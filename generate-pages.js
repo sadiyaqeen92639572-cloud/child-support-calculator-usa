@@ -239,11 +239,13 @@ function renderStatePage(state) {
     <p>Formula model: ${state.formula_model.replace(/_/g, ' ')}. Effective ${state.effective_date}, guideline version ${state.guideline_version}, last reviewed ${state.last_verified}.</p>
     <p>Official source: <a href="${state.source.url}" rel="nofollow noopener">${state.source.agency_name}</a>${state.source.statute_ref ? ` (${state.source.statute_ref})` : ''}.</p>
     <p class="deviation-note">${rules.deviation_note}</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against ${state.name}'s official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
   </section>
 </main>
 
 <footer>
-  <p>&copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
 </footer>
 
 ${calculatorScript(state)}
