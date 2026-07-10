@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usachildsupportcalculator.com/sitemap.xml

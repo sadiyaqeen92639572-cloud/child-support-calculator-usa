@@ -1,0 +1,43 @@
+{
+  "tx": {
+    "name": "Texas",
+    "abbr": "TX",
+    "slug": "texas",
+    "formula_model": "percentage_of_income",
+    "effective_date": "2025-09-01",
+    "last_verified": "2026-07-10",
+    "guideline_version": "2025-TX-v1",
+    "source": {
+      "agency_name": "Texas Office of the Attorney General — Child Support Division",
+      "url": "https://www.txchildsupport.com/",
+      "statute_ref": "Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129"
+    },
+    "params": {
+      "percentages": { "1": 0.20, "2": 0.25, "3": 0.30, "4": 0.35, "5": 0.40, "6+": 0.40 },
+      "low_income_threshold_monthly": 1000,
+      "low_income_percentages": { "1": 0.15, "2": 0.20, "3": 0.25, "4": 0.30, "5": 0.35, "6+": 0.35 },
+      "net_income_cap_monthly": 11700
+    },
+    "worksheet": {
+      "steps": [
+        "Determine gross monthly income (wages, self-employment, and other resources).",
+        "Subtract Social Security taxes, federal income tax (computed as a single filer claiming one exemption), union dues, and health/dental insurance ordered for the child to get net monthly resources.",
+        "If net resources are below $1,000/month, apply the low-income schedule (15%/20%/25%/30%/35% for 1-5 children). Otherwise apply the standard schedule (20%/25%/30%/35%/40% for 1-5 children, not less than the 5-child amount for 6 or more).",
+        "Net resources above $11,700/month are capped at that amount for the guideline calculation — courts have discretion to order more above the cap based on the child's proven needs, but it is not automatic."
+      ],
+      "example": {
+        "scenario": "Example: a parent with $4,000/month in net resources and 2 children.",
+        "calculation": [
+          "Net resources: $4,000/month (below the $11,700 cap, so no cap adjustment applies).",
+          "2 children → standard schedule percentage: 25%.",
+          "$4,000 × 0.25 = $1,000/month guideline child support."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Does Texas child support change with 50/50 custody?",
+      "Is Texas child support based on gross or net income?",
+      "What happens if my income is above the $11,700 cap?"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons (extraordinary medical expenses, travel costs for visitation, additional children in other households, etc.) — this calculator shows the presumptive guideline amount only, not a court order."
+}

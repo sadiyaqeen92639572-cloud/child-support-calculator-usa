@@ -1,0 +1,14 @@
+{
+  "ads": {
+    "enabled": false,
+    "provider": "adsense",
+    "client_id": "",
+    "slots": ["results-sidebar", "below-worksheet"]
+  },
+  "leadgen": {
+    "enabled": false,
+    "cta_text": "Get help from a family law attorney in {state}",
+    "destination_url": "",
+    "placement": ["results-block", "footer-cta"]
+  }
+}

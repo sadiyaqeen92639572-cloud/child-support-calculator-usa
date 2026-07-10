@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "State child support guideline entry",
+  "type": "object",
+  "required": ["name", "abbr", "slug", "formula_model", "effective_date", "last_verified", "guideline_version", "source", "params", "worksheet"],
+  "properties": {
+    "name": { "type": "string" },
+    "abbr": { "type": "string", "pattern": "^[A-Z]{2}$" },
+    "slug": { "type": "string", "pattern": "^[a-z-]+$" },
+    "formula_model": { "type": "string", "enum": ["percentage_of_income", "income_shares", "melson"] },
+    "effective_date": { "type": "string", "format": "date" },
+    "last_verified": { "type": "string", "format": "date" },
+    "guideline_version": { "type": "string" },
+    "source": {
+      "type": "object",
+      "required": ["agency_name", "url"],
+      "properties": {
+        "agency_name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "statute_ref": { "type": "string" }
+      }
+    },
+    "params": { "type": "object" },
+    "worksheet": {
+      "type": "object",
+      "required": ["steps"],
+      "properties": {
+        "steps": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "faq_extra": { "type": "array", "items": { "type": "string" } }
+  }
+}
