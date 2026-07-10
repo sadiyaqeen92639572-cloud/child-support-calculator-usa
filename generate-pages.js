@@ -43,6 +43,63 @@ function monetizationSlot(id) {
   return `<div id="mon-${id}" class="mon-slot">${inner}</div>`;
 }
 
+function formulaSection(state, rules) {
+  if (state.formula_model === 'percentage_of_income') {
+    const p = state.params;
+    const rows = Object.entries(p.percentages)
+      .map(([k, v]) => `<tr><td>${k} ${k === '1' ? 'child' : 'children'}</td><td>${(v * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>`)
+      .join('');
+    const lowIncomeRow = p.low_income_threshold_monthly
+      ? `<tr><td>Low-income threshold</td><td>$${p.low_income_threshold_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>`
+      : '';
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      ${rows}
+      ${lowIncomeRow}
+      <tr><td>Net income cap</td><td>$${p.net_income_cap_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      net_resources = min(obligor_net_income, ${p.net_income_cap_monthly})<br>
+      pct = (obligor_net_income &lt; ${p.low_income_threshold_monthly || 0}) ? low_income_percentages[children] : percentages[children]<br>
+      monthly_support = net_resources &times; pct
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on ${state.name}'s official guideline schedule. Verify against ${state.name}'s official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
+  // income_shares and melson
+  const p = state.params;
+  const custody = rules.custody_adjustment;
+  return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      ${p.self_support_reserve_monthly ? `<tr><td>Self-support reserve</td><td>$${p.self_support_reserve_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
+      ${custody && custody.type === 'overnights_threshold' ? `<tr><td>Overnights threshold</td><td>${custody.threshold} nights/yr</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
+      ${custody && custody.type === 'graduated_overnight_credit' ? `<tr><td>Custody adjustment</td><td>Graduated overnight-credit table</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
+      ${state.formula_model === 'melson' && p.sola_percentage ? `<tr><td>Standard-of-living adjustment</td><td>${(p.sola_percentage * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B${custody ? '<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))' : ''}${state.formula_model === 'melson' ? '<br>obligation_B += obligation_B &times; sola_percentage' : ''}
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on ${state.name}'s official guideline schedule table. Verify against ${state.name}'s official calculator for a court-ready figure.</p>
+  </section>`;
+}
+
 function calculatorFormFields(state) {
   if (state.formula_model === 'percentage_of_income') {
     return `
@@ -227,6 +284,8 @@ function renderStatePage(state) {
     <p>${state.worksheet.example ? state.worksheet.example.scenario : ''}</p>
     ${state.worksheet.example ? `<ol>${state.worksheet.example.calculation.map(s => `<li>${s}</li>`).join('')}</ol>` : ''}
   </section>
+
+  ${formulaSection(state, rules)}
 
   <section>
     <h2>FAQ</h2>

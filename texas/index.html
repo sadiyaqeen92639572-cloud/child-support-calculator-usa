@@ -61,6 +61,26 @@
     <ol><li>Net resources: $4,000/month (below the $11,700 cap, so no cap adjustment applies).</li><li>2 children → standard schedule percentage: 25%.</li><li>$4,000 × 0.25 = $1,000/month guideline child support.</li></ol>
   </section>
 
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Texas Office of the Attorney General — Child Support Division · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>1 child</td><td>20%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr><tr><td>2 children</td><td>25%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr><tr><td>3 children</td><td>30%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr><tr><td>4 children</td><td>35%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr><tr><td>5 children</td><td>40%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr><tr><td>6+ children</td><td>40%</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr>
+      <tr><td>Low-income threshold</td><td>$1,000/mo</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr>
+      <tr><td>Net income cap</td><td>$11,700/mo</td><td>Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      net_resources = min(obligor_net_income, 11700)<br>
+      pct = (obligor_net_income &lt; 1000) ? low_income_percentages[children] : percentages[children]<br>
+      monthly_support = net_resources &times; pct
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Texas's official guideline schedule. Verify against Texas's official calculator for a court-ready figure.</p>
+  </section>
+
   <section>
     <h2>FAQ</h2>
     <details><summary>How is child support calculated in Texas?</summary><p>Determine gross monthly income (wages, self-employment, and other resources). Subtract Social Security taxes, federal income tax (computed as a single filer claiming one exemption), union dues, and health/dental insurance ordered for the child to get net monthly resources. If net resources are below $1,000/month, apply the low-income schedule (15%/20%/25%/30%/35% for 1-5 children). Otherwise apply the standard schedule (20%/25%/30%/35%/40% for 1-5 children, not less than the 5-child amount for 6 or more). Net resources above $11,700/month are capped at that amount for the guideline calculation — courts have discretion to order more above the cap based on the child's proven needs, but it is not automatic.</p></details>
