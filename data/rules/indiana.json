@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "fixed_percentage_of_excess",
+  "deviation_note": "Above $9,200/week combined income, a fixed percentage of the excess is added to the table's top-bracket amount (this calculator applies it automatically). Indiana's Parenting Time Credit Table (starting at 52 overnights/year) is not modeled in this calculator — consult Indiana's official Child Support Calculator for a parenting-time-adjusted figure. This calculator shows the presumptive guideline amount only, not a court order."
+}

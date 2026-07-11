@@ -253,18 +253,29 @@ function interpolateCredit(table, overnights) {
 }
 
 function lookupSchedule(scheduleTable, combinedIncome, numChildren) {
-  const capped = Math.min(combinedIncome, scheduleTable.maxIncome);
-  const key = numChildren >= 6 ? '6' : String(numChildren);
   const rows = scheduleTable.rows;
+  const maxKeyAvailable = Math.max(...Object.keys(rows[0].obligation).map(Number));
+  const key = numChildren >= maxKeyAvailable ? String(maxKeyAvailable) : String(numChildren);
 
+  if (combinedIncome > scheduleTable.maxIncome && scheduleTable.aboveCapPercentages) {
+    // Some states (e.g. Indiana) define an exact fixed percentage of the
+    // excess above the table's top bracket, rather than leaving it to
+    // undocumented discretion — apply it precisely when available.
+    const capRow = rows[rows.length - 1];
+    const pctKey = numChildren >= maxKeyAvailable ? String(maxKeyAvailable) : String(numChildren);
+    const excess = combinedIncome - scheduleTable.maxIncome;
+    return capRow.obligation[key] + excess * scheduleTable.aboveCapPercentages[pctKey];
+  }
+
+  const capped = Math.min(combinedIncome, scheduleTable.maxIncome);
   if (capped <= rows[0].upTo) return rows[0].obligation[key];
   for (let i = 0; i < rows.length - 1; i++) {
     const a = rows[i], b = rows[i + 1];
     if (capped > a.upTo && capped <= b.upTo) {
       // Linear interpolation between the two nearest real anchor rows —
       // official schedule tables are smooth/monotonic between adjacent
-      // $50-increment rows, so this closely approximates the real table
-      // even when anchors are spaced further apart than $50.
+      // increments, so this closely approximates the real table even when
+      // anchors are spaced further apart than the table's native increment.
       const frac = (capped - a.upTo) / (b.upTo - a.upTo);
       return a.obligation[key] + frac * (b.obligation[key] - a.obligation[key]);
     }

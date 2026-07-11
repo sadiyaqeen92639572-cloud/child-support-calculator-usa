@@ -9,3 +9,5 @@ Michigan,2025-MCSF-v1,"Bracket lookup exact match at family income = $7198.27 (2
 Michigan,2025-MCSF-v1,"Low income equation: Parent A income $1000/mo (below $1255 threshold)",Base = income x 10% = $100,$100,$0,claude-sonnet-5,2026-07-11
 Louisiana,2025-LA-v1,"Combined $3000/mo, 2 children, A=$1800(60%) pays",$536/mo (894 x 0.60),$536/mo,$0,claude-sonnet-5,2026-07-11
 Louisiana,2025-LA-v1,"Table integrity check: 980 rows $1050-$50000, spot-checked 4 known points ($1050/1500/2000/2500)",Exact match on all 4 sample points from earlier research,Exact match,$0,claude-sonnet-5,2026-07-11
+Indiana,2024-IN-v1,"Combined $700/week, 2 children, A=$400/wk(57.1%) pays -- exact table anchor",$184/wk base x 0.571 = $105/wk,$105/wk,$0,claude-sonnet-5,2026-07-11
+Indiana,2024-IN-v1,"Above-cap: combined $10000/week (above $9200 cap), 1 child",$745 (cap row) + $800 excess x 8.1% = $809.80,$810/wk,$0.20 rounding,claude-sonnet-5,2026-07-11

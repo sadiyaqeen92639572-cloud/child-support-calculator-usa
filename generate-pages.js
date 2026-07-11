@@ -207,26 +207,29 @@ function calculatorFormFields(state) {
 
   // income_shares and melson share the same form shape
   const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
+  const period = state.params.income_period === 'weekly' ? 'weekly' : 'monthly';
+  const childCountOptions = state.formula_model === 'income_shares' && state.params.schedule_table_ref === 'indiana_schedule.json'
+    ? '<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8 or more</option>'
+    : '<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>';
   return `
-      <label>Parent A ${incomeLabel} monthly income ($)
+      <label>Parent A ${incomeLabel} ${period} income ($)
         <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
       </label>
-      <label>Parent B ${incomeLabel} monthly income ($)
+      <label>Parent B ${incomeLabel} ${period} income ($)
         <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
       </label>
       <label>Number of children
         <select id="numChildren">
-          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+          ${childCountOptions}
         </select>
       </label>
       <label>Overnights per year with Parent A
         <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
       </label>
-      <label>Monthly childcare cost ($)
+      <label>${period === 'weekly' ? 'Weekly' : 'Monthly'} childcare cost ($)
         <input type="number" id="childcareCost" min="0" step="1" value="0">
       </label>
-      <label>Monthly health insurance premium for child(ren) ($)
+      <label>${period === 'weekly' ? 'Weekly' : 'Monthly'} health insurance premium for child(ren) ($)
         <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
       </label>`;
 }
@@ -279,7 +282,8 @@ function calculatorScript(state) {
       const inputs = readInputs();
       const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
       var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
-      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + '/month';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
       document.getElementById('result-deviation').textContent = result.deviationNote || '';
       const warnEl = document.getElementById('result-warning');
       if (result.capWarning) {

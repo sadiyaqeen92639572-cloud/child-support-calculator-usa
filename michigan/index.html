@@ -153,7 +153,8 @@
       const inputs = readInputs();
       const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
       var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
-      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + '/month';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
       document.getElementById('result-deviation').textContent = result.deviationNote || '';
       const warnEl = document.getElementById('result-warning');
       if (result.capWarning) {

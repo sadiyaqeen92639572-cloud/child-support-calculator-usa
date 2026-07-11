@@ -246,5 +246,45 @@
       "What counts as adjusted gross income in Louisiana?",
       "What happens if combined income is above $50,000/month?"
     ]
+  },
+  "in": {
+    "name": "Indiana",
+    "abbr": "IN",
+    "slug": "indiana",
+    "formula_model": "income_shares",
+    "effective_date": "2024-01-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2024-IN-v1",
+    "source": {
+      "agency_name": "Indiana Child Support Rules and Guidelines (Indiana Supreme Court)",
+      "url": "https://rules.incourts.gov/Content/child-support/default.htm",
+      "statute_ref": "Ind. Child Support Guideline 3"
+    },
+    "params": {
+      "schedule_table_ref": "indiana_schedule.json",
+      "income_basis": "gross",
+      "income_period": "weekly"
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's weekly gross income (wages, self-employment, and other sources), then compute weekly adjusted income after allowed deductions.",
+        "Combine both parents' weekly adjusted incomes to get combined weekly adjusted income.",
+        "Look up the basic child support obligation from the official Guideline Schedules for Weekly Support Payments for that combined income and number of children (up to 8; above 8, courts use discretion).",
+        "Each parent's share equals their income divided by the combined income, applied to the basic obligation.",
+        "Above $9,200/week combined income, a fixed percentage of the excess (8.1% for 1 child up to 20.4% for 8 children) is added to the top-bracket amount."
+      ],
+      "example": {
+        "scenario": "Example: combined weekly adjusted income $700/week, 2 children, Parent A earns $400/wk (57% share), Parent B earns $300/wk (43% share) and has primary custody.",
+        "calculation": [
+          "Basic weekly obligation for $700 combined, 2 children: $184/week.",
+          "Parent A's share: 57% × $184 ≈ $105/week guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Is Indiana child support based on weekly or monthly income?",
+      "What happens if combined income is above $9,200/week?",
+      "Does Indiana have a parenting time credit?"
+    ]
   }
 }
