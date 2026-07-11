@@ -73,9 +73,36 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'algebraic_kfactor') {
+    const p = state.params;
+    const rows = Object.entries(p.k_constants)
+      .map(([k, v]) => `<tr><td>K constant (${k} child${k === '1' ? '' : 'ren'})</td><td>${v}</td><td>${state.source.statute_ref || ''}</td></tr>`)
+      .join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      ${rows}
+      <tr><td>Income divisor</td><td>${p.k_income_divisor.toLocaleString()}</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      TN = parentA_net_income + parentB_net_income<br>
+      HN = higher_earner_net_income<br>
+      K = (H% &le; 50% ? 1+H% : 2-H%) &times; min(k_constant[children] + TN/${p.k_income_divisor.toLocaleString()}, k_max)<br>
+      monthly_support = K &times; (HN - H% &times; TN)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on ${state.name}'s official statutory formula (Fam. Code algebraic guideline). Verify against ${state.name}'s official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares and melson
   const p = state.params;
   const custody = rules.custody_adjustment;
+  const isPercentageOfCombined = p.schedule_type === 'percentage';
   return `
   <section class="formula-section">
     <h2>How This Calculator Works — Formula &amp; Constants</h2>
@@ -83,6 +110,8 @@ function formulaSection(state, rules) {
     <h3>Constants used</h3>
     <table>
       <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      ${isPercentageOfCombined ? Object.entries(p.percentages_of_combined).map(([k, v]) => `<tr><td>${k} ${k === '1' ? 'child' : 'children'}</td><td>${(v * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>`).join('') : ''}
+      ${isPercentageOfCombined ? `<tr><td>Combined income cap</td><td>$${p.combined_income_cap_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${p.self_support_reserve_monthly ? `<tr><td>Self-support reserve</td><td>$${p.self_support_reserve_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${custody && custody.type === 'overnights_threshold' ? `<tr><td>Overnights threshold</td><td>${custody.threshold} nights/yr</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${custody && custody.type === 'graduated_overnight_credit' ? `<tr><td>Custody adjustment</td><td>Graduated overnight-credit table</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
@@ -91,7 +120,7 @@ function formulaSection(state, rules) {
     <h3>Formula</h3>
     <div class="formula-code">
       combined_income = parentA_income + parentB_income<br>
-      base_obligation = schedule_lookup(combined_income, children)<br>
+      base_obligation = ${isPercentageOfCombined ? 'min(combined_income, cap) &times; percentages_of_combined[children]' : 'schedule_lookup(combined_income, children)'}<br>
       share_B = parentB_income / combined_income<br>
       total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
       obligation_B = total_obligation &times; share_B${custody ? '<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))' : ''}${state.formula_model === 'melson' ? '<br>obligation_B += obligation_B &times; sola_percentage' : ''}
@@ -113,12 +142,32 @@ function calculatorFormFields(state) {
         </select>
       </label>`;
   }
+  if (state.formula_model === 'algebraic_kfactor') {
+    return `
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentANetIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBNetIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </label>
+      <label>Higher earner's custody timeshare (%)
+        <input type="number" id="higherEarnerTimesharePct" min="0" max="100" step="1" value="50">
+      </label>`;
+  }
+
   // income_shares and melson share the same form shape
+  const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
   return `
-      <label>Parent A gross monthly income ($)
+      <label>Parent A ${incomeLabel} monthly income ($)
         <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
       </label>
-      <label>Parent B gross monthly income ($)
+      <label>Parent B ${incomeLabel} monthly income ($)
         <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
       </label>
       <label>Number of children
@@ -156,6 +205,14 @@ function calculatorScript(state) {
           numChildren: Number(document.getElementById('numChildren').value) || 1
         };
       }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
       return {
         parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
         parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
@@ -169,7 +226,8 @@ function calculatorScript(state) {
     function runCalculation() {
       const inputs = readInputs();
       const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
-      document.getElementById('result-amount').textContent = '$' + result.monthlyAmount.toLocaleString() + '/month';
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + '/month';
       document.getElementById('result-deviation').textContent = result.deviationNote || '';
       const warnEl = document.getElementById('result-warning');
       if (result.capWarning) {

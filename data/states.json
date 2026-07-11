@@ -39,5 +39,48 @@
       "Is Texas child support based on gross or net income?",
       "What happens if my income is above the $11,700 cap?"
     ]
+  },
+  "ny": {
+    "name": "New York",
+    "abbr": "NY",
+    "slug": "new-york",
+    "formula_model": "income_shares",
+    "effective_date": "2026-03-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2026-NY-CSSA-v1",
+    "source": {
+      "agency_name": "New York State Child Support Standards Act (CSSA)",
+      "url": "https://childsupport.ny.gov/",
+      "statute_ref": "N.Y. Dom. Rel. Law § 240; Family Court Act § 413"
+    },
+    "params": {
+      "schedule_type": "percentage",
+      "percentages_of_combined": { "1": 0.17, "2": 0.25, "3": 0.29, "4": 0.31, "5+": 0.35 },
+      "combined_income_cap_monthly": 16083,
+      "self_support_reserve_monthly": 1795
+    },
+    "worksheet": {
+      "steps": [
+        "Combine both parents' income to get combined parental income.",
+        "Apply the statutory percentage based on number of children (17% for 1 child, 25% for 2, 29% for 3, 31% for 4, 35% for 5 or more) to combined income up to the cap ($193,000/year, effective 2026-03-01).",
+        "The parent with fewer overnights (even close to 50/50) pays their pro-rata share of that amount — New York does not use a shared-parenting offset formula.",
+        "Health insurance, work/education-related childcare, and unreimbursed medical costs are mandatory add-ons split pro rata by income share, on top of the basic obligation.",
+        "Above the income cap, courts apply 10 statutory factors rather than the automatic percentage."
+      ],
+      "example": {
+        "scenario": "Example: combined parental income of $6,000/month, 2 children, Parent A earns $4,000/mo (67% share) and Parent B earns $2,000/mo (33% share) and has fewer overnights.",
+        "calculation": [
+          "Combined income: $6,000/month (below the $16,083/month cap).",
+          "2 children → statutory percentage: 25%.",
+          "$6,000 × 0.25 = $1,500/month basic obligation.",
+          "Parent A's share (67%) of $1,500 = $1,000/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Does New York reduce child support for shared/50-50 custody?",
+      "What counts as income under the New York CSSA?",
+      "What happens if combined income is above $193,000/year?"
+    ]
   }
 }

@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above the combined income cap, courts apply 10 statutory factors rather than the automatic percentage. Courts may also deviate below the cap for documented reasons — this calculator shows the presumptive guideline amount only, not a court order."
+}

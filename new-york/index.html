@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New York Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate New York child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-11.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/new-york/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="New York Child Support Calculator">
+<meta property="og:description" content="Free New York child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/new-york/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"New York Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-11"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in New York?","acceptedAnswer":{"@type":"Answer","text":"Combine both parents' income to get combined parental income. Apply the statutory percentage based on number of children (17% for 1 child, 25% for 2, 29% for 3, 31% for 4, 35% for 5 or more) to combined income up to the cap ($193,000/year, effective 2026-03-01). The parent with fewer overnights (even close to 50/50) pays their pro-rata share of that amount — New York does not use a shared-parenting offset formula. Health insurance, work/education-related childcare, and unreimbursed medical costs are mandatory add-ons split pro rata by income share, on top of the basic obligation. Above the income cap, courts apply 10 statutory factors rather than the automatic percentage."}},{"@type":"Question","name":"Does New York reduce child support for shared/50-50 custody?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under New York's child support formula."}},{"@type":"Question","name":"What counts as income under the New York CSSA?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under New York's child support formula."}},{"@type":"Question","name":"What happens if combined income is above $193,000/year?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under New York's child support formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"New York Child Support Calculator","item":"https://usachildsupportcalculator.com/new-york/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>New York Child Support Calculator</h1>
+  <p class="badge">Updated for New York's 2026-NY-CSSA-v1 guidelines · Last reviewed 2026-07-11</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on New York's published child support guidelines as of 2026-07-11. Results may differ from a court order. For your official calculation, consult New York State Child Support Standards Act (CSSA) or a family law attorney licensed in New York.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How New York Child Support Is Calculated</h2>
+    <ol><li>Combine both parents' income to get combined parental income.</li><li>Apply the statutory percentage based on number of children (17% for 1 child, 25% for 2, 29% for 3, 31% for 4, 35% for 5 or more) to combined income up to the cap ($193,000/year, effective 2026-03-01).</li><li>The parent with fewer overnights (even close to 50/50) pays their pro-rata share of that amount — New York does not use a shared-parenting offset formula.</li><li>Health insurance, work/education-related childcare, and unreimbursed medical costs are mandatory add-ons split pro rata by income share, on top of the basic obligation.</li><li>Above the income cap, courts apply 10 statutory factors rather than the automatic percentage.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>New York Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined parental income of $6,000/month, 2 children, Parent A earns $4,000/mo (67% share) and Parent B earns $2,000/mo (33% share) and has fewer overnights.</p>
+    <ol><li>Combined income: $6,000/month (below the $16,083/month cap).</li><li>2 children → statutory percentage: 25%.</li><li>$6,000 × 0.25 = $1,500/month basic obligation.</li><li>Parent A's share (67%) of $1,500 = $1,000/month guideline child support paid by Parent A.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: New York State Child Support Standards Act (CSSA) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>1 child</td><td>17%</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr><tr><td>2 children</td><td>25%</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr><tr><td>3 children</td><td>29%</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr><tr><td>4 children</td><td>31%</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr><tr><td>5+ children</td><td>35%</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr>
+      <tr><td>Combined income cap</td><td>$16,083/mo</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr>
+      <tr><td>Self-support reserve</td><td>$1,795/mo</td><td>N.Y. Dom. Rel. Law § 240; Family Court Act § 413</td></tr>
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = min(combined_income, cap) &times; percentages_of_combined[children]<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on New York's official guideline schedule table. Verify against New York's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in New York?</summary><p>Combine both parents' income to get combined parental income. Apply the statutory percentage based on number of children (17% for 1 child, 25% for 2, 29% for 3, 31% for 4, 35% for 5 or more) to combined income up to the cap ($193,000/year, effective 2026-03-01). The parent with fewer overnights (even close to 50/50) pays their pro-rata share of that amount — New York does not use a shared-parenting offset formula. Health insurance, work/education-related childcare, and unreimbursed medical costs are mandatory add-ons split pro rata by income share, on top of the basic obligation. Above the income cap, courts apply 10 statutory factors rather than the automatic percentage.</p></details>
+    <details><summary>Does New York reduce child support for shared/50-50 custody?</summary><p>See the guidelines section above.</p></details><details><summary>What counts as income under the New York CSSA?</summary><p>See the guidelines section above.</p></details><details><summary>What happens if combined income is above $193,000/year?</summary><p>See the guidelines section above.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2026-03-01, guideline version 2026-NY-CSSA-v1, last reviewed 2026-07-11.</p>
+    <p>Official source: <a href="https://childsupport.ny.gov/" rel="nofollow noopener">New York State Child Support Standards Act (CSSA)</a> (N.Y. Dom. Rel. Law § 240; Family Court Act § 413).</p>
+    <p class="deviation-note">Above the combined income cap, courts apply 10 statutory factors rather than the automatic percentage. Courts may also deviate below the cap for documented reasons — this calculator shows the presumptive guideline amount only, not a court order.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New York's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"New York","abbr":"NY","slug":"new-york","formula_model":"income_shares","effective_date":"2026-03-01","last_verified":"2026-07-11","guideline_version":"2026-NY-CSSA-v1","source":{"agency_name":"New York State Child Support Standards Act (CSSA)","url":"https://childsupport.ny.gov/","statute_ref":"N.Y. Dom. Rel. Law § 240; Family Court Act § 413"},"params":{"schedule_type":"percentage","percentages_of_combined":{"1":0.17,"2":0.25,"3":0.29,"4":0.31,"5+":0.35},"combined_income_cap_monthly":16083,"self_support_reserve_monthly":1795},"worksheet":{"steps":["Combine both parents' income to get combined parental income.","Apply the statutory percentage based on number of children (17% for 1 child, 25% for 2, 29% for 3, 31% for 4, 35% for 5 or more) to combined income up to the cap ($193,000/year, effective 2026-03-01).","The parent with fewer overnights (even close to 50/50) pays their pro-rata share of that amount — New York does not use a shared-parenting offset formula.","Health insurance, work/education-related childcare, and unreimbursed medical costs are mandatory add-ons split pro rata by income share, on top of the basic obligation.","Above the income cap, courts apply 10 statutory factors rather than the automatic percentage."],"example":{"scenario":"Example: combined parental income of $6,000/month, 2 children, Parent A earns $4,000/mo (67% share) and Parent B earns $2,000/mo (33% share) and has fewer overnights.","calculation":["Combined income: $6,000/month (below the $16,083/month cap).","2 children → statutory percentage: 25%.","$6,000 × 0.25 = $1,500/month basic obligation.","Parent A's share (67%) of $1,500 = $1,000/month guideline child support paid by Parent A."]}},"faq_extra":["Does New York reduce child support for shared/50-50 custody?","What counts as income under the New York CSSA?","What happens if combined income is above $193,000/year?"]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":null,"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above the combined income cap, courts apply 10 statutory factors rather than the automatic percentage. Courts may also deviate below the cap for documented reasons — this calculator shows the presumptive guideline amount only, not a court order."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + '/month';
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

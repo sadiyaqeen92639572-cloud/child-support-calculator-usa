@@ -115,6 +115,14 @@
           numChildren: Number(document.getElementById('numChildren').value) || 1
         };
       }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
       return {
         parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
         parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
@@ -128,7 +136,8 @@
     function runCalculation() {
       const inputs = readInputs();
       const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
-      document.getElementById('result-amount').textContent = '$' + result.monthlyAmount.toLocaleString() + '/month';
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + '/month';
       document.getElementById('result-deviation').textContent = result.deviationNote || '';
       const warnEl = document.getElementById('result-warning');
       if (result.capWarning) {

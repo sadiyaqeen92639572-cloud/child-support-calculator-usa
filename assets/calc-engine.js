@@ -29,43 +29,102 @@ function calcPercentageOfIncome(params, rules, inputs) {
 function calcIncomeShares(params, rules, scheduleTable, inputs) {
   // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA, childcareCost, healthInsuranceCost }
   const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
-  const baseObligation = lookupSchedule(scheduleTable, combined, inputs.numChildren);
+  const baseObligation = params.schedule_type === 'percentage'
+    ? calcPercentageOfCombinedIncome(params, combined, inputs.numChildren)
+    : lookupSchedule(scheduleTable, combined, inputs.numChildren);
   const shareA = inputs.parentAGrossIncome / combined;
   const shareB = 1 - shareA;
   const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
   const totalObligation = baseObligation + addOns;
 
-  let obligationOfB = totalObligation * shareB;
+  // The parent with the MAJORITY of overnights is the custodial parent who
+  // receives support; the other parent pays their income-share of the total
+  // obligation. overnightsWithA is nights/year the child spends with Parent A.
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  let amount = totalObligation * payingShare;
   let adjustedForCustody = false;
+  let custodyWarning = null;
 
   if (rules.custody_adjustment) {
     if (rules.custody_adjustment.type === 'overnights_threshold') {
       const threshold = rules.custody_adjustment.threshold;
-      adjustedForCustody = inputs.overnightsWithA > threshold;
-      // Simple states: crossing the threshold switches to an alternate worksheet;
-      // the reduction itself is state-specific and not modeled generically here.
+      adjustedForCustody = payingParentOvernights > threshold;
+      // Crossing this threshold switches to a different, state-specific worksheet
+      // (e.g. Florida's 1.5x gross-up method) that this generic engine does not
+      // compute — surface a warning instead of silently returning a wrong number.
+      if (adjustedForCustody && rules.custody_adjustment.warning_message) {
+        custodyWarning = rules.custody_adjustment.warning_message;
+      }
     } else if (rules.custody_adjustment.type === 'graduated_overnight_credit') {
-      const creditPct = interpolateCredit(rules.custody_adjustment.table, inputs.overnightsWithA);
-      obligationOfB = obligationOfB * (1 - creditPct);
+      const creditPct = interpolateCredit(rules.custody_adjustment.table, payingParentOvernights);
+      amount = amount * (1 - creditPct);
       adjustedForCustody = creditPct > 0;
     }
   }
 
-  obligationOfB = applyRounding(obligationOfB, rules.rounding);
+  amount = applyRounding(amount, rules.rounding);
 
   const reserve = params.self_support_reserve_monthly;
-  const belowReserve = reserve && (inputs.parentBGrossIncome - obligationOfB) < reserve;
+  const belowReserve = reserve && (payingParentIncome - amount) < reserve;
 
   return {
-    monthlyAmount: obligationOfB,
+    monthlyAmount: amount,
+    payingParent,
     combinedIncome: combined,
     baseObligation,
     adjustedForCustody,
     belowSelfSupportReserve: belowReserve,
     deviationNote: rules.deviation_note,
-    capWarning: belowReserve
+    capWarning: custodyWarning || (belowReserve
       ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}/mo) — courts typically adjust in this situation.`
-      : null
+      : null)
+  };
+}
+
+function calcPercentageOfCombinedIncome(params, combinedIncome, numChildren) {
+  // NY CSSA-style: a flat statutory percentage of COMBINED parental income
+  // (capped), rather than a schedule-table lookup. Still fits the income_shares
+  // pipeline (combine -> base obligation -> prorate by share) with a different
+  // base-obligation source.
+  const bracket = numChildren >= 5 ? '5+' : String(numChildren);
+  const capped = Math.min(combinedIncome, params.combined_income_cap_monthly);
+  return capped * params.percentages_of_combined[bracket];
+}
+
+function calcAlgebraicKFactor(params, rules, inputs) {
+  // California-style: CS = K x [HN - (H% x TN)]
+  // HN = higher earner's net monthly disposable income
+  // H% = higher earner's custody timeshare (0-1)
+  // TN = total net monthly disposable income of both parents
+  // K = allocation factor, itself a function of H% and TN (approximated via
+  // params.k_base + params.k_income_divisor, per state's published K table)
+  const netA = inputs.parentANetIncome;
+  const netB = inputs.parentBNetIncome;
+  const higherIsA = netA >= netB;
+  const HN = higherIsA ? netA : netB;
+  const TN = netA + netB;
+  const Hpct = inputs.higherEarnerTimesharePct;
+
+  const childBracket = inputs.numChildren >= 4 ? 4 : inputs.numChildren;
+  const kConst = params.k_constants[String(childBracket)] || params.k_constants['1'];
+  const incomeComponent = TN / params.k_income_divisor;
+  const K = (Hpct <= 0.5 ? (1 + Hpct) : (2 - Hpct)) * Math.min(kConst + incomeComponent, params.k_max || 1);
+
+  let amount = K * (HN - (Hpct * TN));
+  amount = Math.max(amount, 0);
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent: higherIsA ? 'A' : 'B',
+    deviationNote: rules.deviation_note,
+    capWarning: null
   };
 }
 
@@ -87,6 +146,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcIncomeShares(stateEntry.params, rules, scheduleTable, inputs);
     case 'melson':
       return calcMelson(stateEntry.params, rules, scheduleTable, inputs);
+    case 'algebraic_kfactor':
+      return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

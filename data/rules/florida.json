@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "overnights_threshold",
+    "threshold": 73,
+    "warning_message": "Florida uses a different 'gross-up' worksheet when the paying parent has more than 73 overnights/year (20%+ timesharing) — this calculator's standard result does not apply. Use Florida's official Form 12.902(e) Child Support Guidelines Worksheet for a substantial-timesharing calculation."
+  },
+  "income_cap_behavior": "add_percentage_of_excess",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons (extraordinary medical or educational expenses, seasonal income variation, etc.) — this calculator shows the presumptive guideline amount only, not a court order."
+}
