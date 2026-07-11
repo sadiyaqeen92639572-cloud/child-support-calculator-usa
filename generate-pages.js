@@ -319,7 +319,10 @@ function jsonLd(state) {
         applicationCategory: 'FinanceApplication',
         operatingSystem: 'Any',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        dateModified: state.last_verified
+        dateModified: state.last_verified,
+        author: { '@type': 'Organization', name: 'Gesmine-Invest Limited', url: DOMAIN + '/about/' },
+        publisher: { '@type': 'Organization', name: 'Gesmine-Invest Limited', url: DOMAIN + '/about/' },
+        version: state.guideline_version
       },
       {
         '@type': 'FAQPage',
@@ -425,10 +428,51 @@ function renderStatePage(state) {
 
 <footer>
   <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
-  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
 </footer>
 
 ${calculatorScript(state)}
+</body>
+</html>`;
+}
+
+function renderChangelogPage() {
+  const rows = Object.values(states)
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(s => `<tr><td><a href="/${s.slug}/">${s.name}</a></td><td>${s.guideline_version}</td><td>${s.effective_date}</td><td>${s.last_verified}</td><td><a href="${s.source.url}" rel="nofollow noopener">${s.source.agency_name}</a></td></tr>`)
+    .join('\n      ');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog — USA Child Support Calculator</title>
+<meta name="description" content="Guideline version and last-verification date for every state on this site — updated whenever a state revises its child support formula.">
+<link rel="canonical" href="${DOMAIN}/changelog/">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<header>
+  <a href="/">← Home</a>
+  <h1>Changelog</h1>
+  <p class="badge">Guideline version and last-verification date for every state on this site</p>
+</header>
+
+<main>
+  <section>
+    <p>Each state's guideline formula is re-verified against its official source on the cadence noted in our <a href="/about/">methodology</a>. This table is generated directly from the same data that drives each state's calculator — it is not a separate, hand-maintained log.</p>
+    <table>
+      <tr><th>State</th><th>Guideline version</th><th>Effective date</th><th>Last verified</th><th>Official source</th></tr>
+      ${rows}
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
 </body>
 </html>`;
 }
@@ -440,3 +484,7 @@ Object.values(states).forEach(state => {
   fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
   console.log(`Generated: ${state.slug}/ (${state.formula_model})`);
 });
+
+fs.mkdirSync(path.join(__dirname, 'changelog'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'changelog', 'index.html'), renderChangelogPage(), 'utf8');
+console.log('Generated: changelog/');

@@ -12,6 +12,7 @@ let urls = [];
 urls.push({ loc: `${DOMAIN}/`, lastmod: today, changefreq: 'monthly', priority: '1.0' });
 urls.push({ loc: `${DOMAIN}/about/`, lastmod: today, changefreq: 'yearly', priority: '0.3' });
 urls.push({ loc: `${DOMAIN}/privacy/`, lastmod: today, changefreq: 'yearly', priority: '0.3' });
+urls.push({ loc: `${DOMAIN}/changelog/`, lastmod: today, changefreq: 'weekly', priority: '0.4' });
 
 Object.values(states).forEach(state => {
   if (!fs.existsSync(path.join(__dirname, state.slug, 'index.html'))) return;
