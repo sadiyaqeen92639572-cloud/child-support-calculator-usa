@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>California Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate California child support using the state's official algebraic kfactor guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-11.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/california/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="California Child Support Calculator">
+<meta property="og:description" content="Free California child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/california/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"California Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-11"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in California?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's net monthly disposable income (gross income minus taxes, mandatory union dues, mandatory retirement contributions, health premiums, and support paid for other relationships). Combine both parents' net disposable income (TN) and identify the higher earner's income (HN) and their approximate timeshare percentage (H%). Compute K: (1+H% if H% is 50% or less, otherwise 2-H%) multiplied by a fraction that depends on TN — 0.165+TN/82,857 up to $2,900, 0.131+TN/42,149 from $2,901-$5,000, a flat 0.250 from $5,001-$10,000, 0.10+1,499/TN from $10,001-$15,000, and 0.12+1,200/TN above $15,000. Compute the 1-child support amount: CS = K × (HN − H% × TN). Multiply by the statutory multiplier for the actual number of children (1.6 for 2 children, up to 2.86 for 10). A positive result means the higher earner pays; a negative result means the lower earner pays the absolute value."}},{"@type":"Question","name":"What is the California K-factor child support formula?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under California's child support formula."}},{"@type":"Question","name":"Is California child support based on gross or net income?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under California's child support formula."}},{"@type":"Question","name":"How does timeshare percentage affect California child support?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under California's child support formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"California Child Support Calculator","item":"https://usachildsupportcalculator.com/california/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>California Child Support Calculator</h1>
+  <p class="badge">Updated for California's 2025-CA-SB343-v1 guidelines · Last reviewed 2026-07-11</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on California's published child support guidelines as of 2026-07-11. Results may differ from a court order. For your official calculation, consult California Family Code (via leginfo.legislature.ca.gov) or a family law attorney licensed in California.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentANetIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBNetIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          <option value="10">10 or more</option>
+        </select>
+      </label>
+      <label>Higher earner's custody timeshare (%)
+        <input type="number" id="higherEarnerTimesharePct" min="0" max="100" step="1" value="50">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How California Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's net monthly disposable income (gross income minus taxes, mandatory union dues, mandatory retirement contributions, health premiums, and support paid for other relationships).</li><li>Combine both parents' net disposable income (TN) and identify the higher earner's income (HN) and their approximate timeshare percentage (H%).</li><li>Compute K: (1+H% if H% is 50% or less, otherwise 2-H%) multiplied by a fraction that depends on TN — 0.165+TN/82,857 up to $2,900, 0.131+TN/42,149 from $2,901-$5,000, a flat 0.250 from $5,001-$10,000, 0.10+1,499/TN from $10,001-$15,000, and 0.12+1,200/TN above $15,000.</li><li>Compute the 1-child support amount: CS = K × (HN − H% × TN).</li><li>Multiply by the statutory multiplier for the actual number of children (1.6 for 2 children, up to 2.86 for 10).</li><li>A positive result means the higher earner pays; a negative result means the lower earner pays the absolute value.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>California Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A (higher earner) net income $5,000/month, Parent B net income $3,000/month, 2 children, Parent A has 20% timeshare.</p>
+    <ol><li>TN = $8,000/month, HN = $5,000, H% = 20%.</li><li>TN falls in the $5,001-$10,000 bracket → fraction = 0.250.</li><li>K = (1 + 0.20) × 0.250 = 0.30.</li><li>CS (1 child) = 0.30 × ($5,000 − 0.20 × $8,000) = 0.30 × $3,400 = $1,020.</li><li>2-child multiplier ×1.6 = $1,632/month guideline child support paid by Parent A.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: California Family Code (via leginfo.legislature.ca.gov) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>K fraction, TN &le; $2,900</td><td>0.165 + TN/82,857</td><td>Cal. Fam. Code § 4055</td></tr>
+      <tr><td>K fraction, $2,901-$5,000</td><td>0.131 + TN/42,149</td><td>Cal. Fam. Code § 4055</td></tr>
+      <tr><td>K fraction, $5,001-$10,000</td><td>0.250 (flat)</td><td>Cal. Fam. Code § 4055</td></tr>
+      <tr><td>K fraction, $10,001-$15,000</td><td>0.10 + 1,499/TN</td><td>Cal. Fam. Code § 4055</td></tr>
+      <tr><td>K fraction, over $15,000</td><td>0.12 + 1,200/TN</td><td>Cal. Fam. Code § 4055</td></tr>
+      <tr><td>Multiplier (1 children)</td><td>&times;1</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (2 children)</td><td>&times;1.6</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (3 children)</td><td>&times;2</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (4 children)</td><td>&times;2.3</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (5 children)</td><td>&times;2.5</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (6 children)</td><td>&times;2.625</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (7 children)</td><td>&times;2.75</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (8 children)</td><td>&times;2.813</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (9 children)</td><td>&times;2.844</td><td>Cal. Fam. Code § 4055</td></tr><tr><td>Multiplier (10 children)</td><td>&times;2.86</td><td>Cal. Fam. Code § 4055</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      TN = parentA_net_income + parentB_net_income<br>
+      HN = higher_earner_net_income<br>
+      K = (H% &le; 50% ? 1+H% : 2-H%) &times; k_fraction(TN)<br>
+      CS_1_child = K &times; (HN - H% &times; TN)<br>
+      monthly_support = CS_1_child &times; child_multiplier[children]
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Cal. Fam. Code § 4055, transcribed verbatim from the statute text. Verify against California's official Guideline Calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in California?</summary><p>Determine each parent's net monthly disposable income (gross income minus taxes, mandatory union dues, mandatory retirement contributions, health premiums, and support paid for other relationships). Combine both parents' net disposable income (TN) and identify the higher earner's income (HN) and their approximate timeshare percentage (H%). Compute K: (1+H% if H% is 50% or less, otherwise 2-H%) multiplied by a fraction that depends on TN — 0.165+TN/82,857 up to $2,900, 0.131+TN/42,149 from $2,901-$5,000, a flat 0.250 from $5,001-$10,000, 0.10+1,499/TN from $10,001-$15,000, and 0.12+1,200/TN above $15,000. Compute the 1-child support amount: CS = K × (HN − H% × TN). Multiply by the statutory multiplier for the actual number of children (1.6 for 2 children, up to 2.86 for 10). A positive result means the higher earner pays; a negative result means the lower earner pays the absolute value.</p></details>
+    <details><summary>What is the California K-factor child support formula?</summary><p>See the guidelines section above.</p></details><details><summary>Is California child support based on gross or net income?</summary><p>See the guidelines section above.</p></details><details><summary>How does timeshare percentage affect California child support?</summary><p>See the guidelines section above.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: algebraic kfactor. Effective 2025-09-01, guideline version 2025-CA-SB343-v1, last reviewed 2026-07-11.</p>
+    <p>Official source: <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=4055.&lawCode=FAM" rel="nofollow noopener">California Family Code (via leginfo.legislature.ca.gov)</a> (Cal. Fam. Code § 4055).</p>
+    <p class="deviation-note">Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. A separate low-income adjustment applies when the obligor's net disposable income is below full-time minimum-wage earnings (Fam. Code § 4055(b)(7)) — not modeled in this calculator; consult California's official Guideline Calculator for low-income cases.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against California's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"California","abbr":"CA","slug":"california","formula_model":"algebraic_kfactor","effective_date":"2025-09-01","last_verified":"2026-07-11","guideline_version":"2025-CA-SB343-v1","source":{"agency_name":"California Family Code (via leginfo.legislature.ca.gov)","url":"https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=4055.&lawCode=FAM","statute_ref":"Cal. Fam. Code § 4055"},"params":{"child_multipliers":{"1":1,"2":1.6,"3":2,"4":2.3,"5":2.5,"6":2.625,"7":2.75,"8":2.813,"9":2.844,"10":2.86}},"worksheet":{"steps":["Determine each parent's net monthly disposable income (gross income minus taxes, mandatory union dues, mandatory retirement contributions, health premiums, and support paid for other relationships).","Combine both parents' net disposable income (TN) and identify the higher earner's income (HN) and their approximate timeshare percentage (H%).","Compute K: (1+H% if H% is 50% or less, otherwise 2-H%) multiplied by a fraction that depends on TN — 0.165+TN/82,857 up to $2,900, 0.131+TN/42,149 from $2,901-$5,000, a flat 0.250 from $5,001-$10,000, 0.10+1,499/TN from $10,001-$15,000, and 0.12+1,200/TN above $15,000.","Compute the 1-child support amount: CS = K × (HN − H% × TN).","Multiply by the statutory multiplier for the actual number of children (1.6 for 2 children, up to 2.86 for 10).","A positive result means the higher earner pays; a negative result means the lower earner pays the absolute value."],"example":{"scenario":"Example: Parent A (higher earner) net income $5,000/month, Parent B net income $3,000/month, 2 children, Parent A has 20% timeshare.","calculation":["TN = $8,000/month, HN = $5,000, H% = 20%.","TN falls in the $5,001-$10,000 bracket → fraction = 0.250.","K = (1 + 0.20) × 0.250 = 0.30.","CS (1 child) = 0.30 × ($5,000 − 0.20 × $8,000) = 0.30 × $3,400 = $1,020.","2-child multiplier ×1.6 = $1,632/month guideline child support paid by Parent A."]}},"faq_extra":["What is the California K-factor child support formula?","Is California child support based on gross or net income?","How does timeshare percentage affect California child support?"]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":null,"income_cap_behavior":"no_cap","deviation_note":"Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. A separate low-income adjustment applies when the obligor's net disposable income is below full-time minimum-wage earnings (Fam. Code § 4055(b)(7)) — not modeled in this calculator; consult California's official Guideline Calculator for low-income cases."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

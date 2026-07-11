@@ -18,3 +18,5 @@ Alabama,2022-AL-v1,"Combined $3000/mo, 2 children, A=$1800(60%) pays -- exact ta
 Colorado,2026-CO-HB25-1159-v1,"Combined $5850/mo, 2 children, A=$3510(60%) pays, 0 overnights -- exact table anchor",$1573 base x 0.60 = $943.80,$944/mo,$0,claude-sonnet-5,2026-07-11
 Colorado,2026-CO-HB25-1159-v1,"Same but A has 218 overnights (majority, becomes custodial) -- graduated credit table",B pays 40% share minus credit(147 overnights~32.8%) on full base = ~$113,$113/mo,$0,claude-sonnet-5,2026-07-11
 Illinois,2026-IL-v1,"Combined $3000/mo net, 2 children, A=$1800(60%) pays -- exact table anchor",$1070 base x 0.60 = $642,$642/mo,$0,claude-sonnet-5,2026-07-11
+California,2025-CA-SB343-v1,"A=$5000(higher,20pct timeshare)/B=$3000, 2 children",K=(1.20)x0.250=0.30, CS=0.30x(5000-0.2x8000)=1020, x1.6 mult=$1632,$1632/mo,$0,claude-sonnet-5,2026-07-11
+California,2025-CA-SB343-v1,"Statute's own literal example: TN=$1000, H%=20%, expect K~0.21",K=1.20x(0.165+1000/82857)=0.2125 (statute rounds to 0.21),Engine computed 0.2125 -- matches,$0 (statute rounds, engine precise),claude-sonnet-5,2026-07-11

@@ -178,12 +178,20 @@ function calcMichiganFormula(params, rules, inputs) {
 }
 
 function calcAlgebraicKFactor(params, rules, inputs) {
-  // California-style: CS = K x [HN - (H% x TN)]
+  // California Fam. Code 4055: CS = K x [HN - (H% x TN)]
   // HN = higher earner's net monthly disposable income
   // H% = higher earner's custody timeshare (0-1)
-  // TN = total net monthly disposable income of both parents
-  // K = allocation factor, itself a function of H% and TN (approximated via
-  // params.k_base + params.k_income_divisor, per state's published K table)
+  // TN = total net monthly disposable income of both parties
+  // K = (1+H% if H%<=50%, else 2-H%) x a fraction that is a piecewise
+  // function of TN itself (verbatim from the statute, not approximated):
+  //   TN <= 2900:        0.165 + TN/82,857
+  //   2900 < TN <= 5000:  0.131 + TN/42,149
+  //   5000 < TN <= 10000: 0.250
+  //   10000 < TN <= 15000: 0.10 + 1,499/TN
+  //   TN > 15000:          0.12 + 1,200/TN
+  // CS is computed for 1 child, then multiplied by a statutory per-child-count
+  // multiplier (2 children: 1.6, 3: 2, ... 10: 2.86) -- the multiplier applies
+  // to the whole CS amount, K itself does not vary by child count.
   const netA = inputs.parentANetIncome;
   const netB = inputs.parentBNetIncome;
   const higherIsA = netA >= netB;
@@ -191,18 +199,31 @@ function calcAlgebraicKFactor(params, rules, inputs) {
   const TN = netA + netB;
   const Hpct = inputs.higherEarnerTimesharePct;
 
-  const childBracket = inputs.numChildren >= 4 ? 4 : inputs.numChildren;
-  const kConst = params.k_constants[String(childBracket)] || params.k_constants['1'];
-  const incomeComponent = TN / params.k_income_divisor;
-  const K = (Hpct <= 0.5 ? (1 + Hpct) : (2 - Hpct)) * Math.min(kConst + incomeComponent, params.k_max || 1);
+  let fraction;
+  if (TN <= 2900) fraction = 0.165 + TN / 82857;
+  else if (TN <= 5000) fraction = 0.131 + TN / 42149;
+  else if (TN <= 10000) fraction = 0.250;
+  else if (TN <= 15000) fraction = 0.10 + 1499 / TN;
+  else fraction = 0.12 + 1200 / TN;
 
-  let amount = K * (HN - (Hpct * TN));
-  amount = Math.max(amount, 0);
+  const K = (Hpct <= 0.5 ? (1 + Hpct) : (2 - Hpct)) * fraction;
+  const cs1Child = K * (HN - (Hpct * TN));
+
+  const childKey = String(Math.min(inputs.numChildren, 10));
+  const multiplier = params.child_multipliers[childKey] || 1;
+  let amount = cs1Child * multiplier;
+
+  // Per statute: a positive result means the higher earner pays; negative
+  // means the LOWER earner pays the absolute value (can happen when the
+  // higher earner also has majority timeshare).
+  const higherEarnerPays = amount >= 0;
+  const payingParent = higherEarnerPays ? (higherIsA ? 'A' : 'B') : (higherIsA ? 'B' : 'A');
+  amount = Math.abs(amount);
   amount = applyRounding(amount, rules.rounding);
 
   return {
     monthlyAmount: amount,
-    payingParent: higherIsA ? 'A' : 'B',
+    payingParent,
     deviationNote: rules.deviation_note,
     capWarning: null
   };

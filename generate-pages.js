@@ -100,8 +100,8 @@ function formulaSection(state, rules) {
 
   if (state.formula_model === 'algebraic_kfactor') {
     const p = state.params;
-    const rows = Object.entries(p.k_constants)
-      .map(([k, v]) => `<tr><td>K constant (${k} child${k === '1' ? '' : 'ren'})</td><td>${v}</td><td>${state.source.statute_ref || ''}</td></tr>`)
+    const rows = Object.entries(p.child_multipliers)
+      .map(([k, v]) => `<tr><td>Multiplier (${k} children)</td><td>&times;${v}</td><td>${state.source.statute_ref || ''}</td></tr>`)
       .join('');
     return `
   <section class="formula-section">
@@ -110,17 +110,22 @@ function formulaSection(state, rules) {
     <h3>Constants used</h3>
     <table>
       <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>K fraction, TN &le; $2,900</td><td>0.165 + TN/82,857</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>K fraction, $2,901-$5,000</td><td>0.131 + TN/42,149</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>K fraction, $5,001-$10,000</td><td>0.250 (flat)</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>K fraction, $10,001-$15,000</td><td>0.10 + 1,499/TN</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>K fraction, over $15,000</td><td>0.12 + 1,200/TN</td><td>${state.source.statute_ref || ''}</td></tr>
       ${rows}
-      <tr><td>Income divisor</td><td>${p.k_income_divisor.toLocaleString()}</td><td>${state.source.statute_ref || ''}</td></tr>
     </table>
     <h3>Formula</h3>
     <div class="formula-code">
       TN = parentA_net_income + parentB_net_income<br>
       HN = higher_earner_net_income<br>
-      K = (H% &le; 50% ? 1+H% : 2-H%) &times; min(k_constant[children] + TN/${p.k_income_divisor.toLocaleString()}, k_max)<br>
-      monthly_support = K &times; (HN - H% &times; TN)
+      K = (H% &le; 50% ? 1+H% : 2-H%) &times; k_fraction(TN)<br>
+      CS_1_child = K &times; (HN - H% &times; TN)<br>
+      monthly_support = CS_1_child &times; child_multiplier[children]
     </div>
-    <p class="formula-footnote">Deterministic calculation based on ${state.name}'s official statutory formula (Fam. Code algebraic guideline). Verify against ${state.name}'s official calculator for a court-ready figure.</p>
+    <p class="formula-footnote">Deterministic calculation based on Cal. Fam. Code § 4055, transcribed verbatim from the statute text. Verify against California's official Guideline Calculator for a court-ready figure.</p>
   </section>`;
   }
 
@@ -179,7 +184,9 @@ function calculatorFormFields(state) {
       <label>Number of children
         <select id="numChildren">
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          <option value="10">10 or more</option>
         </select>
       </label>
       <label>Higher earner's custody timeshare (%)

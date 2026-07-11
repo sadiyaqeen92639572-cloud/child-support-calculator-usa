@@ -450,5 +450,47 @@
       "Is Illinois child support based on gross or net income?",
       "What happens if combined income is above $27,375/month?"
     ]
+  },
+  "ca": {
+    "name": "California",
+    "abbr": "CA",
+    "slug": "california",
+    "formula_model": "algebraic_kfactor",
+    "effective_date": "2025-09-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2025-CA-SB343-v1",
+    "source": {
+      "agency_name": "California Family Code (via leginfo.legislature.ca.gov)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=4055.&lawCode=FAM",
+      "statute_ref": "Cal. Fam. Code § 4055"
+    },
+    "params": {
+      "child_multipliers": { "1": 1, "2": 1.6, "3": 2, "4": 2.3, "5": 2.5, "6": 2.625, "7": 2.75, "8": 2.813, "9": 2.844, "10": 2.86 }
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's net monthly disposable income (gross income minus taxes, mandatory union dues, mandatory retirement contributions, health premiums, and support paid for other relationships).",
+        "Combine both parents' net disposable income (TN) and identify the higher earner's income (HN) and their approximate timeshare percentage (H%).",
+        "Compute K: (1+H% if H% is 50% or less, otherwise 2-H%) multiplied by a fraction that depends on TN — 0.165+TN/82,857 up to $2,900, 0.131+TN/42,149 from $2,901-$5,000, a flat 0.250 from $5,001-$10,000, 0.10+1,499/TN from $10,001-$15,000, and 0.12+1,200/TN above $15,000.",
+        "Compute the 1-child support amount: CS = K × (HN − H% × TN).",
+        "Multiply by the statutory multiplier for the actual number of children (1.6 for 2 children, up to 2.86 for 10).",
+        "A positive result means the higher earner pays; a negative result means the lower earner pays the absolute value."
+      ],
+      "example": {
+        "scenario": "Example: Parent A (higher earner) net income $5,000/month, Parent B net income $3,000/month, 2 children, Parent A has 20% timeshare.",
+        "calculation": [
+          "TN = $8,000/month, HN = $5,000, H% = 20%.",
+          "TN falls in the $5,001-$10,000 bracket → fraction = 0.250.",
+          "K = (1 + 0.20) × 0.250 = 0.30.",
+          "CS (1 child) = 0.30 × ($5,000 − 0.20 × $8,000) = 0.30 × $3,400 = $1,020.",
+          "2-child multiplier ×1.6 = $1,632/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "What is the California K-factor child support formula?",
+      "Is California child support based on gross or net income?",
+      "How does timeshare percentage affect California child support?"
+    ]
   }
 }

@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "no_cap",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. A separate low-income adjustment applies when the obligor's net disposable income is below full-time minimum-wage earnings (Fam. Code § 4055(b)(7)) — not modeled in this calculator; consult California's official Guideline Calculator for low-income cases."
+}
