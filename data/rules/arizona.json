@@ -1,0 +1,22 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "stepped_days_table",
+    "table": [
+      { "upTo": 19, "value": 0 },
+      { "upTo": 34, "value": 0.025 },
+      { "upTo": 49, "value": 0.050 },
+      { "upTo": 69, "value": 0.075 },
+      { "upTo": 84, "value": 0.10 },
+      { "upTo": 99, "value": 0.15 },
+      { "upTo": 114, "value": 0.175 },
+      { "upTo": 129, "value": 0.20 },
+      { "upTo": 142, "value": 0.25 },
+      { "upTo": 152, "value": 0.325 },
+      { "upTo": 163, "value": 0.40 },
+      { "upTo": 365, "value": 0.50 }
+    ]
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Courts may deviate if combined income exceeds $30,000/month with significant income disparity, or for other documented reasons (Section IX) — this calculator shows the presumptive guideline amount only, not a court order. Note: at exactly equal (50/50) parenting time, Arizona's guidelines may still order the higher-earning parent to pay support based on income disparity alone — this calculator determines the paying parent from parenting-time majority and may not reflect that specific scenario; consult an attorney if your parenting time is exactly equal."
+}

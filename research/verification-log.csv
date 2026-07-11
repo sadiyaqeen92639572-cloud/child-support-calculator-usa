@@ -3,3 +3,5 @@ Texas,2025-TX-v1,"$4000 net/mo, 2 children, standard schedule",$1000/mo (4000 x 
 Texas,2025-TX-v1,"$15000 net/mo (over $11700 cap), 1 child",$2340/mo (11700 x 0.20),$2340/mo,$0,claude-sonnet-5,2026-07-10
 Texas,2025-TX-v1,"$800 net/mo (below $1000 low-income threshold), 1 child",$120/mo (800 x 0.15),$120/mo,$0,claude-sonnet-5,2026-07-10
 New York,2026-NY-CSSA-v1,"Combined $6000/mo, 2 children, A=$4000(67%)/B=$2000(33%), B has all overnights so A pays",$1000/mo (6000 x 0.25 x 0.667),$1000/mo,$0,claude-sonnet-5,2026-07-11
+Arizona,2022-AZ-v1,"Charlie/Drew PDF example: combined $6000, 2 children, A=$4000(67%), 110 parenting-time days",$707/mo (PDF uses rounded 67%),$703/mo,-$4 (rounding methodology: exact fraction vs PDF's rounded %),claude-sonnet-5,2026-07-11
+Arizona,2022-AZ-v1,"Dakota/Alex PDF example: combined $5400, 1 child, A=$1400(25.93%), 0 days, self-support reserve test",$237/mo pre-reserve (PDF confirms $-237 negative -> reduced),$237/mo + belowReserve flag true,$0,claude-sonnet-5,2026-07-11

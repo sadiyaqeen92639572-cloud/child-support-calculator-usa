@@ -115,6 +115,7 @@ function formulaSection(state, rules) {
       ${p.self_support_reserve_monthly ? `<tr><td>Self-support reserve</td><td>$${p.self_support_reserve_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${custody && custody.type === 'overnights_threshold' ? `<tr><td>Overnights threshold</td><td>${custody.threshold} nights/yr</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${custody && custody.type === 'graduated_overnight_credit' ? `<tr><td>Custody adjustment</td><td>Graduated overnight-credit table</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
+      ${custody && custody.type === 'stepped_days_table' ? `<tr><td>Custody adjustment</td><td>Parenting Time Table (step function by day-range)</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
       ${state.formula_model === 'melson' && p.sola_percentage ? `<tr><td>Standard-of-living adjustment</td><td>${(p.sola_percentage * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>` : ''}
     </table>
     <h3>Formula</h3>

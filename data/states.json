@@ -82,5 +82,48 @@
       "What counts as income under the New York CSSA?",
       "What happens if combined income is above $193,000/year?"
     ]
+  },
+  "az": {
+    "name": "Arizona",
+    "abbr": "AZ",
+    "slug": "arizona",
+    "formula_model": "income_shares",
+    "effective_date": "2022-01-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2022-AZ-v1",
+    "source": {
+      "agency_name": "Arizona Child Support Guidelines (Arizona Supreme Court)",
+      "url": "https://superiorcourt.maricopa.gov/media/0zqj3ip2/child-support-guidelines-2022.pdf",
+      "statute_ref": "A.R.S. § 25-320"
+    },
+    "params": {
+      "schedule_table_ref": "arizona_schedule.json",
+      "self_support_reserve_monthly": 1685,
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's Child Support Income (gross income from all sources).",
+        "Combine both parents' Adjusted Child Support Income to get Combined Adjusted Child Support Income.",
+        "Look up the Basic Child Support Obligation from the official Schedule of Basic Support Obligations for that combined income and number of children.",
+        "Each parent's proportionate share equals their income divided by the combined income, applied to the Combined Child Support Obligation.",
+        "Apply the Parenting Time Table adjustment: the number of parenting-time days for the paying parent maps to an adjustment percentage (0% at 0-19 days up to 50% at 164+ days), multiplied by the Basic Child Support Obligation and subtracted from that parent's share.",
+        "Apply the Self-Support Reserve Test: if the result would leave the paying parent below $1,685/month, the court may reduce the order."
+      ],
+      "example": {
+        "scenario": "Example: combined income $8,000/month, 2 children, Parent A earns $5,000/mo (62.5% share) and has 110 parenting-time days/year, Parent B earns $3,000/mo (37.5% share).",
+        "calculation": [
+          "Basic Child Support Obligation for $8,000 combined, 2 children: $1,622/month.",
+          "Parent A's proportionate share: 62.5% × $1,622 = $1,014.",
+          "110 days falls in the 100-114 day bracket → 17.5% adjustment: $1,622 × 0.175 = $284.",
+          "$1,014 − $284 = $730/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "How does Arizona's Parenting Time Table work?",
+      "What counts as Child Support Income in Arizona?",
+      "What happens if combined income is above $30,000/month?"
+    ]
   }
 }

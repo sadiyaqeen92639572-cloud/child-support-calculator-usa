@@ -63,7 +63,17 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       }
     } else if (rules.custody_adjustment.type === 'graduated_overnight_credit') {
       const creditPct = interpolateCredit(rules.custody_adjustment.table, payingParentOvernights);
-      amount = amount * (1 - creditPct);
+      // Credit is a dollar amount computed on the FULL base obligation (before
+      // proration), then subtracted from the paying parent's share — confirmed
+      // against Arizona's official worked examples (credit != a multiplicative
+      // discount on the parent's own share).
+      amount = Math.max(0, amount - (totalObligation * creditPct));
+      adjustedForCustody = creditPct > 0;
+    } else if (rules.custody_adjustment.type === 'stepped_days_table') {
+      // e.g. Arizona's Parenting Time Table — a true step function by day-range,
+      // NOT interpolated (a real 100-114 day range all uses the same .175 credit).
+      const creditPct = stepLookup(rules.custody_adjustment.table, payingParentOvernights);
+      amount = Math.max(0, amount - (totalObligation * creditPct));
       adjustedForCustody = creditPct > 0;
     }
   }
@@ -172,9 +182,31 @@ function interpolateCredit(table, overnights) {
 
 function lookupSchedule(scheduleTable, combinedIncome, numChildren) {
   const capped = Math.min(combinedIncome, scheduleTable.maxIncome);
-  const row = scheduleTable.rows.find(r => capped <= r.upTo) || scheduleTable.rows[scheduleTable.rows.length - 1];
   const key = numChildren >= 6 ? '6' : String(numChildren);
-  return row.obligation[key];
+  const rows = scheduleTable.rows;
+
+  if (capped <= rows[0].upTo) return rows[0].obligation[key];
+  for (let i = 0; i < rows.length - 1; i++) {
+    const a = rows[i], b = rows[i + 1];
+    if (capped > a.upTo && capped <= b.upTo) {
+      // Linear interpolation between the two nearest real anchor rows —
+      // official schedule tables are smooth/monotonic between adjacent
+      // $50-increment rows, so this closely approximates the real table
+      // even when anchors are spaced further apart than $50.
+      const frac = (capped - a.upTo) / (b.upTo - a.upTo);
+      return a.obligation[key] + frac * (b.obligation[key] - a.obligation[key]);
+    }
+  }
+  return rows[rows.length - 1].obligation[key];
+}
+
+function stepLookup(table, value) {
+  // table: [{upTo: N, value: X}, ...] sorted ascending — a true step function
+  // (e.g. Arizona's Parenting Time Table), NOT interpolated between steps.
+  for (const row of table) {
+    if (value <= row.upTo) return row.value;
+  }
+  return table[table.length - 1].value;
 }
 
 function applyRounding(amount, mode) {
