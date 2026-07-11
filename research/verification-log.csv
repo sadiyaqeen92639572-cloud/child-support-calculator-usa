@@ -17,3 +17,4 @@ Florida,2025-FL-v1,"Gross-up warning trigger: paying parent 100 overnights (>73 
 Alabama,2022-AL-v1,"Combined $3000/mo, 2 children, A=$1800(60%) pays -- exact table anchor",$837 base x 0.60 = $502,$502/mo,$0,claude-sonnet-5,2026-07-11
 Colorado,2026-CO-HB25-1159-v1,"Combined $5850/mo, 2 children, A=$3510(60%) pays, 0 overnights -- exact table anchor",$1573 base x 0.60 = $943.80,$944/mo,$0,claude-sonnet-5,2026-07-11
 Colorado,2026-CO-HB25-1159-v1,"Same but A has 218 overnights (majority, becomes custodial) -- graduated credit table",B pays 40% share minus credit(147 overnights~32.8%) on full base = ~$113,$113/mo,$0,claude-sonnet-5,2026-07-11
+Illinois,2026-IL-v1,"Combined $3000/mo net, 2 children, A=$1800(60%) pays -- exact table anchor",$1070 base x 0.60 = $642,$642/mo,$0,claude-sonnet-5,2026-07-11

@@ -410,5 +410,45 @@
       "What is Colorado's self-support reserve?",
       "What happens if combined income is above $40,000/month?"
     ]
+  },
+  "il": {
+    "name": "Illinois",
+    "abbr": "IL",
+    "slug": "illinois",
+    "formula_model": "income_shares",
+    "effective_date": "2026-03-20",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2026-IL-v1",
+    "source": {
+      "agency_name": "Illinois Department of Healthcare and Family Services (HFS)",
+      "url": "https://hfs.illinois.gov/childsupport/parents/incomeshares.html",
+      "statute_ref": "750 ILCS 5/505"
+    },
+    "params": {
+      "schedule_table_ref": "illinois_schedule.json",
+      "income_basis": "net"
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's net income (gross income minus the standardized tax amount from the official Gross-to-Net Income Conversion Table).",
+        "Combine both parents' net incomes to get combined net income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Obligations for that combined income and number of children.",
+        "Each parent's share equals their income divided by the combined income, applied to the basic obligation.",
+        "If each parent has at least 146 overnights/year, a Shared Physical Care worksheet applies instead of straight proration (threshold drops to 110 overnights starting 2027-01-01).",
+        "Above $27,375/month combined net income, courts determine support case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: combined net income $3,000/month, 2 children, Parent A earns $1,800/mo (60% share), Parent B earns $1,200/mo (40% share) and has primary custody.",
+        "calculation": [
+          "Basic child support obligation for $3,000 combined, 2 children: $1,070/month.",
+          "Parent A's share: 60% × $1,070 = $642/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Does Illinois reduce child support for shared parenting time?",
+      "Is Illinois child support based on gross or net income?",
+      "What happens if combined income is above $27,375/month?"
+    ]
   }
 }
