@@ -73,6 +73,31 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'michigan_formula') {
+    const p = state.params;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Low Income Threshold</td><td>$${p.low_income_threshold_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>General Care Support Tables</td><td>5 tables (1-5+ children), 6 income brackets each</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      family_income = parentA_net_income + parentB_net_income<br>
+      base(parent) = (parent_income &le; ${p.low_income_threshold_monthly}) ? parent_income &times; 10% :<br>
+      &nbsp;&nbsp;(BaseSupport[bracket] + MarginalPct[bracket] &times; (family_income - BracketThreshold)) &times; parent_share<br>
+      Ao, Bo = each parent's annual overnights<br>
+      offset = (Ao^2.5 &times; Bs - Bo^2.5 &times; As) / (Ao^2.5 + Bo^2.5)<br>
+      offset &lt; 0 &rarr; Parent A pays |offset| &nbsp;·&nbsp; offset &gt; 0 &rarr; Parent B pays offset
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on the Michigan Child Support Formula's General Care Equation and Parental Time Offset Equation (2025 MCSF §§3.02-3.03). Verify against Michigan's official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
   if (state.formula_model === 'algebraic_kfactor') {
     const p = state.params;
     const rows = Object.entries(p.k_constants)
@@ -161,6 +186,24 @@ function calculatorFormFields(state) {
         <input type="number" id="higherEarnerTimesharePct" min="0" max="100" step="1" value="50">
       </label>`;
   }
+  if (state.formula_model === 'michigan_formula') {
+    return `
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentANetIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBNetIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5 or more</option>
+        </select>
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>`;
+  }
 
   // income_shares and melson share the same form shape
   const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
@@ -212,6 +255,14 @@ function calculatorScript(state) {
           parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
           numChildren: Number(document.getElementById('numChildren').value) || 1,
           higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
       return {

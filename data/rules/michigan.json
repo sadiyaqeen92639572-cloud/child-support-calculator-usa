@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons (Section 1.04) — this calculator shows the presumptive guideline amount only, not a court order. Simplification: this calculator does not model the per-parent family-income exclusion nuance (MCSF 2.09(B)) when one parent's income is near the Low Income Threshold — consult Michigan's official Support Estimator for edge cases near $1,255/month."
+}

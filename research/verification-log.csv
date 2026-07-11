@@ -5,3 +5,5 @@ Texas,2025-TX-v1,"$800 net/mo (below $1000 low-income threshold), 1 child",$120/
 New York,2026-NY-CSSA-v1,"Combined $6000/mo, 2 children, A=$4000(67%)/B=$2000(33%), B has all overnights so A pays",$1000/mo (6000 x 0.25 x 0.667),$1000/mo,$0,claude-sonnet-5,2026-07-11
 Arizona,2022-AZ-v1,"Charlie/Drew PDF example: combined $6000, 2 children, A=$4000(67%), 110 parenting-time days",$707/mo (PDF uses rounded 67%),$703/mo,-$4 (rounding methodology: exact fraction vs PDF's rounded %),claude-sonnet-5,2026-07-11
 Arizona,2022-AZ-v1,"Dakota/Alex PDF example: combined $5400, 1 child, A=$1400(25.93%), 0 days, self-support reserve test",$237/mo pre-reserve (PDF confirms $-237 negative -> reduced),$237/mo + belowReserve flag true,$0,claude-sonnet-5,2026-07-11
+Michigan,2025-MCSF-v1,"Bracket lookup exact match at family income = $7198.27 (2 children)",Base $2095.42 + 20.20% marginal (PDF General Care Table),Exact match,$0,claude-sonnet-5,2026-07-11
+Michigan,2025-MCSF-v1,"Low income equation: Parent A income $1000/mo (below $1255 threshold)",Base = income x 10% = $100,$100,$0,claude-sonnet-5,2026-07-11

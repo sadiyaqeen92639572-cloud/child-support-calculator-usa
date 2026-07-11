@@ -107,6 +107,76 @@ function calcPercentageOfCombinedIncome(params, combinedIncome, numChildren) {
   return capped * params.percentages_of_combined[bracket];
 }
 
+function lookupGeneralCareBracket(table, income) {
+  // table: [{incomeAmount, basePct, baseSupport, marginalPct}, ...] ascending.
+  // Find the highest bracket whose incomeAmount <= income (matches MCSF's
+  // "highest monthly income level that does not exceed the family's net
+  // monthly income" rule).
+  let bracket = table[0];
+  for (const row of table) {
+    if (income >= row.incomeAmount) bracket = row;
+    else break;
+  }
+  return bracket;
+}
+
+function calcMichiganFormula(params, rules, inputs) {
+  // Michigan Child Support Formula: General Care Equation per parent, then the
+  // Parental Time Offset Equation. inputs: { parentANetIncome, parentBNetIncome,
+  // numChildren, overnightsWithA, overnightsWithB } — MI counts each parent's
+  // own annual overnights directly (not a single "overnightsWithA" split of 365).
+  const threshold = params.low_income_threshold_monthly;
+  const bracket = inputs.numChildren >= 5 ? '5' : String(inputs.numChildren);
+  const table = params.general_care_tables[bracket];
+
+  const aAboveThreshold = inputs.parentANetIncome > threshold;
+  const bAboveThreshold = inputs.parentBNetIncome > threshold;
+  // Simplification: if either parent is at/below the Low Income Threshold, the
+  // per-parent Low Income Equation (10% of that parent's own income) applies
+  // instead of the General Care Equation — implemented for both parents below,
+  // but the "exclude from family income" nuance in MCSF 2.09(B) for the OTHER
+  // parent's calc is not modeled here (documented simplification).
+  function baseObligation(ownIncome, otherIncome, ownShare) {
+    if (ownIncome <= threshold) {
+      return ownIncome * 0.10;
+    }
+    const familyIncome = ownIncome + (otherIncome > threshold ? otherIncome : 0);
+    const row = lookupGeneralCareBracket(table, familyIncome);
+    const g = (row.baseSupport + row.marginalPct * (familyIncome - row.incomeAmount)) * ownShare;
+    return g;
+  }
+
+  const combined = inputs.parentANetIncome + inputs.parentBNetIncome;
+  const shareA = inputs.parentANetIncome / combined;
+  const shareB = 1 - shareA;
+
+  const As = baseObligation(inputs.parentANetIncome, inputs.parentBNetIncome, shareA);
+  const Bs = baseObligation(inputs.parentBNetIncome, inputs.parentANetIncome, shareB);
+
+  const Ao = inputs.overnightsWithA;
+  const Bo = 365 - Ao;
+  const AoP = Math.pow(Ao, 2.5);
+  const BoP = Math.pow(Bo, 2.5);
+  const offset = (AoP * Bs - BoP * As) / (AoP + BoP);
+
+  const payingParent = offset < 0 ? 'A' : 'B';
+  let amount = Math.abs(offset);
+  amount = applyRounding(amount, rules.rounding);
+
+  const payingParentIncome = payingParent === 'A' ? inputs.parentANetIncome : inputs.parentBNetIncome;
+  const belowReserve = payingParentIncome <= threshold;
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    deviationNote: rules.deviation_note,
+    capWarning: belowReserve
+      ? `The paying parent's income is at or below Michigan's Low Income Threshold ($${threshold.toLocaleString()}/mo) — a different Low Income Equation applies, which this estimate already uses, but courts retain discretion in these cases.`
+      : null
+  };
+}
+
 function calcAlgebraicKFactor(params, rules, inputs) {
   // California-style: CS = K x [HN - (H% x TN)]
   // HN = higher earner's net monthly disposable income
@@ -158,6 +228,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcMelson(stateEntry.params, rules, scheduleTable, inputs);
     case 'algebraic_kfactor':
       return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
+    case 'michigan_formula':
+      return calcMichiganFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

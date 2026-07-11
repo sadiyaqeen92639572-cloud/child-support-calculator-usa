@@ -141,6 +141,14 @@
           higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
         };
       }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
       return {
         parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
         parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,

@@ -125,5 +125,86 @@
       "What counts as Child Support Income in Arizona?",
       "What happens if combined income is above $30,000/month?"
     ]
+  },
+  "mi": {
+    "name": "Michigan",
+    "abbr": "MI",
+    "slug": "michigan",
+    "formula_model": "michigan_formula",
+    "effective_date": "2025-01-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2025-MCSF-v1",
+    "source": {
+      "agency_name": "Michigan Child Support Formula Manual (State Court Administrative Office)",
+      "url": "https://www.courts.michigan.gov/4a7a53/siteassets/court-administration/standardsguidelines/foc/2025mcsf.pdf",
+      "statute_ref": "MCL 552.605 et seq.; 2025 MCSF §§3.02-3.03"
+    },
+    "params": {
+      "low_income_threshold_monthly": 1255,
+      "general_care_tables": {
+        "1": [
+          { "incomeAmount": 2013.94, "basePct": 0.2500, "baseSupport": 503.49, "marginalPct": 0.2492 },
+          { "incomeAmount": 3272.65, "basePct": 0.2497, "baseSupport": 817.18, "marginalPct": 0.1763 },
+          { "incomeAmount": 4531.37, "basePct": 0.2293, "baseSupport": 1039.04, "marginalPct": 0.1405 },
+          { "incomeAmount": 7198.27, "basePct": 0.1964, "baseSupport": 1413.74, "marginalPct": 0.1398 },
+          { "incomeAmount": 9432.22, "basePct": 0.1830, "baseSupport": 1726.10, "marginalPct": 0.1201 },
+          { "incomeAmount": 17871.57, "basePct": 0.1533, "baseSupport": 2739.71, "marginalPct": 0.1129 }
+        ],
+        "2": [
+          { "incomeAmount": 2013.94, "basePct": 0.3810, "baseSupport": 767.31, "marginalPct": 0.3792 },
+          { "incomeAmount": 3272.65, "basePct": 0.3803, "baseSupport": 1244.59, "marginalPct": 0.2431 },
+          { "incomeAmount": 4531.37, "basePct": 0.3422, "baseSupport": 1550.63, "marginalPct": 0.2043 },
+          { "incomeAmount": 7198.27, "basePct": 0.2911, "baseSupport": 2095.42, "marginalPct": 0.2020 },
+          { "incomeAmount": 9432.22, "basePct": 0.2700, "baseSupport": 2546.70, "marginalPct": 0.1787 },
+          { "incomeAmount": 17871.57, "basePct": 0.2269, "baseSupport": 4055.06, "marginalPct": 0.1616 }
+        ],
+        "3": [
+          { "incomeAmount": 2013.94, "basePct": 0.4600, "baseSupport": 926.41, "marginalPct": 0.4571 },
+          { "incomeAmount": 3272.65, "basePct": 0.4589, "baseSupport": 1501.82, "marginalPct": 0.2548 },
+          { "incomeAmount": 4531.37, "basePct": 0.4022, "baseSupport": 1822.52, "marginalPct": 0.2411 },
+          { "incomeAmount": 7198.27, "basePct": 0.3425, "baseSupport": 2465.41, "marginalPct": 0.2391 },
+          { "incomeAmount": 9432.22, "basePct": 0.3180, "baseSupport": 2999.45, "marginalPct": 0.2098 },
+          { "incomeAmount": 17871.57, "basePct": 0.2669, "baseSupport": 4769.92, "marginalPct": 0.1819 }
+        ],
+        "4": [
+          { "incomeAmount": 2013.94, "basePct": 0.5130, "baseSupport": 1033.15, "marginalPct": 0.5099 },
+          { "incomeAmount": 3272.65, "basePct": 0.5118, "baseSupport": 1674.94, "marginalPct": 0.2814 },
+          { "incomeAmount": 4531.37, "basePct": 0.4478, "baseSupport": 2029.15, "marginalPct": 0.2702 },
+          { "incomeAmount": 7198.27, "basePct": 0.3820, "baseSupport": 2749.74, "marginalPct": 0.2680 },
+          { "incomeAmount": 9432.22, "basePct": 0.3550, "baseSupport": 3348.44, "marginalPct": 0.2328 },
+          { "incomeAmount": 17871.57, "basePct": 0.2973, "baseSupport": 5313.22, "marginalPct": 0.2044 }
+        ],
+        "5": [
+          { "incomeAmount": 2013.94, "basePct": 0.5650, "baseSupport": 1137.88, "marginalPct": 0.5614 },
+          { "incomeAmount": 3272.65, "basePct": 0.5636, "baseSupport": 1844.47, "marginalPct": 0.3145 },
+          { "incomeAmount": 4531.37, "basePct": 0.4944, "baseSupport": 2240.31, "marginalPct": 0.2947 },
+          { "incomeAmount": 7198.27, "basePct": 0.4204, "baseSupport": 3026.15, "marginalPct": 0.2920 },
+          { "incomeAmount": 9432.22, "basePct": 0.3900, "baseSupport": 3678.57, "marginalPct": 0.2583 },
+          { "incomeAmount": 17871.57, "basePct": 0.3278, "baseSupport": 5858.30, "marginalPct": 0.2234 }
+        ]
+      }
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's net income (gross income minus taxes, mandatory retirement, and other allowable deductions).",
+        "If a parent's net income is at or below the Low Income Threshold ($1,255/month), that parent's base support obligation is simply 10% of their income.",
+        "Otherwise, combine both parents' net incomes into family income, look up the General Care Support Table bracket for that family income and number of children, and apply the General Care Equation: Base Support + (Marginal Percentage × amount over the bracket threshold), multiplied by that parent's income share.",
+        "Apply the Parental Time Offset Equation using each parent's approximate annual overnights, which produces the final monthly transfer amount directly — a negative result means Parent A pays, positive means Parent B pays."
+      ],
+      "example": {
+        "scenario": "Example: Parent A net income $4,500/month (60% share), Parent B net income $3,000/month (40% share), 2 children, Parent A has 100 overnights/year, Parent B has 265.",
+        "calculation": [
+          "Family income: $7,500/month, bracket: $7,198.27 (2 children) — Base $2,095.42 + 20.20% × ($7,500−$7,198.27) = $2,156.32.",
+          "Parent A's base obligation: $2,156.32 × 60% = $1,293.79.",
+          "Parent B's base obligation: $2,156.32 × 40% = $862.53.",
+          "Parental Time Offset: (100^2.5 × 862.53 − 265^2.5 × 1293.79) / (100^2.5 + 265^2.5) — a negative result, so Parent A pays the guideline amount."
+        ]
+      }
+    },
+    "faq_extra": [
+      "How does Michigan's Parental Time Offset work?",
+      "What is Michigan's Low Income Threshold?",
+      "What counts as net income in Michigan?"
+    ]
   }
 }

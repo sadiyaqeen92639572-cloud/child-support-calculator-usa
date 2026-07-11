@@ -7,7 +7,7 @@
     "name": { "type": "string" },
     "abbr": { "type": "string", "pattern": "^[A-Z]{2}$" },
     "slug": { "type": "string", "pattern": "^[a-z-]+$" },
-    "formula_model": { "type": "string", "enum": ["percentage_of_income", "income_shares", "melson", "algebraic_kfactor"] },
+    "formula_model": { "type": "string", "enum": ["percentage_of_income", "income_shares", "melson", "algebraic_kfactor", "michigan_formula"] },
     "effective_date": { "type": "string", "format": "date" },
     "last_verified": { "type": "string", "format": "date" },
     "guideline_version": { "type": "string" },
