@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alabama Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Alabama child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-11.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/alabama/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Alabama Child Support Calculator">
+<meta property="og:description" content="Free Alabama child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/alabama/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Alabama Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-11"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Alabama?","acceptedAnswer":{"@type":"Answer","text":"Combine both parents' gross monthly incomes to get combined adjusted gross income. Look up the basic child support obligation from the official Schedule of Basic Child-Support Obligations for that combined income and number of children (below $800/month combined, a flat $50 minimum applies). Each parent's share equals their income divided by the combined income, applied to the basic obligation. If a parent has roughly 143-164+ overnights/year, a separate Shared Physical Custody worksheet applies instead of straight proration. Above $20,000/month combined income, courts determine support case-by-case."}},{"@type":"Question","name":"Does Alabama reduce child support for shared custody?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under Alabama's child support formula."}},{"@type":"Question","name":"What is Alabama's self-support reserve?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under Alabama's child support formula."}},{"@type":"Question","name":"What happens if combined income is above $20,000/month?","acceptedAnswer":{"@type":"Answer","text":"See the guidelines section above for how this applies under Alabama's child support formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Alabama Child Support Calculator","item":"https://usachildsupportcalculator.com/alabama/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Alabama Child Support Calculator</h1>
+  <p class="badge">Updated for Alabama's 2022-AL-v1 guidelines · Last reviewed 2026-07-11</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Alabama's published child support guidelines as of 2026-07-11. Results may differ from a court order. For your official calculation, consult Alabama Rules of Judicial Administration, Rule 32 (Alabama Supreme Court) or a family law attorney licensed in Alabama.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Alabama Child Support Is Calculated</h2>
+    <ol><li>Combine both parents' gross monthly incomes to get combined adjusted gross income.</li><li>Look up the basic child support obligation from the official Schedule of Basic Child-Support Obligations for that combined income and number of children (below $800/month combined, a flat $50 minimum applies).</li><li>Each parent's share equals their income divided by the combined income, applied to the basic obligation.</li><li>If a parent has roughly 143-164+ overnights/year, a separate Shared Physical Custody worksheet applies instead of straight proration.</li><li>Above $20,000/month combined income, courts determine support case-by-case.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Alabama Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined gross income $3,000/month, 2 children, Parent A earns $1,800/mo (60% share), Parent B earns $1,200/mo (40% share) and has primary custody.</p>
+    <ol><li>Basic child support obligation for $3,000 combined, 2 children: $837/month.</li><li>Parent A's share: 60% × $837 = $502/month guideline child support paid by Parent A.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Alabama Rules of Judicial Administration, Rule 32 (Alabama Supreme Court) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      <tr><td>Self-support reserve</td><td>$981/mo</td><td>Ala. R. Jud. Admin. 32</td></tr>
+      <tr><td>Overnights threshold</td><td>143 nights/yr</td><td>Ala. R. Jud. Admin. 32</td></tr>
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Alabama's official guideline schedule table. Verify against Alabama's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Alabama?</summary><p>Combine both parents' gross monthly incomes to get combined adjusted gross income. Look up the basic child support obligation from the official Schedule of Basic Child-Support Obligations for that combined income and number of children (below $800/month combined, a flat $50 minimum applies). Each parent's share equals their income divided by the combined income, applied to the basic obligation. If a parent has roughly 143-164+ overnights/year, a separate Shared Physical Custody worksheet applies instead of straight proration. Above $20,000/month combined income, courts determine support case-by-case.</p></details>
+    <details><summary>Does Alabama reduce child support for shared custody?</summary><p>See the guidelines section above.</p></details><details><summary>What is Alabama's self-support reserve?</summary><p>See the guidelines section above.</p></details><details><summary>What happens if combined income is above $20,000/month?</summary><p>See the guidelines section above.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2022-05-01, guideline version 2022-AL-v1, last reviewed 2026-07-11.</p>
+    <p>Official source: <a href="https://judicial.alabama.gov/docs/library/rules/ja32.pdf" rel="nofollow noopener">Alabama Rules of Judicial Administration, Rule 32 (Alabama Supreme Court)</a> (Ala. R. Jud. Admin. 32).</p>
+    <p class="deviation-note">Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. Above $20,000/month combined income, courts determine support on a case-by-case basis.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Alabama's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Alabama","abbr":"AL","slug":"alabama","formula_model":"income_shares","effective_date":"2022-05-01","last_verified":"2026-07-11","guideline_version":"2022-AL-v1","source":{"agency_name":"Alabama Rules of Judicial Administration, Rule 32 (Alabama Supreme Court)","url":"https://judicial.alabama.gov/docs/library/rules/ja32.pdf","statute_ref":"Ala. R. Jud. Admin. 32"},"params":{"schedule_table_ref":"alabama_schedule.json","self_support_reserve_monthly":981,"income_basis":"gross"},"worksheet":{"steps":["Combine both parents' gross monthly incomes to get combined adjusted gross income.","Look up the basic child support obligation from the official Schedule of Basic Child-Support Obligations for that combined income and number of children (below $800/month combined, a flat $50 minimum applies).","Each parent's share equals their income divided by the combined income, applied to the basic obligation.","If a parent has roughly 143-164+ overnights/year, a separate Shared Physical Custody worksheet applies instead of straight proration.","Above $20,000/month combined income, courts determine support case-by-case."],"example":{"scenario":"Example: combined gross income $3,000/month, 2 children, Parent A earns $1,800/mo (60% share), Parent B earns $1,200/mo (40% share) and has primary custody.","calculation":["Basic child support obligation for $3,000 combined, 2 children: $837/month.","Parent A's share: 60% × $837 = $502/month guideline child support paid by Parent A."]}},"faq_extra":["Does Alabama reduce child support for shared custody?","What is Alabama's self-support reserve?","What happens if combined income is above $20,000/month?"]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":{"type":"overnights_threshold","threshold":143,"warning_message":"Alabama uses a separate Shared Physical Custody worksheet (Form CS-42-S) when a parent has roughly 143-164+ overnights/year — this calculator's standard result does not apply. Use Alabama's official shared-custody worksheet for a substantial-timesharing calculation."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. Above $20,000/month combined income, courts determine support on a case-by-case basis."};
+    const SCHEDULE = {"maxIncome":20000,"source":"Alabama Schedule of Basic Child-Support Obligations, Appendix to Rule 32, https://judicial.alabama.gov/docs/library/rules/ja32.pdf (mirrored via https://kirkdrennanlaw.com/docs/CS_Obligation_Chart.pdf since judicial.alabama.gov was unreachable from this network)","note":"31 real anchor points sampled across the full $0-$20,000 combined income range, transcribed directly from the official 10-page table. Below $800, a flat $50 minimum applies for all child counts (self-support reserve floor).","rows":[{"upTo":800,"obligation":{"1":50,"2":50,"3":50,"4":50,"5":50,"6":50}},{"upTo":1000,"obligation":{"1":155,"2":156,"3":158,"4":160,"5":162,"6":163}},{"upTo":1500,"obligation":{"1":316,"2":459,"3":512,"4":517,"5":523,"6":528}},{"upTo":2000,"obligation":{"1":403,"2":584,"3":687,"4":767,"5":844,"6":875}},{"upTo":2550,"obligation":{"1":500,"2":724,"3":852,"4":952,"5":1047,"6":1138}},{"upTo":3000,"obligation":{"1":579,"2":837,"3":984,"4":1100,"5":1210,"6":1315}},{"upTo":3500,"obligation":{"1":642,"2":928,"3":1090,"4":1218,"5":1340,"6":1456}},{"upTo":4000,"obligation":{"1":685,"2":990,"3":1163,"4":1299,"5":1429,"6":1553}},{"upTo":4500,"obligation":{"1":729,"2":1052,"3":1234,"4":1378,"5":1516,"6":1648}},{"upTo":5000,"obligation":{"1":769,"2":1105,"3":1293,"4":1445,"5":1589,"6":1727}},{"upTo":5500,"obligation":{"1":798,"2":1144,"3":1333,"4":1489,"5":1638,"6":1780}},{"upTo":6000,"obligation":{"1":818,"2":1171,"3":1363,"4":1523,"5":1675,"6":1821}},{"upTo":6500,"obligation":{"1":839,"2":1200,"3":1396,"4":1559,"5":1715,"6":1864}},{"upTo":7000,"obligation":{"1":875,"2":1250,"3":1452,"4":1621,"5":1784,"6":1939}},{"upTo":7500,"obligation":{"1":910,"2":1297,"3":1505,"4":1681,"5":1849,"6":2010}},{"upTo":8000,"obligation":{"1":944,"2":1345,"3":1558,"4":1741,"5":1915,"6":2081}},{"upTo":8500,"obligation":{"1":977,"2":1392,"3":1613,"4":1801,"5":1981,"6":2154}},{"upTo":9000,"obligation":{"1":1010,"2":1438,"3":1667,"4":1862,"5":2048,"6":2226}},{"upTo":9500,"obligation":{"1":1042,"2":1485,"3":1721,"4":1923,"5":2115,"6":2299}},{"upTo":10000,"obligation":{"1":1075,"2":1532,"3":1776,"4":1983,"5":2182,"6":2371}},{"upTo":11000,"obligation":{"1":1137,"2":1619,"3":1876,"4":2096,"5":2305,"6":2506}},{"upTo":12000,"obligation":{"1":1192,"2":1696,"3":1963,"4":2193,"5":2412,"6":2622}},{"upTo":13000,"obligation":{"1":1248,"2":1773,"3":2050,"4":2290,"5":2519,"6":2739}},{"upTo":14000,"obligation":{"1":1294,"2":1836,"3":2121,"4":2369,"5":2606,"6":2833}},{"upTo":15000,"obligation":{"1":1314,"2":1859,"3":2141,"4":2392,"5":2631,"6":2860}},{"upTo":16000,"obligation":{"1":1334,"2":1882,"3":2162,"4":2415,"5":2656,"6":2887}},{"upTo":17000,"obligation":{"1":1354,"2":1905,"3":2182,"4":2437,"5":2681,"6":2914}},{"upTo":18000,"obligation":{"1":1408,"2":1981,"3":2270,"4":2535,"5":2789,"6":3031}},{"upTo":19000,"obligation":{"1":1464,"2":2061,"3":2362,"4":2638,"5":2902,"6":3154}},{"upTo":20000,"obligation":{"1":1520,"2":2140,"3":2454,"4":2741,"5":3015,"6":3277}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

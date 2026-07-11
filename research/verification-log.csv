@@ -14,3 +14,4 @@ Indiana,2024-IN-v1,"Above-cap: combined $10000/week (above $9200 cap), 1 child",
 Florida,2025-FL-v1,"Combined $3000/mo net, 2 children, A=$1800(60%) pays -- exact table anchor",$1001 base x 0.60 = $601,$601/mo,$0,claude-sonnet-5,2026-07-11
 Florida,2025-FL-v1,"Above-cap: combined $12000/mo net (above $10000 cap), 1 child",$1437 + $2000 excess x 5.0% = $1537,$1537/mo,$0,claude-sonnet-5,2026-07-11
 Florida,2025-FL-v1,"Gross-up warning trigger: paying parent 100 overnights (>73 threshold)",Warning must display, no silent wrong calc,Warning displayed correctly,$0,claude-sonnet-5,2026-07-11
+Alabama,2022-AL-v1,"Combined $3000/mo, 2 children, A=$1800(60%) pays -- exact table anchor",$837 base x 0.60 = $502,$502/mo,$0,claude-sonnet-5,2026-07-11

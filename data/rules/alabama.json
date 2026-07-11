@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "overnights_threshold",
+    "threshold": 143,
+    "warning_message": "Alabama uses a separate Shared Physical Custody worksheet (Form CS-42-S) when a parent has roughly 143-164+ overnights/year — this calculator's standard result does not apply. Use Alabama's official shared-custody worksheet for a substantial-timesharing calculation."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. Above $20,000/month combined income, courts determine support on a case-by-case basis."
+}

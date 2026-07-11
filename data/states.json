@@ -327,5 +327,45 @@
       "Is Florida child support based on gross or net income?",
       "What happens if combined income is above $10,000/month?"
     ]
+  },
+  "al": {
+    "name": "Alabama",
+    "abbr": "AL",
+    "slug": "alabama",
+    "formula_model": "income_shares",
+    "effective_date": "2022-05-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2022-AL-v1",
+    "source": {
+      "agency_name": "Alabama Rules of Judicial Administration, Rule 32 (Alabama Supreme Court)",
+      "url": "https://judicial.alabama.gov/docs/library/rules/ja32.pdf",
+      "statute_ref": "Ala. R. Jud. Admin. 32"
+    },
+    "params": {
+      "schedule_table_ref": "alabama_schedule.json",
+      "self_support_reserve_monthly": 981,
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Combine both parents' gross monthly incomes to get combined adjusted gross income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Child-Support Obligations for that combined income and number of children (below $800/month combined, a flat $50 minimum applies).",
+        "Each parent's share equals their income divided by the combined income, applied to the basic obligation.",
+        "If a parent has roughly 143-164+ overnights/year, a separate Shared Physical Custody worksheet applies instead of straight proration.",
+        "Above $20,000/month combined income, courts determine support case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: combined gross income $3,000/month, 2 children, Parent A earns $1,800/mo (60% share), Parent B earns $1,200/mo (40% share) and has primary custody.",
+        "calculation": [
+          "Basic child support obligation for $3,000 combined, 2 children: $837/month.",
+          "Parent A's share: 60% × $837 = $502/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Does Alabama reduce child support for shared custody?",
+      "What is Alabama's self-support reserve?",
+      "What happens if combined income is above $20,000/month?"
+    ]
   }
 }
