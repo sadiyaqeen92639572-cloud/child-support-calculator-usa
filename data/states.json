@@ -367,5 +367,48 @@
       "What is Alabama's self-support reserve?",
       "What happens if combined income is above $20,000/month?"
     ]
+  },
+  "co": {
+    "name": "Colorado",
+    "abbr": "CO",
+    "slug": "colorado",
+    "formula_model": "income_shares",
+    "effective_date": "2026-03-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2026-CO-HB25-1159-v1",
+    "source": {
+      "agency_name": "Colorado Revised Statutes (via HB 25-1159, 2025 session)",
+      "url": "https://leg.colorado.gov/bill_files/85404/download",
+      "statute_ref": "C.R.S. § 14-10-115"
+    },
+    "params": {
+      "schedule_table_ref": "colorado_schedule.json",
+      "self_support_reserve_monthly": 1832,
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Combine both parents' adjusted gross incomes to get combined adjusted gross income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Child Support Obligations for that combined income and number of children.",
+        "Each parent's share equals their income divided by the combined income, applied to the basic obligation.",
+        "Apply the Parenting Time Table: each parent's annual overnights map to a graduated credit percentage (0% at 0 overnights up to 100% at 365), replacing the old 92-overnight cliff under HB 25-1159 (effective 2026-03-01).",
+        "If the paying parent's income is at or below the self-support reserve (state minimum wage x 29 hrs/week x 50 weeks/year / 12), a reduced low-income adjustment may apply instead.",
+        "Above $40,000/month combined income, courts use discretion but the amount must not be less than the $40,000-bracket amount."
+      ],
+      "example": {
+        "scenario": "Example: combined income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share) and has 110 overnights/year, Parent B earns $2,400/mo (40% share).",
+        "calculation": [
+          "Basic child support obligation for $6,000 combined (interpolated near $5,850-$6,800 bracket), 2 children: ≈$1,600/month.",
+          "Parent A's share: 60% × $1,600 ≈ $960/month.",
+          "Parenting Time credit at 110 overnights: 18.41% × $1,600 ≈ $295 subtracted from Parent A's share.",
+          "Parent A pays approximately $665/month guideline child support."
+        ]
+      }
+    },
+    "faq_extra": [
+      "How does Colorado's new Parenting Time Table work (HB 25-1159)?",
+      "What is Colorado's self-support reserve?",
+      "What happens if combined income is above $40,000/month?"
+    ]
   }
 }

@@ -1,0 +1,31 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "graduated_overnight_credit",
+    "table": [
+      { "overnights": 0, "creditPct": 0.0000 },
+      { "overnights": 20, "creditPct": 0.0156 },
+      { "overnights": 40, "creditPct": 0.0366 },
+      { "overnights": 60, "creditPct": 0.0651 },
+      { "overnights": 73, "creditPct": 0.0887 },
+      { "overnights": 90, "creditPct": 0.1268 },
+      { "overnights": 110, "creditPct": 0.1841 },
+      { "overnights": 130, "creditPct": 0.2558 },
+      { "overnights": 146, "creditPct": 0.3232 },
+      { "overnights": 160, "creditPct": 0.3883 },
+      { "overnights": 182.5, "creditPct": 0.5000 },
+      { "overnights": 200, "creditPct": 0.5825 },
+      { "overnights": 218, "creditPct": 0.6723 },
+      { "overnights": 240, "creditPct": 0.7635 },
+      { "overnights": 260, "creditPct": 0.8316 },
+      { "overnights": 280, "creditPct": 0.8853 },
+      { "overnights": 291, "creditPct": 0.9093 },
+      { "overnights": 310, "creditPct": 0.9429 },
+      { "overnights": 330, "creditPct": 0.9692 },
+      { "overnights": 350, "creditPct": 0.9887 },
+      { "overnights": 365, "creditPct": 1.0000 }
+    ]
+  },
+  "income_cap_behavior": "floor_at_top_bracket",
+  "deviation_note": "Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. Above $40,000/month combined income, courts use discretion but the amount must not be less than the $40,000-bracket amount."
+}
