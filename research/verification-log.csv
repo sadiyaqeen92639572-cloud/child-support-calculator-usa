@@ -7,3 +7,5 @@ Arizona,2022-AZ-v1,"Charlie/Drew PDF example: combined $6000, 2 children, A=$400
 Arizona,2022-AZ-v1,"Dakota/Alex PDF example: combined $5400, 1 child, A=$1400(25.93%), 0 days, self-support reserve test",$237/mo pre-reserve (PDF confirms $-237 negative -> reduced),$237/mo + belowReserve flag true,$0,claude-sonnet-5,2026-07-11
 Michigan,2025-MCSF-v1,"Bracket lookup exact match at family income = $7198.27 (2 children)",Base $2095.42 + 20.20% marginal (PDF General Care Table),Exact match,$0,claude-sonnet-5,2026-07-11
 Michigan,2025-MCSF-v1,"Low income equation: Parent A income $1000/mo (below $1255 threshold)",Base = income x 10% = $100,$100,$0,claude-sonnet-5,2026-07-11
+Louisiana,2025-LA-v1,"Combined $3000/mo, 2 children, A=$1800(60%) pays",$536/mo (894 x 0.60),$536/mo,$0,claude-sonnet-5,2026-07-11
+Louisiana,2025-LA-v1,"Table integrity check: 980 rows $1050-$50000, spot-checked 4 known points ($1050/1500/2000/2500)",Exact match on all 4 sample points from earlier research,Exact match,$0,claude-sonnet-5,2026-07-11

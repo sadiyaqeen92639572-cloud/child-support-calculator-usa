@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Courts have discretion to grant a credit against the support obligation when a parent exercises more than 73 days per year of physical custody (R.S. 9:315.8(E)(2)) — this is a discretionary credit, not an automatic formula reduction, so this calculator does not apply it automatically. Below $1,050/month combined income or above $50,000/month, courts determine support on a case-by-case basis. This calculator shows the presumptive guideline amount only, not a court order."
+}

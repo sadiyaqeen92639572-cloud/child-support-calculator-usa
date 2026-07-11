@@ -206,5 +206,45 @@
       "What is Michigan's Low Income Threshold?",
       "What counts as net income in Michigan?"
     ]
+  },
+  "la": {
+    "name": "Louisiana",
+    "abbr": "LA",
+    "slug": "louisiana",
+    "formula_model": "income_shares",
+    "effective_date": "2025-01-01",
+    "last_verified": "2026-07-11",
+    "guideline_version": "2025-LA-v1",
+    "source": {
+      "agency_name": "Louisiana Revised Statutes (Legislature)",
+      "url": "https://legis.la.gov/legis/Law.aspx?d=107384",
+      "statute_ref": "La. R.S. 9:315.8 (worksheet); 9:315.19 (schedule)"
+    },
+    "params": {
+      "schedule_table_ref": "louisiana_schedule.json",
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Combine both parents' adjusted gross income (gross income minus preexisting child support or spousal support paid) to get combined adjusted gross income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Child Support Obligations for that combined income and number of children (R.S. 9:315.19).",
+        "Each parent's share equals their income divided by the combined income, applied to the basic obligation.",
+        "Net childcare costs, health insurance premiums, and extraordinary medical/other extraordinary expenses are added to the basic obligation before proration (R.S. 9:315.8(A)).",
+        "Courts have discretion (not an automatic formula) to grant a credit when a parent exercises more than 73 days/year of physical custody.",
+        "Below $1,050/month or above $50,000/month combined income, courts determine support case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted gross income $3,000/month, 2 children, Parent A earns $1,800/mo (60% share), Parent B earns $1,200/mo (40% share) and has primary custody.",
+        "calculation": [
+          "Basic child support obligation for $3,000 combined, 2 children: $894/month.",
+          "Parent A's share: 60% × $894 = $536/month guideline child support paid by Parent A."
+        ]
+      }
+    },
+    "faq_extra": [
+      "Does Louisiana reduce child support for shared custody?",
+      "What counts as adjusted gross income in Louisiana?",
+      "What happens if combined income is above $50,000/month?"
+    ]
   }
 }
