@@ -47,6 +47,44 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
   const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
   const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
 
+  if (rules.self_support_reserve) {
+    // North Carolina-style self-support reserve: gated on the PAYING parent's
+    // own income, not combined income. Below the min-order threshold, a flat
+    // minimum order applies. Above that but at/below the shaded-zone ceiling
+    // for this child count, the schedule is looked up using the paying
+    // parent's income alone (not combined), with no add-ons — per the
+    // guidelines' "shaded area of the Schedule" rule for Worksheet A.
+    const ssr = rules.self_support_reserve;
+    if (payingParentIncome < ssr.min_order_threshold_monthly) {
+      const minAmount = applyRounding(ssr.min_order_amount, rules.rounding);
+      return {
+        monthlyAmount: minAmount,
+        payingParent,
+        combinedIncome: combined,
+        baseObligation: ssr.min_order_amount,
+        adjustedForCustody: false,
+        selfSupportMinimumOrderApplied: true,
+        deviationNote: rules.deviation_note,
+        capWarning: `Minimum order applies — paying parent's adjusted gross income is below $${ssr.min_order_threshold_monthly.toLocaleString()}/mo.`
+      };
+    }
+    const shadedCeiling = ssr.shaded_zone_max_obligor_income[String(inputs.numChildren)];
+    if (shadedCeiling && payingParentIncome <= shadedCeiling) {
+      const soloObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+      const soloAmount = applyRounding(soloObligation, rules.rounding);
+      return {
+        monthlyAmount: soloAmount,
+        payingParent,
+        combinedIncome: combined,
+        baseObligation: soloObligation,
+        adjustedForCustody: false,
+        selfSupportReserveZoneApplied: true,
+        deviationNote: rules.deviation_note,
+        capWarning: "Self-support reserve zone applies (Worksheet A): computed from the paying parent's own income only, not combined income — childcare and health insurance costs are not added in this zone."
+      };
+    }
+  }
+
   let amount = totalObligation * payingShare;
   let adjustedForCustody = false;
   let custodyWarning = null;

@@ -1,0 +1,18 @@
+{
+  "rounding": "nearest_dollar",
+  "self_support_reserve": {
+    "min_order_threshold_monthly": 1150,
+    "min_order_amount": 50,
+    "shaded_zone_max_obligor_income": {
+      "1": 1750,
+      "2": 2150,
+      "3": 2500,
+      "4": 2800,
+      "5": 3100,
+      "6": 3450
+    },
+    "note": "Based on the 2022 federal poverty level for one person ($1,133/mo). Obligor AGI below $1,150/mo: minimum order of $50/mo absent deviation. Obligor AGI above $1,150/mo but at or below the shaded-zone ceiling (varies by number of children): the schedule's self-support-reserve adjustment applies and the obligation is computed from the obligor's own income only (not combined income), with no childcare/health-insurance add-ons under Worksheet A."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $40,000/month combined adjusted gross income, North Carolina's schedule has no table value — courts set support to meet the child's reasonable needs under G.S. 50-13.4(c) rather than extending the formula. This calculator models Worksheet A (one parent has primary physical custody, defined as 243+ nights/year); Worksheet B (shared custody, each parent 123+ nights/year, combined obligation increased 50%) and Worksheet C (split custody between parents) are not computed here."
+}

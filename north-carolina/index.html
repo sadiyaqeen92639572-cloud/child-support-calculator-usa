@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>North Carolina Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate North Carolina child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/north-carolina/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="North Carolina Child Support Calculator">
+<meta property="og:description" content="Free North Carolina child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/north-carolina/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"North Carolina Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2023-NC-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in North Carolina?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly adjusted gross income, then combine both for total combined adjusted gross income. If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies (absent deviation). If the paying parent's income is above $1,150/month but within the self-support reserve \"shaded\" zone for the number of children ($1,750 for 1 child up to $3,450 for 6 children), the obligation is looked up using the paying parent's own income alone — not combined income — with no childcare or health insurance add-ons. Otherwise, look up the basic child support obligation from the official Schedule of Basic Support Obligations using combined adjusted gross income and number of children. Each parent's share equals their income divided by combined income, applied to the basic obligation plus reasonable work-related child care costs and health insurance premiums. This models Worksheet A only (one parent has primary physical custody, defined as 243+ nights/year). Worksheet B (shared custody, both parents 123+ nights/year) and Worksheet C (split custody) use different calculations not modeled here. Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the schedule."}},{"@type":"Question","name":"What is North Carolina's self-support reserve, and how does it affect low-income parents?","acceptedAnswer":{"@type":"Answer","text":"North Carolina builds a self-support reserve into its child support schedule, based on the 2022 federal poverty level for one person ($1,133/month). If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies absent a deviation. Between $1,150/month and a higher ceiling that varies by number of children ($1,750 for one child up to $3,450 for six children), the obligation is calculated from the paying parent's income alone rather than combined income, and childcare/health insurance costs are not added on top — a mechanic most online calculators skip entirely."}},{"@type":"Question","name":"What is the difference between Worksheet A, B, and C in North Carolina?","acceptedAnswer":{"@type":"Answer","text":"Worksheet A applies when one parent (or a third party) has primary physical custody of all the children — defined as 243+ nights per year. Worksheet B applies when parents share custody (each has the child at least 123 nights per year) of all children, or share custody of some while one has primary custody of others; the combined basic obligation is increased 50% before being prorated. Worksheet C applies when primary custody of two or more children is split between the parents. This calculator models Worksheet A only."}},{"@type":"Question","name":"What happens if combined income is above $40,000/month in North Carolina?","acceptedAnswer":{"@type":"Answer","text":"Above $40,000/month in combined adjusted gross income, North Carolina's official schedule has no table value. Courts set support to meet the child's reasonable needs for health, education, and maintenance under G.S. 50-13.4(c), using the schedule only as a possible reference point for a minimal level of support."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"North Carolina Child Support Calculator","item":"https://usachildsupportcalculator.com/north-carolina/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>North Carolina Child Support Calculator</h1>
+  <p class="badge">Updated for North Carolina's 2023-NC-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on North Carolina's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult North Carolina Conference of Chief District Court Judges (AOC-A-162) or a family law attorney licensed in North Carolina.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How North Carolina Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly adjusted gross income, then combine both for total combined adjusted gross income.</li><li>If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies (absent deviation).</li><li>If the paying parent's income is above $1,150/month but within the self-support reserve "shaded" zone for the number of children ($1,750 for 1 child up to $3,450 for 6 children), the obligation is looked up using the paying parent's own income alone — not combined income — with no childcare or health insurance add-ons.</li><li>Otherwise, look up the basic child support obligation from the official Schedule of Basic Support Obligations using combined adjusted gross income and number of children.</li><li>Each parent's share equals their income divided by combined income, applied to the basic obligation plus reasonable work-related child care costs and health insurance premiums.</li><li>This models Worksheet A only (one parent has primary physical custody, defined as 243+ nights/year). Worksheet B (shared custody, both parents 123+ nights/year) and Worksheet C (split custody) use different calculations not modeled here.</li><li>Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the schedule.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>North Carolina Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined adjusted gross income $7,000/month, 2 children, Parent A earns $4,000/mo (57% share), Parent B earns $3,000/mo (43% share, above the self-support reserve zone for this state) and is the noncustodial parent.</p>
+    <ol><li>Basic child support obligation for $7,000 combined, 2 children (official schedule): $1,614/month.</li><li>Parent B's share: 42.9% × $1,614 ≈ $692/month guideline child support paid by Parent B.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: North Carolina Conference of Chief District Court Judges (AOC-A-162) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on North Carolina's official guideline schedule table. Verify against North Carolina's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in North Carolina?</summary><p>Determine each parent's monthly adjusted gross income, then combine both for total combined adjusted gross income. If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies (absent deviation). If the paying parent's income is above $1,150/month but within the self-support reserve "shaded" zone for the number of children ($1,750 for 1 child up to $3,450 for 6 children), the obligation is looked up using the paying parent's own income alone — not combined income — with no childcare or health insurance add-ons. Otherwise, look up the basic child support obligation from the official Schedule of Basic Support Obligations using combined adjusted gross income and number of children. Each parent's share equals their income divided by combined income, applied to the basic obligation plus reasonable work-related child care costs and health insurance premiums. This models Worksheet A only (one parent has primary physical custody, defined as 243+ nights/year). Worksheet B (shared custody, both parents 123+ nights/year) and Worksheet C (split custody) use different calculations not modeled here. Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the schedule.</p></details>
+    <details><summary>What is North Carolina's self-support reserve, and how does it affect low-income parents?</summary><p>North Carolina builds a self-support reserve into its child support schedule, based on the 2022 federal poverty level for one person ($1,133/month). If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies absent a deviation. Between $1,150/month and a higher ceiling that varies by number of children ($1,750 for one child up to $3,450 for six children), the obligation is calculated from the paying parent's income alone rather than combined income, and childcare/health insurance costs are not added on top — a mechanic most online calculators skip entirely.</p></details><details><summary>What is the difference between Worksheet A, B, and C in North Carolina?</summary><p>Worksheet A applies when one parent (or a third party) has primary physical custody of all the children — defined as 243+ nights per year. Worksheet B applies when parents share custody (each has the child at least 123 nights per year) of all children, or share custody of some while one has primary custody of others; the combined basic obligation is increased 50% before being prorated. Worksheet C applies when primary custody of two or more children is split between the parents. This calculator models Worksheet A only.</p></details><details><summary>What happens if combined income is above $40,000/month in North Carolina?</summary><p>Above $40,000/month in combined adjusted gross income, North Carolina's official schedule has no table value. Courts set support to meet the child's reasonable needs for health, education, and maintenance under G.S. 50-13.4(c), using the schedule only as a possible reference point for a minimal level of support.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2023-01-01, guideline version 2023-NC-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://ncchildsupport.ncdhhs.gov/ecoa/cseGuideLineDetails.htm" rel="nofollow noopener">North Carolina Conference of Chief District Court Judges (AOC-A-162)</a> (N.C. Gen. Stat. § 50-13.4).</p>
+    <p class="deviation-note">Above $40,000/month combined adjusted gross income, North Carolina's schedule has no table value — courts set support to meet the child's reasonable needs under G.S. 50-13.4(c) rather than extending the formula. This calculator models Worksheet A (one parent has primary physical custody, defined as 243+ nights/year); Worksheet B (shared custody, each parent 123+ nights/year, combined obligation increased 50%) and Worksheet C (split custody between parents) are not computed here.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against North Carolina's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"North Carolina","abbr":"NC","slug":"north-carolina","formula_model":"income_shares","effective_date":"2023-01-01","last_verified":"2026-07-12","guideline_version":"2023-NC-v1","source":{"agency_name":"North Carolina Conference of Chief District Court Judges (AOC-A-162)","url":"https://ncchildsupport.ncdhhs.gov/ecoa/cseGuideLineDetails.htm","statute_ref":"N.C. Gen. Stat. § 50-13.4"},"params":{"schedule_table_ref":"north-carolina_schedule.json","income_basis":"gross","income_cap_monthly":40000,"high_income_note":"Above $40,000/month combined adjusted gross income, courts set support to meet the child's reasonable needs under G.S. 50-13.4(c) rather than extending the schedule."},"worksheet":{"steps":["Determine each parent's monthly adjusted gross income, then combine both for total combined adjusted gross income.","If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies (absent deviation).","If the paying parent's income is above $1,150/month but within the self-support reserve \"shaded\" zone for the number of children ($1,750 for 1 child up to $3,450 for 6 children), the obligation is looked up using the paying parent's own income alone — not combined income — with no childcare or health insurance add-ons.","Otherwise, look up the basic child support obligation from the official Schedule of Basic Support Obligations using combined adjusted gross income and number of children.","Each parent's share equals their income divided by combined income, applied to the basic obligation plus reasonable work-related child care costs and health insurance premiums.","This models Worksheet A only (one parent has primary physical custody, defined as 243+ nights/year). Worksheet B (shared custody, both parents 123+ nights/year) and Worksheet C (split custody) use different calculations not modeled here.","Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the schedule."],"example":{"scenario":"Example: combined adjusted gross income $7,000/month, 2 children, Parent A earns $4,000/mo (57% share), Parent B earns $3,000/mo (43% share, above the self-support reserve zone for this state) and is the noncustodial parent.","calculation":["Basic child support obligation for $7,000 combined, 2 children (official schedule): $1,614/month.","Parent B's share: 42.9% × $1,614 ≈ $692/month guideline child support paid by Parent B."]}},"faq_extra":[{"q":"What is North Carolina's self-support reserve, and how does it affect low-income parents?","a":"North Carolina builds a self-support reserve into its child support schedule, based on the 2022 federal poverty level for one person ($1,133/month). If the paying parent's own adjusted gross income is below $1,150/month, a flat $50/month minimum order applies absent a deviation. Between $1,150/month and a higher ceiling that varies by number of children ($1,750 for one child up to $3,450 for six children), the obligation is calculated from the paying parent's income alone rather than combined income, and childcare/health insurance costs are not added on top — a mechanic most online calculators skip entirely."},{"q":"What is the difference between Worksheet A, B, and C in North Carolina?","a":"Worksheet A applies when one parent (or a third party) has primary physical custody of all the children — defined as 243+ nights per year. Worksheet B applies when parents share custody (each has the child at least 123 nights per year) of all children, or share custody of some while one has primary custody of others; the combined basic obligation is increased 50% before being prorated. Worksheet C applies when primary custody of two or more children is split between the parents. This calculator models Worksheet A only."},{"q":"What happens if combined income is above $40,000/month in North Carolina?","a":"Above $40,000/month in combined adjusted gross income, North Carolina's official schedule has no table value. Courts set support to meet the child's reasonable needs for health, education, and maintenance under G.S. 50-13.4(c), using the schedule only as a possible reference point for a minimal level of support."}]};
+    const RULES = {"rounding":"nearest_dollar","self_support_reserve":{"min_order_threshold_monthly":1150,"min_order_amount":50,"shaded_zone_max_obligor_income":{"1":1750,"2":2150,"3":2500,"4":2800,"5":3100,"6":3450},"note":"Based on the 2022 federal poverty level for one person ($1,133/mo). Obligor AGI below $1,150/mo: minimum order of $50/mo absent deviation. Obligor AGI above $1,150/mo but at or below the shaded-zone ceiling (varies by number of children): the schedule's self-support-reserve adjustment applies and the obligation is computed from the obligor's own income only (not combined income), with no childcare/health-insurance add-ons under Worksheet A."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above $40,000/month combined adjusted gross income, North Carolina's schedule has no table value — courts set support to meet the child's reasonable needs under G.S. 50-13.4(c) rather than extending the formula. This calculator models Worksheet A (one parent has primary physical custody, defined as 243+ nights/year); Worksheet B (shared custody, each parent 123+ nights/year, combined obligation increased 50%) and Worksheet C (split custody between parents) are not computed here."};
+    const SCHEDULE = {"maxIncome":40000,"source":"North Carolina Child Support Guidelines, AOC-A-162, Rev. 1/23, effective 2023-01-01, Schedule of Basic Support Obligations, https://ncchildsupport.ncdhhs.gov/ecoa/getGuideLinesTable.htm (official mirror of the nccourts.gov table; nccourts.gov PDF blocked by Cloudflare WAF)","note":"64 real anchor points transcribed directly from the full official table (775 rows, $1,300-$40,000 combined adjusted gross income in $50 increments), scraped as structured HTML (not OCR) from the NC DHHS ecoa mirror of the same AOC-A-162 schedule. Engine interpolates linearly between anchors.","rows":[{"upTo":1300,"obligation":{"1":50,"2":50,"3":50,"4":50,"5":50,"6":50}},{"upTo":1350,"obligation":{"1":65,"2":66,"3":67,"4":67,"5":68,"6":69}},{"upTo":1400,"obligation":{"1":100,"2":101,"3":102,"4":103,"5":104,"6":106}},{"upTo":1450,"obligation":{"1":135,"2":136,"3":138,"4":139,"5":141,"6":142}},{"upTo":1500,"obligation":{"1":170,"2":171,"3":173,"4":175,"5":177,"6":179}},{"upTo":1600,"obligation":{"1":239,"2":242,"3":244,"4":247,"5":250,"6":252}},{"upTo":1700,"obligation":{"1":309,"2":312,"3":315,"4":319,"5":322,"6":326}},{"upTo":1750,"obligation":{"1":343,"2":347,"3":351,"4":355,"5":359,"6":362}},{"upTo":1800,"obligation":{"1":358,"2":382,"3":387,"4":391,"5":395,"6":399}},{"upTo":1900,"obligation":{"1":376,"2":453,"3":458,"4":463,"5":468,"6":473}},{"upTo":2000,"obligation":{"1":393,"2":522,"3":528,"4":533,"5":539,"6":545}},{"upTo":2100,"obligation":{"1":410,"2":590,"3":597,"4":603,"5":610,"6":616}},{"upTo":2150,"obligation":{"1":419,"2":625,"3":631,"4":638,"5":645,"6":652}},{"upTo":2200,"obligation":{"1":428,"2":651,"3":666,"4":673,"5":680,"6":688}},{"upTo":2300,"obligation":{"1":445,"2":678,"3":735,"4":743,"5":751,"6":759}},{"upTo":2400,"obligation":{"1":462,"2":704,"3":804,"4":813,"5":822,"6":831}},{"upTo":2500,"obligation":{"1":480,"2":731,"3":874,"4":883,"5":893,"6":902}},{"upTo":2550,"obligation":{"1":488,"2":744,"3":899,"4":918,"5":928,"6":938}},{"upTo":2600,"obligation":{"1":497,"2":757,"3":915,"4":953,"5":963,"6":974}},{"upTo":2700,"obligation":{"1":514,"2":783,"3":947,"4":1023,"5":1034,"6":1045}},{"upTo":2800,"obligation":{"1":532,"2":810,"3":979,"4":1093,"5":1105,"6":1117}},{"upTo":2850,"obligation":{"1":540,"2":823,"3":995,"4":1111,"5":1140,"6":1152}},{"upTo":2900,"obligation":{"1":549,"2":836,"3":1011,"4":1129,"5":1176,"6":1188}},{"upTo":3000,"obligation":{"1":566,"2":863,"3":1043,"4":1165,"5":1246,"6":1260}},{"upTo":3100,"obligation":{"1":584,"2":889,"3":1075,"4":1200,"5":1317,"6":1331}},{"upTo":3150,"obligation":{"1":592,"2":902,"3":1091,"4":1218,"5":1340,"6":1367}},{"upTo":3200,"obligation":{"1":601,"2":915,"3":1107,"4":1236,"5":1360,"6":1403}},{"upTo":3300,"obligation":{"1":618,"2":942,"3":1139,"4":1272,"5":1399,"6":1474}},{"upTo":3400,"obligation":{"1":636,"2":968,"3":1170,"4":1307,"5":1438,"6":1546}},{"upTo":3450,"obligation":{"1":644,"2":981,"3":1186,"4":1325,"5":1458,"6":1581}},{"upTo":3500,"obligation":{"1":653,"2":995,"3":1202,"4":1343,"5":1477,"6":1606}},{"upTo":4000,"obligation":{"1":740,"2":1122,"3":1354,"4":1513,"5":1664,"6":1809}},{"upTo":4500,"obligation":{"1":827,"2":1236,"3":1485,"4":1659,"5":1825,"6":1984}},{"upTo":5000,"obligation":{"1":896,"2":1349,"3":1619,"4":1808,"5":1989,"6":2162}},{"upTo":5500,"obligation":{"1":957,"2":1445,"3":1732,"4":1934,"5":2128,"6":2313}},{"upTo":6000,"obligation":{"1":1010,"2":1524,"3":1826,"4":2040,"5":2244,"6":2439}},{"upTo":6500,"obligation":{"1":1044,"2":1573,"3":1881,"4":2102,"5":2312,"6":2513}},{"upTo":7000,"obligation":{"1":1076,"2":1614,"3":1920,"4":2145,"5":2360,"6":2565}},{"upTo":7500,"obligation":{"1":1109,"2":1655,"3":1959,"4":2189,"5":2408,"6":2617}},{"upTo":8000,"obligation":{"1":1152,"2":1727,"3":2055,"4":2295,"5":2525,"6":2745}},{"upTo":8500,"obligation":{"1":1183,"2":1770,"3":2102,"4":2347,"5":2582,"6":2807}},{"upTo":9000,"obligation":{"1":1210,"2":1802,"3":2130,"4":2379,"5":2617,"6":2844}},{"upTo":9500,"obligation":{"1":1246,"2":1849,"3":2176,"4":2431,"5":2674,"6":2907}},{"upTo":10000,"obligation":{"1":1292,"2":1913,"3":2247,"4":2510,"5":2761,"6":3001}},{"upTo":11000,"obligation":{"1":1391,"2":2056,"3":2410,"4":2692,"5":2961,"6":3218}},{"upTo":12000,"obligation":{"1":1466,"2":2178,"3":2568,"4":2869,"5":3155,"6":3430}},{"upTo":13000,"obligation":{"1":1531,"2":2268,"3":2666,"4":2978,"5":3275,"6":3560}},{"upTo":14000,"obligation":{"1":1615,"2":2380,"3":2781,"4":3106,"5":3417,"6":3714}},{"upTo":15000,"obligation":{"1":1680,"2":2463,"3":2864,"4":3199,"5":3519,"6":3825}},{"upTo":16000,"obligation":{"1":1736,"2":2538,"3":2941,"4":3286,"5":3614,"6":3929}},{"upTo":17000,"obligation":{"1":1824,"2":2668,"3":3094,"4":3456,"5":3801,"6":4132}},{"upTo":18000,"obligation":{"1":1910,"2":2796,"3":3244,"4":3624,"5":3986,"6":4333}},{"upTo":19000,"obligation":{"1":1982,"2":2893,"3":3347,"4":3739,"5":4113,"6":4471}},{"upTo":20000,"obligation":{"1":2048,"2":2980,"3":3436,"4":3838,"5":4222,"6":4590}},{"upTo":22000,"obligation":{"1":2174,"2":3160,"3":3639,"4":4064,"5":4471,"6":4860}},{"upTo":24000,"obligation":{"1":2289,"2":3358,"3":3905,"4":4362,"5":4799,"6":5216}},{"upTo":26000,"obligation":{"1":2404,"2":3555,"3":4172,"4":4660,"5":5126,"6":5572}},{"upTo":28000,"obligation":{"1":2523,"2":3732,"3":4381,"4":4893,"5":5383,"6":5851}},{"upTo":30000,"obligation":{"1":2642,"2":3903,"3":4574,"4":5109,"5":5620,"6":6109}},{"upTo":32000,"obligation":{"1":2762,"2":4074,"3":4767,"4":5325,"5":5857,"6":6367}},{"upTo":34000,"obligation":{"1":2881,"2":4244,"3":4960,"4":5541,"5":6095,"6":6625}},{"upTo":36000,"obligation":{"1":3000,"2":4415,"3":5154,"4":5757,"5":6332,"6":6883}},{"upTo":38000,"obligation":{"1":3120,"2":4586,"3":5347,"4":5972,"5":6570,"6":7141}},{"upTo":40000,"obligation":{"1":3246,"2":4768,"3":5554,"4":6204,"5":6824,"6":7418}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>
