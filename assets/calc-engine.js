@@ -269,6 +269,7 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
 
   const reserve = params.self_support_reserve_monthly;
   const belowReserve = reserve && (payingParentIncome - amount) < reserve;
+  const reservePeriodLabel = params.income_period === 'weekly' ? '/week' : '/mo';
 
   return {
     monthlyAmount: amount,
@@ -279,7 +280,7 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     belowSelfSupportReserve: belowReserve,
     deviationNote: rules.deviation_note,
     capWarning: custodyWarning || (belowReserve
-      ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}/mo) — courts typically adjust in this situation.`
+      ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
       : null)
   };
 }

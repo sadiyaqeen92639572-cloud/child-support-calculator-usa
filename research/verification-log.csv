@@ -32,3 +32,4 @@ Virginia,2025-VA-v1,"same incomes, shared custody (Parent B 120 overnights, over
 Virginia,2025-VA-v1,"\$50000 combined gross/mo (above \$42500 cap), 2 children",\$5047/mo (\$4792 + \$7500 x 3.4%, statute's own above-cap formula),\$5047/mo,\$0,claude-sonnet-5,2026-07-12
 Washington,2026-WA-v1,"\$8500 combined net/mo, 2 children, Parent A 59% Parent B 41% (\$3500, above \$2394 SSR)",\$409/mo (\$993.50 base x 41.18%),\$409/mo,\$0,claude-sonnet-5,2026-07-12
 Washington,2026-WA-v1,"Parent B net income \$80/mo, 3 children (floor vs 45% cap interaction)",\$36/mo (45% of \$80, overriding the \$150 floor),\$36/mo,\$0,claude-sonnet-5,2026-07-12
+New Jersey,2025-NJ-v1,"\$1000 combined net/wk, 2 children, Parent A 60% Parent B 40% (noncustodial)",\$136/wk (\$339 base x 40%),\$136/wk,\$0,claude-sonnet-5,2026-07-12

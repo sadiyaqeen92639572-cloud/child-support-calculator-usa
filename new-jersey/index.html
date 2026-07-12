@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Jersey Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate New Jersey child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/new-jersey/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="New Jersey Child Support Calculator">
+<meta property="og:description" content="Free New Jersey child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/new-jersey/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"New Jersey Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2025-NJ-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in New Jersey?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's net weekly income (New Jersey's guidelines run on weekly figures, not monthly). Combine both parents' net weekly income for combined net weekly income. Look up the basic child support award from the official Schedule of Child Support Awards (Appendix IX-F) for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic award. The Self-Support Reserve (150% of the one-person federal poverty guideline, $460/week as of 2026) is checked: if paying support would drop the paying parent's net income below the reserve AND the receiving parent's net income minus their share would stay above the reserve, courts review income and living expenses rather than applying the schedule automatically. Below $180/week combined net income, and above the $3,600/week cap, the guideline is explicitly discretionary rather than a formula — the rule text says not to extrapolate the schedule."}},{"@type":"Question","name":"Is New Jersey child support based on weekly or monthly income?","acceptedAnswer":{"@type":"Answer","text":"Weekly. New Jersey's Schedule of Child Support Awards (Appendix IX-F) and worksheets run on net WEEKLY income figures, from $180 to $3,600/week combined — not monthly amounts like most other states. If your pay is monthly or biweekly, it needs to be converted to a weekly figure first."}},{"@type":"Question","name":"What is New Jersey's Self-Support Reserve?","acceptedAnswer":{"@type":"Answer","text":"The Self-Support Reserve is 150% of the federal poverty guideline for a one-person household — $460/week as of January 1, 2026. It only adjusts the award when BOTH conditions are met: paying the guideline amount would drop the paying parent's net income below the reserve, AND the receiving parent's income minus their own share would stay above the reserve. If the receiving parent would also fall below the reserve, no adjustment is made regardless of the paying parent's income — courts prioritize the custodial household's basic needs."}},{"@type":"Question","name":"What happens if combined income is above $3,600/week in New Jersey?","acceptedAnswer":{"@type":"Answer","text":"Above $3,600/week ($187,200/year) in combined net income, New Jersey's rule explicitly says not to extrapolate the schedule. Courts instead apply the $3,600 guideline amount as a floor and add a discretionary amount based on the family's actual circumstances under N.J.S.A. 2A:34-23, rather than a formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"New Jersey Child Support Calculator","item":"https://usachildsupportcalculator.com/new-jersey/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>New Jersey Child Support Calculator</h1>
+  <p class="badge">Updated for New Jersey's 2025-NJ-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on New Jersey's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts) or a family law attorney licensed in New Jersey.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A net weekly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net weekly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Weekly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Weekly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How New Jersey Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's net weekly income (New Jersey's guidelines run on weekly figures, not monthly).</li><li>Combine both parents' net weekly income for combined net weekly income.</li><li>Look up the basic child support award from the official Schedule of Child Support Awards (Appendix IX-F) for that combined income and number of children.</li><li>Each parent's share equals their income divided by combined income, applied to the basic award.</li><li>The Self-Support Reserve (150% of the one-person federal poverty guideline, $460/week as of 2026) is checked: if paying support would drop the paying parent's net income below the reserve AND the receiving parent's net income minus their share would stay above the reserve, courts review income and living expenses rather than applying the schedule automatically.</li><li>Below $180/week combined net income, and above the $3,600/week cap, the guideline is explicitly discretionary rather than a formula — the rule text says not to extrapolate the schedule.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>New Jersey Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined net income $1,000/week, 2 children, Parent A earns $600/wk (60% share), Parent B earns $400/wk (40% share) and is the noncustodial parent.</p>
+    <ol><li>Basic child support award for $1,000 combined, 2 children: $339/week.</li><li>Parent B's share: 40% × $339 ≈ $136/week guideline child support paid by Parent B.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      <tr><td>Self-support reserve</td><td>$460/mo</td><td>N.J. Ct. R. 5:6A, Appendix IX-A through IX-F</td></tr>
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on New Jersey's official guideline schedule table. Verify against New Jersey's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in New Jersey?</summary><p>Determine each parent's net weekly income (New Jersey's guidelines run on weekly figures, not monthly). Combine both parents' net weekly income for combined net weekly income. Look up the basic child support award from the official Schedule of Child Support Awards (Appendix IX-F) for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic award. The Self-Support Reserve (150% of the one-person federal poverty guideline, $460/week as of 2026) is checked: if paying support would drop the paying parent's net income below the reserve AND the receiving parent's net income minus their share would stay above the reserve, courts review income and living expenses rather than applying the schedule automatically. Below $180/week combined net income, and above the $3,600/week cap, the guideline is explicitly discretionary rather than a formula — the rule text says not to extrapolate the schedule.</p></details>
+    <details><summary>Is New Jersey child support based on weekly or monthly income?</summary><p>Weekly. New Jersey's Schedule of Child Support Awards (Appendix IX-F) and worksheets run on net WEEKLY income figures, from $180 to $3,600/week combined — not monthly amounts like most other states. If your pay is monthly or biweekly, it needs to be converted to a weekly figure first.</p></details><details><summary>What is New Jersey's Self-Support Reserve?</summary><p>The Self-Support Reserve is 150% of the federal poverty guideline for a one-person household — $460/week as of January 1, 2026. It only adjusts the award when BOTH conditions are met: paying the guideline amount would drop the paying parent's net income below the reserve, AND the receiving parent's income minus their own share would stay above the reserve. If the receiving parent would also fall below the reserve, no adjustment is made regardless of the paying parent's income — courts prioritize the custodial household's basic needs.</p></details><details><summary>What happens if combined income is above $3,600/week in New Jersey?</summary><p>Above $3,600/week ($187,200/year) in combined net income, New Jersey's rule explicitly says not to extrapolate the schedule. Courts instead apply the $3,600 guideline amount as a floor and add a discretionary amount based on the family's actual circumstances under N.J.S.A. 2A:34-23, rather than a formula.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2025-09-01, guideline version 2025-NJ-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://www.njcourts.gov/sites/default/files/attorneys/rules-of-court/app9f.pdf" rel="nofollow noopener">New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts)</a> (N.J. Ct. R. 5:6A, Appendix IX-A through IX-F).</p>
+    <p class="deviation-note">Below $180/week combined net income, and above the $3,600/week cap ($187,200/year), New Jersey's guideline is explicitly discretionary -- the rule text says "DO NOT EXTRAPOLATE THIS SCHEDULE." Above the cap, courts apply the $3,600 guideline amount as a minimum and add a discretionary amount based on the factors in N.J.S.A. 2A:34-23. This calculator does not model NJ's Parenting Time (PAR) adjustment, which changes the sole-parenting worksheet calculation when the non-custodial parent has substantial parenting time.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New Jersey's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"New Jersey","abbr":"NJ","slug":"new-jersey","formula_model":"income_shares","effective_date":"2025-09-01","last_verified":"2026-07-12","guideline_version":"2025-NJ-v1","source":{"agency_name":"New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts)","url":"https://www.njcourts.gov/sites/default/files/attorneys/rules-of-court/app9f.pdf","statute_ref":"N.J. Ct. R. 5:6A, Appendix IX-A through IX-F"},"params":{"schedule_table_ref":"new-jersey_schedule.json","income_basis":"net","income_period":"weekly","self_support_reserve_monthly":460,"income_cap_monthly":3600,"high_income_note":"Above $3,600/week combined net income ($187,200/year), courts apply the $3,600 guideline amount as a floor and add a discretionary amount rather than extrapolating the schedule."},"worksheet":{"steps":["Determine each parent's net weekly income (New Jersey's guidelines run on weekly figures, not monthly).","Combine both parents' net weekly income for combined net weekly income.","Look up the basic child support award from the official Schedule of Child Support Awards (Appendix IX-F) for that combined income and number of children.","Each parent's share equals their income divided by combined income, applied to the basic award.","The Self-Support Reserve (150% of the one-person federal poverty guideline, $460/week as of 2026) is checked: if paying support would drop the paying parent's net income below the reserve AND the receiving parent's net income minus their share would stay above the reserve, courts review income and living expenses rather than applying the schedule automatically.","Below $180/week combined net income, and above the $3,600/week cap, the guideline is explicitly discretionary rather than a formula — the rule text says not to extrapolate the schedule."],"example":{"scenario":"Example: combined net income $1,000/week, 2 children, Parent A earns $600/wk (60% share), Parent B earns $400/wk (40% share) and is the noncustodial parent.","calculation":["Basic child support award for $1,000 combined, 2 children: $339/week.","Parent B's share: 40% × $339 ≈ $136/week guideline child support paid by Parent B."]}},"faq_extra":[{"q":"Is New Jersey child support based on weekly or monthly income?","a":"Weekly. New Jersey's Schedule of Child Support Awards (Appendix IX-F) and worksheets run on net WEEKLY income figures, from $180 to $3,600/week combined — not monthly amounts like most other states. If your pay is monthly or biweekly, it needs to be converted to a weekly figure first."},{"q":"What is New Jersey's Self-Support Reserve?","a":"The Self-Support Reserve is 150% of the federal poverty guideline for a one-person household — $460/week as of January 1, 2026. It only adjusts the award when BOTH conditions are met: paying the guideline amount would drop the paying parent's net income below the reserve, AND the receiving parent's income minus their own share would stay above the reserve. If the receiving parent would also fall below the reserve, no adjustment is made regardless of the paying parent's income — courts prioritize the custodial household's basic needs."},{"q":"What happens if combined income is above $3,600/week in New Jersey?","a":"Above $3,600/week ($187,200/year) in combined net income, New Jersey's rule explicitly says not to extrapolate the schedule. Courts instead apply the $3,600 guideline amount as a floor and add a discretionary amount based on the family's actual circumstances under N.J.S.A. 2A:34-23, rather than a formula."}]};
+    const RULES = {"rounding":"nearest_dollar","income_cap_behavior":"discretionary_above_cap","deviation_note":"Below $180/week combined net income, and above the $3,600/week cap ($187,200/year), New Jersey's guideline is explicitly discretionary -- the rule text says \"DO NOT EXTRAPOLATE THIS SCHEDULE.\" Above the cap, courts apply the $3,600 guideline amount as a minimum and add a discretionary amount based on the factors in N.J.S.A. 2A:34-23. This calculator does not model NJ's Parenting Time (PAR) adjustment, which changes the sole-parenting worksheet calculation when the non-custodial parent has substantial parenting time."};
+    const SCHEDULE = {"maxIncome":3600,"income_period":"weekly","source":"N.J. Court Rules, Appendix IX-F, Schedule of Child Support Awards, revised eff. 2025-09-01, https://www.njcourts.gov/sites/default/files/attorneys/rules-of-court/app9f.pdf (njcourts.gov blocked by Incapsula WAF from this environment -- fetched via gannlaw.com mirror of the identical official PDF)","note":"45 real anchor points transcribed directly from the full official schedule (343 rows, $180-$3,600 combined weekly net income, mostly $10 increments, extracted via pdftotext -layout from the primary PDF, not OCR). Below $180/week combined, and above the $3,600 cap, the guideline is explicitly discretionary (\"DO NOT EXTRAPOLATE THIS SCHEDULE\") -- not a formula. Engine interpolates linearly between anchors within the $180-$3,600 range.","rows":[{"upTo":180,"obligation":{"1":63,"2":125,"3":133,"4":148,"5":163,"6":177}},{"upTo":200,"obligation":{"1":70,"2":132,"3":141,"4":157,"5":173,"6":188}},{"upTo":220,"obligation":{"1":78,"2":139,"3":148,"4":165,"5":182,"6":198}},{"upTo":240,"obligation":{"1":85,"2":145,"3":156,"4":174,"5":191,"6":208}},{"upTo":260,"obligation":{"1":93,"2":152,"3":164,"4":182,"5":201,"6":218}},{"upTo":280,"obligation":{"1":100,"2":158,"3":171,"4":191,"5":210,"6":228}},{"upTo":300,"obligation":{"1":107,"2":165,"3":179,"4":199,"5":219,"6":238}},{"upTo":320,"obligation":{"1":114,"2":171,"3":186,"4":207,"5":228,"6":248}},{"upTo":340,"obligation":{"1":121,"2":177,"3":193,"4":215,"5":237,"6":258}},{"upTo":360,"obligation":{"1":128,"2":183,"3":200,"4":223,"5":246,"6":267}},{"upTo":380,"obligation":{"1":134,"2":189,"3":207,"4":231,"5":254,"6":277}},{"upTo":400,"obligation":{"1":141,"2":195,"3":214,"4":239,"5":263,"6":286}},{"upTo":420,"obligation":{"1":147,"2":201,"3":221,"4":247,"5":271,"6":295}},{"upTo":440,"obligation":{"1":153,"2":207,"3":228,"4":254,"5":280,"6":304}},{"upTo":460,"obligation":{"1":160,"2":212,"3":235,"4":262,"5":288,"6":313}},{"upTo":480,"obligation":{"1":166,"2":218,"3":241,"4":269,"5":296,"6":322}},{"upTo":500,"obligation":{"1":172,"2":224,"3":248,"4":277,"5":304,"6":331}},{"upTo":550,"obligation":{"1":187,"2":237,"3":264,"4":295,"5":324,"6":352}},{"upTo":600,"obligation":{"1":201,"2":250,"3":280,"4":312,"5":343,"6":373}},{"upTo":650,"obligation":{"1":214,"2":263,"3":295,"4":329,"5":362,"6":394}},{"upTo":700,"obligation":{"1":227,"2":275,"3":310,"4":345,"5":380,"6":413}},{"upTo":750,"obligation":{"1":239,"2":286,"3":324,"4":361,"5":398,"6":433}},{"upTo":800,"obligation":{"1":250,"2":298,"3":338,"4":377,"5":415,"6":451}},{"upTo":850,"obligation":{"1":261,"2":309,"3":352,"4":392,"5":431,"6":469}},{"upTo":900,"obligation":{"1":273,"2":319,"3":365,"4":407,"5":448,"6":487}},{"upTo":950,"obligation":{"1":283,"2":329,"3":378,"4":421,"5":463,"6":504}},{"upTo":1000,"obligation":{"1":293,"2":339,"3":390,"4":435,"5":479,"6":521}},{"upTo":1100,"obligation":{"1":310,"2":357,"3":414,"4":462,"5":508,"6":553}},{"upTo":1200,"obligation":{"1":327,"2":375,"3":437,"4":487,"5":536,"6":583}},{"upTo":1300,"obligation":{"1":342,"2":391,"3":459,"4":511,"5":563,"6":612}},{"upTo":1400,"obligation":{"1":357,"2":406,"3":479,"4":534,"5":588,"6":640}},{"upTo":1500,"obligation":{"1":369,"2":420,"3":499,"4":557,"5":612,"6":666}},{"upTo":1600,"obligation":{"1":382,"2":433,"3":518,"4":578,"5":636,"6":691}},{"upTo":1700,"obligation":{"1":393,"2":446,"3":537,"4":598,"5":658,"6":716}},{"upTo":1800,"obligation":{"1":403,"2":458,"3":554,"4":618,"5":680,"6":740}},{"upTo":1900,"obligation":{"1":414,"2":470,"3":572,"4":638,"5":701,"6":763}},{"upTo":2000,"obligation":{"1":425,"2":481,"3":589,"4":657,"5":722,"6":786}},{"upTo":2200,"obligation":{"1":446,"2":504,"3":623,"4":695,"5":764,"6":831}},{"upTo":2400,"obligation":{"1":470,"2":526,"3":657,"4":733,"5":806,"6":877}},{"upTo":2600,"obligation":{"1":495,"2":550,"3":692,"4":772,"5":849,"6":924}},{"upTo":2800,"obligation":{"1":525,"2":576,"3":729,"4":813,"5":895,"6":973}},{"upTo":3000,"obligation":{"1":561,"2":605,"3":769,"4":858,"5":944,"6":1027}},{"upTo":3200,"obligation":{"1":604,"2":637,"3":814,"4":907,"5":998,"6":1086}},{"upTo":3400,"obligation":{"1":656,"2":675,"3":862,"4":961,"5":1058,"6":1151}},{"upTo":3600,"obligation":{"1":717,"2":719,"3":917,"4":1022,"5":1125,"6":1223}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

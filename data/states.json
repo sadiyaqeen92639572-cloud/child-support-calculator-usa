@@ -1105,5 +1105,58 @@
         "a": "No — Washington's official Economic Table (RCW 26.19.020) only has columns for one through five children, unlike most other states' schedules which extend to six. For six or more children, this calculator uses the five-child figure as an approximation, since the statute itself doesn't define a specific amount beyond five."
       }
     ]
+  },
+  "nj": {
+    "name": "New Jersey",
+    "abbr": "NJ",
+    "slug": "new-jersey",
+    "formula_model": "income_shares",
+    "effective_date": "2025-09-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2025-NJ-v1",
+    "source": {
+      "agency_name": "New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts)",
+      "url": "https://www.njcourts.gov/sites/default/files/attorneys/rules-of-court/app9f.pdf",
+      "statute_ref": "N.J. Ct. R. 5:6A, Appendix IX-A through IX-F"
+    },
+    "params": {
+      "schedule_table_ref": "new-jersey_schedule.json",
+      "income_basis": "net",
+      "income_period": "weekly",
+      "self_support_reserve_monthly": 460,
+      "income_cap_monthly": 3600,
+      "high_income_note": "Above $3,600/week combined net income ($187,200/year), courts apply the $3,600 guideline amount as a floor and add a discretionary amount rather than extrapolating the schedule."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's net weekly income (New Jersey's guidelines run on weekly figures, not monthly).",
+        "Combine both parents' net weekly income for combined net weekly income.",
+        "Look up the basic child support award from the official Schedule of Child Support Awards (Appendix IX-F) for that combined income and number of children.",
+        "Each parent's share equals their income divided by combined income, applied to the basic award.",
+        "The Self-Support Reserve (150% of the one-person federal poverty guideline, $460/week as of 2026) is checked: if paying support would drop the paying parent's net income below the reserve AND the receiving parent's net income minus their share would stay above the reserve, courts review income and living expenses rather than applying the schedule automatically.",
+        "Below $180/week combined net income, and above the $3,600/week cap, the guideline is explicitly discretionary rather than a formula — the rule text says not to extrapolate the schedule."
+      ],
+      "example": {
+        "scenario": "Example: combined net income $1,000/week, 2 children, Parent A earns $600/wk (60% share), Parent B earns $400/wk (40% share) and is the noncustodial parent.",
+        "calculation": [
+          "Basic child support award for $1,000 combined, 2 children: $339/week.",
+          "Parent B's share: 40% × $339 ≈ $136/week guideline child support paid by Parent B."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Is New Jersey child support based on weekly or monthly income?",
+        "a": "Weekly. New Jersey's Schedule of Child Support Awards (Appendix IX-F) and worksheets run on net WEEKLY income figures, from $180 to $3,600/week combined — not monthly amounts like most other states. If your pay is monthly or biweekly, it needs to be converted to a weekly figure first."
+      },
+      {
+        "q": "What is New Jersey's Self-Support Reserve?",
+        "a": "The Self-Support Reserve is 150% of the federal poverty guideline for a one-person household — $460/week as of January 1, 2026. It only adjusts the award when BOTH conditions are met: paying the guideline amount would drop the paying parent's net income below the reserve, AND the receiving parent's income minus their own share would stay above the reserve. If the receiving parent would also fall below the reserve, no adjustment is made regardless of the paying parent's income — courts prioritize the custodial household's basic needs."
+      },
+      {
+        "q": "What happens if combined income is above $3,600/week in New Jersey?",
+        "a": "Above $3,600/week ($187,200/year) in combined net income, New Jersey's rule explicitly says not to extrapolate the schedule. Courts instead apply the $3,600 guideline amount as a floor and add a discretionary amount based on the family's actual circumstances under N.J.S.A. 2A:34-23, rather than a formula."
+      }
+    ]
   }
 }

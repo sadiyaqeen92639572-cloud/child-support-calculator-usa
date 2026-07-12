@@ -1,0 +1,5 @@
+{
+  "rounding": "nearest_dollar",
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Below $180/week combined net income, and above the $3,600/week cap ($187,200/year), New Jersey's guideline is explicitly discretionary -- the rule text says \"DO NOT EXTRAPOLATE THIS SCHEDULE.\" Above the cap, courts apply the $3,600 guideline amount as a minimum and add a discretionary amount based on the factors in N.J.S.A. 2A:34-23. This calculator does not model NJ's Parenting Time (PAR) adjustment, which changes the sole-parenting worksheet calculation when the non-custodial parent has substantial parenting time."
+}
