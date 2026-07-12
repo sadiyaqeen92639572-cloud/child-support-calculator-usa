@@ -332,10 +332,10 @@ function jsonLd(state) {
             name: `How is child support calculated in ${state.name}?`,
             acceptedAnswer: { '@type': 'Answer', text: state.worksheet.steps.join(' ') }
           },
-          ...(state.faq_extra || []).map(q => ({
+          ...(state.faq_extra || []).map(item => ({
             '@type': 'Question',
-            name: q,
-            acceptedAnswer: { '@type': 'Answer', text: `See the guidelines section above for how this applies under ${state.name}'s child support formula.` }
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a }
           }))
         ]
       },
@@ -414,7 +414,7 @@ function renderStatePage(state) {
   <section>
     <h2>FAQ</h2>
     <details><summary>How is child support calculated in ${state.name}?</summary><p>${state.worksheet.steps.join(' ')}</p></details>
-    ${(state.faq_extra || []).map(q => `<details><summary>${q}</summary><p>See the guidelines section above.</p></details>`).join('')}
+    ${(state.faq_extra || []).map(item => `<details><summary>${item.q}</summary><p>${item.a}</p></details>`).join('')}
   </section>
 
   <section class="methodology">

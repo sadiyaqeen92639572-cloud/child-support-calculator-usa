@@ -13,9 +13,23 @@
       "statute_ref": "Tex. Fam. Code §§ 154.062, 154.068, 154.125, 154.129"
     },
     "params": {
-      "percentages": { "1": 0.20, "2": 0.25, "3": 0.30, "4": 0.35, "5": 0.40, "6+": 0.40 },
+      "percentages": {
+        "1": 0.2,
+        "2": 0.25,
+        "3": 0.3,
+        "4": 0.35,
+        "5": 0.4,
+        "6+": 0.4
+      },
       "low_income_threshold_monthly": 1000,
-      "low_income_percentages": { "1": 0.15, "2": 0.20, "3": 0.25, "4": 0.30, "5": 0.35, "6+": 0.35 },
+      "low_income_percentages": {
+        "1": 0.15,
+        "2": 0.2,
+        "3": 0.25,
+        "4": 0.3,
+        "5": 0.35,
+        "6+": 0.35
+      },
       "net_income_cap_monthly": 11700
     },
     "worksheet": {
@@ -35,9 +49,18 @@
       }
     },
     "faq_extra": [
-      "Does Texas child support change with 50/50 custody?",
-      "Is Texas child support based on gross or net income?",
-      "What happens if my income is above the $11,700 cap?"
+      {
+        "q": "Does Texas child support change with 50/50 custody?",
+        "a": "Texas uses a percentage-of-income model based only on the paying parent's net resources and number of children — it has no shared-parenting or overnight-based offset formula like income-shares states. Even under a 50/50 possession schedule, the parent not designated as primary conservator still owes the standard guideline amount; a court can deviate downward for extensive time-sharing, but there is no automatic reduction."
+      },
+      {
+        "q": "Is Texas child support based on gross or net income?",
+        "a": "Net monthly resources — not gross pay and not your personal take-home after all your own expenses. It's a specific statutory calculation: gross income minus Social Security taxes, federal income tax (computed as a single filer claiming one exemption, regardless of actual filing status), union dues, and any health/dental insurance premiums ordered for the child."
+      },
+      {
+        "q": "What happens if my income is above the $11,700 cap?",
+        "a": "The $11,700/month net resources cap (effective 2025-09-01) is where the guideline percentage calculation stops — courts don't automatically keep applying the percentage to income above it. A parent can still be ordered to pay more than the capped guideline amount, but only if the child's proven needs justify it, and that's a discretionary finding, not an automatic formula extension."
+      }
     ]
   },
   "ny": {
@@ -55,7 +78,13 @@
     },
     "params": {
       "schedule_type": "percentage",
-      "percentages_of_combined": { "1": 0.17, "2": 0.25, "3": 0.29, "4": 0.31, "5+": 0.35 },
+      "percentages_of_combined": {
+        "1": 0.17,
+        "2": 0.25,
+        "3": 0.29,
+        "4": 0.31,
+        "5+": 0.35
+      },
       "combined_income_cap_monthly": 16083,
       "self_support_reserve_monthly": 1795
     },
@@ -78,9 +107,18 @@
       }
     },
     "faq_extra": [
-      "Does New York reduce child support for shared/50-50 custody?",
-      "What counts as income under the New York CSSA?",
-      "What happens if combined income is above $193,000/year?"
+      {
+        "q": "Does New York reduce child support for shared/50-50 custody?",
+        "a": "No. New York's CSSA formula does not include a shared-parenting or overnight-based offset like income-shares states use. Even in a near-50/50 schedule, whichever parent has fewer overnights (as designated by the court) still pays their full pro-rata share of the statutory percentage — there's no built-in credit for shared time, though a court retains discretion to deviate."
+      },
+      {
+        "q": "What counts as income under the New York CSSA?",
+        "a": "Combined parental income for CSSA purposes starts from gross income and is adjusted for statutory items such as FICA/Medicare taxes, NYC or Yonkers income tax if applicable, and maintenance (spousal support) actually paid to the other parent. It is not simply take-home pay."
+      },
+      {
+        "q": "What happens if combined income is above $193,000/year?",
+        "a": "Above the $193,000/year combined income cap (effective 2026-03-01), courts stop applying the automatic statutory percentage. Instead, they weigh 10 factors set out in the CSSA — including the standard of living the child would have had, the non-monied parent's needs, and the parties' financial resources — to decide support on the portion above the cap."
+      }
     ]
   },
   "az": {
@@ -121,9 +159,18 @@
       }
     },
     "faq_extra": [
-      "How does Arizona's Parenting Time Table work?",
-      "What counts as Child Support Income in Arizona?",
-      "What happens if combined income is above $30,000/month?"
+      {
+        "q": "How does Arizona's Parenting Time Table work?",
+        "a": "Arizona's Parenting Time Table maps the paying parent's annual parenting-time days directly to an adjustment percentage — 0% at 0-19 days, rising in steps up to 50% at 164 or more days per year. That percentage is multiplied by the Basic Child Support Obligation and subtracted from the paying parent's proportionate share, so more parenting time directly lowers the guideline amount."
+      },
+      {
+        "q": "What counts as Child Support Income in Arizona?",
+        "a": "Child Support Income in Arizona is gross income from all sources — wages, self-employment, bonuses, and other resources — before taxes, not net take-home pay. Both parents' Child Support Income is combined to look up the Basic Child Support Obligation on the official schedule."
+      },
+      {
+        "q": "What happens if combined income is above $30,000/month?",
+        "a": "The official Arizona schedule of Basic Support Obligations is built out through $30,000/month in combined Child Support Income. Above that ceiling, the schedule doesn't provide a table value, so courts use discretion to set an appropriate amount rather than an automatic formula extension."
+      }
     ]
   },
   "mi": {
@@ -143,44 +190,194 @@
       "low_income_threshold_monthly": 1255,
       "general_care_tables": {
         "1": [
-          { "incomeAmount": 2013.94, "basePct": 0.2500, "baseSupport": 503.49, "marginalPct": 0.2492 },
-          { "incomeAmount": 3272.65, "basePct": 0.2497, "baseSupport": 817.18, "marginalPct": 0.1763 },
-          { "incomeAmount": 4531.37, "basePct": 0.2293, "baseSupport": 1039.04, "marginalPct": 0.1405 },
-          { "incomeAmount": 7198.27, "basePct": 0.1964, "baseSupport": 1413.74, "marginalPct": 0.1398 },
-          { "incomeAmount": 9432.22, "basePct": 0.1830, "baseSupport": 1726.10, "marginalPct": 0.1201 },
-          { "incomeAmount": 17871.57, "basePct": 0.1533, "baseSupport": 2739.71, "marginalPct": 0.1129 }
+          {
+            "incomeAmount": 2013.94,
+            "basePct": 0.25,
+            "baseSupport": 503.49,
+            "marginalPct": 0.2492
+          },
+          {
+            "incomeAmount": 3272.65,
+            "basePct": 0.2497,
+            "baseSupport": 817.18,
+            "marginalPct": 0.1763
+          },
+          {
+            "incomeAmount": 4531.37,
+            "basePct": 0.2293,
+            "baseSupport": 1039.04,
+            "marginalPct": 0.1405
+          },
+          {
+            "incomeAmount": 7198.27,
+            "basePct": 0.1964,
+            "baseSupport": 1413.74,
+            "marginalPct": 0.1398
+          },
+          {
+            "incomeAmount": 9432.22,
+            "basePct": 0.183,
+            "baseSupport": 1726.1,
+            "marginalPct": 0.1201
+          },
+          {
+            "incomeAmount": 17871.57,
+            "basePct": 0.1533,
+            "baseSupport": 2739.71,
+            "marginalPct": 0.1129
+          }
         ],
         "2": [
-          { "incomeAmount": 2013.94, "basePct": 0.3810, "baseSupport": 767.31, "marginalPct": 0.3792 },
-          { "incomeAmount": 3272.65, "basePct": 0.3803, "baseSupport": 1244.59, "marginalPct": 0.2431 },
-          { "incomeAmount": 4531.37, "basePct": 0.3422, "baseSupport": 1550.63, "marginalPct": 0.2043 },
-          { "incomeAmount": 7198.27, "basePct": 0.2911, "baseSupport": 2095.42, "marginalPct": 0.2020 },
-          { "incomeAmount": 9432.22, "basePct": 0.2700, "baseSupport": 2546.70, "marginalPct": 0.1787 },
-          { "incomeAmount": 17871.57, "basePct": 0.2269, "baseSupport": 4055.06, "marginalPct": 0.1616 }
+          {
+            "incomeAmount": 2013.94,
+            "basePct": 0.381,
+            "baseSupport": 767.31,
+            "marginalPct": 0.3792
+          },
+          {
+            "incomeAmount": 3272.65,
+            "basePct": 0.3803,
+            "baseSupport": 1244.59,
+            "marginalPct": 0.2431
+          },
+          {
+            "incomeAmount": 4531.37,
+            "basePct": 0.3422,
+            "baseSupport": 1550.63,
+            "marginalPct": 0.2043
+          },
+          {
+            "incomeAmount": 7198.27,
+            "basePct": 0.2911,
+            "baseSupport": 2095.42,
+            "marginalPct": 0.202
+          },
+          {
+            "incomeAmount": 9432.22,
+            "basePct": 0.27,
+            "baseSupport": 2546.7,
+            "marginalPct": 0.1787
+          },
+          {
+            "incomeAmount": 17871.57,
+            "basePct": 0.2269,
+            "baseSupport": 4055.06,
+            "marginalPct": 0.1616
+          }
         ],
         "3": [
-          { "incomeAmount": 2013.94, "basePct": 0.4600, "baseSupport": 926.41, "marginalPct": 0.4571 },
-          { "incomeAmount": 3272.65, "basePct": 0.4589, "baseSupport": 1501.82, "marginalPct": 0.2548 },
-          { "incomeAmount": 4531.37, "basePct": 0.4022, "baseSupport": 1822.52, "marginalPct": 0.2411 },
-          { "incomeAmount": 7198.27, "basePct": 0.3425, "baseSupport": 2465.41, "marginalPct": 0.2391 },
-          { "incomeAmount": 9432.22, "basePct": 0.3180, "baseSupport": 2999.45, "marginalPct": 0.2098 },
-          { "incomeAmount": 17871.57, "basePct": 0.2669, "baseSupport": 4769.92, "marginalPct": 0.1819 }
+          {
+            "incomeAmount": 2013.94,
+            "basePct": 0.46,
+            "baseSupport": 926.41,
+            "marginalPct": 0.4571
+          },
+          {
+            "incomeAmount": 3272.65,
+            "basePct": 0.4589,
+            "baseSupport": 1501.82,
+            "marginalPct": 0.2548
+          },
+          {
+            "incomeAmount": 4531.37,
+            "basePct": 0.4022,
+            "baseSupport": 1822.52,
+            "marginalPct": 0.2411
+          },
+          {
+            "incomeAmount": 7198.27,
+            "basePct": 0.3425,
+            "baseSupport": 2465.41,
+            "marginalPct": 0.2391
+          },
+          {
+            "incomeAmount": 9432.22,
+            "basePct": 0.318,
+            "baseSupport": 2999.45,
+            "marginalPct": 0.2098
+          },
+          {
+            "incomeAmount": 17871.57,
+            "basePct": 0.2669,
+            "baseSupport": 4769.92,
+            "marginalPct": 0.1819
+          }
         ],
         "4": [
-          { "incomeAmount": 2013.94, "basePct": 0.5130, "baseSupport": 1033.15, "marginalPct": 0.5099 },
-          { "incomeAmount": 3272.65, "basePct": 0.5118, "baseSupport": 1674.94, "marginalPct": 0.2814 },
-          { "incomeAmount": 4531.37, "basePct": 0.4478, "baseSupport": 2029.15, "marginalPct": 0.2702 },
-          { "incomeAmount": 7198.27, "basePct": 0.3820, "baseSupport": 2749.74, "marginalPct": 0.2680 },
-          { "incomeAmount": 9432.22, "basePct": 0.3550, "baseSupport": 3348.44, "marginalPct": 0.2328 },
-          { "incomeAmount": 17871.57, "basePct": 0.2973, "baseSupport": 5313.22, "marginalPct": 0.2044 }
+          {
+            "incomeAmount": 2013.94,
+            "basePct": 0.513,
+            "baseSupport": 1033.15,
+            "marginalPct": 0.5099
+          },
+          {
+            "incomeAmount": 3272.65,
+            "basePct": 0.5118,
+            "baseSupport": 1674.94,
+            "marginalPct": 0.2814
+          },
+          {
+            "incomeAmount": 4531.37,
+            "basePct": 0.4478,
+            "baseSupport": 2029.15,
+            "marginalPct": 0.2702
+          },
+          {
+            "incomeAmount": 7198.27,
+            "basePct": 0.382,
+            "baseSupport": 2749.74,
+            "marginalPct": 0.268
+          },
+          {
+            "incomeAmount": 9432.22,
+            "basePct": 0.355,
+            "baseSupport": 3348.44,
+            "marginalPct": 0.2328
+          },
+          {
+            "incomeAmount": 17871.57,
+            "basePct": 0.2973,
+            "baseSupport": 5313.22,
+            "marginalPct": 0.2044
+          }
         ],
         "5": [
-          { "incomeAmount": 2013.94, "basePct": 0.5650, "baseSupport": 1137.88, "marginalPct": 0.5614 },
-          { "incomeAmount": 3272.65, "basePct": 0.5636, "baseSupport": 1844.47, "marginalPct": 0.3145 },
-          { "incomeAmount": 4531.37, "basePct": 0.4944, "baseSupport": 2240.31, "marginalPct": 0.2947 },
-          { "incomeAmount": 7198.27, "basePct": 0.4204, "baseSupport": 3026.15, "marginalPct": 0.2920 },
-          { "incomeAmount": 9432.22, "basePct": 0.3900, "baseSupport": 3678.57, "marginalPct": 0.2583 },
-          { "incomeAmount": 17871.57, "basePct": 0.3278, "baseSupport": 5858.30, "marginalPct": 0.2234 }
+          {
+            "incomeAmount": 2013.94,
+            "basePct": 0.565,
+            "baseSupport": 1137.88,
+            "marginalPct": 0.5614
+          },
+          {
+            "incomeAmount": 3272.65,
+            "basePct": 0.5636,
+            "baseSupport": 1844.47,
+            "marginalPct": 0.3145
+          },
+          {
+            "incomeAmount": 4531.37,
+            "basePct": 0.4944,
+            "baseSupport": 2240.31,
+            "marginalPct": 0.2947
+          },
+          {
+            "incomeAmount": 7198.27,
+            "basePct": 0.4204,
+            "baseSupport": 3026.15,
+            "marginalPct": 0.292
+          },
+          {
+            "incomeAmount": 9432.22,
+            "basePct": 0.39,
+            "baseSupport": 3678.57,
+            "marginalPct": 0.2583
+          },
+          {
+            "incomeAmount": 17871.57,
+            "basePct": 0.3278,
+            "baseSupport": 5858.3,
+            "marginalPct": 0.2234
+          }
         ]
       }
     },
@@ -202,9 +399,18 @@
       }
     },
     "faq_extra": [
-      "How does Michigan's Parental Time Offset work?",
-      "What is Michigan's Low Income Threshold?",
-      "What counts as net income in Michigan?"
+      {
+        "q": "How does Michigan's Parental Time Offset work?",
+        "a": "Michigan's Parental Time Offset Equation takes each parent's base support obligation (from the General Care Support Table) and each parent's approximate annual overnights, and computes a single net transfer amount directly — it isn't a simple percentage credit. A negative result means Parent A pays; a positive result means Parent B pays. More overnights for the paying parent reduces what they owe, but through this specific equation rather than a flat percentage table."
+      },
+      {
+        "q": "What is Michigan's Low Income Threshold?",
+        "a": "Michigan's Low Income Threshold is $1,255/month in net income (2025 MCSF). A parent at or below that threshold has their base support obligation set at simply 10% of their income, instead of being run through the General Care Support Table — a simplified calculation meant to avoid pushing very low earners below subsistence."
+      },
+      {
+        "q": "What counts as net income in Michigan?",
+        "a": "Net income under the Michigan Child Support Formula is gross income minus taxes, mandatory retirement contributions, and other allowable deductions specifically defined in the MCSF Manual — not just whatever shows up as take-home pay on a paystub, since some deductions employers apply (like voluntary retirement or optional benefits) aren't allowed reductions under the formula."
+      }
     ]
   },
   "la": {
@@ -242,9 +448,18 @@
       }
     },
     "faq_extra": [
-      "Does Louisiana reduce child support for shared custody?",
-      "What counts as adjusted gross income in Louisiana?",
-      "What happens if combined income is above $50,000/month?"
+      {
+        "q": "Does Louisiana reduce child support for shared custody?",
+        "a": "Not automatically. Louisiana courts have discretion — not an automatic formula credit — to grant an adjustment when a parent exercises more than 73 days per year of physical custody. Unlike states with a graduated overnight table, Louisiana's statute leaves the exact amount of any such credit to the court's judgment."
+      },
+      {
+        "q": "What counts as adjusted gross income in Louisiana?",
+        "a": "Adjusted gross income in Louisiana is each parent's gross income minus any preexisting child support or spousal support they actually pay for other cases — not simply their paycheck gross. Both parents' adjusted gross incomes are then combined to look up the basic obligation on the official schedule."
+      },
+      {
+        "q": "What happens if combined income is above $50,000/month?",
+        "a": "Louisiana's official schedule covers combined adjusted gross income from $1,050 up to $50,000/month. Below $1,050 or above $50,000, the schedule doesn't provide a table value, and courts determine support case-by-case rather than extrapolating the formula automatically."
+      }
     ]
   },
   "in": {
@@ -282,9 +497,18 @@
       }
     },
     "faq_extra": [
-      "Is Indiana child support based on weekly or monthly income?",
-      "What happens if combined income is above $9,200/week?",
-      "Does Indiana have a parenting time credit?"
+      {
+        "q": "Is Indiana child support based on weekly or monthly income?",
+        "a": "Weekly. Indiana's guidelines are built around weekly gross income and a weekly schedule of support amounts — not monthly figures like most other states. If your pay is monthly or biweekly, it needs to be converted to a weekly figure before applying the guideline schedule."
+      },
+      {
+        "q": "What happens if combined income is above $9,200/week?",
+        "a": "Above $9,200/week in combined adjusted income, Indiana adds a fixed percentage of the excess directly on top of the top-bracket schedule amount — ranging from 8.1% for one child up to 20.4% for eight children. This is an automatic formula step, not a discretionary court decision, unlike the case-by-case approach some other states use above their income caps."
+      },
+      {
+        "q": "Does Indiana have a parenting time credit?",
+        "a": "Indiana's official guidelines do include a Parenting Time Credit Table that reduces the paying parent's obligation starting around 52 overnights per year. This calculator does not yet model that adjustment — treat its estimate as the pre-credit guideline amount, and expect a court-ordered figure to run lower if the paying parent has substantial parenting time."
+      }
     ]
   },
   "fl": {
@@ -323,9 +547,18 @@
       }
     },
     "faq_extra": [
-      "Does Florida child support change with 50/50 or substantial timesharing?",
-      "Is Florida child support based on gross or net income?",
-      "What happens if combined income is above $10,000/month?"
+      {
+        "q": "Does Florida child support change with 50/50 or substantial timesharing?",
+        "a": "Yes — timesharing changes the calculation method entirely rather than adjusting a percentage. If the paying parent has more than 73 overnights per year (roughly 20%+ timesharing), Florida requires a different 'gross-up' worksheet instead of the standard proration used for primary-custody arrangements, which generally produces a lower support amount."
+      },
+      {
+        "q": "Is Florida child support based on gross or net income?",
+        "a": "Net monthly income — gross income minus taxes, mandatory union dues, mandatory retirement, and other allowable deductions under Fla. Stat. § 61.30. Both parents' net incomes are combined to look up the obligation on the official schedule."
+      },
+      {
+        "q": "What happens if combined income is above $10,000/month?",
+        "a": "Above $10,000/month in combined net income, Florida automatically adds a fixed percentage of the excess on top of the $10,000-bracket schedule amount — ranging from 5.0% for one child up to 12.5% for six children. This is a formula step built into the statute, not a discretionary court decision."
+      }
     ]
   },
   "al": {
@@ -363,9 +596,18 @@
       }
     },
     "faq_extra": [
-      "Does Alabama reduce child support for shared custody?",
-      "What is Alabama's self-support reserve?",
-      "What happens if combined income is above $20,000/month?"
+      {
+        "q": "Does Alabama reduce child support for shared custody?",
+        "a": "Only through a separate track, not an automatic reduction. If a parent has roughly 143 to 164 or more overnights per year, Alabama requires a distinct Shared Physical Custody worksheet instead of straight proration of the basic obligation. The exact mechanics of that worksheet's adjustment weren't independently re-verified in this project's sourcing pass, so treat this calculator's standard estimate as a starting point if your case is near that overnight threshold."
+      },
+      {
+        "q": "What is Alabama's self-support reserve?",
+        "a": "Alabama's self-support reserve is $981/month. It functions as a floor — Rule 32 guidelines are designed so a paying parent's own income generally isn't reduced below this level by a child support order, similar in purpose to the self-support reserves used in several other income-shares states."
+      },
+      {
+        "q": "What happens if combined income is above $20,000/month?",
+        "a": "Alabama's official schedule extends to $20,000/month in combined gross income. Above that, the guidelines don't specify a table value, and courts determine the appropriate amount case-by-case rather than extrapolating the percentage automatically."
+      }
     ]
   },
   "co": {
@@ -406,9 +648,18 @@
       }
     },
     "faq_extra": [
-      "How does Colorado's new Parenting Time Table work (HB 25-1159)?",
-      "What is Colorado's self-support reserve?",
-      "What happens if combined income is above $40,000/month?"
+      {
+        "q": "How does Colorado's new Parenting Time Table work (HB 25-1159)?",
+        "a": "Colorado replaced its old 92-overnight cliff with a graduated Parenting Time Table under HB 25-1159, effective 2026-03-01. Annual overnights now map to a smoothly increasing credit percentage — 0% at 0 overnights up to 100% at 365 — so every additional overnight incrementally lowers the paying parent's obligation, instead of only qualifying for a credit once you crossed a fixed day-count."
+      },
+      {
+        "q": "What is Colorado's self-support reserve?",
+        "a": "Colorado's self-support reserve is calculated from the state minimum wage: hourly minimum wage × 29 hours/week × 50 weeks/year ÷ 12 months, which comes to $1,832/month using the 2026 Colorado minimum wage of $15.16/hour. If the paying parent's income falls at or below this level, a reduced low-income adjustment may apply instead of the standard formula."
+      },
+      {
+        "q": "What happens if combined income is above $40,000/month?",
+        "a": "Colorado's official schedule extends to $40,000/month in combined gross income. Above that, courts use discretion to determine the appropriate amount, but the order cannot be set lower than the $40,000-bracket amount — the schedule acts as a floor rather than a hard ceiling above that point."
+      }
     ]
   },
   "il": {
@@ -446,9 +697,18 @@
       }
     },
     "faq_extra": [
-      "Does Illinois reduce child support for shared parenting time?",
-      "Is Illinois child support based on gross or net income?",
-      "What happens if combined income is above $27,375/month?"
+      {
+        "q": "Does Illinois reduce child support for shared parenting time?",
+        "a": "Only if both parents clear a specific overnight threshold — it isn't a sliding scale. Illinois requires each parent to have at least 146 overnights per year (dropping to 110 starting 2027-01-01) before a Shared Physical Care worksheet replaces the standard proration calculation. Below that threshold for either parent, the standard formula applies regardless of how time is actually split."
+      },
+      {
+        "q": "Is Illinois child support based on gross or net income?",
+        "a": "Net income in Illinois is not your literal take-home pay — it's gross income minus a standardized tax amount pulled from the state's official Gross-to-Net Income Conversion Table, based on income level and filing status assumptions, rather than each parent's actual individual tax situation."
+      },
+      {
+        "q": "What happens if combined income is above $27,375/month?",
+        "a": "Above $27,375/month in combined net income, Illinois's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula."
+      }
     ]
   },
   "ca": {
@@ -465,7 +725,18 @@
       "statute_ref": "Cal. Fam. Code § 4055"
     },
     "params": {
-      "child_multipliers": { "1": 1, "2": 1.6, "3": 2, "4": 2.3, "5": 2.5, "6": 2.625, "7": 2.75, "8": 2.813, "9": 2.844, "10": 2.86 }
+      "child_multipliers": {
+        "1": 1,
+        "2": 1.6,
+        "3": 2,
+        "4": 2.3,
+        "5": 2.5,
+        "6": 2.625,
+        "7": 2.75,
+        "8": 2.813,
+        "9": 2.844,
+        "10": 2.86
+      }
     },
     "worksheet": {
       "steps": [
@@ -488,9 +759,18 @@
       }
     },
     "faq_extra": [
-      "What is the California K-factor child support formula?",
-      "Is California child support based on gross or net income?",
-      "How does timeshare percentage affect California child support?"
+      {
+        "q": "What is the California K-factor child support formula?",
+        "a": "California's guideline uses the algebraic formula CS = K × (HN − H% × TN), where TN is both parents' combined net disposable income, HN is the higher earner's net income, H% is their approximate percentage of time with the children, and K is a fraction that itself depends on TN (ranging roughly from 0.13 to 0.25+ depending on income level). The result is then multiplied by a statutory multiplier based on the number of children (1.6 for two children, up to 2.86 for ten)."
+      },
+      {
+        "q": "Is California child support based on gross or net income?",
+        "a": "Net disposable income — a specific statutory figure, not gross pay or simple take-home pay. It's gross income minus state and federal taxes, mandatory union dues, mandatory retirement contributions, health insurance premiums, and support actually paid for other relationships."
+      },
+      {
+        "q": "How does timeshare percentage affect California child support?",
+        "a": "Timeshare percentage (H%) enters the formula twice: first inside the K fraction itself — K uses (1 + H%) if the higher earner has 50% or less of the time, or (2 − H%) if they have more — and second directly in the base calculation (HN − H% × TN). More time with the higher earner generally reduces the support amount owed, since it changes both the K value and the income figure being multiplied."
+      }
     ]
   }
 }
