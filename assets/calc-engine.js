@@ -438,6 +438,75 @@ function calcMichiganFormula(params, rules, inputs) {
   };
 }
 
+function calcWisconsinFormula(params, rules, inputs) {
+  // Wisconsin's Percentage of Income Standard (Wis. Admin. Code DCF 150).
+  // Unlike income-shares states, the base calculation uses each parent's OWN
+  // gross income individually, never combined income. inputs: {
+  // parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA }
+  const bracket = inputs.numChildren >= 5 ? '5' : String(inputs.numChildren);
+
+  function tieredPercent(monthlyIncome) {
+    // High-income payers: the standard percentage applies to the first
+    // tier of income, then progressively lower percentages apply to each
+    // higher tier (Your Guide to Setting Support Amounts, DCF-P-DWSC824) --
+    // verified against the guide's own worked example ($14,000/mo, 2
+    // children -> $3,075: $7,000x25% + $5,500x20% + $1,500x15%).
+    let remaining = monthlyIncome;
+    let prevCap = 0;
+    let total = 0;
+    for (const tier of params.high_income_tiers) {
+      const cap = tier.upTo === null ? Infinity : tier.upTo;
+      const portion = Math.max(0, Math.min(remaining, cap - prevCap));
+      total += portion * tier.pct[bracket];
+      remaining -= portion;
+      prevCap = cap;
+      if (remaining <= 0) break;
+    }
+    return total;
+  }
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+
+  if (payingParentOvernights >= rules.shared_placement_threshold_days) {
+    // Shared-placement formula (Your Guide, "Shared-placement cases"),
+    // verified exactly against the guide's own worked example (2 children,
+    // Parent A $2,000/60% custody, Parent B $3,000/40% custody -> $375
+    // owed by Parent B):
+    const custodyShareA = overnightsWithA / 365;
+    const custodyShareB = 1 - custodyShareA;
+    const line1A = tieredPercent(inputs.parentAGrossIncome);
+    const line1B = tieredPercent(inputs.parentBGrossIncome);
+    const line3A = (line1A * 1.5) * custodyShareB;
+    const line3B = (line1B * 1.5) * custodyShareA;
+    const finalPayingParent = line3A > line3B ? 'A' : 'B';
+    const amount = applyRounding(Math.abs(line3A - line3B), rules.rounding);
+    return {
+      monthlyAmount: amount,
+      payingParent: finalPayingParent,
+      combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+      baseObligation: null,
+      adjustedForCustody: true,
+      deviationNote: rules.deviation_note,
+      capWarning: null
+    };
+  }
+
+  const payingIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+  const amount = applyRounding(tieredPercent(payingIncome), rules.rounding);
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation: null,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: null
+  };
+}
+
 function calcAlgebraicKFactor(params, rules, inputs) {
   // California Fam. Code 4055: CS = K x [HN - (H% x TN)]
   // HN = higher earner's net monthly disposable income
@@ -512,6 +581,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
     case 'michigan_formula':
       return calcMichiganFormula(stateEntry.params, rules, inputs);
+    case 'wi_percentage_shared':
+      return calcWisconsinFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

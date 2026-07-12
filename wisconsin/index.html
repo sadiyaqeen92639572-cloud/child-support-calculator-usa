@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wisconsin Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Wisconsin child support using the state's official wi percentage shared guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/wisconsin/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Wisconsin Child Support Calculator">
+<meta property="og:description" content="Free Wisconsin child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/wisconsin/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Wisconsin Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2020-WI-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Wisconsin?","acceptedAnswer":{"@type":"Answer","text":"Wisconsin is NOT an income-shares state -- the Percentage Standard applies to the paying parent's OWN gross income only, never combined income. If the paying parent has fewer than 92 overnights/year with the child (sole placement), support equals a flat percentage of that parent's gross monthly income: 17% for one child, 25% for two, 29% for three, 31% for four, 34% for five or more. Above $7,000/month, progressively lower percentages apply to income above that threshold, then again above $12,500/month (a tiered formula, not judicial discretion). If the paying parent has 92 or more overnights/year (at least 25% of the time, shared placement), a different formula applies: each parent's percentage-of-income amount is multiplied by 1.5, then by the share of time the child spends with the OTHER parent -- the difference between the two results is the support owed, paid by whichever parent's amount is larger. Wisconsin also has separate low-income payer guidelines (75%-150% of the federal poverty guideline) and split-placement guidelines, not modeled by this calculator."}},{"@type":"Question","name":"Is Wisconsin an income-shares state?","acceptedAnswer":{"@type":"Answer","text":"No. Unlike most states covered here, Wisconsin uses a Percentage of Income Standard: support is based on the paying parent's OWN gross income alone, not combined parental income. The percentages are fixed by number of children (17% for one child up to 34% for five or more) rather than looked up on an income-based schedule table."}},{"@type":"Question","name":"How does Wisconsin's shared-placement formula work?","acceptedAnswer":{"@type":"Answer","text":"When the paying parent has 92 or more overnights per year (at least 25% of the time), Wisconsin uses a cross-formula instead of a flat percentage: each parent's percentage-of-income amount is multiplied by 1.5 (to account for both parents' basic support costs), then by the share of time the child spends with the OTHER parent. The difference between the two parents' results is the actual support amount, paid by whichever parent's calculated amount is larger."}},{"@type":"Question","name":"What happens with high-income paying parents in Wisconsin?","acceptedAnswer":{"@type":"Answer","text":"Above $7,000/month in gross income, Wisconsin applies progressively lower percentages to each additional tier of income (14%-27% between $7,000-$12,500/month, then 10%-20% above $12,500/month, depending on the number of children) rather than applying the standard percentage to the full amount or leaving it to judicial discretion."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Wisconsin Child Support Calculator","item":"https://usachildsupportcalculator.com/wisconsin/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Wisconsin Child Support Calculator</h1>
+  <p class="badge">Updated for Wisconsin's 2020-WI-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Wisconsin's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Wisconsin Department of Children and Families, Bureau of Child Support (Wis. Admin. Code DCF 150) or a family law attorney licensed in Wisconsin.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5 or more</option>
+        </select>
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Wisconsin Child Support Is Calculated</h2>
+    <ol><li>Wisconsin is NOT an income-shares state -- the Percentage Standard applies to the paying parent's OWN gross income only, never combined income.</li><li>If the paying parent has fewer than 92 overnights/year with the child (sole placement), support equals a flat percentage of that parent's gross monthly income: 17% for one child, 25% for two, 29% for three, 31% for four, 34% for five or more.</li><li>Above $7,000/month, progressively lower percentages apply to income above that threshold, then again above $12,500/month (a tiered formula, not judicial discretion).</li><li>If the paying parent has 92 or more overnights/year (at least 25% of the time, shared placement), a different formula applies: each parent's percentage-of-income amount is multiplied by 1.5, then by the share of time the child spends with the OTHER parent -- the difference between the two results is the support owed, paid by whichever parent's amount is larger.</li><li>Wisconsin also has separate low-income payer guidelines (75%-150% of the federal poverty guideline) and split-placement guidelines, not modeled by this calculator.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Wisconsin Child Support Worksheet Walkthrough</h2>
+    <p>Example (the state's own worked example): 2 children, Parent A earns $2,000/mo and has 219 placement days/year (60%), Parent B earns $3,000/mo and has 146 placement days/year (40%) -- both over the 92-day shared-placement threshold.</p>
+    <ol><li>Line 1: Parent A: $2,000 × 25% = $500. Parent B: $3,000 × 25% = $750.</li><li>Line 2 (×150%): Parent A: $750. Parent B: $1,125.</li><li>Line 3 (× time with the OTHER parent): Parent A: $750 × 40% = $300. Parent B: $1,125 × 60% = $675.</li><li>Offset: $675 − $300 = $375/month owed by Parent B (the parent with the larger Line 3 amount).</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Wisconsin Department of Children and Families, Bureau of Child Support (Wis. Admin. Code DCF 150) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used (Percentage Standard, sole placement)</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>1 child</td><td>17%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>2 children</td><td>25%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>3 children</td><td>29%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>4 children</td><td>31%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>5 children</td><td>34%</td><td>Wis. Admin. Code DCF 150</td></tr>
+    </table>
+    <h3>High-income tiers (example: 2 children)</h3>
+    <table>
+      <tr><th>Income portion</th><th>Percentage</th><th>Source</th></tr>
+      <tr><td>First $7,000/mo, 2 children</td><td>25%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>$7,000-$12,500/mo, 2 children</td><td>20%</td><td>Wis. Admin. Code DCF 150</td></tr><tr><td>Above $12,500/mo, 2 children</td><td>15%</td><td>Wis. Admin. Code DCF 150</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      Sole placement (paying parent has &lt; 92 overnights/yr):<br>
+      &nbsp;&nbsp;support = tieredPercent(payingParent_income, children)<br>
+      Shared placement (paying parent has &ge; 92 overnights/yr, i.e. &ge;25% of the year):<br>
+      &nbsp;&nbsp;line1(parent) = tieredPercent(parent_income, children)<br>
+      &nbsp;&nbsp;line2(parent) = line1(parent) &times; 1.5<br>
+      &nbsp;&nbsp;line3(parent) = line2(parent) &times; (share of time child spends with the OTHER parent)<br>
+      &nbsp;&nbsp;support = |line3(A) - line3(B)|, paid by whichever parent's line3 is larger
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Wisconsin's Percentage of Income Standard (Wis. Admin. Code DCF 150). Verify against Wisconsin's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Wisconsin?</summary><p>Wisconsin is NOT an income-shares state -- the Percentage Standard applies to the paying parent's OWN gross income only, never combined income. If the paying parent has fewer than 92 overnights/year with the child (sole placement), support equals a flat percentage of that parent's gross monthly income: 17% for one child, 25% for two, 29% for three, 31% for four, 34% for five or more. Above $7,000/month, progressively lower percentages apply to income above that threshold, then again above $12,500/month (a tiered formula, not judicial discretion). If the paying parent has 92 or more overnights/year (at least 25% of the time, shared placement), a different formula applies: each parent's percentage-of-income amount is multiplied by 1.5, then by the share of time the child spends with the OTHER parent -- the difference between the two results is the support owed, paid by whichever parent's amount is larger. Wisconsin also has separate low-income payer guidelines (75%-150% of the federal poverty guideline) and split-placement guidelines, not modeled by this calculator.</p></details>
+    <details><summary>Is Wisconsin an income-shares state?</summary><p>No. Unlike most states covered here, Wisconsin uses a Percentage of Income Standard: support is based on the paying parent's OWN gross income alone, not combined parental income. The percentages are fixed by number of children (17% for one child up to 34% for five or more) rather than looked up on an income-based schedule table.</p></details><details><summary>How does Wisconsin's shared-placement formula work?</summary><p>When the paying parent has 92 or more overnights per year (at least 25% of the time), Wisconsin uses a cross-formula instead of a flat percentage: each parent's percentage-of-income amount is multiplied by 1.5 (to account for both parents' basic support costs), then by the share of time the child spends with the OTHER parent. The difference between the two parents' results is the actual support amount, paid by whichever parent's calculated amount is larger.</p></details><details><summary>What happens with high-income paying parents in Wisconsin?</summary><p>Above $7,000/month in gross income, Wisconsin applies progressively lower percentages to each additional tier of income (14%-27% between $7,000-$12,500/month, then 10%-20% above $12,500/month, depending on the number of children) rather than applying the standard percentage to the full amount or leaving it to judicial discretion.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: wi percentage shared. Effective 2020-07-01, guideline version 2020-WI-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://dcf.wisconsin.gov/files/publications/pdf/824.pdf" rel="nofollow noopener">Wisconsin Department of Children and Families, Bureau of Child Support (Wis. Admin. Code DCF 150)</a> (Wis. Admin. Code DCF 150).</p>
+    <p class="deviation-note">Wisconsin courts may deviate from the Percentage Standard if it would be unfair to the child or a parent. This calculator does not model split-placement cases (each parent has placement of at least one different child), serial-family adjustments for parents supporting other children, or the low-income payer table (75%-150% of the federal poverty guideline), which is republished annually and not reproduced here.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Wisconsin's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Wisconsin","abbr":"WI","slug":"wisconsin","formula_model":"wi_percentage_shared","effective_date":"2020-07-01","last_verified":"2026-07-12","guideline_version":"2020-WI-v1","source":{"agency_name":"Wisconsin Department of Children and Families, Bureau of Child Support (Wis. Admin. Code DCF 150)","url":"https://dcf.wisconsin.gov/files/publications/pdf/824.pdf","statute_ref":"Wis. Admin. Code DCF 150"},"params":{"income_basis":"gross","percentages":{"1":0.17,"2":0.25,"3":0.29,"4":0.31,"5":0.34},"high_income_tiers":[{"upTo":7000,"pct":{"1":0.17,"2":0.25,"3":0.29,"4":0.31,"5":0.34}},{"upTo":12500,"pct":{"1":0.14,"2":0.2,"3":0.23,"4":0.25,"5":0.27}},{"upTo":null,"pct":{"1":0.1,"2":0.15,"3":0.17,"4":0.19,"5":0.2}}],"high_income_note":"Above $7,000/month, progressively lower percentages apply to each higher income tier -- not judicial discretion."},"worksheet":{"steps":["Wisconsin is NOT an income-shares state -- the Percentage Standard applies to the paying parent's OWN gross income only, never combined income.","If the paying parent has fewer than 92 overnights/year with the child (sole placement), support equals a flat percentage of that parent's gross monthly income: 17% for one child, 25% for two, 29% for three, 31% for four, 34% for five or more.","Above $7,000/month, progressively lower percentages apply to income above that threshold, then again above $12,500/month (a tiered formula, not judicial discretion).","If the paying parent has 92 or more overnights/year (at least 25% of the time, shared placement), a different formula applies: each parent's percentage-of-income amount is multiplied by 1.5, then by the share of time the child spends with the OTHER parent -- the difference between the two results is the support owed, paid by whichever parent's amount is larger.","Wisconsin also has separate low-income payer guidelines (75%-150% of the federal poverty guideline) and split-placement guidelines, not modeled by this calculator."],"example":{"scenario":"Example (the state's own worked example): 2 children, Parent A earns $2,000/mo and has 219 placement days/year (60%), Parent B earns $3,000/mo and has 146 placement days/year (40%) -- both over the 92-day shared-placement threshold.","calculation":["Line 1: Parent A: $2,000 × 25% = $500. Parent B: $3,000 × 25% = $750.","Line 2 (×150%): Parent A: $750. Parent B: $1,125.","Line 3 (× time with the OTHER parent): Parent A: $750 × 40% = $300. Parent B: $1,125 × 60% = $675.","Offset: $675 − $300 = $375/month owed by Parent B (the parent with the larger Line 3 amount)."]}},"faq_extra":[{"q":"Is Wisconsin an income-shares state?","a":"No. Unlike most states covered here, Wisconsin uses a Percentage of Income Standard: support is based on the paying parent's OWN gross income alone, not combined parental income. The percentages are fixed by number of children (17% for one child up to 34% for five or more) rather than looked up on an income-based schedule table."},{"q":"How does Wisconsin's shared-placement formula work?","a":"When the paying parent has 92 or more overnights per year (at least 25% of the time), Wisconsin uses a cross-formula instead of a flat percentage: each parent's percentage-of-income amount is multiplied by 1.5 (to account for both parents' basic support costs), then by the share of time the child spends with the OTHER parent. The difference between the two parents' results is the actual support amount, paid by whichever parent's calculated amount is larger."},{"q":"What happens with high-income paying parents in Wisconsin?","a":"Above $7,000/month in gross income, Wisconsin applies progressively lower percentages to each additional tier of income (14%-27% between $7,000-$12,500/month, then 10%-20% above $12,500/month, depending on the number of children) rather than applying the standard percentage to the full amount or leaving it to judicial discretion."}]};
+    const RULES = {"rounding":"nearest_dollar","shared_placement_threshold_days":92,"income_cap_behavior":"formula_above_cap","deviation_note":"Wisconsin courts may deviate from the Percentage Standard if it would be unfair to the child or a parent. This calculator does not model split-placement cases (each parent has placement of at least one different child), serial-family adjustments for parents supporting other children, or the low-income payer table (75%-150% of the federal poverty guideline), which is republished annually and not reproduced here."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

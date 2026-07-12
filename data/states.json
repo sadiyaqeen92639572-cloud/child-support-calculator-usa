@@ -1262,5 +1262,94 @@
         "a": "Above $40,000/month in combined adjusted gross income, or when more than six children are involved, Missouri's Form 14 doesn't provide an automatic schedule value — courts instead consider deviation factors under Form 14's comment provisions rather than extending the formula."
       }
     ]
+  },
+  "wi": {
+    "name": "Wisconsin",
+    "abbr": "WI",
+    "slug": "wisconsin",
+    "formula_model": "wi_percentage_shared",
+    "effective_date": "2020-07-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2020-WI-v1",
+    "source": {
+      "agency_name": "Wisconsin Department of Children and Families, Bureau of Child Support (Wis. Admin. Code DCF 150)",
+      "url": "https://dcf.wisconsin.gov/files/publications/pdf/824.pdf",
+      "statute_ref": "Wis. Admin. Code DCF 150"
+    },
+    "params": {
+      "income_basis": "gross",
+      "percentages": {
+        "1": 0.17,
+        "2": 0.25,
+        "3": 0.29,
+        "4": 0.31,
+        "5": 0.34
+      },
+      "high_income_tiers": [
+        {
+          "upTo": 7000,
+          "pct": {
+            "1": 0.17,
+            "2": 0.25,
+            "3": 0.29,
+            "4": 0.31,
+            "5": 0.34
+          }
+        },
+        {
+          "upTo": 12500,
+          "pct": {
+            "1": 0.14,
+            "2": 0.2,
+            "3": 0.23,
+            "4": 0.25,
+            "5": 0.27
+          }
+        },
+        {
+          "upTo": null,
+          "pct": {
+            "1": 0.1,
+            "2": 0.15,
+            "3": 0.17,
+            "4": 0.19,
+            "5": 0.2
+          }
+        }
+      ],
+      "high_income_note": "Above $7,000/month, progressively lower percentages apply to each higher income tier -- not judicial discretion."
+    },
+    "worksheet": {
+      "steps": [
+        "Wisconsin is NOT an income-shares state -- the Percentage Standard applies to the paying parent's OWN gross income only, never combined income.",
+        "If the paying parent has fewer than 92 overnights/year with the child (sole placement), support equals a flat percentage of that parent's gross monthly income: 17% for one child, 25% for two, 29% for three, 31% for four, 34% for five or more.",
+        "Above $7,000/month, progressively lower percentages apply to income above that threshold, then again above $12,500/month (a tiered formula, not judicial discretion).",
+        "If the paying parent has 92 or more overnights/year (at least 25% of the time, shared placement), a different formula applies: each parent's percentage-of-income amount is multiplied by 1.5, then by the share of time the child spends with the OTHER parent -- the difference between the two results is the support owed, paid by whichever parent's amount is larger.",
+        "Wisconsin also has separate low-income payer guidelines (75%-150% of the federal poverty guideline) and split-placement guidelines, not modeled by this calculator."
+      ],
+      "example": {
+        "scenario": "Example (the state's own worked example): 2 children, Parent A earns $2,000/mo and has 219 placement days/year (60%), Parent B earns $3,000/mo and has 146 placement days/year (40%) -- both over the 92-day shared-placement threshold.",
+        "calculation": [
+          "Line 1: Parent A: $2,000 × 25% = $500. Parent B: $3,000 × 25% = $750.",
+          "Line 2 (×150%): Parent A: $750. Parent B: $1,125.",
+          "Line 3 (× time with the OTHER parent): Parent A: $750 × 40% = $300. Parent B: $1,125 × 60% = $675.",
+          "Offset: $675 − $300 = $375/month owed by Parent B (the parent with the larger Line 3 amount)."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Is Wisconsin an income-shares state?",
+        "a": "No. Unlike most states covered here, Wisconsin uses a Percentage of Income Standard: support is based on the paying parent's OWN gross income alone, not combined parental income. The percentages are fixed by number of children (17% for one child up to 34% for five or more) rather than looked up on an income-based schedule table."
+      },
+      {
+        "q": "How does Wisconsin's shared-placement formula work?",
+        "a": "When the paying parent has 92 or more overnights per year (at least 25% of the time), Wisconsin uses a cross-formula instead of a flat percentage: each parent's percentage-of-income amount is multiplied by 1.5 (to account for both parents' basic support costs), then by the share of time the child spends with the OTHER parent. The difference between the two parents' results is the actual support amount, paid by whichever parent's calculated amount is larger."
+      },
+      {
+        "q": "What happens with high-income paying parents in Wisconsin?",
+        "a": "Above $7,000/month in gross income, Wisconsin applies progressively lower percentages to each additional tier of income (14%-27% between $7,000-$12,500/month, then 10%-20% above $12,500/month, depending on the number of children) rather than applying the standard percentage to the full amount or leaving it to judicial discretion."
+      }
+    ]
   }
 }

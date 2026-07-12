@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "shared_placement_threshold_days": 92,
+  "income_cap_behavior": "formula_above_cap",
+  "deviation_note": "Wisconsin courts may deviate from the Percentage Standard if it would be unfair to the child or a parent. This calculator does not model split-placement cases (each parent has placement of at least one different child), serial-family adjustments for parents supporting other children, or the low-income payer table (75%-150% of the federal poverty guideline), which is republished annually and not reproduced here."
+}

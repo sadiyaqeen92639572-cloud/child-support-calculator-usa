@@ -98,6 +98,43 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'wi_percentage_shared') {
+    const p = state.params;
+    const rows = Object.entries(p.percentages)
+      .map(([k, v]) => `<tr><td>${k} ${k === '1' ? 'child' : 'children'}</td><td>${(v * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>`)
+      .join('');
+    const tierRows = p.high_income_tiers.map((t, i) => {
+      const label = i === 0 ? `First $${t.upTo.toLocaleString()}/mo` : (t.upTo === null ? `Above $${p.high_income_tiers[i-1].upTo.toLocaleString()}/mo` : `$${p.high_income_tiers[i-1].upTo.toLocaleString()}-$${t.upTo.toLocaleString()}/mo`);
+      return `<tr><td>${label}, 2 children</td><td>${(t.pct['2'] * 100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>`;
+    }).join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used (Percentage Standard, sole placement)</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      ${rows}
+    </table>
+    <h3>High-income tiers (example: 2 children)</h3>
+    <table>
+      <tr><th>Income portion</th><th>Percentage</th><th>Source</th></tr>
+      ${tierRows}
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      Sole placement (paying parent has &lt; 92 overnights/yr):<br>
+      &nbsp;&nbsp;support = tieredPercent(payingParent_income, children)<br>
+      Shared placement (paying parent has &ge; 92 overnights/yr, i.e. &ge;25% of the year):<br>
+      &nbsp;&nbsp;line1(parent) = tieredPercent(parent_income, children)<br>
+      &nbsp;&nbsp;line2(parent) = line1(parent) &times; 1.5<br>
+      &nbsp;&nbsp;line3(parent) = line2(parent) &times; (share of time child spends with the OTHER parent)<br>
+      &nbsp;&nbsp;support = |line3(A) - line3(B)|, paid by whichever parent's line3 is larger
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Wisconsin's Percentage of Income Standard (Wis. Admin. Code DCF 150). Verify against Wisconsin's official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
   if (state.formula_model === 'algebraic_kfactor') {
     const p = state.params;
     const rows = Object.entries(p.child_multipliers)
@@ -211,6 +248,24 @@ function calculatorFormFields(state) {
         <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
       </label>`;
   }
+  if (state.formula_model === 'wi_percentage_shared') {
+    return `
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5 or more</option>
+        </select>
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>`;
+  }
 
   // income_shares and melson share the same form shape
   const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
@@ -271,6 +326,14 @@ function calculatorScript(state) {
         return {
           parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
           parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
           numChildren: Number(document.getElementById('numChildren').value) || 1,
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
