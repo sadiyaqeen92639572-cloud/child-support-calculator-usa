@@ -882,5 +882,64 @@
         "a": "Above $40,000/month in combined adjusted gross income, North Carolina's official schedule has no table value. Courts set support to meet the child's reasonable needs for health, education, and maintenance under G.S. 50-13.4(c), using the schedule only as a possible reference point for a minimal level of support."
       }
     ]
+  },
+  "oh": {
+    "name": "Ohio",
+    "abbr": "OH",
+    "slug": "ohio",
+    "formula_model": "income_shares",
+    "effective_date": "2023-06-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2023-OH-v1",
+    "source": {
+      "agency_name": "Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023)",
+      "url": "https://jfs.ohio.gov",
+      "statute_ref": "Ohio Rev. Code § 3119.021"
+    },
+    "params": {
+      "schedule_table_ref": "ohio_schedule.json",
+      "income_basis": "gross",
+      "income_period": "annual",
+      "income_cap_annual": 336000,
+      "high_income_note": "Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's annual gross income (Ohio's worksheets and schedule run on ANNUAL figures, not monthly).",
+        "Combine both parents' annual gross income for combined annual income, and calculate each parent's income share percentage.",
+        "Look up the basic obligation two ways: (a) using each parent's own individual income alone, and (b) using combined income multiplied by that parent's income share — the LOWER of the two is that parent's obligation. This is what produces the schedule's built-in self-support reserve protection for low and low-middle income parents.",
+        "A flat 10% credit applies to the paying parent's obligation if there is any court-ordered parenting time at all — Ohio does not use a graduated overnight scale like most other states.",
+        "The result is floored at the statutory minimum order of $960/year ($80/month).",
+        "Add each parent's pro rata share of work-related child care costs and health insurance premiums, then divide the annual total by 12 for the monthly order amount.",
+        "A separate cash medical support order ($388.70/child/year as of the 2023 schedule) and a 7+ children obligation multiplier table exist but are not computed by this calculator.",
+        "Above $336,000/year combined gross income, courts determine support case-by-case rather than extending the schedule."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $60,000/yr, Parent B earns $40,000/yr (combined $100,000/yr), 2 children, Parent B is the noncustodial parent with 30 court-ordered parenting days/year.",
+        "calculation": [
+          "Individual-income lookup for Parent B alone ($40,000/yr, 2 children): $6,926/yr.",
+          "Combined-income lookup at $100,000/yr, 2 children: $19,724/yr; Parent B's 40% income share: $7,890/yr.",
+          "Ohio takes the LOWER of the two ($6,926/yr individual lookup), then applies the flat 10% parenting-time credit (since Parent B has some court-ordered time): $6,926 × 0.90 = $6,233/yr ÷ 12 ≈ $519/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Why does Ohio calculate child support two different ways and take the lower amount?",
+        "a": "Ohio's worksheet (JFS 07768) computes each parent's obligation both from their own individual income alone and from their share of the combined-income schedule amount, then uses whichever is lower. This dual calculation — not a simple income threshold — is what builds Ohio's self-support reserve protection into the schedule, and it explains why the printed schedule shows identical dollar figures across multiple child-count columns at lower income levels."
+      },
+      {
+        "q": "Does Ohio reduce child support for parenting time?",
+        "a": "Yes, but as a flat 10% credit if the paying parent has ANY amount of court-ordered parenting time at all — not a graduated scale based on the number of overnights, which is how most other states (Arizona, Colorado, Georgia) handle it. More parenting time beyond having a court order doesn't increase the credit under Ohio's guidelines."
+      },
+      {
+        "q": "Is Ohio child support based on annual or monthly income?",
+        "a": "Annual. Ohio's Basic Child Support Schedule (JFS 07767) and worksheets run on annual gross income figures in $600 increments, from $8,400 to $336,000/year — the final child support order is then divided by 12 to get the monthly payment amount."
+      },
+      {
+        "q": "What happens if combined income is above $336,000/year in Ohio?",
+        "a": "Above $336,000/year in combined gross income, Ohio's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula."
+      }
+    ]
   }
 }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ohio Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Ohio child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/ohio/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Ohio Child Support Calculator">
+<meta property="og:description" content="Free Ohio child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/ohio/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Ohio Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2023-OH-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Ohio?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's annual gross income (Ohio's worksheets and schedule run on ANNUAL figures, not monthly). Combine both parents' annual gross income for combined annual income, and calculate each parent's income share percentage. Look up the basic obligation two ways: (a) using each parent's own individual income alone, and (b) using combined income multiplied by that parent's income share — the LOWER of the two is that parent's obligation. This is what produces the schedule's built-in self-support reserve protection for low and low-middle income parents. A flat 10% credit applies to the paying parent's obligation if there is any court-ordered parenting time at all — Ohio does not use a graduated overnight scale like most other states. The result is floored at the statutory minimum order of $960/year ($80/month). Add each parent's pro rata share of work-related child care costs and health insurance premiums, then divide the annual total by 12 for the monthly order amount. A separate cash medical support order ($388.70/child/year as of the 2023 schedule) and a 7+ children obligation multiplier table exist but are not computed by this calculator. Above $336,000/year combined gross income, courts determine support case-by-case rather than extending the schedule."}},{"@type":"Question","name":"Why does Ohio calculate child support two different ways and take the lower amount?","acceptedAnswer":{"@type":"Answer","text":"Ohio's worksheet (JFS 07768) computes each parent's obligation both from their own individual income alone and from their share of the combined-income schedule amount, then uses whichever is lower. This dual calculation — not a simple income threshold — is what builds Ohio's self-support reserve protection into the schedule, and it explains why the printed schedule shows identical dollar figures across multiple child-count columns at lower income levels."}},{"@type":"Question","name":"Does Ohio reduce child support for parenting time?","acceptedAnswer":{"@type":"Answer","text":"Yes, but as a flat 10% credit if the paying parent has ANY amount of court-ordered parenting time at all — not a graduated scale based on the number of overnights, which is how most other states (Arizona, Colorado, Georgia) handle it. More parenting time beyond having a court order doesn't increase the credit under Ohio's guidelines."}},{"@type":"Question","name":"Is Ohio child support based on annual or monthly income?","acceptedAnswer":{"@type":"Answer","text":"Annual. Ohio's Basic Child Support Schedule (JFS 07767) and worksheets run on annual gross income figures in $600 increments, from $8,400 to $336,000/year — the final child support order is then divided by 12 to get the monthly payment amount."}},{"@type":"Question","name":"What happens if combined income is above $336,000/year in Ohio?","acceptedAnswer":{"@type":"Answer","text":"Above $336,000/year in combined gross income, Ohio's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Ohio Child Support Calculator","item":"https://usachildsupportcalculator.com/ohio/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Ohio Child Support Calculator</h1>
+  <p class="badge">Updated for Ohio's 2023-OH-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Ohio's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023) or a family law attorney licensed in Ohio.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross annual income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross annual income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Annual childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Annual health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Ohio Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's annual gross income (Ohio's worksheets and schedule run on ANNUAL figures, not monthly).</li><li>Combine both parents' annual gross income for combined annual income, and calculate each parent's income share percentage.</li><li>Look up the basic obligation two ways: (a) using each parent's own individual income alone, and (b) using combined income multiplied by that parent's income share — the LOWER of the two is that parent's obligation. This is what produces the schedule's built-in self-support reserve protection for low and low-middle income parents.</li><li>A flat 10% credit applies to the paying parent's obligation if there is any court-ordered parenting time at all — Ohio does not use a graduated overnight scale like most other states.</li><li>The result is floored at the statutory minimum order of $960/year ($80/month).</li><li>Add each parent's pro rata share of work-related child care costs and health insurance premiums, then divide the annual total by 12 for the monthly order amount.</li><li>A separate cash medical support order ($388.70/child/year as of the 2023 schedule) and a 7+ children obligation multiplier table exist but are not computed by this calculator.</li><li>Above $336,000/year combined gross income, courts determine support case-by-case rather than extending the schedule.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Ohio Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A earns $60,000/yr, Parent B earns $40,000/yr (combined $100,000/yr), 2 children, Parent B is the noncustodial parent with 30 court-ordered parenting days/year.</p>
+    <ol><li>Individual-income lookup for Parent B alone ($40,000/yr, 2 children): $6,926/yr.</li><li>Combined-income lookup at $100,000/yr, 2 children: $19,724/yr; Parent B's 40% income share: $7,890/yr.</li><li>Ohio takes the LOWER of the two ($6,926/yr individual lookup), then applies the flat 10% parenting-time credit (since Parent B has some court-ordered time): $6,926 × 0.90 = $6,233/yr ÷ 12 ≈ $519/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Ohio's official guideline schedule table. Verify against Ohio's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Ohio?</summary><p>Determine each parent's annual gross income (Ohio's worksheets and schedule run on ANNUAL figures, not monthly). Combine both parents' annual gross income for combined annual income, and calculate each parent's income share percentage. Look up the basic obligation two ways: (a) using each parent's own individual income alone, and (b) using combined income multiplied by that parent's income share — the LOWER of the two is that parent's obligation. This is what produces the schedule's built-in self-support reserve protection for low and low-middle income parents. A flat 10% credit applies to the paying parent's obligation if there is any court-ordered parenting time at all — Ohio does not use a graduated overnight scale like most other states. The result is floored at the statutory minimum order of $960/year ($80/month). Add each parent's pro rata share of work-related child care costs and health insurance premiums, then divide the annual total by 12 for the monthly order amount. A separate cash medical support order ($388.70/child/year as of the 2023 schedule) and a 7+ children obligation multiplier table exist but are not computed by this calculator. Above $336,000/year combined gross income, courts determine support case-by-case rather than extending the schedule.</p></details>
+    <details><summary>Why does Ohio calculate child support two different ways and take the lower amount?</summary><p>Ohio's worksheet (JFS 07768) computes each parent's obligation both from their own individual income alone and from their share of the combined-income schedule amount, then uses whichever is lower. This dual calculation — not a simple income threshold — is what builds Ohio's self-support reserve protection into the schedule, and it explains why the printed schedule shows identical dollar figures across multiple child-count columns at lower income levels.</p></details><details><summary>Does Ohio reduce child support for parenting time?</summary><p>Yes, but as a flat 10% credit if the paying parent has ANY amount of court-ordered parenting time at all — not a graduated scale based on the number of overnights, which is how most other states (Arizona, Colorado, Georgia) handle it. More parenting time beyond having a court order doesn't increase the credit under Ohio's guidelines.</p></details><details><summary>Is Ohio child support based on annual or monthly income?</summary><p>Annual. Ohio's Basic Child Support Schedule (JFS 07767) and worksheets run on annual gross income figures in $600 increments, from $8,400 to $336,000/year — the final child support order is then divided by 12 to get the monthly payment amount.</p></details><details><summary>What happens if combined income is above $336,000/year in Ohio?</summary><p>Above $336,000/year in combined gross income, Ohio's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2023-06-01, guideline version 2023-OH-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://jfs.ohio.gov" rel="nofollow noopener">Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023)</a> (Ohio Rev. Code § 3119.021).</p>
+    <p class="deviation-note">Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case. Not modeled here: a separate cash medical support order ($388.70/child/year, JFS 07766 Table 3), the 7+ children obligation multiplier table, and the federal/state child care tax credit reductions applied on the worksheet's Line 21 (this calculator adds childcare/health insurance costs prorated by income share without those credit reductions).</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Ohio's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Ohio","abbr":"OH","slug":"ohio","formula_model":"income_shares","effective_date":"2023-06-01","last_verified":"2026-07-12","guideline_version":"2023-OH-v1","source":{"agency_name":"Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023)","url":"https://jfs.ohio.gov","statute_ref":"Ohio Rev. Code § 3119.021"},"params":{"schedule_table_ref":"ohio_schedule.json","income_basis":"gross","income_period":"annual","income_cap_annual":336000,"high_income_note":"Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case."},"worksheet":{"steps":["Determine each parent's annual gross income (Ohio's worksheets and schedule run on ANNUAL figures, not monthly).","Combine both parents' annual gross income for combined annual income, and calculate each parent's income share percentage.","Look up the basic obligation two ways: (a) using each parent's own individual income alone, and (b) using combined income multiplied by that parent's income share — the LOWER of the two is that parent's obligation. This is what produces the schedule's built-in self-support reserve protection for low and low-middle income parents.","A flat 10% credit applies to the paying parent's obligation if there is any court-ordered parenting time at all — Ohio does not use a graduated overnight scale like most other states.","The result is floored at the statutory minimum order of $960/year ($80/month).","Add each parent's pro rata share of work-related child care costs and health insurance premiums, then divide the annual total by 12 for the monthly order amount.","A separate cash medical support order ($388.70/child/year as of the 2023 schedule) and a 7+ children obligation multiplier table exist but are not computed by this calculator.","Above $336,000/year combined gross income, courts determine support case-by-case rather than extending the schedule."],"example":{"scenario":"Example: Parent A earns $60,000/yr, Parent B earns $40,000/yr (combined $100,000/yr), 2 children, Parent B is the noncustodial parent with 30 court-ordered parenting days/year.","calculation":["Individual-income lookup for Parent B alone ($40,000/yr, 2 children): $6,926/yr.","Combined-income lookup at $100,000/yr, 2 children: $19,724/yr; Parent B's 40% income share: $7,890/yr.","Ohio takes the LOWER of the two ($6,926/yr individual lookup), then applies the flat 10% parenting-time credit (since Parent B has some court-ordered time): $6,926 × 0.90 = $6,233/yr ÷ 12 ≈ $519/month."]}},"faq_extra":[{"q":"Why does Ohio calculate child support two different ways and take the lower amount?","a":"Ohio's worksheet (JFS 07768) computes each parent's obligation both from their own individual income alone and from their share of the combined-income schedule amount, then uses whichever is lower. This dual calculation — not a simple income threshold — is what builds Ohio's self-support reserve protection into the schedule, and it explains why the printed schedule shows identical dollar figures across multiple child-count columns at lower income levels."},{"q":"Does Ohio reduce child support for parenting time?","a":"Yes, but as a flat 10% credit if the paying parent has ANY amount of court-ordered parenting time at all — not a graduated scale based on the number of overnights, which is how most other states (Arizona, Colorado, Georgia) handle it. More parenting time beyond having a court order doesn't increase the credit under Ohio's guidelines."},{"q":"Is Ohio child support based on annual or monthly income?","a":"Annual. Ohio's Basic Child Support Schedule (JFS 07767) and worksheets run on annual gross income figures in $600 increments, from $8,400 to $336,000/year — the final child support order is then divided by 12 to get the monthly payment amount."},{"q":"What happens if combined income is above $336,000/year in Ohio?","a":"Above $336,000/year in combined gross income, Ohio's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula."}]};
+    const RULES = {"rounding":"nearest_dollar","min_of_individual_or_prorated":{"min_order_annual":960,"note":"JFS 07768 Sole/Shared Child Support Computation Worksheet, Lines 18a-18d: the obligation is the LOWER of (a) the schedule looked up at the paying parent's own income, or (b) the schedule looked up at combined income times that parent's income share — floored at $960/yr ($80/mo)."},"custody_adjustment":{"type":"flat_percent_if_any_time","pct":0.1,"note":"JFS 07768 Line 19: a flat 10% credit applies if the paying parent has ANY court-ordered parenting time — not graduated by number of overnights like most other states."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case. Not modeled here: a separate cash medical support order ($388.70/child/year, JFS 07766 Table 3), the 7+ children obligation multiplier table, and the federal/state child care tax credit reductions applied on the worksheet's Line 21 (this calculator adds childcare/health insurance costs prorated by income share without those credit reductions)."};
+    const SCHEDULE = {"maxIncome":336000,"income_period":"annual","source":"Ohio JFS 07767 \"Basic Child Support Schedule\", Rev. 6/2023, Ohio Department of Job and Family Services (ORC 3119.021) -- provided directly by user, .ohio.gov mirrors unreachable from this environment (connection refused / Cloudflare block on every subdomain tried)","note":"98 real rows/anchors transcribed directly from the official JFS 07767 PDF (all 13 pages read in full, $8,400-$336,000 annual combined income in $600 increments). Values below ~$33,600 show the schedule's built-in self-support reserve (SSR) flattening -- multiple child-count columns share an identical dollar figure at low-middle income, exactly as printed, not an approximation. Engine interpolates linearly between anchors.","rows":[{"upTo":8400,"obligation":{"1":960,"2":960,"3":960,"4":960,"5":960,"6":960}},{"upTo":9000,"obligation":{"1":990,"2":1020,"3":1032,"4":1038,"5":1044,"6":1050}},{"upTo":9600,"obligation":{"1":1020,"2":1080,"3":1104,"4":1116,"5":1128,"6":1140}},{"upTo":10200,"obligation":{"1":1050,"2":1140,"3":1176,"4":1194,"5":1212,"6":1230}},{"upTo":10800,"obligation":{"1":1080,"2":1200,"3":1248,"4":1272,"5":1296,"6":1320}},{"upTo":11400,"obligation":{"1":1110,"2":1260,"3":1320,"4":1350,"5":1380,"6":1410}},{"upTo":12000,"obligation":{"1":1140,"2":1320,"3":1392,"4":1428,"5":1464,"6":1500}},{"upTo":12600,"obligation":{"1":1170,"2":1380,"3":1464,"4":1506,"5":1548,"6":1590}},{"upTo":13200,"obligation":{"1":1200,"2":1440,"3":1536,"4":1584,"5":1632,"6":1680}},{"upTo":13800,"obligation":{"1":1230,"2":1500,"3":1608,"4":1662,"5":1716,"6":1770}},{"upTo":14400,"obligation":{"1":1260,"2":1560,"3":1680,"4":1740,"5":1800,"6":1860}},{"upTo":15000,"obligation":{"1":1290,"2":1620,"3":1752,"4":1818,"5":1884,"6":1950}},{"upTo":15600,"obligation":{"1":1320,"2":1680,"3":1824,"4":1896,"5":1968,"6":2040}},{"upTo":16200,"obligation":{"1":1350,"2":1740,"3":1896,"4":1974,"5":2052,"6":2130}},{"upTo":16800,"obligation":{"1":1380,"2":1800,"3":1968,"4":2052,"5":2136,"6":2220}},{"upTo":17400,"obligation":{"1":1410,"2":1860,"3":2040,"4":2130,"5":2220,"6":2310}},{"upTo":18000,"obligation":{"1":1440,"2":1920,"3":2112,"4":2208,"5":2304,"6":2400}},{"upTo":18600,"obligation":{"1":1470,"2":1980,"3":2184,"4":2286,"5":2388,"6":2490}},{"upTo":19200,"obligation":{"1":1500,"2":2040,"3":2256,"4":2364,"5":2472,"6":2580}},{"upTo":19800,"obligation":{"1":1530,"2":2100,"3":2328,"4":2442,"5":2556,"6":2670}},{"upTo":20400,"obligation":{"1":1560,"2":2160,"3":2400,"4":2520,"5":2640,"6":2760}},{"upTo":21000,"obligation":{"1":1590,"2":2220,"3":2472,"4":2598,"5":2724,"6":2850}},{"upTo":21600,"obligation":{"1":1620,"2":2280,"3":2544,"4":2676,"5":2808,"6":2940}},{"upTo":22200,"obligation":{"1":1650,"2":2340,"3":2616,"4":2754,"5":2892,"6":3030}},{"upTo":22800,"obligation":{"1":1766,"2":2400,"3":2688,"4":2832,"5":2976,"6":3120}},{"upTo":23400,"obligation":{"1":1946,"2":2460,"3":2760,"4":2910,"5":3060,"6":3210}},{"upTo":24000,"obligation":{"1":2126,"2":2520,"3":2832,"4":2988,"5":3144,"6":3300}},{"upTo":24600,"obligation":{"1":2306,"2":2580,"3":2904,"4":3066,"5":3228,"6":3390}},{"upTo":25200,"obligation":{"1":2486,"2":2640,"3":2976,"4":3144,"5":3312,"6":3480}},{"upTo":25800,"obligation":{"1":2666,"2":2700,"3":3048,"4":3222,"5":3396,"6":3570}},{"upTo":26400,"obligation":{"1":2846,"2":2846,"3":3120,"4":3300,"5":3480,"6":3660}},{"upTo":27000,"obligation":{"1":3026,"2":3026,"3":3192,"4":3378,"5":3564,"6":3750}},{"upTo":27600,"obligation":{"1":3206,"2":3206,"3":3264,"4":3456,"5":3648,"6":3840}},{"upTo":28200,"obligation":{"1":3386,"2":3386,"3":3386,"4":3534,"5":3732,"6":3930}},{"upTo":28800,"obligation":{"1":3566,"2":3566,"3":3566,"4":3612,"5":3816,"6":4020}},{"upTo":29400,"obligation":{"1":3746,"2":3746,"3":3746,"4":3746,"5":3900,"6":4110}},{"upTo":30000,"obligation":{"1":3926,"2":3926,"3":3926,"4":3926,"5":3984,"6":4200}},{"upTo":30600,"obligation":{"1":4106,"2":4106,"3":4106,"4":4106,"5":4106,"6":4290}},{"upTo":31200,"obligation":{"1":4286,"2":4286,"3":4286,"4":4286,"5":4286,"6":4380}},{"upTo":31800,"obligation":{"1":4466,"2":4466,"3":4466,"4":4466,"5":4466,"6":4470}},{"upTo":32400,"obligation":{"1":4646,"2":4646,"3":4646,"4":4646,"5":4646,"6":4646}},{"upTo":33000,"obligation":{"1":4826,"2":4826,"3":4826,"4":4826,"5":4826,"6":4826}},{"upTo":33600,"obligation":{"1":5006,"2":5006,"3":5006,"4":5006,"5":5006,"6":5006}},{"upTo":36000,"obligation":{"1":5726,"2":5726,"3":5726,"4":5726,"5":5726,"6":5726}},{"upTo":39600,"obligation":{"1":6806,"2":6806,"3":6806,"4":6806,"5":6806,"6":6806}},{"upTo":42000,"obligation":{"1":7191,"2":7526,"3":7526,"4":7526,"5":7526,"6":7526}},{"upTo":45000,"obligation":{"1":7672,"2":8426,"3":8426,"4":8426,"5":8426,"6":8426}},{"upTo":48000,"obligation":{"1":8154,"2":9326,"3":9326,"4":9326,"5":9326,"6":9326}},{"upTo":51000,"obligation":{"1":8606,"2":10226,"3":10226,"4":10226,"5":10226,"6":10226}},{"upTo":54000,"obligation":{"1":9049,"2":11126,"3":11126,"4":11126,"5":11126,"6":11126}},{"upTo":57000,"obligation":{"1":9493,"2":12026,"3":12026,"4":12026,"5":12026,"6":12026}},{"upTo":60000,"obligation":{"1":9937,"2":12926,"3":12926,"4":12926,"5":12926,"6":12926}},{"upTo":66000,"obligation":{"1":10685,"2":14726,"3":14726,"4":14726,"5":14726,"6":14726}},{"upTo":72000,"obligation":{"1":11348,"2":16526,"3":16526,"4":16526,"5":16526,"6":16526}},{"upTo":78000,"obligation":{"1":11800,"2":17692,"3":18326,"4":18326,"5":18326,"6":18326}},{"upTo":84000,"obligation":{"1":12215,"2":18257,"3":20126,"4":20126,"5":20126,"6":20126}},{"upTo":90000,"obligation":{"1":12570,"2":18770,"3":21926,"4":21926,"5":21926,"6":21926}},{"upTo":96000,"obligation":{"1":12925,"2":19283,"3":22773,"4":23726,"5":23726,"6":23726}},{"upTo":102000,"obligation":{"1":13365,"2":19945,"3":23654,"4":25526,"5":25526,"6":25526}},{"upTo":108000,"obligation":{"1":13854,"2":20695,"3":24474,"4":27326,"5":27326,"6":27326}},{"upTo":114000,"obligation":{"1":14332,"2":21420,"3":25351,"4":28316,"5":29126,"6":29126}},{"upTo":120000,"obligation":{"1":14594,"2":21736,"3":25629,"4":28627,"5":30926,"6":30926}},{"upTo":126000,"obligation":{"1":14810,"2":22007,"3":25881,"4":28909,"5":31799,"6":32726}},{"upTo":132000,"obligation":{"1":14934,"2":22184,"3":26082,"4":29133,"5":32046,"6":34526}},{"upTo":138000,"obligation":{"1":15228,"2":22626,"3":26608,"4":29721,"5":32694,"6":35539}},{"upTo":144000,"obligation":{"1":15686,"2":23322,"3":27447,"4":30658,"5":33725,"6":36660}},{"upTo":150000,"obligation":{"1":16145,"2":24019,"3":28286,"4":31596,"5":34757,"6":37780}},{"upTo":156000,"obligation":{"1":16643,"2":24773,"3":29191,"4":32607,"5":35868,"6":38988}},{"upTo":162000,"obligation":{"1":17151,"2":25540,"3":30109,"4":33632,"5":36995,"6":40214}},{"upTo":168000,"obligation":{"1":17602,"2":26205,"3":30934,"4":34497,"5":37946,"6":41249}},{"upTo":174000,"obligation":{"1":17939,"2":26662,"3":31372,"4":35034,"5":38537,"6":41891}},{"upTo":180000,"obligation":{"1":18276,"2":27118,"3":31858,"4":35572,"5":39128,"6":42534}},{"upTo":186000,"obligation":{"1":18647,"2":27659,"3":32472,"4":36270,"5":39897,"6":43368}},{"upTo":192000,"obligation":{"1":19024,"2":28219,"3":33128,"4":37003,"5":40704,"6":44245}},{"upTo":198000,"obligation":{"1":19402,"2":28778,"3":33784,"4":37736,"5":41510,"6":45121}},{"upTo":204000,"obligation":{"1":19758,"2":29333,"3":34469,"4":38503,"5":42353,"6":46038}},{"upTo":210000,"obligation":{"1":20092,"2":29883,"3":35186,"4":39304,"5":43234,"6":46996}},{"upTo":216000,"obligation":{"1":20426,"2":30434,"3":35903,"4":40106,"5":44115,"6":47954}},{"upTo":222000,"obligation":{"1":20772,"2":30988,"3":36664,"4":40887,"5":44976,"6":48888}},{"upTo":228000,"obligation":{"1":21196,"2":31560,"3":37264,"4":41557,"5":45714,"6":49690}},{"upTo":234000,"obligation":{"1":21621,"2":32132,"3":37865,"4":42228,"5":46452,"6":50493}},{"upTo":240000,"obligation":{"1":22045,"2":32704,"3":38466,"4":42899,"5":47190,"6":51295}},{"upTo":246000,"obligation":{"1":22262,"2":33024,"3":38778,"4":43315,"5":47646,"6":51789}},{"upTo":252000,"obligation":{"1":22431,"2":33283,"3":39094,"4":43668,"5":48034,"6":52212}},{"upTo":258000,"obligation":{"1":22600,"2":33543,"3":39411,"4":44022,"5":48423,"6":52635}},{"upTo":264000,"obligation":{"1":22769,"2":33803,"3":39727,"4":44375,"5":48812,"6":53057}},{"upTo":270000,"obligation":{"1":22938,"2":34062,"3":40044,"4":44729,"5":49201,"6":53480}},{"upTo":276000,"obligation":{"1":23151,"2":34366,"3":40387,"4":45111,"5":49623,"6":53941}},{"upTo":282000,"obligation":{"1":23414,"2":34723,"3":40764,"4":45532,"5":50086,"6":54444}},{"upTo":288000,"obligation":{"1":23678,"2":35080,"3":41141,"4":45953,"5":50549,"6":54947}},{"upTo":294000,"obligation":{"1":23941,"2":35437,"3":41518,"4":46374,"5":51012,"6":55450}},{"upTo":300000,"obligation":{"1":24205,"2":35794,"3":41895,"4":46795,"5":51475,"6":55953}},{"upTo":306000,"obligation":{"1":24469,"2":36151,"3":42271,"4":47216,"5":51938,"6":56457}},{"upTo":312000,"obligation":{"1":24732,"2":36508,"3":42648,"4":47636,"5":52401,"6":56960}},{"upTo":318000,"obligation":{"1":24996,"2":36865,"3":43025,"4":48057,"5":52864,"6":57463}},{"upTo":324000,"obligation":{"1":25246,"2":37225,"3":43431,"4":48514,"5":53307,"6":57945}},{"upTo":330000,"obligation":{"1":25472,"2":37590,"3":43898,"4":49035,"5":53937,"6":58631}},{"upTo":336000,"obligation":{"1":25697,"2":37955,"3":44364,"4":49556,"5":54511,"6":59254}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

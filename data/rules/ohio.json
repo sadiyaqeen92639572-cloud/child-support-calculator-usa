@@ -1,0 +1,14 @@
+{
+  "rounding": "nearest_dollar",
+  "min_of_individual_or_prorated": {
+    "min_order_annual": 960,
+    "note": "JFS 07768 Sole/Shared Child Support Computation Worksheet, Lines 18a-18d: the obligation is the LOWER of (a) the schedule looked up at the paying parent's own income, or (b) the schedule looked up at combined income times that parent's income share — floored at $960/yr ($80/mo)."
+  },
+  "custody_adjustment": {
+    "type": "flat_percent_if_any_time",
+    "pct": 0.10,
+    "note": "JFS 07768 Line 19: a flat 10% credit applies if the paying parent has ANY court-ordered parenting time — not graduated by number of overnights like most other states."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case. Not modeled here: a separate cash medical support order ($388.70/child/year, JFS 07766 Table 3), the 7+ children obligation multiplier table, and the federal/state child care tax credit reductions applied on the worksheet's Line 21 (this calculator adds childcare/health insurance costs prorated by income share without those credit reductions)."
+}

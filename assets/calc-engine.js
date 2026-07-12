@@ -47,6 +47,43 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
   const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
   const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
 
+  if (rules.min_of_individual_or_prorated) {
+    // Ohio's mechanism (JFS 07768 Sole/Shared worksheet, Lines 18a-18d): compute
+    // the obligation TWO ways — (a) look up the schedule using the paying
+    // parent's OWN income alone, and (b) look up the schedule at combined
+    // income and multiply by that parent's income share — then take the LOWER
+    // of the two, floored at the statutory minimum order. This (not a
+    // threshold branch) is what produces the schedule's self-support-reserve
+    // flattening. A flat percentage parenting-time credit is subtracted next
+    // (Line 19b) if there is any court-ordered parenting time, then add-ons
+    // are added (Line 21j) before the annual total is divided by 12 (Line 24).
+    const mip = rules.min_of_individual_or_prorated;
+    const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    const proratedObligation = baseObligation * payingShare;
+    let annualAmount = Math.max(Math.min(individualObligation, proratedObligation), mip.min_order_annual);
+
+    let ptCredit = 0;
+    let adjustedForCustody = false;
+    if (rules.custody_adjustment && rules.custody_adjustment.type === 'flat_percent_if_any_time' && payingParentOvernights > 0) {
+      ptCredit = annualAmount * rules.custody_adjustment.pct;
+      adjustedForCustody = true;
+    }
+    annualAmount = Math.max(0, annualAmount - ptCredit) + addOns;
+
+    const monthly = applyRounding(annualAmount / 12, rules.rounding);
+    return {
+      monthlyAmount: monthly,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody,
+      deviationNote: rules.deviation_note,
+      capWarning: combined > (params.income_cap_annual || Infinity)
+        ? `Above the $${(params.income_cap_annual || 0).toLocaleString()}/yr schedule cap, the obligation cannot be determined from the schedule — courts set support case-by-case.`
+        : null
+    };
+  }
+
   if (rules.self_support_reserve) {
     // North Carolina-style self-support reserve: gated on the PAYING parent's
     // own income, not combined income. Below the min-order threshold, a flat
