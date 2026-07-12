@@ -155,6 +155,42 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     }
   }
 
+  if (rules.wa_self_support_floor) {
+    // Washington's mechanism, RCW 26.19.065 (eff. 2026-01-01): (1) a
+    // presumptive $50/child/month minimum whenever the paying parent's net
+    // income is below the Self-Support Reserve (180% of the one-person
+    // federal poverty guideline); (2) the basic obligation otherwise may not
+    // reduce the paying parent's income below the SSR, EXCEPT the $50/child
+    // minimum always applies even if that dips into the reserve; (3) total
+    // support across all of that parent's children is capped at 45% of net
+    // income. This is a floor/cap on the standard prorated amount, not a
+    // different lookup method.
+    const wa = rules.wa_self_support_floor;
+    const minFloor = wa.min_per_child_monthly * inputs.numChildren;
+    const proratedAmount = totalObligation * payingShare;
+    const reserveCappedAmount = Math.max(0, payingParentIncome - wa.self_support_reserve_monthly);
+    let amount = Math.max(minFloor, Math.min(proratedAmount, reserveCappedAmount));
+    const percentCap = payingParentIncome * 0.45;
+    const cappedAt45 = amount > percentCap;
+    if (cappedAt45) amount = percentCap;
+    amount = applyRounding(amount, rules.rounding);
+    const belowReserve = payingParentIncome < wa.self_support_reserve_monthly;
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: false,
+      belowSelfSupportReserve: belowReserve,
+      deviationNote: rules.deviation_note,
+      capWarning: cappedAt45
+        ? "Capped at 45% of the paying parent's net income (RCW 26.19.065(1)) — this limit applies across ALL of that parent's children, not just this case."
+        : (belowReserve
+          ? `Presumptive $${wa.min_per_child_monthly}/child/month minimum applies — paying parent's net income is below the Self-Support Reserve ($${wa.self_support_reserve_monthly.toLocaleString()}/mo, 180% of the one-person federal poverty guideline).`
+          : null)
+    };
+  }
+
   let amount = totalObligation * payingShare;
   let adjustedForCustody = false;
   let custodyWarning = null;

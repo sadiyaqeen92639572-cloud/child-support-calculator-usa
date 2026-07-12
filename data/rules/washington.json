@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "wa_self_support_floor": {
+    "min_per_child_monthly": 50,
+    "self_support_reserve_monthly": 2394,
+    "note": "RCW 26.19.065 (eff. 2026-01-01): presumptive $50/child/month minimum below the Self-Support Reserve; the reserve itself is 180% of the one-person federal poverty guideline ($1,330/mo per the 2026 HHS guidelines for the 48 contiguous states, per the Federal Register, Jan. 15 2026) = $2,394/mo; total support across all of a parent's children capped at 45% of net income."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $50,000/month combined net income, Washington's economic table has no further table value — courts may exceed the $50,000 presumptive amount only upon written findings of fact. This calculator does not model the 45% cap across a parent's OTHER children outside this case, or deviations for residential time under RCW 26.19.075."
+}

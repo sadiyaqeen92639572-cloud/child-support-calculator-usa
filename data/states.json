@@ -1049,5 +1049,61 @@
         "a": "A day is a 24-hour period. If the parent with fewer overnights has an overnight with the child but physical custody for less than 24 hours during that period, each parent is presumed to get credit for half a day. The 90-day threshold determines whether the shared-custody formula applies at all — below it, the standard sole-custody proration is used regardless of how time is actually split."
       }
     ]
+  },
+  "wa": {
+    "name": "Washington",
+    "abbr": "WA",
+    "slug": "washington",
+    "formula_model": "income_shares",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2026-WA-v1",
+    "source": {
+      "agency_name": "Revised Code of Washington § 26.19.020 (Washington State Legislature)",
+      "url": "https://apps.leg.wa.gov/rcw/default.aspx?Cite=26.19.020",
+      "statute_ref": "RCW 26.19.020, RCW 26.19.065"
+    },
+    "params": {
+      "schedule_table_ref": "washington_schedule.json",
+      "income_basis": "net",
+      "income_cap_monthly": 50000,
+      "high_income_note": "Above $50,000/month combined net income, Washington's economic table has no further value -- courts may exceed the presumptive amount only upon written findings of fact."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly net income, then combine both for combined monthly net income.",
+        "Look up the basic child support obligation from the official Economic Table for combined income and number of children (table covers 1-5 children; 6+ uses the 5-child figure).",
+        "Each parent's share equals their income divided by combined income, applied to the basic obligation.",
+        "A presumptive minimum of $50/child/month applies whenever the paying parent's net income is below the Self-Support Reserve (180% of the one-person federal poverty guideline, $2,394/month as of the 2026 guidelines).",
+        "Above that minimum, the basic obligation may not reduce the paying parent's net income below the Self-Support Reserve.",
+        "Total support owed for ALL of that parent's children (not just this case) is capped at 45% of net income.",
+        "Above $50,000/month combined net income, courts may exceed the presumptive amount only upon written findings of fact."
+      ],
+      "example": {
+        "scenario": "Example: combined net income $8,500/month, 2 children, Parent A earns $5,000/mo (59% share), Parent B earns $3,500/mo (41% share, above the $2,394 Self-Support Reserve) and is the noncustodial parent.",
+        "calculation": [
+          "Basic child support obligation for $8,500 combined, 2 children: $993.50/month.",
+          "Parent B's share: 41.18% × $993.50 ≈ $409/month — above both the $100/month minimum (2 × $50) and the Self-Support Reserve floor, so the standard prorated amount applies."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Washington's Self-Support Reserve and how does it work?",
+        "a": "The Self-Support Reserve (SSR) is 180% of the federal poverty guideline for a one-person household — $2,394/month as of the 2026 guidelines. The basic child support obligation generally may not reduce the paying parent's net income below this amount. However, a presumptive minimum of $50/child/month always applies, even if that would dip into the reserve, unless the obligor shows it would be unjust."
+      },
+      {
+        "q": "Is there a cap on how much child support Washington can order?",
+        "a": "Yes — total support a parent owes for ALL of their biological or legal children (not just the children in a specific case) cannot exceed 45% of that parent's net income, except for good cause shown (such as substantial wealth or special medical/educational needs). This calculator applies the cap to the case at hand but can't account for a parent's other support obligations outside it."
+      },
+      {
+        "q": "What happens if combined income is above $50,000/month in Washington?",
+        "a": "Above $50,000/month in combined net income, Washington's Economic Table doesn't extend further — courts may exceed the presumptive amount set at $50,000 only upon written findings of fact, not automatically. This threshold itself was unchanged by the 2026 update; what changed was the LOWER threshold, which rose from $1,000 to $2,200/month."
+      },
+      {
+        "q": "Does Washington's schedule cover 6 or more children?",
+        "a": "No — Washington's official Economic Table (RCW 26.19.020) only has columns for one through five children, unlike most other states' schedules which extend to six. For six or more children, this calculator uses the five-child figure as an approximation, since the statute itself doesn't define a specific amount beyond five."
+      }
+    ]
   }
 }
