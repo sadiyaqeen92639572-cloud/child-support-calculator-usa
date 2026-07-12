@@ -772,5 +772,63 @@
         "a": "Timeshare percentage (H%) enters the formula twice: first inside the K fraction itself — K uses (1 + H%) if the higher earner has 50% or less of the time, or (2 − H%) if they have more — and second directly in the base calculation (HN − H% × TN). More time with the higher earner generally reduces the support amount owed, since it changes both the K value and the income figure being multiplied."
       }
     ]
+  },
+  "ga": {
+    "name": "Georgia",
+    "abbr": "GA",
+    "slug": "georgia",
+    "formula_model": "income_shares",
+    "effective_date": "2024-07-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2026-GA-v1",
+    "source": {
+      "agency_name": "Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15",
+      "url": "https://gov.georgia.gov/document/2024-signed-legislation/sb-454/download",
+      "statute_ref": "O.C.G.A. § 19-6-15"
+    },
+    "params": {
+      "schedule_table_ref": "georgia_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 40000,
+      "high_income_note": "Above $40,000/month combined adjusted gross income, courts set support case-by-case rather than extending the schedule formula (raised from the prior $30,000 cap effective 2024-07-01).",
+      "income_cap_behavior": "discretionary_above_cap"
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly gross income, then combine both for total combined adjusted gross income.",
+        "Look up the basic child support obligation from Georgia's official Schedule of Basic Obligations for that combined income and number of children.",
+        "Each parent's pro rata share equals their income divided by combined income, applied to the basic obligation.",
+        "If there is a court order for parenting time, apply the parenting time adjustment: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation — this can reduce the noncustodial parent's share to zero, or in some cases make the parent with more income owe more than the parent with less.",
+        "Add each parent's pro rata share of work-related child care costs and health insurance premiums (Schedule D) to get the presumptive child support amount.",
+        "Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the table."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 court-ordered parenting days/year (Parent B has 265).",
+        "calculation": [
+          "Basic child support obligation for $5,000 combined, 2 children: $1,341/month.",
+          "Parent B (noncustodial)'s pro rata share before parenting time adjustment: 40% × $1,341 = $536.40/month.",
+          "Parenting time adjustment (100^2.5 vs 265^2.5 cross-multiplied against each parent's dollar share) reduces this further because Parent B has meaningful court-ordered time with the child.",
+          "Parenting time adjustment formula result: noncustodial parent's final guideline obligation is $108/month (down from the $536.40 pre-adjustment share, because Parent B has 100 court-ordered parenting days out of 365)."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What changed in Georgia child support law in 2026?",
+        "a": "Senate Bill 454 replaced the old discretionary parenting-time deviation with a mandatory formula: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation (O.C.G.A. § 19-6-15(g), effective 2026-01-01). It also raised the income cap for the schedule table from $30,000 to $40,000/month combined adjusted gross income (effective 2024-07-01) and added a new low-income adjustment mechanism and table (effective 2026-01-01)."
+      },
+      {
+        "q": "Does Georgia reduce child support for parenting time?",
+        "a": "Yes, but only when there is a court order awarding parenting time — without one, the court determines support without this adjustment. When a court order exists, Georgia uses a mandatory power-of-2.5 formula rather than a simple overnight-credit table like some other states use; the adjustment can reduce the noncustodial parent's obligation to zero, or in some cases require the parent with more income to pay more than the parent with less."
+      },
+      {
+        "q": "What happens if combined income is above $40,000/month in Georgia?",
+        "a": "Above $40,000/month in combined adjusted gross income, Georgia's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula. This cap was raised from $30,000/month effective 2024-07-01."
+      },
+      {
+        "q": "Is there a low-income adjustment in Georgia child support?",
+        "a": "Yes. Effective 2026-01-01, Georgia added a low-income adjustment for parents with $3,950/month or less in individual adjusted gross income, applying a sliding percentage (19% for one child up to 28% for six children) of that parent's income, phased out as income rises within that range."
+      }
+    ]
   }
 }

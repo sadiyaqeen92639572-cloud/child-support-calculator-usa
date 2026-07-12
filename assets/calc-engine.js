@@ -75,6 +75,23 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       const creditPct = stepLookup(rules.custody_adjustment.table, payingParentOvernights);
       amount = Math.max(0, amount - (totalObligation * creditPct));
       adjustedForCustody = creditPct > 0;
+    } else if (rules.custody_adjustment.type === 'parenting_time_pow25') {
+      // Georgia's parenting time adjustment, O.C.G.A. § 19-6-15(g)(2)(B) (SB454,
+      // eff. 2026-01-01). Raises each parent's court-ordered days with the child
+      // to the power of 2.5, then cross-multiplies against the OTHER parent's
+      // dollar share of the BASE obligation (add-ons are prorated separately,
+      // unaffected by this adjustment):
+      //   adjustment = (ncpDaysPow * cpShare$ - cpDaysPow * ncpShare$) / (ncpDaysPow + cpDaysPow)
+      //   ncpObligation = ncpShare$ + adjustment
+      const ncpDays = payingParentOvernights;
+      const cpDays = 365 - ncpDays;
+      const ncpShareDollars = baseObligation * payingShare;
+      const cpShareDollars = baseObligation - ncpShareDollars;
+      const ncpDaysPow = Math.pow(ncpDays, 2.5);
+      const cpDaysPow = Math.pow(cpDays, 2.5);
+      const ptAdjustment = ((ncpDaysPow * cpShareDollars) - (cpDaysPow * ncpShareDollars)) / (ncpDaysPow + cpDaysPow);
+      amount = Math.max(0, ncpShareDollars + ptAdjustment) + (addOns * payingShare);
+      adjustedForCustody = true;
     }
   }
 

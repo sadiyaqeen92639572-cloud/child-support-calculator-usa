@@ -1,0 +1,9 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "parenting_time_pow25",
+    "note": "O.C.G.A. § 19-6-15(g), effective 2026-01-01. Only applies when there is a court order awarding parenting time — without one, courts determine support without this adjustment."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Georgia courts can deviate for a low-income adjustment (parents at or below $3,950/month individual adjusted gross income, on a sliding 19-28% of income scale by number of children), high-income cases above the $40,000/month schedule cap, and other statutory deviations under O.C.G.A. § 19-6-15(i)."
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Georgia Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Georgia child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/georgia/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Georgia Child Support Calculator">
+<meta property="og:description" content="Free Georgia child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/georgia/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Georgia Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-GA-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Georgia?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly gross income, then combine both for total combined adjusted gross income. Look up the basic child support obligation from Georgia's official Schedule of Basic Obligations for that combined income and number of children. Each parent's pro rata share equals their income divided by combined income, applied to the basic obligation. If there is a court order for parenting time, apply the parenting time adjustment: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation — this can reduce the noncustodial parent's share to zero, or in some cases make the parent with more income owe more than the parent with less. Add each parent's pro rata share of work-related child care costs and health insurance premiums (Schedule D) to get the presumptive child support amount. Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the table."}},{"@type":"Question","name":"What changed in Georgia child support law in 2026?","acceptedAnswer":{"@type":"Answer","text":"Senate Bill 454 replaced the old discretionary parenting-time deviation with a mandatory formula: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation (O.C.G.A. § 19-6-15(g), effective 2026-01-01). It also raised the income cap for the schedule table from $30,000 to $40,000/month combined adjusted gross income (effective 2024-07-01) and added a new low-income adjustment mechanism and table (effective 2026-01-01)."}},{"@type":"Question","name":"Does Georgia reduce child support for parenting time?","acceptedAnswer":{"@type":"Answer","text":"Yes, but only when there is a court order awarding parenting time — without one, the court determines support without this adjustment. When a court order exists, Georgia uses a mandatory power-of-2.5 formula rather than a simple overnight-credit table like some other states use; the adjustment can reduce the noncustodial parent's obligation to zero, or in some cases require the parent with more income to pay more than the parent with less."}},{"@type":"Question","name":"What happens if combined income is above $40,000/month in Georgia?","acceptedAnswer":{"@type":"Answer","text":"Above $40,000/month in combined adjusted gross income, Georgia's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula. This cap was raised from $30,000/month effective 2024-07-01."}},{"@type":"Question","name":"Is there a low-income adjustment in Georgia child support?","acceptedAnswer":{"@type":"Answer","text":"Yes. Effective 2026-01-01, Georgia added a low-income adjustment for parents with $3,950/month or less in individual adjusted gross income, applying a sliding percentage (19% for one child up to 28% for six children) of that parent's income, phased out as income rises within that range."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Georgia Child Support Calculator","item":"https://usachildsupportcalculator.com/georgia/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Georgia Child Support Calculator</h1>
+  <p class="badge">Updated for Georgia's 2026-GA-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Georgia's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15 or a family law attorney licensed in Georgia.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Georgia Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly gross income, then combine both for total combined adjusted gross income.</li><li>Look up the basic child support obligation from Georgia's official Schedule of Basic Obligations for that combined income and number of children.</li><li>Each parent's pro rata share equals their income divided by combined income, applied to the basic obligation.</li><li>If there is a court order for parenting time, apply the parenting time adjustment: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation — this can reduce the noncustodial parent's share to zero, or in some cases make the parent with more income owe more than the parent with less.</li><li>Add each parent's pro rata share of work-related child care costs and health insurance premiums (Schedule D) to get the presumptive child support amount.</li><li>Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the table.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Georgia Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 court-ordered parenting days/year (Parent B has 265).</p>
+    <ol><li>Basic child support obligation for $5,000 combined, 2 children: $1,341/month.</li><li>Parent B (noncustodial)'s pro rata share before parenting time adjustment: 40% × $1,341 = $536.40/month.</li><li>Parenting time adjustment (100^2.5 vs 265^2.5 cross-multiplied against each parent's dollar share) reduces this further because Parent B has meaningful court-ordered time with the child.</li><li>Parenting time adjustment formula result: noncustodial parent's final guideline obligation is $108/month (down from the $536.40 pre-adjustment share, because Parent B has 100 court-ordered parenting days out of 365).</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15 · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Georgia's official guideline schedule table. Verify against Georgia's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Georgia?</summary><p>Determine each parent's monthly gross income, then combine both for total combined adjusted gross income. Look up the basic child support obligation from Georgia's official Schedule of Basic Obligations for that combined income and number of children. Each parent's pro rata share equals their income divided by combined income, applied to the basic obligation. If there is a court order for parenting time, apply the parenting time adjustment: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation — this can reduce the noncustodial parent's share to zero, or in some cases make the parent with more income owe more than the parent with less. Add each parent's pro rata share of work-related child care costs and health insurance premiums (Schedule D) to get the presumptive child support amount. Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the table.</p></details>
+    <details><summary>What changed in Georgia child support law in 2026?</summary><p>Senate Bill 454 replaced the old discretionary parenting-time deviation with a mandatory formula: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation (O.C.G.A. § 19-6-15(g), effective 2026-01-01). It also raised the income cap for the schedule table from $30,000 to $40,000/month combined adjusted gross income (effective 2024-07-01) and added a new low-income adjustment mechanism and table (effective 2026-01-01).</p></details><details><summary>Does Georgia reduce child support for parenting time?</summary><p>Yes, but only when there is a court order awarding parenting time — without one, the court determines support without this adjustment. When a court order exists, Georgia uses a mandatory power-of-2.5 formula rather than a simple overnight-credit table like some other states use; the adjustment can reduce the noncustodial parent's obligation to zero, or in some cases require the parent with more income to pay more than the parent with less.</p></details><details><summary>What happens if combined income is above $40,000/month in Georgia?</summary><p>Above $40,000/month in combined adjusted gross income, Georgia's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula. This cap was raised from $30,000/month effective 2024-07-01.</p></details><details><summary>Is there a low-income adjustment in Georgia child support?</summary><p>Yes. Effective 2026-01-01, Georgia added a low-income adjustment for parents with $3,950/month or less in individual adjusted gross income, applying a sliding percentage (19% for one child up to 28% for six children) of that parent's income, phased out as income rises within that range.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2024-07-01, guideline version 2026-GA-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://gov.georgia.gov/document/2024-signed-legislation/sb-454/download" rel="nofollow noopener">Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15</a> (O.C.G.A. § 19-6-15).</p>
+    <p class="deviation-note">Georgia courts can deviate for a low-income adjustment (parents at or below $3,950/month individual adjusted gross income, on a sliding 19-28% of income scale by number of children), high-income cases above the $40,000/month schedule cap, and other statutory deviations under O.C.G.A. § 19-6-15(i).</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Georgia's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Georgia","abbr":"GA","slug":"georgia","formula_model":"income_shares","effective_date":"2024-07-01","last_verified":"2026-07-12","guideline_version":"2026-GA-v1","source":{"agency_name":"Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15","url":"https://gov.georgia.gov/document/2024-signed-legislation/sb-454/download","statute_ref":"O.C.G.A. § 19-6-15"},"params":{"schedule_table_ref":"georgia_schedule.json","income_basis":"gross","income_cap_monthly":40000,"high_income_note":"Above $40,000/month combined adjusted gross income, courts set support case-by-case rather than extending the schedule formula (raised from the prior $30,000 cap effective 2024-07-01).","income_cap_behavior":"discretionary_above_cap"},"worksheet":{"steps":["Determine each parent's monthly gross income, then combine both for total combined adjusted gross income.","Look up the basic child support obligation from Georgia's official Schedule of Basic Obligations for that combined income and number of children.","Each parent's pro rata share equals their income divided by combined income, applied to the basic obligation.","If there is a court order for parenting time, apply the parenting time adjustment: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation — this can reduce the noncustodial parent's share to zero, or in some cases make the parent with more income owe more than the parent with less.","Add each parent's pro rata share of work-related child care costs and health insurance premiums (Schedule D) to get the presumptive child support amount.","Above $40,000/month combined adjusted gross income, courts determine support case-by-case rather than extending the table."],"example":{"scenario":"Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 court-ordered parenting days/year (Parent B has 265).","calculation":["Basic child support obligation for $5,000 combined, 2 children: $1,341/month.","Parent B (noncustodial)'s pro rata share before parenting time adjustment: 40% × $1,341 = $536.40/month.","Parenting time adjustment (100^2.5 vs 265^2.5 cross-multiplied against each parent's dollar share) reduces this further because Parent B has meaningful court-ordered time with the child.","Parenting time adjustment formula result: noncustodial parent's final guideline obligation is $108/month (down from the $536.40 pre-adjustment share, because Parent B has 100 court-ordered parenting days out of 365)."]}},"faq_extra":[{"q":"What changed in Georgia child support law in 2026?","a":"Senate Bill 454 replaced the old discretionary parenting-time deviation with a mandatory formula: each parent's court-ordered days with the child are raised to the power of 2.5 and cross-multiplied against the other parent's dollar share of the basic obligation (O.C.G.A. § 19-6-15(g), effective 2026-01-01). It also raised the income cap for the schedule table from $30,000 to $40,000/month combined adjusted gross income (effective 2024-07-01) and added a new low-income adjustment mechanism and table (effective 2026-01-01)."},{"q":"Does Georgia reduce child support for parenting time?","a":"Yes, but only when there is a court order awarding parenting time — without one, the court determines support without this adjustment. When a court order exists, Georgia uses a mandatory power-of-2.5 formula rather than a simple overnight-credit table like some other states use; the adjustment can reduce the noncustodial parent's obligation to zero, or in some cases require the parent with more income to pay more than the parent with less."},{"q":"What happens if combined income is above $40,000/month in Georgia?","a":"Above $40,000/month in combined adjusted gross income, Georgia's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula. This cap was raised from $30,000/month effective 2024-07-01."},{"q":"Is there a low-income adjustment in Georgia child support?","a":"Yes. Effective 2026-01-01, Georgia added a low-income adjustment for parents with $3,950/month or less in individual adjusted gross income, applying a sliding percentage (19% for one child up to 28% for six children) of that parent's income, phased out as income rises within that range."}]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":{"type":"parenting_time_pow25","note":"O.C.G.A. § 19-6-15(g), effective 2026-01-01. Only applies when there is a court order awarding parenting time — without one, courts determine support without this adjustment."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Georgia courts can deviate for a low-income adjustment (parents at or below $3,950/month individual adjusted gross income, on a sliding 19-28% of income scale by number of children), high-income cases above the $40,000/month schedule cap, and other statutory deviations under O.C.G.A. § 19-6-15(i)."};
+    const SCHEDULE = {"maxIncome":40000,"source":"Georgia SB 454 (2026 session), amending O.C.G.A. § 19-6-15(o) Basic Child Support Obligation Table, https://gov.georgia.gov/document/2024-signed-legislation/sb-454/download","note":"48 real anchor points transcribed directly from the new (underlined/inserted) Basic Child Support Obligation Table in SB454, pages 67-95 of the enrolled bill PDF. The full official table is in $50 increments from $800 to $40,000 (785 rows); anchors below are exact values sampled from that table, engine interpolates linearly between them. Table effective 2024-07-01, raised the income cap from $30,000 to $40,000/month combined adjusted gross income.","rows":[{"upTo":800,"obligation":{"1":170,"2":259,"3":313,"4":349,"5":384,"6":417}},{"upTo":1000,"obligation":{"1":211,"2":322,"3":389,"4":434,"5":477,"6":519}},{"upTo":1200,"obligation":{"1":249,"2":379,"3":459,"4":512,"5":563,"6":612}},{"upTo":1400,"obligation":{"1":285,"2":433,"3":524,"4":584,"5":643,"6":699}},{"upTo":1600,"obligation":{"1":320,"2":487,"3":589,"4":657,"5":723,"6":786}},{"upTo":1800,"obligation":{"1":355,"2":541,"3":654,"4":730,"5":802,"6":872}},{"upTo":2000,"obligation":{"1":390,"2":594,"3":719,"4":802,"5":882,"6":958}},{"upTo":2200,"obligation":{"1":425,"2":647,"3":782,"4":872,"5":959,"6":1043}},{"upTo":2400,"obligation":{"1":459,"2":699,"3":846,"4":943,"5":1037,"6":1127}},{"upTo":2600,"obligation":{"1":494,"2":752,"3":909,"4":1014,"5":1115,"6":1212}},{"upTo":2800,"obligation":{"1":528,"2":804,"3":973,"4":1084,"5":1193,"6":1296}},{"upTo":3000,"obligation":{"1":562,"2":857,"3":1036,"4":1155,"5":1270,"6":1381}},{"upTo":3200,"obligation":{"1":597,"2":909,"3":1099,"4":1226,"5":1348,"6":1465}},{"upTo":3400,"obligation":{"1":631,"2":962,"3":1163,"4":1296,"5":1426,"6":1550}},{"upTo":3600,"obligation":{"1":666,"2":1014,"3":1226,"4":1367,"5":1504,"6":1635}},{"upTo":3800,"obligation":{"1":700,"2":1066,"3":1290,"4":1438,"5":1581,"6":1719}},{"upTo":4000,"obligation":{"1":733,"2":1116,"3":1349,"4":1507,"5":1657,"6":1802}},{"upTo":4200,"obligation":{"1":765,"2":1162,"3":1401,"4":1565,"5":1722,"6":1872}},{"upTo":4400,"obligation":{"1":796,"2":1208,"3":1454,"4":1624,"5":1786,"6":1942}},{"upTo":4600,"obligation":{"1":828,"2":1253,"3":1506,"4":1682,"5":1850,"6":2011}},{"upTo":4800,"obligation":{"1":857,"2":1297,"3":1558,"4":1740,"5":1914,"6":2081}},{"upTo":5000,"obligation":{"1":887,"2":1341,"3":1610,"4":1799,"5":1979,"6":2151}},{"upTo":5400,"obligation":{"1":943,"2":1424,"3":1710,"4":1910,"5":2101,"6":2284}},{"upTo":5800,"obligation":{"1":987,"2":1490,"3":1787,"4":1996,"5":2196,"6":2387}},{"upTo":6200,"obligation":{"1":1025,"2":1547,"3":1853,"4":2070,"5":2277,"6":2475}},{"upTo":6600,"obligation":{"1":1052,"2":1586,"3":1898,"4":2120,"5":2331,"6":2534}},{"upTo":7000,"obligation":{"1":1078,"2":1620,"3":1932,"4":2158,"5":2374,"6":2581}},{"upTo":7400,"obligation":{"1":1103,"2":1649,"3":1956,"4":2185,"5":2404,"6":2613}},{"upTo":7800,"obligation":{"1":1133,"2":1695,"3":2012,"4":2247,"5":2472,"6":2687}},{"upTo":8200,"obligation":{"1":1167,"2":1752,"3":2088,"4":2332,"5":2565,"6":2788}},{"upTo":8600,"obligation":{"1":1191,"2":1784,"3":2121,"4":2370,"5":2606,"6":2833}},{"upTo":9000,"obligation":{"1":1211,"2":1807,"3":2140,"4":2391,"5":2630,"6":2859}},{"upTo":9400,"obligation":{"1":1238,"2":1842,"3":2175,"4":2429,"5":2672,"6":2904}},{"upTo":9800,"obligation":{"1":1266,"2":1879,"3":2212,"4":2471,"5":2718,"6":2954}},{"upTo":10200,"obligation":{"1":1306,"2":1935,"3":2275,"4":2541,"5":2795,"6":3038}},{"upTo":10800,"obligation":{"1":1369,"2":2023,"3":2372,"4":2650,"5":2915,"6":3169}},{"upTo":11400,"obligation":{"1":1419,"2":2102,"3":2470,"4":2758,"5":3034,"6":3298}},{"upTo":12000,"obligation":{"1":1465,"2":2176,"3":2566,"4":2867,"5":3153,"6":3428}},{"upTo":12500,"obligation":{"1":1498,"2":2225,"3":2624,"4":2931,"5":3224,"6":3504}},{"upTo":13000,"obligation":{"1":1530,"2":2270,"3":2673,"4":2986,"5":3284,"6":3570}},{"upTo":13500,"obligation":{"1":1568,"2":2322,"3":2727,"4":3046,"5":3351,"6":3642}},{"upTo":14000,"obligation":{"1":1610,"2":2377,"3":2784,"4":3110,"5":3421,"6":3719}},{"upTo":14500,"obligation":{"1":1652,"2":2433,"3":2842,"4":3174,"5":3492,"6":3795}},{"upTo":15000,"obligation":{"1":1682,"2":2471,"3":2879,"4":3216,"5":3537,"6":3845}},{"upTo":15500,"obligation":{"1":1707,"2":2502,"3":2909,"4":3250,"5":3575,"6":3885}},{"upTo":16000,"obligation":{"1":1730,"2":2532,"3":2938,"4":3281,"5":3609,"6":3923}},{"upTo":16500,"obligation":{"1":1768,"2":2586,"3":2999,"4":3350,"5":3685,"6":4005}},{"upTo":17000,"obligation":{"1":1810,"2":2646,"3":3067,"4":3426,"5":3769,"6":4097}},{"upTo":17500,"obligation":{"1":1851,"2":2706,"3":3135,"4":3502,"5":3852,"6":4188}},{"upTo":18000,"obligation":{"1":1892,"2":2765,"3":3204,"4":3578,"5":3936,"6":4279}},{"upTo":18500,"obligation":{"1":1933,"2":2825,"3":3272,"4":3655,"5":4020,"6":4370}},{"upTo":19000,"obligation":{"1":1974,"2":2884,"3":3340,"4":3731,"5":4104,"6":4461}},{"upTo":19500,"obligation":{"1":2014,"2":2941,"3":3405,"4":3804,"5":4184,"6":4548}},{"upTo":20000,"obligation":{"1":2053,"2":2998,"3":3470,"4":3876,"5":4264,"6":4634}},{"upTo":20500,"obligation":{"1":2084,"2":3047,"3":3530,"4":3943,"5":4337,"6":4715}},{"upTo":21000,"obligation":{"1":2113,"2":3092,"3":3588,"4":4007,"5":4408,"6":4792}},{"upTo":21500,"obligation":{"1":2141,"2":3138,"3":3645,"4":4072,"5":4479,"6":4869}},{"upTo":22000,"obligation":{"1":2170,"2":3183,"3":3703,"4":4136,"5":4550,"6":4946}},{"upTo":22500,"obligation":{"1":2198,"2":3228,"3":3761,"4":4201,"5":4621,"6":5023}},{"upTo":23000,"obligation":{"1":2226,"2":3274,"3":3818,"4":4265,"5":4691,"6":5100}},{"upTo":23500,"obligation":{"1":2255,"2":3319,"3":3876,"4":4329,"5":4762,"6":5177}},{"upTo":24000,"obligation":{"1":2283,"2":3365,"3":3934,"4":4394,"5":4833,"6":5254}},{"upTo":24500,"obligation":{"1":2312,"2":3410,"3":3991,"4":4458,"5":4904,"6":5331}},{"upTo":25000,"obligation":{"1":2340,"2":3456,"3":4049,"4":4523,"5":4975,"6":5408}},{"upTo":25500,"obligation":{"1":2368,"2":3501,"3":4107,"4":4587,"5":5046,"6":5485}},{"upTo":26000,"obligation":{"1":2397,"2":3547,"3":4164,"4":4651,"5":5117,"6":5562}},{"upTo":26250,"obligation":{"1":2411,"2":3569,"3":4193,"4":4684,"5":5152,"6":5600}},{"upTo":27000,"obligation":{"1":2454,"2":3637,"3":4278,"4":4779,"5":5257,"6":5714}},{"upTo":27500,"obligation":{"1":2483,"2":3679,"3":4326,"4":4832,"5":5315,"6":5778}},{"upTo":28000,"obligation":{"1":2513,"2":3722,"3":4374,"4":4886,"5":5374,"6":5842}},{"upTo":28500,"obligation":{"1":2542,"2":3764,"3":4422,"4":4939,"5":5433,"6":5906}},{"upTo":29000,"obligation":{"1":2572,"2":3806,"3":4470,"4":4993,"5":5492,"6":5970}},{"upTo":29500,"obligation":{"1":2601,"2":3848,"3":4517,"4":5046,"5":5551,"6":6033}},{"upTo":30000,"obligation":{"1":2631,"2":3891,"3":4565,"4":5099,"5":5609,"6":6097}},{"upTo":30500,"obligation":{"1":2660,"2":3933,"3":4613,"4":5153,"5":5668,"6":6161}},{"upTo":31000,"obligation":{"1":2690,"2":3975,"3":4661,"4":5206,"5":5727,"6":6225}},{"upTo":31500,"obligation":{"1":2720,"2":4017,"3":4709,"4":5260,"5":5786,"6":6289}},{"upTo":32000,"obligation":{"1":2749,"2":4060,"3":4757,"4":5313,"5":5844,"6":6353}},{"upTo":32500,"obligation":{"1":2779,"2":4102,"3":4804,"4":5366,"5":5903,"6":6417}},{"upTo":33000,"obligation":{"1":2808,"2":4144,"3":4852,"4":5420,"5":5962,"6":6481}},{"upTo":33500,"obligation":{"1":2838,"2":4186,"3":4900,"4":5473,"5":6021,"6":6544}},{"upTo":34000,"obligation":{"1":2867,"2":4229,"3":4948,"4":5527,"5":6079,"6":6608}},{"upTo":34500,"obligation":{"1":2897,"2":4271,"3":4996,"4":5580,"5":6138,"6":6672}},{"upTo":35000,"obligation":{"1":2926,"2":4313,"3":5043,"4":5634,"5":6197,"6":6736}},{"upTo":35500,"obligation":{"1":2956,"2":4355,"3":5091,"4":5687,"5":6256,"6":6800}},{"upTo":36000,"obligation":{"1":2986,"2":4398,"3":5139,"4":5740,"5":6314,"6":6864}},{"upTo":36500,"obligation":{"1":3015,"2":4440,"3":5187,"4":5794,"5":6373,"6":6928}},{"upTo":37000,"obligation":{"1":3045,"2":4482,"3":5235,"4":5847,"5":6432,"6":6992}},{"upTo":37500,"obligation":{"1":3074,"2":4525,"3":5283,"4":5901,"5":6491,"6":7055}},{"upTo":38000,"obligation":{"1":3104,"2":4567,"3":5330,"4":5954,"5":6549,"6":7119}},{"upTo":38500,"obligation":{"1":3133,"2":4609,"3":5378,"4":6007,"5":6608,"6":7183}},{"upTo":39000,"obligation":{"1":3163,"2":4651,"3":5426,"4":6061,"5":6667,"6":7247}},{"upTo":39500,"obligation":{"1":3192,"2":4694,"3":5474,"4":6114,"5":6726,"6":7311}},{"upTo":40000,"obligation":{"1":3222,"2":4736,"3":5522,"4":6168,"5":6785,"6":7375}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>
