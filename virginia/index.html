@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Virginia Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Virginia child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/virginia/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Virginia Child Support Calculator">
+<meta property="og:description" content="Free Virginia child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/virginia/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Virginia Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2025-VA-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Virginia?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly gross income, then combine both for combined monthly gross income. Look up the basic child support obligation from the official Schedule of Monthly Basic Child Support Obligations for that combined income and number of children. If the parent with fewer overnights has 90 days or fewer per year, use the standard sole-custody calculation: each parent's pro rata share of the basic obligation plus childcare and health insurance costs. If the parent with fewer overnights has MORE than 90 days per year, the shared-custody formula applies instead: multiply the basic obligation by 1.4 (the \"shared support need\"), then cross-multiply each parent's custody share and income share against the other's — the difference is the shared-custody support, paid by whichever parent's computed share is larger. The presumptive amount is the shared-custody result UNLESS the sole-custody amount is actually less, in which case the lesser amount applies. Above $42,500/month combined gross income, Virginia's statute applies its own formula directly (the $42,500 amount plus a percentage of income above that) rather than judicial discretion."}},{"@type":"Question","name":"How does Virginia's shared custody child support formula work?","acceptedAnswer":{"@type":"Answer","text":"When the parent with fewer overnights has more than 90 days per year, Virginia uses a distinct shared-custody formula instead of simple proration: the basic schedule obligation is multiplied by 1.4 to get the \"shared support need,\" which is then cross-multiplied by each parent's custody share (days with the child ÷ 365) and income share. The difference between what each parent would theoretically owe the other becomes the actual support amount — paid by whichever parent's calculated share is larger. If this shared-custody amount would be more than the standard sole-custody amount, the lesser of the two applies."}},{"@type":"Question","name":"What happens if combined income is above $42,500/month in Virginia?","acceptedAnswer":{"@type":"Answer","text":"Unlike most states, Virginia doesn't leave amounts above the schedule cap to judicial discretion. The statute (Va. Code § 20-108.2(B)) specifies a formula directly: take the schedule amount at $42,500/month and add a percentage of income above that threshold — 2.6% for one child up to 5.0% for six children. This cap was raised from $35,000/month by SB 805, effective 2025-07-01, the first update to Virginia's schedule since 2014."}},{"@type":"Question","name":"What counts as a \"day\" for Virginia's 90-day shared custody threshold?","acceptedAnswer":{"@type":"Answer","text":"A day is a 24-hour period. If the parent with fewer overnights has an overnight with the child but physical custody for less than 24 hours during that period, each parent is presumed to get credit for half a day. The 90-day threshold determines whether the shared-custody formula applies at all — below it, the standard sole-custody proration is used regardless of how time is actually split."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Virginia Child Support Calculator","item":"https://usachildsupportcalculator.com/virginia/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Virginia Child Support Calculator</h1>
+  <p class="badge">Updated for Virginia's 2025-VA-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Virginia's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Code of Virginia § 20-108.2 (Virginia Legislative Information System) or a family law attorney licensed in Virginia.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Virginia Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly gross income, then combine both for combined monthly gross income.</li><li>Look up the basic child support obligation from the official Schedule of Monthly Basic Child Support Obligations for that combined income and number of children.</li><li>If the parent with fewer overnights has 90 days or fewer per year, use the standard sole-custody calculation: each parent's pro rata share of the basic obligation plus childcare and health insurance costs.</li><li>If the parent with fewer overnights has MORE than 90 days per year, the shared-custody formula applies instead: multiply the basic obligation by 1.4 (the "shared support need"), then cross-multiply each parent's custody share and income share against the other's — the difference is the shared-custody support, paid by whichever parent's computed share is larger.</li><li>The presumptive amount is the shared-custody result UNLESS the sole-custody amount is actually less, in which case the lesser amount applies.</li><li>Above $42,500/month combined gross income, Virginia's statute applies its own formula directly (the $42,500 amount plus a percentage of income above that) rather than judicial discretion.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Virginia Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and has 120 overnights/year (over the 90-day shared-custody threshold).</p>
+    <ol><li>Basic child support obligation for $6,000 combined, 2 children: $1,489/month.</li><li>Shared support need: $1,489 × 1.4 = $2,085/month.</li><li>Cross-multiplying custody shares (Parent B 32.9%, Parent A 67.1%) and income shares against the shared support need gives $148/month — well below the sole-custody amount ($596/month), so the lesser (shared-custody) amount applies.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Code of Virginia § 20-108.2 (Virginia Legislative Information System) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Virginia's official guideline schedule table. Verify against Virginia's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Virginia?</summary><p>Determine each parent's monthly gross income, then combine both for combined monthly gross income. Look up the basic child support obligation from the official Schedule of Monthly Basic Child Support Obligations for that combined income and number of children. If the parent with fewer overnights has 90 days or fewer per year, use the standard sole-custody calculation: each parent's pro rata share of the basic obligation plus childcare and health insurance costs. If the parent with fewer overnights has MORE than 90 days per year, the shared-custody formula applies instead: multiply the basic obligation by 1.4 (the "shared support need"), then cross-multiply each parent's custody share and income share against the other's — the difference is the shared-custody support, paid by whichever parent's computed share is larger. The presumptive amount is the shared-custody result UNLESS the sole-custody amount is actually less, in which case the lesser amount applies. Above $42,500/month combined gross income, Virginia's statute applies its own formula directly (the $42,500 amount plus a percentage of income above that) rather than judicial discretion.</p></details>
+    <details><summary>How does Virginia's shared custody child support formula work?</summary><p>When the parent with fewer overnights has more than 90 days per year, Virginia uses a distinct shared-custody formula instead of simple proration: the basic schedule obligation is multiplied by 1.4 to get the "shared support need," which is then cross-multiplied by each parent's custody share (days with the child ÷ 365) and income share. The difference between what each parent would theoretically owe the other becomes the actual support amount — paid by whichever parent's calculated share is larger. If this shared-custody amount would be more than the standard sole-custody amount, the lesser of the two applies.</p></details><details><summary>What happens if combined income is above $42,500/month in Virginia?</summary><p>Unlike most states, Virginia doesn't leave amounts above the schedule cap to judicial discretion. The statute (Va. Code § 20-108.2(B)) specifies a formula directly: take the schedule amount at $42,500/month and add a percentage of income above that threshold — 2.6% for one child up to 5.0% for six children. This cap was raised from $35,000/month by SB 805, effective 2025-07-01, the first update to Virginia's schedule since 2014.</p></details><details><summary>What counts as a "day" for Virginia's 90-day shared custody threshold?</summary><p>A day is a 24-hour period. If the parent with fewer overnights has an overnight with the child but physical custody for less than 24 hours during that period, each parent is presumed to get credit for half a day. The 90-day threshold determines whether the shared-custody formula applies at all — below it, the standard sole-custody proration is used regardless of how time is actually split.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2025-07-01, guideline version 2025-VA-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://law.lis.virginia.gov/vacode/title20/chapter6/section20-108.2/" rel="nofollow noopener">Code of Virginia § 20-108.2 (Virginia Legislative Information System)</a> (Va. Code § 20-108.2).</p>
+    <p class="deviation-note">Above $42,500/month combined gross income (raised from $35,000 by SB 805, eff. 2025-07-01), Virginia's own statutory formula applies directly: the $42,500 obligation plus a percentage of income above that (2.6%-5.0% by number of children) -- not a discretionary court determination. The shared-custody formula's add-on cost split (each parent's own childcare/health insurance costs credited separately) is approximated here as a single combined figure, since this calculator collects one childcare/health-insurance amount rather than a separate figure per parent.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Virginia's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Virginia","abbr":"VA","slug":"virginia","formula_model":"income_shares","effective_date":"2025-07-01","last_verified":"2026-07-12","guideline_version":"2025-VA-v1","source":{"agency_name":"Code of Virginia § 20-108.2 (Virginia Legislative Information System)","url":"https://law.lis.virginia.gov/vacode/title20/chapter6/section20-108.2/","statute_ref":"Va. Code § 20-108.2"},"params":{"schedule_table_ref":"virginia_schedule.json","income_basis":"gross","income_cap_monthly":42500,"high_income_note":"Above $42,500/month combined gross income, Virginia's own formula applies directly: the $42,500 schedule amount plus a percentage of income above that (2.6%-5.0% by number of children) -- not judicial discretion."},"worksheet":{"steps":["Determine each parent's monthly gross income, then combine both for combined monthly gross income.","Look up the basic child support obligation from the official Schedule of Monthly Basic Child Support Obligations for that combined income and number of children.","If the parent with fewer overnights has 90 days or fewer per year, use the standard sole-custody calculation: each parent's pro rata share of the basic obligation plus childcare and health insurance costs.","If the parent with fewer overnights has MORE than 90 days per year, the shared-custody formula applies instead: multiply the basic obligation by 1.4 (the \"shared support need\"), then cross-multiply each parent's custody share and income share against the other's — the difference is the shared-custody support, paid by whichever parent's computed share is larger.","The presumptive amount is the shared-custody result UNLESS the sole-custody amount is actually less, in which case the lesser amount applies.","Above $42,500/month combined gross income, Virginia's statute applies its own formula directly (the $42,500 amount plus a percentage of income above that) rather than judicial discretion."],"example":{"scenario":"Example: combined gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and has 120 overnights/year (over the 90-day shared-custody threshold).","calculation":["Basic child support obligation for $6,000 combined, 2 children: $1,489/month.","Shared support need: $1,489 × 1.4 = $2,085/month.","Cross-multiplying custody shares (Parent B 32.9%, Parent A 67.1%) and income shares against the shared support need gives $148/month — well below the sole-custody amount ($596/month), so the lesser (shared-custody) amount applies."]}},"faq_extra":[{"q":"How does Virginia's shared custody child support formula work?","a":"When the parent with fewer overnights has more than 90 days per year, Virginia uses a distinct shared-custody formula instead of simple proration: the basic schedule obligation is multiplied by 1.4 to get the \"shared support need,\" which is then cross-multiplied by each parent's custody share (days with the child ÷ 365) and income share. The difference between what each parent would theoretically owe the other becomes the actual support amount — paid by whichever parent's calculated share is larger. If this shared-custody amount would be more than the standard sole-custody amount, the lesser of the two applies."},{"q":"What happens if combined income is above $42,500/month in Virginia?","a":"Unlike most states, Virginia doesn't leave amounts above the schedule cap to judicial discretion. The statute (Va. Code § 20-108.2(B)) specifies a formula directly: take the schedule amount at $42,500/month and add a percentage of income above that threshold — 2.6% for one child up to 5.0% for six children. This cap was raised from $35,000/month by SB 805, effective 2025-07-01, the first update to Virginia's schedule since 2014."},{"q":"What counts as a \"day\" for Virginia's 90-day shared custody threshold?","a":"A day is a 24-hour period. If the parent with fewer overnights has an overnight with the child but physical custody for less than 24 hours during that period, each parent is presumed to get credit for half a day. The 90-day threshold determines whether the shared-custody formula applies at all — below it, the standard sole-custody proration is used regardless of how time is actually split."}]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":{"type":"va_shared_custody","threshold_days":90,"note":"Va. Code § 20-108.2(G)(3): when the parent with fewer overnights has more than 90 days/year, the presumptive amount is the shared-custody formula (shared support need = basic schedule obligation × 1.4, cross-multiplied by each parent's custody share and income share) UNLESS the sole-custody amount is less, in which case the lesser amount applies (subsection (a)/(f))."},"income_cap_behavior":"formula_above_cap","deviation_note":"Above $42,500/month combined gross income (raised from $35,000 by SB 805, eff. 2025-07-01), Virginia's own statutory formula applies directly: the $42,500 obligation plus a percentage of income above that (2.6%-5.0% by number of children) -- not a discretionary court determination. The shared-custody formula's add-on cost split (each parent's own childcare/health insurance costs credited separately) is approximated here as a single combined figure, since this calculator collects one childcare/health-insurance amount rather than a separate figure per parent."};
+    const SCHEDULE = {"maxIncome":42500,"aboveCapPercentages":{"1":0.026,"2":0.034,"3":0.038,"4":0.042,"5":0.046,"6":0.05},"source":"Va. Code Ann. section 20-108.2(B), Schedule of Monthly Basic Child Support Obligations, amended by SB 805 eff. 2025-07-01, https://law.lis.virginia.gov/vacode/title20/chapter6/section20-108.2/","note":"90 real anchor points transcribed directly from the full official schedule (844 rows, \\$350-\\$42,500 combined monthly gross income, mostly \\$50 increments, scraped as a structured HTML table from the primary source, not OCR). Income cap raised from \\$35,000 to \\$42,500/month by SB805 (first update since 2014). Above the cap, the statute's own formula applies directly (base at \\$42,500 plus a percentage of income above it, by number of children) via the aboveCapPercentages engine feature. Engine interpolates linearly between anchors below the cap.","rows":[{"upTo":350,"obligation":{"1":68,"2":104,"3":126,"4":141,"5":155,"6":169}},{"upTo":400,"obligation":{"1":78,"2":119,"3":144,"4":161,"5":177,"6":192}},{"upTo":500,"obligation":{"1":97,"2":148,"3":179,"4":200,"5":220,"6":239}},{"upTo":600,"obligation":{"1":124,"2":188,"3":234,"4":262,"5":288,"6":313}},{"upTo":700,"obligation":{"1":145,"2":219,"3":273,"4":305,"5":336,"6":365}},{"upTo":800,"obligation":{"1":166,"2":250,"3":312,"4":349,"5":384,"6":417}},{"upTo":900,"obligation":{"1":186,"2":281,"3":351,"4":392,"5":431,"6":468}},{"upTo":1000,"obligation":{"1":206,"2":311,"3":389,"4":434,"5":478,"6":519}},{"upTo":1100,"obligation":{"1":226,"2":341,"3":427,"4":477,"5":524,"6":570}},{"upTo":1200,"obligation":{"1":246,"2":372,"3":465,"4":519,"5":571,"6":621}},{"upTo":1300,"obligation":{"1":264,"2":398,"3":498,"4":556,"5":612,"6":665}},{"upTo":1400,"obligation":{"1":281,"2":425,"3":531,"4":593,"5":652,"6":709}},{"upTo":1500,"obligation":{"1":299,"2":451,"3":563,"4":629,"5":692,"6":753}},{"upTo":1600,"obligation":{"1":316,"2":477,"3":596,"4":666,"5":733,"6":796}},{"upTo":1700,"obligation":{"1":333,"2":503,"3":629,"4":703,"5":773,"6":840}},{"upTo":1800,"obligation":{"1":351,"2":529,"3":662,"4":739,"5":813,"6":884}},{"upTo":1900,"obligation":{"1":368,"2":556,"3":694,"4":776,"5":853,"6":927}},{"upTo":2000,"obligation":{"1":385,"2":582,"3":727,"4":812,"5":893,"6":971}},{"upTo":2100,"obligation":{"1":403,"2":608,"3":760,"4":849,"5":934,"6":1015}},{"upTo":2200,"obligation":{"1":420,"2":634,"3":792,"4":885,"5":974,"6":1058}},{"upTo":2300,"obligation":{"1":437,"2":659,"3":824,"4":920,"5":1012,"6":1100}},{"upTo":2400,"obligation":{"1":453,"2":684,"3":856,"4":956,"5":1051,"6":1143}},{"upTo":2500,"obligation":{"1":470,"2":710,"3":887,"4":991,"5":1090,"6":1185}},{"upTo":2600,"obligation":{"1":487,"2":735,"3":919,"4":1026,"5":1129,"6":1227}},{"upTo":2700,"obligation":{"1":504,"2":760,"3":950,"4":1061,"5":1167,"6":1269}},{"upTo":2800,"obligation":{"1":520,"2":785,"3":982,"4":1097,"5":1206,"6":1311}},{"upTo":2900,"obligation":{"1":537,"2":811,"3":1013,"4":1132,"5":1245,"6":1353}},{"upTo":3000,"obligation":{"1":554,"2":836,"3":1045,"4":1167,"5":1284,"6":1396}},{"upTo":3200,"obligation":{"1":587,"2":886,"3":1108,"4":1238,"5":1361,"6":1480}},{"upTo":3400,"obligation":{"1":621,"2":937,"3":1171,"4":1308,"5":1439,"6":1564}},{"upTo":3600,"obligation":{"1":654,"2":987,"3":1234,"4":1379,"5":1516,"6":1648}},{"upTo":3800,"obligation":{"1":688,"2":1038,"3":1297,"4":1449,"5":1594,"6":1733}},{"upTo":4000,"obligation":{"1":721,"2":1088,"3":1360,"4":1520,"5":1672,"6":1817}},{"upTo":4200,"obligation":{"1":753,"2":1136,"3":1420,"4":1586,"5":1745,"6":1897}},{"upTo":4400,"obligation":{"1":782,"2":1176,"3":1473,"4":1645,"5":1810,"6":1967}},{"upTo":4600,"obligation":{"1":811,"2":1217,"3":1526,"4":1704,"5":1874,"6":2038}},{"upTo":4800,"obligation":{"1":840,"2":1257,"3":1578,"4":1763,"5":1939,"6":2108}},{"upTo":5000,"obligation":{"1":872,"2":1304,"3":1637,"4":1829,"5":2012,"6":2187}},{"upTo":5200,"obligation":{"1":903,"2":1349,"3":1695,"4":1893,"5":2082,"6":2263}},{"upTo":5400,"obligation":{"1":931,"2":1389,"3":1746,"4":1950,"5":2146,"6":2332}},{"upTo":5600,"obligation":{"1":957,"2":1428,"3":1795,"4":2005,"5":2206,"6":2398}},{"upTo":5800,"obligation":{"1":978,"2":1458,"3":1834,"4":2048,"5":2253,"6":2449}},{"upTo":6000,"obligation":{"1":999,"2":1489,"3":1872,"4":2092,"5":2301,"6":2501}},{"upTo":6200,"obligation":{"1":1019,"2":1519,"3":1911,"4":2135,"5":2348,"6":2553}},{"upTo":6400,"obligation":{"1":1038,"2":1547,"3":1946,"4":2173,"5":2391,"6":2599}},{"upTo":6600,"obligation":{"1":1051,"2":1564,"3":1968,"4":2198,"5":2418,"6":2628}},{"upTo":6800,"obligation":{"1":1064,"2":1582,"3":1990,"4":2222,"5":2445,"6":2657}},{"upTo":7000,"obligation":{"1":1076,"2":1600,"3":2012,"4":2247,"5":2472,"6":2687}},{"upTo":7200,"obligation":{"1":1087,"2":1614,"3":2031,"4":2268,"5":2495,"6":2712}},{"upTo":7400,"obligation":{"1":1095,"2":1619,"3":2043,"4":2282,"5":2510,"6":2729}},{"upTo":7600,"obligation":{"1":1103,"2":1624,"3":2056,"4":2296,"5":2526,"6":2745}},{"upTo":7800,"obligation":{"1":1110,"2":1628,"3":2068,"4":2310,"5":2541,"6":2762}},{"upTo":8000,"obligation":{"1":1121,"2":1642,"3":2089,"4":2334,"5":2567,"6":2790}},{"upTo":8500,"obligation":{"1":1165,"2":1715,"3":2183,"4":2438,"5":2682,"6":2915}},{"upTo":9000,"obligation":{"1":1196,"2":1760,"3":2237,"4":2499,"5":2749,"6":2988}},{"upTo":9500,"obligation":{"1":1219,"2":1784,"3":2261,"4":2526,"5":2778,"6":3020}},{"upTo":10000,"obligation":{"1":1251,"2":1824,"3":2308,"4":2578,"5":2835,"6":3082}},{"upTo":10500,"obligation":{"1":1288,"2":1871,"3":2366,"4":2643,"5":2907,"6":3160}},{"upTo":11000,"obligation":{"1":1334,"2":1932,"3":2447,"4":2734,"5":3007,"6":3269}},{"upTo":11500,"obligation":{"1":1379,"2":1992,"3":2528,"4":2824,"5":3106,"6":3377}},{"upTo":12000,"obligation":{"1":1420,"2":2059,"3":2609,"4":2914,"5":3206,"6":3485}},{"upTo":12500,"obligation":{"1":1460,"2":2126,"3":2690,"4":3005,"5":3305,"6":3593}},{"upTo":13000,"obligation":{"1":1496,"2":2182,"3":2754,"4":3076,"5":3384,"6":3678}},{"upTo":13500,"obligation":{"1":1526,"2":2224,"3":2798,"4":3126,"5":3438,"6":3737}},{"upTo":14000,"obligation":{"1":1556,"2":2265,"3":2843,"4":3175,"5":3493,"6":3797}},{"upTo":14500,"obligation":{"1":1595,"2":2317,"3":2900,"4":3239,"5":3563,"6":3873}},{"upTo":15000,"obligation":{"1":1635,"2":2369,"3":2957,"4":3303,"5":3634,"6":3950}},{"upTo":15500,"obligation":{"1":1675,"2":2420,"3":3014,"4":3367,"5":3703,"6":4025}},{"upTo":16000,"obligation":{"1":1700,"2":2451,"3":3046,"4":3403,"5":3743,"6":4068}},{"upTo":17000,"obligation":{"1":1752,"2":2515,"3":3113,"4":3477,"5":3825,"6":4158}},{"upTo":18000,"obligation":{"1":1833,"2":2630,"3":3253,"4":3634,"5":3997,"6":4345}},{"upTo":19000,"obligation":{"1":1911,"2":2741,"3":3389,"4":3785,"5":4164,"6":4526}},{"upTo":20000,"obligation":{"1":1990,"2":2853,"3":3525,"4":3937,"5":4331,"6":4708}},{"upTo":21000,"obligation":{"1":2069,"2":2965,"3":3661,"4":4089,"5":4498,"6":4890}},{"upTo":22000,"obligation":{"1":2130,"2":3060,"3":3782,"4":4225,"5":4647,"6":5052}},{"upTo":23000,"obligation":{"1":2186,"2":3150,"3":3898,"4":4354,"5":4789,"6":5206}},{"upTo":24000,"obligation":{"1":2242,"2":3239,"3":4013,"4":4483,"5":4931,"6":5360}},{"upTo":25000,"obligation":{"1":2298,"2":3328,"3":4129,"4":4612,"5":5073,"6":5514}},{"upTo":26000,"obligation":{"1":2354,"2":3417,"3":4244,"4":4741,"5":5215,"6":5669}},{"upTo":27000,"obligation":{"1":2410,"2":3506,"3":4360,"4":4870,"5":5357,"6":5823}},{"upTo":28000,"obligation":{"1":2466,"2":3596,"3":4475,"4":4999,"5":5499,"6":5977}},{"upTo":29000,"obligation":{"1":2523,"2":3680,"3":4578,"4":5113,"5":5625,"6":6114}},{"upTo":30000,"obligation":{"1":2581,"2":3763,"3":4673,"4":5220,"5":5742,"6":6242}},{"upTo":32000,"obligation":{"1":2697,"2":3927,"3":4864,"4":5433,"5":5977,"6":6497}},{"upTo":34000,"obligation":{"1":2813,"2":4092,"3":5055,"4":5647,"5":6212,"6":6752}},{"upTo":36000,"obligation":{"1":2929,"2":4257,"3":5246,"4":5860,"5":6446,"6":7007}},{"upTo":38000,"obligation":{"1":3045,"2":4421,"3":5438,"4":6074,"5":6681,"6":7262}},{"upTo":40000,"obligation":{"1":3161,"2":4586,"3":5629,"4":6287,"5":6916,"6":7518}},{"upTo":42000,"obligation":{"1":3277,"2":4751,"3":5820,"4":6501,"5":7151,"6":7773}},{"upTo":42500,"obligation":{"1":3306,"2":4792,"3":5867,"4":6554,"5":7209,"6":7837}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

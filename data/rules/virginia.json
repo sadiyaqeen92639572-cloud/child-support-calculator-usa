@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "va_shared_custody",
+    "threshold_days": 90,
+    "note": "Va. Code § 20-108.2(G)(3): when the parent with fewer overnights has more than 90 days/year, the presumptive amount is the shared-custody formula (shared support need = basic schedule obligation × 1.4, cross-multiplied by each parent's custody share and income share) UNLESS the sole-custody amount is less, in which case the lesser amount applies (subsection (a)/(f))."
+  },
+  "income_cap_behavior": "formula_above_cap",
+  "deviation_note": "Above $42,500/month combined gross income (raised from $35,000 by SB 805, eff. 2025-07-01), Virginia's own statutory formula applies directly: the $42,500 obligation plus a percentage of income above that (2.6%-5.0% by number of children) -- not a discretionary court determination. The shared-custody formula's add-on cost split (each parent's own childcare/health insurance costs credited separately) is approximated here as a single combined figure, since this calculator collects one childcare/health-insurance amount rather than a separate figure per parent."
+}

@@ -997,5 +997,57 @@
         "a": "Above $30,000/month in combined net income, Pennsylvania's schedule doesn't provide a table value. Courts instead use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 rather than extending the basic schedule."
       }
     ]
+  },
+  "va": {
+    "name": "Virginia",
+    "abbr": "VA",
+    "slug": "virginia",
+    "formula_model": "income_shares",
+    "effective_date": "2025-07-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2025-VA-v1",
+    "source": {
+      "agency_name": "Code of Virginia § 20-108.2 (Virginia Legislative Information System)",
+      "url": "https://law.lis.virginia.gov/vacode/title20/chapter6/section20-108.2/",
+      "statute_ref": "Va. Code § 20-108.2"
+    },
+    "params": {
+      "schedule_table_ref": "virginia_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 42500,
+      "high_income_note": "Above $42,500/month combined gross income, Virginia's own formula applies directly: the $42,500 schedule amount plus a percentage of income above that (2.6%-5.0% by number of children) -- not judicial discretion."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly gross income, then combine both for combined monthly gross income.",
+        "Look up the basic child support obligation from the official Schedule of Monthly Basic Child Support Obligations for that combined income and number of children.",
+        "If the parent with fewer overnights has 90 days or fewer per year, use the standard sole-custody calculation: each parent's pro rata share of the basic obligation plus childcare and health insurance costs.",
+        "If the parent with fewer overnights has MORE than 90 days per year, the shared-custody formula applies instead: multiply the basic obligation by 1.4 (the \"shared support need\"), then cross-multiply each parent's custody share and income share against the other's — the difference is the shared-custody support, paid by whichever parent's computed share is larger.",
+        "The presumptive amount is the shared-custody result UNLESS the sole-custody amount is actually less, in which case the lesser amount applies.",
+        "Above $42,500/month combined gross income, Virginia's statute applies its own formula directly (the $42,500 amount plus a percentage of income above that) rather than judicial discretion."
+      ],
+      "example": {
+        "scenario": "Example: combined gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and has 120 overnights/year (over the 90-day shared-custody threshold).",
+        "calculation": [
+          "Basic child support obligation for $6,000 combined, 2 children: $1,489/month.",
+          "Shared support need: $1,489 × 1.4 = $2,085/month.",
+          "Cross-multiplying custody shares (Parent B 32.9%, Parent A 67.1%) and income shares against the shared support need gives $148/month — well below the sole-custody amount ($596/month), so the lesser (shared-custody) amount applies."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How does Virginia's shared custody child support formula work?",
+        "a": "When the parent with fewer overnights has more than 90 days per year, Virginia uses a distinct shared-custody formula instead of simple proration: the basic schedule obligation is multiplied by 1.4 to get the \"shared support need,\" which is then cross-multiplied by each parent's custody share (days with the child ÷ 365) and income share. The difference between what each parent would theoretically owe the other becomes the actual support amount — paid by whichever parent's calculated share is larger. If this shared-custody amount would be more than the standard sole-custody amount, the lesser of the two applies."
+      },
+      {
+        "q": "What happens if combined income is above $42,500/month in Virginia?",
+        "a": "Unlike most states, Virginia doesn't leave amounts above the schedule cap to judicial discretion. The statute (Va. Code § 20-108.2(B)) specifies a formula directly: take the schedule amount at $42,500/month and add a percentage of income above that threshold — 2.6% for one child up to 5.0% for six children. This cap was raised from $35,000/month by SB 805, effective 2025-07-01, the first update to Virginia's schedule since 2014."
+      },
+      {
+        "q": "What counts as a \"day\" for Virginia's 90-day shared custody threshold?",
+        "a": "A day is a 24-hour period. If the parent with fewer overnights has an overnight with the child but physical custody for less than 24 hours during that period, each parent is presumed to get credit for half a day. The 90-day threshold determines whether the shared-custody formula applies at all — below it, the standard sole-custody proration is used regardless of how time is actually split."
+      }
+    ]
   }
 }

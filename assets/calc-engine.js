@@ -200,6 +200,32 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       const ptAdjustment = ((ncpDaysPow * cpShareDollars) - (cpDaysPow * ncpShareDollars)) / (ncpDaysPow + cpDaysPow);
       amount = Math.max(0, ncpShareDollars + ptAdjustment) + (addOns * payingShare);
       adjustedForCustody = true;
+    } else if (rules.custody_adjustment.type === 'va_shared_custody') {
+      // Virginia's shared custody formula, Va. Code § 20-108.2(G)(3), triggers
+      // when the parent with fewer overnights has more than 90 days/year.
+      // sharedSupportNeed = basic schedule obligation × 1.4. Each parent's
+      // "theoretical" amount owed to the other = (sharedSupportNeed × the
+      // OTHER parent's custody share + that other parent's add-on costs) ×
+      // this parent's income share. The difference between the two
+      // theoretical amounts is the shared-custody support, paid by whichever
+      // parent's theoretical amount is larger — unless the sole-custody
+      // amount (already computed above as `amount`) is LESS, in which case
+      // the lesser (sole-custody) amount is used instead (subsection (a)/(f)).
+      // Limitation: the statute credits each parent's OWN add-on costs
+      // separately, but this engine only collects one combined
+      // childcare/health-insurance figure — approximated here as entirely
+      // the custodial parent's cost, disclosed in the deviation note.
+      const threshold = rules.custody_adjustment.threshold_days || 90;
+      if (payingParentOvernights > threshold) {
+        const custodyShareA = overnightsWithA / 365;
+        const custodyShareB = 1 - custodyShareA;
+        const sharedSupportNeed = baseObligation * 1.4;
+        const aTheoretical = (sharedSupportNeed * custodyShareB + addOns) * shareA;
+        const bTheoretical = (sharedSupportNeed * custodyShareA + addOns) * shareB;
+        const sharedAmount = Math.abs(aTheoretical - bTheoretical);
+        amount = Math.min(amount, sharedAmount);
+        adjustedForCustody = true;
+      }
     }
   }
 
