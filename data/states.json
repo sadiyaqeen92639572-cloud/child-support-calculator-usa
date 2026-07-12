@@ -1158,5 +1158,57 @@
         "a": "Above $3,600/week ($187,200/year) in combined net income, New Jersey's rule explicitly says not to extrapolate the schedule. Courts instead apply the $3,600 guideline amount as a floor and add a discretionary amount based on the family's actual circumstances under N.J.S.A. 2A:34-23, rather than a formula."
       }
     ]
+  },
+  "tn": {
+    "name": "Tennessee",
+    "abbr": "TN",
+    "slug": "tennessee",
+    "formula_model": "income_shares",
+    "effective_date": "2021-10-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2021-TN-v1",
+    "source": {
+      "agency_name": "Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04)",
+      "url": "https://publications.tnsosfiles.com/rules/1240/1240-02/1240-02-04.20211001.pdf",
+      "statute_ref": "Tenn. Comp. R. & Regs. 1240-02-04"
+    },
+    "params": {
+      "schedule_table_ref": "tennessee_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 28250,
+      "high_income_note": "Above $28,250/month combined adjusted gross income, Tennessee's statute applies its own formula directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children)."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.",
+        "Look up the basic child support obligation (BCSO) from the official Schedule of Basic Child Support Obligations for that combined income and number of children.",
+        "Each parent's pro rata share equals their income divided by combined income, applied to the BCSO.",
+        "If the paying parent (ARP) has 92 or more days of parenting time per year, a variable multiplier (days x 2/182.5) adjusts the BCSO upward, and the difference is credited against the paying parent's share to account for duplicated/transferred expenses.",
+        "That result is compared against a schedule lookup using the paying parent's own income alone (the Self-Support Reserve, $957/month) — the LESSER of the two applies, and if the individual lookup wins, the parenting-time credit is effectively forfeited.",
+        "Above $28,250/month combined adjusted gross income, Tennessee applies its own formula directly rather than judicial discretion."
+      ],
+      "example": {
+        "scenario": "Example (the rule's own worked example): $1,000/month BCSO, paying parent (ARP) has 94 parenting days/year, custodial parent (PRP) has a 40% income share.",
+        "calculation": [
+          "Variable multiplier: 94 × 0.0109589 = 1.0301366.",
+          "Adjusted BCSO: $1,000 × 1.0301366 = $1,030.14; difference from base: $30.14.",
+          "PRP's 40% share of that difference: $12.06, credited against the ARP's 60% share ($600): $600 − $12.06 = $587.94/month, assuming this is above the Self-Support Reserve comparison."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How does Tennessee's parenting time credit work?",
+        "a": "If the paying parent (ARP) has 92 or more days of parenting time per year, Tennessee applies a \"variable multiplier\" — the ARP's annual parenting days times 2/182.5 — to the basic child support obligation (BCSO). The increase this produces is prorated by the custodial parent's income share and credited against the paying parent's obligation, reflecting the duplicated and transferred expenses of shared parenting time. At exactly half the year (182.5 days), this doubles the BCSO before crediting."
+      },
+      {
+        "q": "What is Tennessee's Self-Support Reserve, and does it cancel the parenting time credit?",
+        "a": "The Self-Support Reserve (SSR) is 90% of the federal poverty guideline for one person — $957/month. Tennessee compares the parenting-time-credited obligation against a schedule lookup using the paying parent's own income alone; whichever is LOWER applies. If the individual-income lookup is lower, the paying parent effectively loses the parenting-time credit, since the final amount comes from the SSR comparison instead."
+      },
+      {
+        "q": "What happens if combined income is above $28,250/month in Tennessee?",
+        "a": "Above $28,250/month in combined adjusted gross income, Tennessee's rule specifies its own formula directly rather than leaving it to judicial discretion: the $28,250 schedule amount plus a percentage of the income above that threshold, ranging from 6.81% for one child up to 8.66% for five or more children."
+      }
+    ]
   }
 }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tennessee Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Tennessee child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/tennessee/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Tennessee Child Support Calculator">
+<meta property="og:description" content="Free Tennessee child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/tennessee/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Tennessee Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2021-TN-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Tennessee?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income. Look up the basic child support obligation (BCSO) from the official Schedule of Basic Child Support Obligations for that combined income and number of children. Each parent's pro rata share equals their income divided by combined income, applied to the BCSO. If the paying parent (ARP) has 92 or more days of parenting time per year, a variable multiplier (days x 2/182.5) adjusts the BCSO upward, and the difference is credited against the paying parent's share to account for duplicated/transferred expenses. That result is compared against a schedule lookup using the paying parent's own income alone (the Self-Support Reserve, $957/month) — the LESSER of the two applies, and if the individual lookup wins, the parenting-time credit is effectively forfeited. Above $28,250/month combined adjusted gross income, Tennessee applies its own formula directly rather than judicial discretion."}},{"@type":"Question","name":"How does Tennessee's parenting time credit work?","acceptedAnswer":{"@type":"Answer","text":"If the paying parent (ARP) has 92 or more days of parenting time per year, Tennessee applies a \"variable multiplier\" — the ARP's annual parenting days times 2/182.5 — to the basic child support obligation (BCSO). The increase this produces is prorated by the custodial parent's income share and credited against the paying parent's obligation, reflecting the duplicated and transferred expenses of shared parenting time. At exactly half the year (182.5 days), this doubles the BCSO before crediting."}},{"@type":"Question","name":"What is Tennessee's Self-Support Reserve, and does it cancel the parenting time credit?","acceptedAnswer":{"@type":"Answer","text":"The Self-Support Reserve (SSR) is 90% of the federal poverty guideline for one person — $957/month. Tennessee compares the parenting-time-credited obligation against a schedule lookup using the paying parent's own income alone; whichever is LOWER applies. If the individual-income lookup is lower, the paying parent effectively loses the parenting-time credit, since the final amount comes from the SSR comparison instead."}},{"@type":"Question","name":"What happens if combined income is above $28,250/month in Tennessee?","acceptedAnswer":{"@type":"Answer","text":"Above $28,250/month in combined adjusted gross income, Tennessee's rule specifies its own formula directly rather than leaving it to judicial discretion: the $28,250 schedule amount plus a percentage of the income above that threshold, ranging from 6.81% for one child up to 8.66% for five or more children."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Tennessee Child Support Calculator","item":"https://usachildsupportcalculator.com/tennessee/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Tennessee Child Support Calculator</h1>
+  <p class="badge">Updated for Tennessee's 2021-TN-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Tennessee's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04) or a family law attorney licensed in Tennessee.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Tennessee Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.</li><li>Look up the basic child support obligation (BCSO) from the official Schedule of Basic Child Support Obligations for that combined income and number of children.</li><li>Each parent's pro rata share equals their income divided by combined income, applied to the BCSO.</li><li>If the paying parent (ARP) has 92 or more days of parenting time per year, a variable multiplier (days x 2/182.5) adjusts the BCSO upward, and the difference is credited against the paying parent's share to account for duplicated/transferred expenses.</li><li>That result is compared against a schedule lookup using the paying parent's own income alone (the Self-Support Reserve, $957/month) — the LESSER of the two applies, and if the individual lookup wins, the parenting-time credit is effectively forfeited.</li><li>Above $28,250/month combined adjusted gross income, Tennessee applies its own formula directly rather than judicial discretion.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Tennessee Child Support Worksheet Walkthrough</h2>
+    <p>Example (the rule's own worked example): $1,000/month BCSO, paying parent (ARP) has 94 parenting days/year, custodial parent (PRP) has a 40% income share.</p>
+    <ol><li>Variable multiplier: 94 × 0.0109589 = 1.0301366.</li><li>Adjusted BCSO: $1,000 × 1.0301366 = $1,030.14; difference from base: $30.14.</li><li>PRP's 40% share of that difference: $12.06, credited against the ARP's 60% share ($600): $600 − $12.06 = $587.94/month, assuming this is above the Self-Support Reserve comparison.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Tennessee's official guideline schedule table. Verify against Tennessee's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Tennessee?</summary><p>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income. Look up the basic child support obligation (BCSO) from the official Schedule of Basic Child Support Obligations for that combined income and number of children. Each parent's pro rata share equals their income divided by combined income, applied to the BCSO. If the paying parent (ARP) has 92 or more days of parenting time per year, a variable multiplier (days x 2/182.5) adjusts the BCSO upward, and the difference is credited against the paying parent's share to account for duplicated/transferred expenses. That result is compared against a schedule lookup using the paying parent's own income alone (the Self-Support Reserve, $957/month) — the LESSER of the two applies, and if the individual lookup wins, the parenting-time credit is effectively forfeited. Above $28,250/month combined adjusted gross income, Tennessee applies its own formula directly rather than judicial discretion.</p></details>
+    <details><summary>How does Tennessee's parenting time credit work?</summary><p>If the paying parent (ARP) has 92 or more days of parenting time per year, Tennessee applies a "variable multiplier" — the ARP's annual parenting days times 2/182.5 — to the basic child support obligation (BCSO). The increase this produces is prorated by the custodial parent's income share and credited against the paying parent's obligation, reflecting the duplicated and transferred expenses of shared parenting time. At exactly half the year (182.5 days), this doubles the BCSO before crediting.</p></details><details><summary>What is Tennessee's Self-Support Reserve, and does it cancel the parenting time credit?</summary><p>The Self-Support Reserve (SSR) is 90% of the federal poverty guideline for one person — $957/month. Tennessee compares the parenting-time-credited obligation against a schedule lookup using the paying parent's own income alone; whichever is LOWER applies. If the individual-income lookup is lower, the paying parent effectively loses the parenting-time credit, since the final amount comes from the SSR comparison instead.</p></details><details><summary>What happens if combined income is above $28,250/month in Tennessee?</summary><p>Above $28,250/month in combined adjusted gross income, Tennessee's rule specifies its own formula directly rather than leaving it to judicial discretion: the $28,250 schedule amount plus a percentage of the income above that threshold, ranging from 6.81% for one child up to 8.66% for five or more children.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2021-10-01, guideline version 2021-TN-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://publications.tnsosfiles.com/rules/1240/1240-02/1240-02-04.20211001.pdf" rel="nofollow noopener">Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04)</a> (Tenn. Comp. R. & Regs. 1240-02-04).</p>
+    <p class="deviation-note">Above $28,250/month combined adjusted gross income, Tennessee's own formula applies directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children), not judicial discretion. This calculator does not model split parenting (two or more children divided between parents) or extraordinary/other statutory deviations.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Tennessee's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Tennessee","abbr":"TN","slug":"tennessee","formula_model":"income_shares","effective_date":"2021-10-01","last_verified":"2026-07-12","guideline_version":"2021-TN-v1","source":{"agency_name":"Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04)","url":"https://publications.tnsosfiles.com/rules/1240/1240-02/1240-02-04.20211001.pdf","statute_ref":"Tenn. Comp. R. & Regs. 1240-02-04"},"params":{"schedule_table_ref":"tennessee_schedule.json","income_basis":"gross","income_cap_monthly":28250,"high_income_note":"Above $28,250/month combined adjusted gross income, Tennessee's statute applies its own formula directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children)."},"worksheet":{"steps":["Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.","Look up the basic child support obligation (BCSO) from the official Schedule of Basic Child Support Obligations for that combined income and number of children.","Each parent's pro rata share equals their income divided by combined income, applied to the BCSO.","If the paying parent (ARP) has 92 or more days of parenting time per year, a variable multiplier (days x 2/182.5) adjusts the BCSO upward, and the difference is credited against the paying parent's share to account for duplicated/transferred expenses.","That result is compared against a schedule lookup using the paying parent's own income alone (the Self-Support Reserve, $957/month) — the LESSER of the two applies, and if the individual lookup wins, the parenting-time credit is effectively forfeited.","Above $28,250/month combined adjusted gross income, Tennessee applies its own formula directly rather than judicial discretion."],"example":{"scenario":"Example (the rule's own worked example): $1,000/month BCSO, paying parent (ARP) has 94 parenting days/year, custodial parent (PRP) has a 40% income share.","calculation":["Variable multiplier: 94 × 0.0109589 = 1.0301366.","Adjusted BCSO: $1,000 × 1.0301366 = $1,030.14; difference from base: $30.14.","PRP's 40% share of that difference: $12.06, credited against the ARP's 60% share ($600): $600 − $12.06 = $587.94/month, assuming this is above the Self-Support Reserve comparison."]}},"faq_extra":[{"q":"How does Tennessee's parenting time credit work?","a":"If the paying parent (ARP) has 92 or more days of parenting time per year, Tennessee applies a \"variable multiplier\" — the ARP's annual parenting days times 2/182.5 — to the basic child support obligation (BCSO). The increase this produces is prorated by the custodial parent's income share and credited against the paying parent's obligation, reflecting the duplicated and transferred expenses of shared parenting time. At exactly half the year (182.5 days), this doubles the BCSO before crediting."},{"q":"What is Tennessee's Self-Support Reserve, and does it cancel the parenting time credit?","a":"The Self-Support Reserve (SSR) is 90% of the federal poverty guideline for one person — $957/month. Tennessee compares the parenting-time-credited obligation against a schedule lookup using the paying parent's own income alone; whichever is LOWER applies. If the individual-income lookup is lower, the paying parent effectively loses the parenting-time credit, since the final amount comes from the SSR comparison instead."},{"q":"What happens if combined income is above $28,250/month in Tennessee?","a":"Above $28,250/month in combined adjusted gross income, Tennessee's rule specifies its own formula directly rather than leaving it to judicial discretion: the $28,250 schedule amount plus a percentage of the income above that threshold, ranging from 6.81% for one child up to 8.66% for five or more children."}]};
+    const RULES = {"rounding":"nearest_dollar","tn_parenting_and_ssr":{"parenting_credit_threshold_days":92,"per_diem_multiplier":0.0109589,"self_support_reserve_monthly":957,"note":"Tenn. Comp. R. & Regs. 1240-02-04-.04(7)(h): variable multiplier = ARP's annual parenting days x 2/182.5, applied to the BCSO; the difference is credited against the ARP's share. Compared against a schedule lookup at the ARP's own income (Self-Support Reserve, 90% of the 2020 federal poverty guideline, $957/mo) -- the lesser amount applies, and the SSR result forfeits the parenting-time credit."},"income_cap_behavior":"formula_above_cap","deviation_note":"Above $28,250/month combined adjusted gross income, Tennessee's own formula applies directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children), not judicial discretion. This calculator does not model split parenting (two or more children divided between parents) or extraordinary/other statutory deviations."};
+    const SCHEDULE = {"maxIncome":28250,"aboveCapPercentages":{"1":0.0681,"2":0.0722,"3":0.0777,"4":0.0805,"5":0.0866},"source":"Tenn. Comp. R. & Regs. 1240-02-04-.09, Schedule of Basic Child Support Obligations, October 2021 (Revised), https://publications.tnsosfiles.com/rules/1240/1240-02/1240-02-04.20211001.pdf","note":"76 real anchor points transcribed directly from the full official schedule (547 rows, $150-$28,250 combined monthly adjusted gross income in mostly $50 increments, extracted via pdftotext -layout from the primary PDF, not OCR). Table only has a \"Five+\" column (no discrete 6th column, unlike most other states) -- 5+ children uses this column per this calculator's generic lookup convention. Below $950/mo the schedule is flat at $100 (self-support-reserve floor). Above $28,250/mo, the statute's own formula applies directly (base amount plus a percentage of income above that, 6.81%-8.66% by number of children) via the aboveCapPercentages engine feature. Engine interpolates linearly between anchors below the cap.","rows":[{"upTo":950,"obligation":{"1":100,"2":100,"3":100,"4":100,"5":100}},{"upTo":1000,"obligation":{"1":100,"2":100,"3":107,"4":119,"5":131}},{"upTo":1100,"obligation":{"1":135,"2":162,"3":177,"4":189,"5":201}},{"upTo":1200,"obligation":{"1":205,"2":232,"3":247,"4":259,"5":271}},{"upTo":1300,"obligation":{"1":275,"2":302,"3":317,"4":329,"5":341}},{"upTo":1400,"obligation":{"1":305,"2":372,"3":387,"4":399,"5":411}},{"upTo":1500,"obligation":{"1":325,"2":442,"3":457,"4":469,"5":481}},{"upTo":1600,"obligation":{"1":345,"2":487,"3":527,"4":539,"5":551}},{"upTo":1700,"obligation":{"1":365,"2":514,"3":597,"4":609,"5":621}},{"upTo":1800,"obligation":{"1":384,"2":542,"3":628,"4":679,"5":691}},{"upTo":1900,"obligation":{"1":403,"2":568,"3":657,"4":733,"5":761}},{"upTo":2000,"obligation":{"1":421,"2":592,"3":685,"4":764,"5":831}},{"upTo":2100,"obligation":{"1":439,"2":616,"3":713,"4":795,"5":874}},{"upTo":2200,"obligation":{"1":457,"2":641,"3":741,"4":826,"5":908}},{"upTo":2300,"obligation":{"1":475,"2":665,"3":768,"4":857,"5":942}},{"upTo":2400,"obligation":{"1":493,"2":689,"3":796,"4":887,"5":976}},{"upTo":2500,"obligation":{"1":510,"2":712,"3":821,"4":916,"5":1007}},{"upTo":2600,"obligation":{"1":527,"2":735,"3":847,"4":945,"5":1039}},{"upTo":2700,"obligation":{"1":544,"2":758,"3":873,"4":973,"5":1070}},{"upTo":2800,"obligation":{"1":561,"2":781,"3":898,"4":1002,"5":1102}},{"upTo":2900,"obligation":{"1":577,"2":802,"3":922,"4":1028,"5":1130}},{"upTo":3000,"obligation":{"1":592,"2":822,"3":945,"4":1053,"5":1159}},{"upTo":3200,"obligation":{"1":624,"2":866,"3":995,"4":1109,"5":1220}},{"upTo":3400,"obligation":{"1":656,"2":910,"3":1045,"4":1165,"5":1282}},{"upTo":3600,"obligation":{"1":688,"2":954,"3":1095,"4":1221,"5":1343}},{"upTo":3800,"obligation":{"1":715,"2":991,"3":1136,"4":1266,"5":1393}},{"upTo":4000,"obligation":{"1":742,"2":1027,"3":1175,"4":1310,"5":1441}},{"upTo":4200,"obligation":{"1":769,"2":1063,"3":1215,"4":1355,"5":1490}},{"upTo":4400,"obligation":{"1":785,"2":1082,"3":1233,"4":1375,"5":1512}},{"upTo":4600,"obligation":{"1":797,"2":1094,"3":1242,"4":1385,"5":1524}},{"upTo":4800,"obligation":{"1":809,"2":1107,"3":1252,"4":1395,"5":1535}},{"upTo":5000,"obligation":{"1":823,"2":1122,"3":1266,"4":1411,"5":1552}},{"upTo":5200,"obligation":{"1":838,"2":1140,"3":1285,"4":1432,"5":1576}},{"upTo":5400,"obligation":{"1":853,"2":1158,"3":1304,"4":1454,"5":1599}},{"upTo":5600,"obligation":{"1":868,"2":1177,"3":1324,"4":1476,"5":1623}},{"upTo":5800,"obligation":{"1":884,"2":1197,"3":1345,"4":1499,"5":1649}},{"upTo":6000,"obligation":{"1":900,"2":1216,"3":1366,"4":1523,"5":1675}},{"upTo":6200,"obligation":{"1":915,"2":1235,"3":1386,"4":1545,"5":1700}},{"upTo":6400,"obligation":{"1":930,"2":1254,"3":1406,"4":1568,"5":1725}},{"upTo":6600,"obligation":{"1":942,"2":1268,"3":1421,"4":1584,"5":1743}},{"upTo":6800,"obligation":{"1":946,"2":1272,"3":1424,"4":1588,"5":1747}},{"upTo":7000,"obligation":{"1":950,"2":1276,"3":1428,"4":1592,"5":1751}},{"upTo":7200,"obligation":{"1":954,"2":1280,"3":1431,"4":1596,"5":1755}},{"upTo":7400,"obligation":{"1":958,"2":1284,"3":1435,"4":1600,"5":1760}},{"upTo":7600,"obligation":{"1":962,"2":1289,"3":1439,"4":1604,"5":1765}},{"upTo":7800,"obligation":{"1":967,"2":1293,"3":1442,"4":1608,"5":1769}},{"upTo":8000,"obligation":{"1":984,"2":1317,"3":1469,"4":1637,"5":1801}},{"upTo":8500,"obligation":{"1":1035,"2":1385,"3":1543,"4":1720,"5":1892}},{"upTo":9000,"obligation":{"1":1085,"2":1452,"3":1617,"4":1803,"5":1983}},{"upTo":9500,"obligation":{"1":1122,"2":1499,"3":1667,"4":1858,"5":2044}},{"upTo":10000,"obligation":{"1":1158,"2":1544,"3":1713,"4":1910,"5":2101}},{"upTo":10500,"obligation":{"1":1193,"2":1588,"3":1759,"4":1962,"5":2158}},{"upTo":11000,"obligation":{"1":1227,"2":1632,"3":1805,"4":2013,"5":2214}},{"upTo":11500,"obligation":{"1":1257,"2":1671,"3":1848,"4":2060,"5":2266}},{"upTo":12000,"obligation":{"1":1287,"2":1709,"3":1890,"4":2108,"5":2319}},{"upTo":12500,"obligation":{"1":1316,"2":1748,"3":1933,"4":2155,"5":2371}},{"upTo":13000,"obligation":{"1":1345,"2":1785,"3":1974,"4":2201,"5":2421}},{"upTo":13500,"obligation":{"1":1372,"2":1821,"3":2013,"4":2245,"5":2469}},{"upTo":14000,"obligation":{"1":1398,"2":1853,"3":2046,"4":2282,"5":2510}},{"upTo":14500,"obligation":{"1":1421,"2":1880,"3":2073,"4":2312,"5":2543}},{"upTo":15000,"obligation":{"1":1444,"2":1907,"3":2100,"4":2341,"5":2576}},{"upTo":15500,"obligation":{"1":1467,"2":1934,"3":2127,"4":2371,"5":2609}},{"upTo":16000,"obligation":{"1":1490,"2":1961,"3":2154,"4":2401,"5":2641}},{"upTo":17000,"obligation":{"1":1536,"2":2015,"3":2207,"4":2461,"5":2707}},{"upTo":18000,"obligation":{"1":1582,"2":2070,"3":2261,"4":2521,"5":2773}},{"upTo":19000,"obligation":{"1":1628,"2":2124,"3":2315,"4":2581,"5":2839}},{"upTo":20000,"obligation":{"1":1692,"2":2197,"3":2384,"4":2658,"5":2923}},{"upTo":21000,"obligation":{"1":1758,"2":2271,"3":2453,"4":2735,"5":3009}},{"upTo":22000,"obligation":{"1":1823,"2":2344,"3":2523,"4":2813,"5":3094}},{"upTo":23000,"obligation":{"1":1889,"2":2418,"3":2592,"4":2890,"5":3179}},{"upTo":24000,"obligation":{"1":1955,"2":2492,"3":2662,"4":2968,"5":3264}},{"upTo":25000,"obligation":{"1":2020,"2":2566,"3":2731,"4":3045,"5":3350}},{"upTo":26000,"obligation":{"1":2086,"2":2640,"3":2801,"4":3123,"5":3435}},{"upTo":27000,"obligation":{"1":2151,"2":2713,"3":2870,"4":3200,"5":3520}},{"upTo":28000,"obligation":{"1":2215,"2":2785,"3":2938,"4":3275,"5":3603}},{"upTo":28250,"obligation":{"1":2231,"2":2803,"3":2954,"4":3294,"5":3624}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

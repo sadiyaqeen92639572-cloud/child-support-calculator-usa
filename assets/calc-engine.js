@@ -84,6 +84,48 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
+  if (rules.tn_parenting_and_ssr) {
+    // Tennessee's mechanism (Tenn. Comp. R. & Regs. 1240-02-04-.04(7)(h)/.03(2)(b)2):
+    // First, if the paying (ARP) parent has 92+ days/year of parenting time, a
+    // "variable multiplier" adjusts the BCSO: multiplier = ARP's days ×
+    // 0.0109589 (= 2/182.5), adjustedBCSO = baseObligation × multiplier, and
+    // the difference (adjustedBCSO - baseObligation) is prorated by the
+    // OTHER (custodial) parent's income share and credited against the
+    // paying parent's prorated share — verified against the rule's own
+    // worked example (94 days, $1,000 BCSO, 40% custodial share -> $587.94).
+    // Second, that result is compared against a schedule lookup at the
+    // paying parent's own income alone; the LESSER of the two applies (this
+    // is what implements the Self-Support Reserve — if the individual lookup
+    // wins, the paying parent effectively loses the parenting-time credit).
+    const tn = rules.tn_parenting_and_ssr;
+    const custodialShare = 1 - payingShare;
+    let arpAmount = baseObligation * payingShare;
+    let adjustedForCustody = false;
+    if (payingParentOvernights >= tn.parenting_credit_threshold_days) {
+      const multiplier = payingParentOvernights * tn.per_diem_multiplier;
+      const adjustedBCSO = baseObligation * multiplier;
+      const diff = adjustedBCSO - baseObligation;
+      const credit = diff * custodialShare;
+      arpAmount = Math.max(0, (baseObligation * payingShare) - credit);
+      adjustedForCustody = true;
+    }
+    const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    const ssrApplied = individualObligation < arpAmount;
+    const finalAmount = Math.min(individualObligation, arpAmount) + addOns;
+    const amount = applyRounding(finalAmount, rules.rounding);
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: adjustedForCustody && !ssrApplied,
+      deviationNote: rules.deviation_note,
+      capWarning: ssrApplied
+        ? "Self-Support Reserve applies — computed from the paying parent's own income alone (Tenn. Comp. R. & Regs. 1240-02-04-.03(2)(b)2), which also means the parenting-time credit does not apply even if the paying parent has 92+ days/year."
+        : null
+    };
+  }
+
   if (rules.pa_lesser_of_calculations) {
     // Pennsylvania's mechanism (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)): when the
     // paying parent's income and number of children fall in the schedule's

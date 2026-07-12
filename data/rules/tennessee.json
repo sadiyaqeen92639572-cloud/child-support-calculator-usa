@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "tn_parenting_and_ssr": {
+    "parenting_credit_threshold_days": 92,
+    "per_diem_multiplier": 0.0109589,
+    "self_support_reserve_monthly": 957,
+    "note": "Tenn. Comp. R. & Regs. 1240-02-04-.04(7)(h): variable multiplier = ARP's annual parenting days x 2/182.5, applied to the BCSO; the difference is credited against the ARP's share. Compared against a schedule lookup at the ARP's own income (Self-Support Reserve, 90% of the 2020 federal poverty guideline, $957/mo) -- the lesser amount applies, and the SSR result forfeits the parenting-time credit."
+  },
+  "income_cap_behavior": "formula_above_cap",
+  "deviation_note": "Above $28,250/month combined adjusted gross income, Tennessee's own formula applies directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children), not judicial discretion. This calculator does not model split parenting (two or more children divided between parents) or extraordinary/other statutory deviations."
+}
