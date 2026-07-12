@@ -36,3 +36,4 @@ New Jersey,2025-NJ-v1,"\$1000 combined net/wk, 2 children, Parent A 60% Parent B
 Tennessee,2021-TN-v1,"Rule's own worked example: \$1000 BCSO, ARP 94 parenting days, PRP 40% income share",\$587.94/mo (verbatim from Tenn. Comp. R. & Regs. 1240-02-04-.04(7)(h)4),\$588/mo,\$0,claude-sonnet-5,2026-07-12
 Tennessee,2021-TN-v1,"\$5000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (no parenting-time credit, standard proration)",\$449/mo (\$1122 base x 40%),\$449/mo,\$0,claude-sonnet-5,2026-07-12
 Tennessee,2021-TN-v1,"\$15900 combined gross/mo, 2 children, paying parent individual income \$900/mo (SSR triggers)",\$100/mo (individual lookup, lower than \$110.70 prorated),\$100/mo,\$0,claude-sonnet-5,2026-07-12
+Missouri,2026-MO-v1,"\$6000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, 100 overnights/yr, 10% bracket)",\$477/mo (\$1589 base x 40% minus \$158.90 credit),\$477/mo,\$0,claude-sonnet-5,2026-07-12

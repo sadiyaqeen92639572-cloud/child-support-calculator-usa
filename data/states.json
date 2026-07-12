@@ -1210,5 +1210,57 @@
         "a": "Above $28,250/month in combined adjusted gross income, Tennessee's rule specifies its own formula directly rather than leaving it to judicial discretion: the $28,250 schedule amount plus a percentage of the income above that threshold, ranging from 6.81% for one child up to 8.66% for five or more children."
       }
     ]
+  },
+  "mo": {
+    "name": "Missouri",
+    "abbr": "MO",
+    "slug": "missouri",
+    "formula_model": "income_shares",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2026-MO-v1",
+    "source": {
+      "agency_name": "Missouri Supreme Court, Form 14 Schedule of Basic Child Support Obligations (2024 Guideline Review)",
+      "url": "https://images.magnetmail.net/images/clients/MOBAR/attach/Orders/3093b.pdf",
+      "statute_ref": "Mo. Sup. Ct. R. 88.01, Form 14"
+    },
+    "params": {
+      "schedule_table_ref": "missouri_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 40000,
+      "high_income_note": "Above $40,000/month combined adjusted gross income, or beyond six children, Missouri courts consider deviation factors under Form 14 rather than an automatic formula."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.",
+        "Look up the basic child support amount from the official Schedule of Basic Child Support Obligations (Form 14) for that combined income and number of children.",
+        "Each parent's share equals their income divided by combined income, applied to the basic amount, plus each parent's pro rata share of childcare and health insurance costs.",
+        "A stepped overnight-visitation credit applies based on the paying parent's annual overnights — 0% below 36 nights, rising in steps to 34% at 181-183 nights — computed on the FULL basic child support amount and subtracted from the paying parent's share.",
+        "For low-income cases (the paying parent's income and children count fall in the schedule's shaded self-support-reserve area), two calculations are compared using the SAME overnight credit dollar amount: the standard proration, and a lookup at the paying parent's own income alone (100%) — the LOWER applies.",
+        "Above $40,000/month combined adjusted gross income, or beyond six children, courts consider deviation factors rather than an automatic formula."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent with 100 overnights/year (10% credit bracket).",
+        "calculation": [
+          "Basic child support amount for $6,000 combined, 2 children: $1,589/month.",
+          "Overnight credit: $1,589 × 10% = $159.",
+          "Parent B's share: 40% × $1,589 = $635.60, minus the $159 credit = $477/month guideline child support paid by Parent B."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How does Missouri's overnight visitation credit work?",
+        "a": "Missouri's Form 14 applies a stepped percentage credit based on the paying parent's annual overnights with the child — 0% below 36 nights, rising through fixed brackets (6% at 36-72, 10% at 92-109, up to 34% at 181-183 nights). Unlike some states' graduated formulas, this credit is calculated on the FULL basic child support amount (not just the paying parent's share) and then subtracted from that parent's prorated obligation."
+      },
+      {
+        "q": "Does Missouri have a self-support reserve for low-income parents?",
+        "a": "Yes. When the paying parent's income and the number of children fall within the schedule's shaded (low-income) area, Missouri compares two calculations using the same overnight-visitation credit dollar amount: the standard combined-income proration, and a lookup using the paying parent's own income alone. Whichever produces the lower amount is used."
+      },
+      {
+        "q": "What happens if combined income is above $40,000/month in Missouri, or there are more than six children?",
+        "a": "Above $40,000/month in combined adjusted gross income, or when more than six children are involved, Missouri's Form 14 doesn't provide an automatic schedule value — courts instead consider deviation factors under Form 14's comment provisions rather than extending the formula."
+      }
+    ]
   }
 }

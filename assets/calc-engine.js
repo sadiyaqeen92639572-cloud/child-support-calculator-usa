@@ -126,6 +126,37 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
+  if (rules.mo_lesser_of_with_credit) {
+    // Missouri's mechanism (Form 14 Directions, Line 5/11 comments): the
+    // overnight-visitation credit (a stepped percentage of the FULL basic
+    // child support amount, by number of overnights) is computed ONCE, then
+    // when the paying parent's income falls in the schedule's shaded
+    // (self-support reserve) area, TWO calculations are compared using that
+    // SAME credit dollar amount: (A) the standard combined-income-prorated
+    // amount, and (B) the paying parent's own individual-income schedule
+    // lookup (at 100%, not prorated). The LOWER of (A) and (B) applies.
+    const overnightPct = stepLookup(rules.custody_adjustment.table, payingParentOvernights);
+    const creditAmount = baseObligation * overnightPct;
+    const addOnsShare = addOns * payingShare;
+    const amountA = (baseObligation * payingShare) - creditAmount + addOnsShare;
+    const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    const amountB = individualObligation - creditAmount + addOnsShare;
+    const ssrApplied = amountB < amountA;
+    const finalAmount = Math.max(0, Math.min(amountA, amountB));
+    const amount = applyRounding(finalAmount, rules.rounding);
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: overnightPct > 0,
+      deviationNote: rules.deviation_note,
+      capWarning: ssrApplied
+        ? "Self-Support Reserve applies (Form 14 shaded area) — the lower amount comes from a schedule lookup at the paying parent's own income alone, not the standard combined-income proration."
+        : null
+    };
+  }
+
   if (rules.pa_lesser_of_calculations) {
     // Pennsylvania's mechanism (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)): when the
     // paying parent's income and number of children fall in the schedule's

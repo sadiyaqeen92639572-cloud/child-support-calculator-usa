@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Missouri Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Missouri child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/missouri/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Missouri Child Support Calculator">
+<meta property="og:description" content="Free Missouri child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/missouri/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Missouri Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-MO-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Missouri?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income. Look up the basic child support amount from the official Schedule of Basic Child Support Obligations (Form 14) for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic amount, plus each parent's pro rata share of childcare and health insurance costs. A stepped overnight-visitation credit applies based on the paying parent's annual overnights — 0% below 36 nights, rising in steps to 34% at 181-183 nights — computed on the FULL basic child support amount and subtracted from the paying parent's share. For low-income cases (the paying parent's income and children count fall in the schedule's shaded self-support-reserve area), two calculations are compared using the SAME overnight credit dollar amount: the standard proration, and a lookup at the paying parent's own income alone (100%) — the LOWER applies. Above $40,000/month combined adjusted gross income, or beyond six children, courts consider deviation factors rather than an automatic formula."}},{"@type":"Question","name":"How does Missouri's overnight visitation credit work?","acceptedAnswer":{"@type":"Answer","text":"Missouri's Form 14 applies a stepped percentage credit based on the paying parent's annual overnights with the child — 0% below 36 nights, rising through fixed brackets (6% at 36-72, 10% at 92-109, up to 34% at 181-183 nights). Unlike some states' graduated formulas, this credit is calculated on the FULL basic child support amount (not just the paying parent's share) and then subtracted from that parent's prorated obligation."}},{"@type":"Question","name":"Does Missouri have a self-support reserve for low-income parents?","acceptedAnswer":{"@type":"Answer","text":"Yes. When the paying parent's income and the number of children fall within the schedule's shaded (low-income) area, Missouri compares two calculations using the same overnight-visitation credit dollar amount: the standard combined-income proration, and a lookup using the paying parent's own income alone. Whichever produces the lower amount is used."}},{"@type":"Question","name":"What happens if combined income is above $40,000/month in Missouri, or there are more than six children?","acceptedAnswer":{"@type":"Answer","text":"Above $40,000/month in combined adjusted gross income, or when more than six children are involved, Missouri's Form 14 doesn't provide an automatic schedule value — courts instead consider deviation factors under Form 14's comment provisions rather than extending the formula."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Missouri Child Support Calculator","item":"https://usachildsupportcalculator.com/missouri/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Missouri Child Support Calculator</h1>
+  <p class="badge">Updated for Missouri's 2026-MO-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Missouri's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Missouri Supreme Court, Form 14 Schedule of Basic Child Support Obligations (2024 Guideline Review) or a family law attorney licensed in Missouri.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Missouri Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.</li><li>Look up the basic child support amount from the official Schedule of Basic Child Support Obligations (Form 14) for that combined income and number of children.</li><li>Each parent's share equals their income divided by combined income, applied to the basic amount, plus each parent's pro rata share of childcare and health insurance costs.</li><li>A stepped overnight-visitation credit applies based on the paying parent's annual overnights — 0% below 36 nights, rising in steps to 34% at 181-183 nights — computed on the FULL basic child support amount and subtracted from the paying parent's share.</li><li>For low-income cases (the paying parent's income and children count fall in the schedule's shaded self-support-reserve area), two calculations are compared using the SAME overnight credit dollar amount: the standard proration, and a lookup at the paying parent's own income alone (100%) — the LOWER applies.</li><li>Above $40,000/month combined adjusted gross income, or beyond six children, courts consider deviation factors rather than an automatic formula.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Missouri Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined adjusted gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent with 100 overnights/year (10% credit bracket).</p>
+    <ol><li>Basic child support amount for $6,000 combined, 2 children: $1,589/month.</li><li>Overnight credit: $1,589 × 10% = $159.</li><li>Parent B's share: 40% × $1,589 = $635.60, minus the $159 credit = $477/month guideline child support paid by Parent B.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Missouri Supreme Court, Form 14 Schedule of Basic Child Support Obligations (2024 Guideline Review) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      <tr><td>Custody adjustment</td><td>Parenting Time Table (step function by day-range)</td><td>Mo. Sup. Ct. R. 88.01, Form 14</td></tr>
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Missouri's official guideline schedule table. Verify against Missouri's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Missouri?</summary><p>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income. Look up the basic child support amount from the official Schedule of Basic Child Support Obligations (Form 14) for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic amount, plus each parent's pro rata share of childcare and health insurance costs. A stepped overnight-visitation credit applies based on the paying parent's annual overnights — 0% below 36 nights, rising in steps to 34% at 181-183 nights — computed on the FULL basic child support amount and subtracted from the paying parent's share. For low-income cases (the paying parent's income and children count fall in the schedule's shaded self-support-reserve area), two calculations are compared using the SAME overnight credit dollar amount: the standard proration, and a lookup at the paying parent's own income alone (100%) — the LOWER applies. Above $40,000/month combined adjusted gross income, or beyond six children, courts consider deviation factors rather than an automatic formula.</p></details>
+    <details><summary>How does Missouri's overnight visitation credit work?</summary><p>Missouri's Form 14 applies a stepped percentage credit based on the paying parent's annual overnights with the child — 0% below 36 nights, rising through fixed brackets (6% at 36-72, 10% at 92-109, up to 34% at 181-183 nights). Unlike some states' graduated formulas, this credit is calculated on the FULL basic child support amount (not just the paying parent's share) and then subtracted from that parent's prorated obligation.</p></details><details><summary>Does Missouri have a self-support reserve for low-income parents?</summary><p>Yes. When the paying parent's income and the number of children fall within the schedule's shaded (low-income) area, Missouri compares two calculations using the same overnight-visitation credit dollar amount: the standard combined-income proration, and a lookup using the paying parent's own income alone. Whichever produces the lower amount is used.</p></details><details><summary>What happens if combined income is above $40,000/month in Missouri, or there are more than six children?</summary><p>Above $40,000/month in combined adjusted gross income, or when more than six children are involved, Missouri's Form 14 doesn't provide an automatic schedule value — courts instead consider deviation factors under Form 14's comment provisions rather than extending the formula.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2026-01-01, guideline version 2026-MO-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://images.magnetmail.net/images/clients/MOBAR/attach/Orders/3093b.pdf" rel="nofollow noopener">Missouri Supreme Court, Form 14 Schedule of Basic Child Support Obligations (2024 Guideline Review)</a> (Mo. Sup. Ct. R. 88.01, Form 14).</p>
+    <p class="deviation-note">Above $40,000/month combined adjusted gross income, or when more than six children are involved, Missouri courts consider deviation factors under Form 14 Line 13 rather than an automatic formula. This calculator does not model split custody (each parent primary for at least one child) or the multiple-children-support scenarios described in the Form 14 directions.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Missouri's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Missouri","abbr":"MO","slug":"missouri","formula_model":"income_shares","effective_date":"2026-01-01","last_verified":"2026-07-12","guideline_version":"2026-MO-v1","source":{"agency_name":"Missouri Supreme Court, Form 14 Schedule of Basic Child Support Obligations (2024 Guideline Review)","url":"https://images.magnetmail.net/images/clients/MOBAR/attach/Orders/3093b.pdf","statute_ref":"Mo. Sup. Ct. R. 88.01, Form 14"},"params":{"schedule_table_ref":"missouri_schedule.json","income_basis":"gross","income_cap_monthly":40000,"high_income_note":"Above $40,000/month combined adjusted gross income, or beyond six children, Missouri courts consider deviation factors under Form 14 rather than an automatic formula."},"worksheet":{"steps":["Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted gross income.","Look up the basic child support amount from the official Schedule of Basic Child Support Obligations (Form 14) for that combined income and number of children.","Each parent's share equals their income divided by combined income, applied to the basic amount, plus each parent's pro rata share of childcare and health insurance costs.","A stepped overnight-visitation credit applies based on the paying parent's annual overnights — 0% below 36 nights, rising in steps to 34% at 181-183 nights — computed on the FULL basic child support amount and subtracted from the paying parent's share.","For low-income cases (the paying parent's income and children count fall in the schedule's shaded self-support-reserve area), two calculations are compared using the SAME overnight credit dollar amount: the standard proration, and a lookup at the paying parent's own income alone (100%) — the LOWER applies.","Above $40,000/month combined adjusted gross income, or beyond six children, courts consider deviation factors rather than an automatic formula."],"example":{"scenario":"Example: combined adjusted gross income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent with 100 overnights/year (10% credit bracket).","calculation":["Basic child support amount for $6,000 combined, 2 children: $1,589/month.","Overnight credit: $1,589 × 10% = $159.","Parent B's share: 40% × $1,589 = $635.60, minus the $159 credit = $477/month guideline child support paid by Parent B."]}},"faq_extra":[{"q":"How does Missouri's overnight visitation credit work?","a":"Missouri's Form 14 applies a stepped percentage credit based on the paying parent's annual overnights with the child — 0% below 36 nights, rising through fixed brackets (6% at 36-72, 10% at 92-109, up to 34% at 181-183 nights). Unlike some states' graduated formulas, this credit is calculated on the FULL basic child support amount (not just the paying parent's share) and then subtracted from that parent's prorated obligation."},{"q":"Does Missouri have a self-support reserve for low-income parents?","a":"Yes. When the paying parent's income and the number of children fall within the schedule's shaded (low-income) area, Missouri compares two calculations using the same overnight-visitation credit dollar amount: the standard combined-income proration, and a lookup using the paying parent's own income alone. Whichever produces the lower amount is used."},{"q":"What happens if combined income is above $40,000/month in Missouri, or there are more than six children?","a":"Above $40,000/month in combined adjusted gross income, or when more than six children are involved, Missouri's Form 14 doesn't provide an automatic schedule value — courts instead consider deviation factors under Form 14's comment provisions rather than extending the formula."}]};
+    const RULES = {"rounding":"nearest_dollar","mo_lesser_of_with_credit":{"note":"Form 14 Directions, Line 5 comment: for low-income cases (paying parent's income and children count in the schedule's shaded area), two calculations are compared -- standard combined-income proration vs. a lookup at the paying parent's own income alone (100%) -- using the SAME overnight-visitation credit dollar amount in both. The lesser applies."},"custody_adjustment":{"type":"stepped_days_table","table":[{"upTo":35,"value":0},{"upTo":72,"value":0.06},{"upTo":91,"value":0.09},{"upTo":109,"value":0.1},{"upTo":115,"value":0.13},{"upTo":119,"value":0.15},{"upTo":125,"value":0.17},{"upTo":130,"value":0.2},{"upTo":136,"value":0.23},{"upTo":141,"value":0.25},{"upTo":147,"value":0.27},{"upTo":152,"value":0.28},{"upTo":158,"value":0.29},{"upTo":164,"value":0.3},{"upTo":170,"value":0.31},{"upTo":175,"value":0.32},{"upTo":180,"value":0.33},{"upTo":365,"value":0.34}]},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above $40,000/month combined adjusted gross income, or when more than six children are involved, Missouri courts consider deviation factors under Form 14 Line 13 rather than an automatic formula. This calculator does not model split custody (each parent primary for at least one child) or the multiple-children-support scenarios described in the Form 14 directions."};
+    const SCHEDULE = {"maxIncome":40000,"source":"Missouri Supreme Court Order re: Form 14, Schedule of Basic Child Support Obligations (2024 Guideline Review), effective 2026-01-01, https://images.magnetmail.net/images/clients/MOBAR/attach/Orders/3093b.pdf (courts.mo.gov blocked by Cloudflare from this environment -- fetched via the Missouri Bar's mirror of the official Supreme Court order attachment)","note":"83 real anchor points transcribed directly from the full official schedule (775 rows, $1,300-$40,000 combined adjusted gross monthly income in $50 increments, extracted via pdftotext -layout from the primary PDF, not OCR). Below $1,300/mo the schedule is flat at $60 (self-support-reserve floor). Above $40,000/mo or beyond 6 children, courts consider deviation factors rather than an automatic formula. Engine interpolates linearly between anchors.","rows":[{"upTo":1300,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":1350,"obligation":{"1":91,"2":94,"3":94,"4":95,"5":95,"6":95}},{"upTo":1450,"obligation":{"1":153,"2":161,"3":162,"4":164,"5":164,"6":165}},{"upTo":1550,"obligation":{"1":215,"2":228,"3":230,"4":233,"5":234,"6":235}},{"upTo":1650,"obligation":{"1":277,"2":295,"3":298,"4":302,"5":303,"6":305}},{"upTo":1750,"obligation":{"1":339,"2":362,"3":366,"4":371,"5":373,"6":375}},{"upTo":1850,"obligation":{"1":376,"2":429,"3":434,"4":440,"5":442,"6":445}},{"upTo":1950,"obligation":{"1":394,"2":496,"3":502,"4":509,"5":512,"6":515}},{"upTo":2050,"obligation":{"1":412,"2":563,"3":570,"4":578,"5":581,"6":585}},{"upTo":2150,"obligation":{"1":430,"2":630,"3":638,"4":647,"5":651,"6":655}},{"upTo":2250,"obligation":{"1":448,"2":682,"3":706,"4":716,"5":720,"6":725}},{"upTo":2350,"obligation":{"1":465,"2":709,"3":774,"4":785,"5":790,"6":795}},{"upTo":2450,"obligation":{"1":483,"2":736,"3":842,"4":854,"5":859,"6":865}},{"upTo":2550,"obligation":{"1":500,"2":762,"3":910,"4":923,"5":929,"6":935}},{"upTo":2650,"obligation":{"1":518,"2":789,"3":954,"4":992,"5":998,"6":1005}},{"upTo":2750,"obligation":{"1":535,"2":815,"3":986,"4":1061,"5":1068,"6":1075}},{"upTo":2850,"obligation":{"1":553,"2":842,"3":1019,"4":1130,"5":1137,"6":1145}},{"upTo":2950,"obligation":{"1":570,"2":869,"3":1051,"4":1174,"5":1207,"6":1215}},{"upTo":3200,"obligation":{"1":614,"2":935,"3":1131,"4":1264,"5":1381,"6":1390}},{"upTo":3400,"obligation":{"1":648,"2":988,"3":1196,"4":1336,"5":1469,"6":1530}},{"upTo":3600,"obligation":{"1":683,"2":1041,"3":1260,"4":1407,"5":1548,"6":1670}},{"upTo":3800,"obligation":{"1":718,"2":1095,"3":1324,"4":1479,"5":1627,"6":1769}},{"upTo":4000,"obligation":{"1":753,"2":1148,"3":1389,"4":1551,"5":1706,"6":1855}},{"upTo":4200,"obligation":{"1":786,"2":1197,"3":1446,"4":1616,"5":1777,"6":1932}},{"upTo":4400,"obligation":{"1":818,"2":1243,"3":1500,"4":1675,"5":1843,"6":2003}},{"upTo":4600,"obligation":{"1":850,"2":1290,"3":1553,"4":1735,"5":1909,"6":2075}},{"upTo":4800,"obligation":{"1":883,"2":1338,"3":1609,"4":1797,"5":1977,"6":2149}},{"upTo":5000,"obligation":{"1":918,"2":1390,"3":1670,"4":1866,"5":2052,"6":2231}},{"upTo":5200,"obligation":{"1":951,"2":1439,"3":1730,"4":1932,"5":2125,"6":2310}},{"upTo":5400,"obligation":{"1":981,"2":1484,"3":1783,"4":1992,"5":2191,"6":2382}},{"upTo":5600,"obligation":{"1":1006,"2":1522,"3":1828,"4":2041,"5":2246,"6":2441}},{"upTo":5800,"obligation":{"1":1029,"2":1555,"3":1867,"4":2085,"5":2294,"6":2494}},{"upTo":6000,"obligation":{"1":1051,"2":1589,"3":1906,"4":2129,"5":2342,"6":2546}},{"upTo":6200,"obligation":{"1":1074,"2":1622,"3":1946,"4":2173,"5":2391,"6":2599}},{"upTo":6400,"obligation":{"1":1089,"2":1645,"3":1972,"4":2203,"5":2424,"6":2634}},{"upTo":6600,"obligation":{"1":1103,"2":1665,"3":1995,"4":2228,"5":2451,"6":2665}},{"upTo":6800,"obligation":{"1":1117,"2":1685,"3":2018,"4":2254,"5":2479,"6":2695}},{"upTo":7000,"obligation":{"1":1131,"2":1705,"3":2040,"4":2279,"5":2507,"6":2725}},{"upTo":7200,"obligation":{"1":1144,"2":1721,"3":2055,"4":2295,"5":2525,"6":2744}},{"upTo":7400,"obligation":{"1":1157,"2":1736,"3":2068,"4":2310,"5":2541,"6":2762}},{"upTo":7600,"obligation":{"1":1170,"2":1751,"3":2081,"4":2324,"5":2557,"6":2779}},{"upTo":7800,"obligation":{"1":1182,"2":1766,"3":2094,"4":2339,"5":2573,"6":2797}},{"upTo":8000,"obligation":{"1":1199,"2":1795,"3":2132,"4":2381,"5":2619,"6":2847}},{"upTo":8500,"obligation":{"1":1242,"2":1867,"3":2227,"4":2488,"5":2737,"6":2975}},{"upTo":9000,"obligation":{"1":1272,"2":1905,"3":2265,"4":2530,"5":2783,"6":3025}},{"upTo":9500,"obligation":{"1":1301,"2":1940,"3":2297,"4":2565,"5":2822,"6":3067}},{"upTo":10000,"obligation":{"1":1337,"2":1987,"3":2345,"4":2619,"5":2881,"6":3131}},{"upTo":10500,"obligation":{"1":1384,"2":2054,"3":2417,"4":2700,"5":2970,"6":3228}},{"upTo":11000,"obligation":{"1":1438,"2":2129,"3":2501,"4":2793,"5":3072,"6":3340}},{"upTo":11500,"obligation":{"1":1487,"2":2200,"3":2584,"4":2886,"5":3174,"6":3451}},{"upTo":12000,"obligation":{"1":1525,"2":2263,"3":2665,"4":2977,"5":3275,"6":3560}},{"upTo":12500,"obligation":{"1":1563,"2":2326,"3":2747,"4":3068,"5":3375,"6":3669}},{"upTo":13000,"obligation":{"1":1594,"2":2371,"3":2797,"4":3125,"5":3437,"6":3736}},{"upTo":13500,"obligation":{"1":1624,"2":2412,"3":2843,"4":3175,"5":3493,"6":3797}},{"upTo":14000,"obligation":{"1":1658,"2":2458,"3":2892,"4":3230,"5":3553,"6":3862}},{"upTo":14500,"obligation":{"1":1700,"2":2514,"3":2950,"4":3295,"5":3624,"6":3940}},{"upTo":15000,"obligation":{"1":1743,"2":2571,"3":3008,"4":3360,"5":3696,"6":4018}},{"upTo":15500,"obligation":{"1":1778,"2":2617,"3":3054,"4":3412,"5":3753,"6":4079}},{"upTo":16000,"obligation":{"1":1805,"2":2651,"3":3087,"4":3448,"5":3793,"6":4123}},{"upTo":17000,"obligation":{"1":1870,"2":2738,"3":3178,"4":3550,"5":3905,"6":4245}},{"upTo":18000,"obligation":{"1":1956,"2":2863,"3":3321,"4":3709,"5":4080,"6":4435}},{"upTo":19000,"obligation":{"1":2040,"2":2984,"3":3460,"4":3865,"5":4251,"6":4621}},{"upTo":20000,"obligation":{"1":2123,"2":3105,"3":3599,"4":4020,"5":4422,"6":4807}},{"upTo":21000,"obligation":{"1":2204,"2":3223,"3":3736,"4":4173,"5":4590,"6":4990}},{"upTo":22000,"obligation":{"1":2263,"2":3318,"3":3856,"4":4308,"5":4738,"6":5151}},{"upTo":23000,"obligation":{"1":2321,"2":3410,"3":3974,"4":4439,"5":4883,"6":5308}},{"upTo":24000,"obligation":{"1":2379,"2":3503,"3":4091,"4":4570,"5":5027,"6":5464}},{"upTo":25000,"obligation":{"1":2437,"2":3595,"3":4209,"4":4701,"5":5171,"6":5621}},{"upTo":26000,"obligation":{"1":2494,"2":3688,"3":4326,"4":4832,"5":5316,"6":5778}},{"upTo":27000,"obligation":{"1":2552,"2":3780,"3":4444,"4":4964,"5":5460,"6":5935}},{"upTo":28000,"obligation":{"1":2610,"2":3872,"3":4559,"4":5092,"5":5601,"6":6089}},{"upTo":29000,"obligation":{"1":2670,"2":3958,"3":4656,"4":5201,"5":5721,"6":6219}},{"upTo":30000,"obligation":{"1":2731,"2":4044,"3":4754,"4":5310,"5":5841,"6":6349}},{"upTo":31000,"obligation":{"1":2791,"2":4130,"3":4851,"4":5419,"5":5961,"6":6479}},{"upTo":32000,"obligation":{"1":2851,"2":4217,"3":4949,"4":5528,"5":6080,"6":6609}},{"upTo":33000,"obligation":{"1":2911,"2":4303,"3":5046,"4":5636,"5":6200,"6":6739}},{"upTo":34000,"obligation":{"1":2971,"2":4389,"3":5143,"4":5745,"5":6320,"6":6870}},{"upTo":35000,"obligation":{"1":3031,"2":4475,"3":5241,"4":5854,"5":6440,"6":7000}},{"upTo":36000,"obligation":{"1":3092,"2":4561,"3":5338,"4":5963,"5":6559,"6":7130}},{"upTo":37000,"obligation":{"1":3152,"2":4647,"3":5436,"4":6072,"5":6679,"6":7260}},{"upTo":38000,"obligation":{"1":3212,"2":4733,"3":5533,"4":6181,"5":6799,"6":7390}},{"upTo":39000,"obligation":{"1":3272,"2":4819,"3":5631,"4":6290,"5":6918,"6":7520}},{"upTo":40000,"obligation":{"1":3332,"2":4905,"3":5728,"4":6398,"5":7038,"6":7651}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

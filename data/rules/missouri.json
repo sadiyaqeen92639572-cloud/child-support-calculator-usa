@@ -1,0 +1,31 @@
+{
+  "rounding": "nearest_dollar",
+  "mo_lesser_of_with_credit": {
+    "note": "Form 14 Directions, Line 5 comment: for low-income cases (paying parent's income and children count in the schedule's shaded area), two calculations are compared -- standard combined-income proration vs. a lookup at the paying parent's own income alone (100%) -- using the SAME overnight-visitation credit dollar amount in both. The lesser applies."
+  },
+  "custody_adjustment": {
+    "type": "stepped_days_table",
+    "table": [
+      { "upTo": 35, "value": 0 },
+      { "upTo": 72, "value": 0.06 },
+      { "upTo": 91, "value": 0.09 },
+      { "upTo": 109, "value": 0.10 },
+      { "upTo": 115, "value": 0.13 },
+      { "upTo": 119, "value": 0.15 },
+      { "upTo": 125, "value": 0.17 },
+      { "upTo": 130, "value": 0.20 },
+      { "upTo": 136, "value": 0.23 },
+      { "upTo": 141, "value": 0.25 },
+      { "upTo": 147, "value": 0.27 },
+      { "upTo": 152, "value": 0.28 },
+      { "upTo": 158, "value": 0.29 },
+      { "upTo": 164, "value": 0.30 },
+      { "upTo": 170, "value": 0.31 },
+      { "upTo": 175, "value": 0.32 },
+      { "upTo": 180, "value": 0.33 },
+      { "upTo": 365, "value": 0.34 }
+    ]
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $40,000/month combined adjusted gross income, or when more than six children are involved, Missouri courts consider deviation factors under Form 14 Line 13 rather than an automatic formula. This calculator does not model split custody (each parent primary for at least one child) or the multiple-children-support scenarios described in the Form 14 directions."
+}
