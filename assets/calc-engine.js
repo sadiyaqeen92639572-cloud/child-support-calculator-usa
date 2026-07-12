@@ -84,6 +84,39 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
+  if (rules.pa_lesser_of_calculations) {
+    // Pennsylvania's mechanism (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)): when the
+    // paying parent's income and number of children fall in the schedule's
+    // shaded (self-support reserve) area, the obligation is the LESSER of
+    // (A) a schedule lookup at the paying parent's own income alone, or
+    // (B) a schedule lookup at combined income times that parent's share.
+    // Structurally the same "lesser of two calculations" idea as Ohio, but
+    // monthly (not annual), with no fixed minimum order — below the SSR
+    // itself, the rule gives courts discretion rather than a formula floor.
+    const pa = rules.pa_lesser_of_calculations;
+    const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    const proratedObligation = baseObligation * payingShare;
+    const amount = applyRounding(Math.min(individualObligation, proratedObligation) + addOns, rules.rounding);
+    const belowReserve = payingParentIncome <= pa.self_support_reserve_monthly;
+    let sharedCustodyWarning = null;
+    if (rules.custody_adjustment && rules.custody_adjustment.type === 'overnights_threshold'
+        && payingParentOvernights > rules.custody_adjustment.threshold) {
+      sharedCustodyWarning = rules.custody_adjustment.warning_message;
+    }
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: false,
+      belowSelfSupportReserve: belowReserve,
+      deviationNote: rules.deviation_note,
+      capWarning: sharedCustodyWarning || (belowReserve
+        ? `Paying parent's net income is at or below the Self-Support Reserve ($${pa.self_support_reserve_monthly.toLocaleString()}/mo) — courts have full discretion here rather than applying the schedule automatically.`
+        : null)
+    };
+  }
+
   if (rules.self_support_reserve) {
     // North Carolina-style self-support reserve: gated on the PAYING parent's
     // own income, not combined income. Below the min-order threshold, a flat

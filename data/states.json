@@ -941,5 +941,61 @@
         "a": "Above $336,000/year in combined gross income, Ohio's official schedule doesn't provide a table value, and courts determine support case-by-case rather than automatically extending the formula."
       }
     ]
+  },
+  "pa": {
+    "name": "Pennsylvania",
+    "abbr": "PA",
+    "slug": "pennsylvania",
+    "formula_model": "income_shares",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-12",
+    "guideline_version": "2026-PA-v1",
+    "source": {
+      "agency_name": "Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3)",
+      "url": "https://www.pacodeandbulletin.gov/Display/pacode?file=%2Fsecure%2Fpacode%2Fdata%2F231%2Fchapter1910%2Fs1910.16-3.html",
+      "statute_ref": "Pa.R.Civ.P. 1910.16-1 through 1910.16-7"
+    },
+    "params": {
+      "schedule_table_ref": "pennsylvania_schedule.json",
+      "income_basis": "net",
+      "income_cap_monthly": 30000,
+      "high_income_note": "Above $30,000/month combined net income, Pennsylvania uses the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead of the schedule."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly net income, then combine both for combined monthly net income.",
+        "Look up the basic obligation two ways: (a) using the paying parent's own individual net income alone, and (b) using combined income multiplied by that parent's income share — the LESSER of the two applies. This mirrors the schedule's Self-Support Reserve (SSR) protection.",
+        "If the paying parent's net income is at or below the SSR ($1,255/month), courts have full discretion rather than an automatic formula result.",
+        "If the paying parent has 146 or more overnights per year (40%+ shared physical custody), a separate shared-custody adjustment formula applies (Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)) — not computed by this calculator.",
+        "Add each parent's pro rata share of childcare costs and health insurance premiums.",
+        "Above $30,000/month combined net income, courts use the high-income formula (Pa.R.Civ.P. 1910.16-3.1) rather than the schedule."
+      ],
+      "example": {
+        "scenario": "Example: combined net income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with under 146 overnights/year.",
+        "calculation": [
+          "Individual-income lookup for Parent B alone ($2,000/mo, 2 children): $678/month.",
+          "Combined-income lookup at $5,000/mo, 2 children: $1,629/month; Parent B's 40% share: $652/month.",
+          "Pennsylvania uses the LESSER of the two: $652/month guideline child support paid by Parent B."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Why does Pennsylvania calculate child support two different ways and use the lower amount?",
+        "a": "Pennsylvania's rule (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)) requires comparing the obligation calculated from the paying parent's own income alone against the obligation calculated from combined income and that parent's income share, then using whichever is LOWER. This protects lower-income paying parents and is what produces the Self-Support Reserve built into the schedule's low end."
+      },
+      {
+        "q": "What is Pennsylvania's Self-Support Reserve?",
+        "a": "The Self-Support Reserve (SSR) is $1,255/month as of the 2026 schedule — the minimum monthly net income the law reserves to the paying parent to meet basic needs. If the paying parent's net income is at or below the SSR, courts have full discretion to set support after considering actual financial resources and living expenses, rather than applying the schedule automatically."
+      },
+      {
+        "q": "Does shared custody reduce child support in Pennsylvania?",
+        "a": "Yes, but only past a specific threshold: if the paying parent has 40% or more of the annual overnights (146+ nights), a separate shared-custody adjustment formula under Pa.R.Civ.P. 1910.16-4(a)(1)(Part D) applies instead of the basic calculation. Below that threshold, the standard formula applies regardless of how time is actually split."
+      },
+      {
+        "q": "What happens if combined income is above $30,000/month in Pennsylvania?",
+        "a": "Above $30,000/month in combined net income, Pennsylvania's schedule doesn't provide a table value. Courts instead use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 rather than extending the basic schedule."
+      }
+    ]
   }
 }

@@ -1,0 +1,14 @@
+{
+  "rounding": "nearest_dollar",
+  "pa_lesser_of_calculations": {
+    "self_support_reserve_monthly": 1255,
+    "note": "Pa.R.Civ.P. 1910.16-2(e)(1)(ii): obligation is the LESSER of a schedule lookup at the paying parent's own income alone, or a schedule lookup at combined income times that parent's share. Below the $1,255/mo Self-Support Reserve, courts have full discretion rather than a formula."
+  },
+  "custody_adjustment": {
+    "type": "overnights_threshold",
+    "threshold": 146,
+    "warning_message": "The paying parent has 40% or more of the annual overnights (146+ days) — Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)/(a)(2)(Part II) requires a separate shared-custody adjustment formula that this calculator does not compute. The amount shown is the basic (non-shared-custody) obligation only."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $30,000/month combined net income, Pennsylvania's schedule has no table value — courts use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead. This calculator does not model the shared-custody adjustment (Pa.R.Civ.P. 1910.16-4(c), triggered at 146+ overnights/year for the paying parent) or spousal support/APL interactions."
+}

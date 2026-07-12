@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pennsylvania Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Pennsylvania child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-12.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/pennsylvania/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Pennsylvania Child Support Calculator">
+<meta property="og:description" content="Free Pennsylvania child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/pennsylvania/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Pennsylvania Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-12","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-PA-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Pennsylvania?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly net income, then combine both for combined monthly net income. Look up the basic obligation two ways: (a) using the paying parent's own individual net income alone, and (b) using combined income multiplied by that parent's income share — the LESSER of the two applies. This mirrors the schedule's Self-Support Reserve (SSR) protection. If the paying parent's net income is at or below the SSR ($1,255/month), courts have full discretion rather than an automatic formula result. If the paying parent has 146 or more overnights per year (40%+ shared physical custody), a separate shared-custody adjustment formula applies (Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)) — not computed by this calculator. Add each parent's pro rata share of childcare costs and health insurance premiums. Above $30,000/month combined net income, courts use the high-income formula (Pa.R.Civ.P. 1910.16-3.1) rather than the schedule."}},{"@type":"Question","name":"Why does Pennsylvania calculate child support two different ways and use the lower amount?","acceptedAnswer":{"@type":"Answer","text":"Pennsylvania's rule (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)) requires comparing the obligation calculated from the paying parent's own income alone against the obligation calculated from combined income and that parent's income share, then using whichever is LOWER. This protects lower-income paying parents and is what produces the Self-Support Reserve built into the schedule's low end."}},{"@type":"Question","name":"What is Pennsylvania's Self-Support Reserve?","acceptedAnswer":{"@type":"Answer","text":"The Self-Support Reserve (SSR) is $1,255/month as of the 2026 schedule — the minimum monthly net income the law reserves to the paying parent to meet basic needs. If the paying parent's net income is at or below the SSR, courts have full discretion to set support after considering actual financial resources and living expenses, rather than applying the schedule automatically."}},{"@type":"Question","name":"Does shared custody reduce child support in Pennsylvania?","acceptedAnswer":{"@type":"Answer","text":"Yes, but only past a specific threshold: if the paying parent has 40% or more of the annual overnights (146+ nights), a separate shared-custody adjustment formula under Pa.R.Civ.P. 1910.16-4(a)(1)(Part D) applies instead of the basic calculation. Below that threshold, the standard formula applies regardless of how time is actually split."}},{"@type":"Question","name":"What happens if combined income is above $30,000/month in Pennsylvania?","acceptedAnswer":{"@type":"Answer","text":"Above $30,000/month in combined net income, Pennsylvania's schedule doesn't provide a table value. Courts instead use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 rather than extending the basic schedule."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Pennsylvania Child Support Calculator","item":"https://usachildsupportcalculator.com/pennsylvania/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Pennsylvania Child Support Calculator</h1>
+  <p class="badge">Updated for Pennsylvania's 2026-PA-v1 guidelines · Last reviewed 2026-07-12</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Pennsylvania's published child support guidelines as of 2026-07-12. Results may differ from a court order. For your official calculation, consult Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3) or a family law attorney licensed in Pennsylvania.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Pennsylvania Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly net income, then combine both for combined monthly net income.</li><li>Look up the basic obligation two ways: (a) using the paying parent's own individual net income alone, and (b) using combined income multiplied by that parent's income share — the LESSER of the two applies. This mirrors the schedule's Self-Support Reserve (SSR) protection.</li><li>If the paying parent's net income is at or below the SSR ($1,255/month), courts have full discretion rather than an automatic formula result.</li><li>If the paying parent has 146 or more overnights per year (40%+ shared physical custody), a separate shared-custody adjustment formula applies (Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)) — not computed by this calculator.</li><li>Add each parent's pro rata share of childcare costs and health insurance premiums.</li><li>Above $30,000/month combined net income, courts use the high-income formula (Pa.R.Civ.P. 1910.16-3.1) rather than the schedule.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Pennsylvania Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined net income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with under 146 overnights/year.</p>
+    <ol><li>Individual-income lookup for Parent B alone ($2,000/mo, 2 children): $678/month.</li><li>Combined-income lookup at $5,000/mo, 2 children: $1,629/month; Parent B's 40% share: $652/month.</li><li>Pennsylvania uses the LESSER of the two: $652/month guideline child support paid by Parent B.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      <tr><td>Overnights threshold</td><td>146 nights/yr</td><td>Pa.R.Civ.P. 1910.16-1 through 1910.16-7</td></tr>
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B<br>obligation_B = obligation_B &times; (1 - custody_credit(overnights))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Pennsylvania's official guideline schedule table. Verify against Pennsylvania's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Pennsylvania?</summary><p>Determine each parent's monthly net income, then combine both for combined monthly net income. Look up the basic obligation two ways: (a) using the paying parent's own individual net income alone, and (b) using combined income multiplied by that parent's income share — the LESSER of the two applies. This mirrors the schedule's Self-Support Reserve (SSR) protection. If the paying parent's net income is at or below the SSR ($1,255/month), courts have full discretion rather than an automatic formula result. If the paying parent has 146 or more overnights per year (40%+ shared physical custody), a separate shared-custody adjustment formula applies (Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)) — not computed by this calculator. Add each parent's pro rata share of childcare costs and health insurance premiums. Above $30,000/month combined net income, courts use the high-income formula (Pa.R.Civ.P. 1910.16-3.1) rather than the schedule.</p></details>
+    <details><summary>Why does Pennsylvania calculate child support two different ways and use the lower amount?</summary><p>Pennsylvania's rule (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)) requires comparing the obligation calculated from the paying parent's own income alone against the obligation calculated from combined income and that parent's income share, then using whichever is LOWER. This protects lower-income paying parents and is what produces the Self-Support Reserve built into the schedule's low end.</p></details><details><summary>What is Pennsylvania's Self-Support Reserve?</summary><p>The Self-Support Reserve (SSR) is $1,255/month as of the 2026 schedule — the minimum monthly net income the law reserves to the paying parent to meet basic needs. If the paying parent's net income is at or below the SSR, courts have full discretion to set support after considering actual financial resources and living expenses, rather than applying the schedule automatically.</p></details><details><summary>Does shared custody reduce child support in Pennsylvania?</summary><p>Yes, but only past a specific threshold: if the paying parent has 40% or more of the annual overnights (146+ nights), a separate shared-custody adjustment formula under Pa.R.Civ.P. 1910.16-4(a)(1)(Part D) applies instead of the basic calculation. Below that threshold, the standard formula applies regardless of how time is actually split.</p></details><details><summary>What happens if combined income is above $30,000/month in Pennsylvania?</summary><p>Above $30,000/month in combined net income, Pennsylvania's schedule doesn't provide a table value. Courts instead use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 rather than extending the basic schedule.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2026-01-01, guideline version 2026-PA-v1, last reviewed 2026-07-12.</p>
+    <p>Official source: <a href="https://www.pacodeandbulletin.gov/Display/pacode?file=%2Fsecure%2Fpacode%2Fdata%2F231%2Fchapter1910%2Fs1910.16-3.html" rel="nofollow noopener">Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3)</a> (Pa.R.Civ.P. 1910.16-1 through 1910.16-7).</p>
+    <p class="deviation-note">Above $30,000/month combined net income, Pennsylvania's schedule has no table value — courts use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead. This calculator does not model the shared-custody adjustment (Pa.R.Civ.P. 1910.16-4(c), triggered at 146+ overnights/year for the paying parent) or spousal support/APL interactions.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Pennsylvania's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Pennsylvania","abbr":"PA","slug":"pennsylvania","formula_model":"income_shares","effective_date":"2026-01-01","last_verified":"2026-07-12","guideline_version":"2026-PA-v1","source":{"agency_name":"Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3)","url":"https://www.pacodeandbulletin.gov/Display/pacode?file=%2Fsecure%2Fpacode%2Fdata%2F231%2Fchapter1910%2Fs1910.16-3.html","statute_ref":"Pa.R.Civ.P. 1910.16-1 through 1910.16-7"},"params":{"schedule_table_ref":"pennsylvania_schedule.json","income_basis":"net","income_cap_monthly":30000,"high_income_note":"Above $30,000/month combined net income, Pennsylvania uses the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead of the schedule."},"worksheet":{"steps":["Determine each parent's monthly net income, then combine both for combined monthly net income.","Look up the basic obligation two ways: (a) using the paying parent's own individual net income alone, and (b) using combined income multiplied by that parent's income share — the LESSER of the two applies. This mirrors the schedule's Self-Support Reserve (SSR) protection.","If the paying parent's net income is at or below the SSR ($1,255/month), courts have full discretion rather than an automatic formula result.","If the paying parent has 146 or more overnights per year (40%+ shared physical custody), a separate shared-custody adjustment formula applies (Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)) — not computed by this calculator.","Add each parent's pro rata share of childcare costs and health insurance premiums.","Above $30,000/month combined net income, courts use the high-income formula (Pa.R.Civ.P. 1910.16-3.1) rather than the schedule."],"example":{"scenario":"Example: combined net income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with under 146 overnights/year.","calculation":["Individual-income lookup for Parent B alone ($2,000/mo, 2 children): $678/month.","Combined-income lookup at $5,000/mo, 2 children: $1,629/month; Parent B's 40% share: $652/month.","Pennsylvania uses the LESSER of the two: $652/month guideline child support paid by Parent B."]}},"faq_extra":[{"q":"Why does Pennsylvania calculate child support two different ways and use the lower amount?","a":"Pennsylvania's rule (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)) requires comparing the obligation calculated from the paying parent's own income alone against the obligation calculated from combined income and that parent's income share, then using whichever is LOWER. This protects lower-income paying parents and is what produces the Self-Support Reserve built into the schedule's low end."},{"q":"What is Pennsylvania's Self-Support Reserve?","a":"The Self-Support Reserve (SSR) is $1,255/month as of the 2026 schedule — the minimum monthly net income the law reserves to the paying parent to meet basic needs. If the paying parent's net income is at or below the SSR, courts have full discretion to set support after considering actual financial resources and living expenses, rather than applying the schedule automatically."},{"q":"Does shared custody reduce child support in Pennsylvania?","a":"Yes, but only past a specific threshold: if the paying parent has 40% or more of the annual overnights (146+ nights), a separate shared-custody adjustment formula under Pa.R.Civ.P. 1910.16-4(a)(1)(Part D) applies instead of the basic calculation. Below that threshold, the standard formula applies regardless of how time is actually split."},{"q":"What happens if combined income is above $30,000/month in Pennsylvania?","a":"Above $30,000/month in combined net income, Pennsylvania's schedule doesn't provide a table value. Courts instead use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 rather than extending the basic schedule."}]};
+    const RULES = {"rounding":"nearest_dollar","pa_lesser_of_calculations":{"self_support_reserve_monthly":1255,"note":"Pa.R.Civ.P. 1910.16-2(e)(1)(ii): obligation is the LESSER of a schedule lookup at the paying parent's own income alone, or a schedule lookup at combined income times that parent's share. Below the $1,255/mo Self-Support Reserve, courts have full discretion rather than a formula."},"custody_adjustment":{"type":"overnights_threshold","threshold":146,"warning_message":"The paying parent has 40% or more of the annual overnights (146+ days) — Pa.R.Civ.P. 1910.16-4(a)(1)(Part D)/(a)(2)(Part II) requires a separate shared-custody adjustment formula that this calculator does not compute. The amount shown is the basic (non-shared-custody) obligation only."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above $30,000/month combined net income, Pennsylvania's schedule has no table value — courts use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead. This calculator does not model the shared-custody adjustment (Pa.R.Civ.P. 1910.16-4(c), triggered at 146+ overnights/year for the paying parent) or spousal support/APL interactions."};
+    const SCHEDULE = {"maxIncome":30000,"source":"231 Pa. Code Rule 1910.16-3, Basic Child Support Schedule, amended Aug. 11, 2025, effective 2026-01-01, https://www.pacodeandbulletin.gov/Display/pacode?file=%2Fsecure%2Fpacode%2Fdata%2F231%2Fchapter1910%2Fs1910.16-3.html","note":"58 real anchor points transcribed directly from the full official schedule (575 rows, $1,300-$30,000 combined monthly net income in $50 increments, scraped as plain text from the primary source, not OCR). Engine interpolates linearly between anchors. Low end of the table (below ~$3,000) has the self-support reserve built directly into the printed values.","rows":[{"upTo":1300,"obligation":{"1":41,"2":41,"3":41,"4":42,"5":42,"6":43}},{"upTo":1400,"obligation":{"1":131,"2":132,"3":133,"4":135,"5":136,"6":138}},{"upTo":1500,"obligation":{"1":221,"2":223,"3":225,"4":228,"5":230,"6":233}},{"upTo":1600,"obligation":{"1":311,"2":314,"3":317,"4":321,"5":324,"6":328}},{"upTo":1700,"obligation":{"1":392,"2":405,"3":409,"4":414,"5":418,"6":423}},{"upTo":1800,"obligation":{"1":415,"2":496,"3":501,"4":507,"5":512,"6":518}},{"upTo":1900,"obligation":{"1":438,"2":587,"3":593,"4":600,"5":606,"6":613}},{"upTo":2000,"obligation":{"1":461,"2":678,"3":685,"4":693,"5":700,"6":708}},{"upTo":2100,"obligation":{"1":484,"2":737,"3":777,"4":786,"5":794,"6":803}},{"upTo":2200,"obligation":{"1":507,"2":772,"3":869,"4":879,"5":888,"6":898}},{"upTo":2300,"obligation":{"1":530,"2":807,"3":961,"4":972,"5":982,"6":993}},{"upTo":2400,"obligation":{"1":553,"2":842,"3":1018,"4":1065,"5":1076,"6":1088}},{"upTo":2500,"obligation":{"1":576,"2":877,"3":1060,"4":1158,"5":1170,"6":1183}},{"upTo":2600,"obligation":{"1":599,"2":912,"3":1103,"4":1232,"5":1264,"6":1278}},{"upTo":2700,"obligation":{"1":622,"2":947,"3":1145,"4":1279,"5":1358,"6":1373}},{"upTo":2800,"obligation":{"1":645,"2":982,"3":1188,"4":1327,"5":1452,"6":1468}},{"upTo":2900,"obligation":{"1":668,"2":1017,"3":1230,"4":1374,"5":1511,"6":1563}},{"upTo":3000,"obligation":{"1":691,"2":1053,"3":1272,"4":1421,"5":1563,"6":1658}},{"upTo":3200,"obligation":{"1":737,"2":1123,"3":1357,"4":1516,"5":1668,"6":1813}},{"upTo":3400,"obligation":{"1":783,"2":1186,"3":1431,"4":1599,"5":1759,"6":1912}},{"upTo":3600,"obligation":{"1":829,"2":1247,"3":1501,"4":1677,"5":1844,"6":2005}},{"upTo":3800,"obligation":{"1":875,"2":1309,"3":1573,"4":1757,"5":1932,"6":2101}},{"upTo":4000,"obligation":{"1":916,"2":1377,"3":1653,"4":1847,"5":2031,"6":2208}},{"upTo":4200,"obligation":{"1":958,"2":1445,"3":1734,"4":1936,"5":2130,"6":2315}},{"upTo":4400,"obligation":{"1":994,"2":1501,"3":1800,"4":2010,"5":2211,"6":2404}},{"upTo":4600,"obligation":{"1":1028,"2":1552,"3":1860,"4":2077,"5":2285,"6":2484}},{"upTo":4800,"obligation":{"1":1060,"2":1599,"3":1915,"4":2139,"5":2353,"6":2557}},{"upTo":5000,"obligation":{"1":1080,"2":1629,"3":1949,"4":2177,"5":2394,"6":2603}},{"upTo":5200,"obligation":{"1":1101,"2":1659,"3":1983,"4":2215,"5":2436,"6":2648}},{"upTo":5400,"obligation":{"1":1121,"2":1683,"3":2006,"4":2240,"5":2464,"6":2679}},{"upTo":5600,"obligation":{"1":1140,"2":1704,"3":2023,"4":2260,"5":2486,"6":2702}},{"upTo":5800,"obligation":{"1":1160,"2":1730,"3":2048,"4":2288,"5":2517,"6":2736}},{"upTo":6000,"obligation":{"1":1186,"2":1774,"3":2107,"4":2353,"5":2589,"6":2814}},{"upTo":6500,"obligation":{"1":1240,"2":1855,"3":2202,"4":2460,"5":2706,"6":2941}},{"upTo":7000,"obligation":{"1":1287,"2":1913,"3":2256,"4":2520,"5":2772,"6":3014}},{"upTo":7500,"obligation":{"1":1355,"2":2006,"3":2356,"4":2631,"5":2894,"6":3146}},{"upTo":8000,"obligation":{"1":1438,"2":2122,"3":2484,"4":2775,"5":3052,"6":3318}},{"upTo":8500,"obligation":{"1":1499,"2":2222,"3":2613,"4":2919,"5":3211,"6":3491}},{"upTo":9000,"obligation":{"1":1553,"2":2306,"3":2717,"4":3034,"5":3338,"6":3628}},{"upTo":9500,"obligation":{"1":1600,"2":2372,"3":2788,"4":3115,"5":3426,"6":3724}},{"upTo":10000,"obligation":{"1":1661,"2":2452,"3":2871,"4":3207,"5":3527,"6":3834}},{"upTo":10500,"obligation":{"1":1721,"2":2532,"3":2954,"4":3299,"5":3629,"6":3945}},{"upTo":11000,"obligation":{"1":1761,"2":2582,"3":3002,"4":3353,"5":3689,"6":4010}},{"upTo":11500,"obligation":{"1":1799,"2":2631,"3":3048,"4":3405,"5":3746,"6":4071}},{"upTo":12000,"obligation":{"1":1869,"2":2733,"3":3169,"4":3539,"5":3893,"6":4232}},{"upTo":13000,"obligation":{"1":2012,"2":2945,"3":3418,"4":3817,"5":4199,"6":4564}},{"upTo":14000,"obligation":{"1":2126,"2":3097,"3":3575,"4":3993,"5":4392,"6":4774}},{"upTo":15000,"obligation":{"1":2240,"2":3247,"3":3729,"4":4165,"5":4582,"6":4980}},{"upTo":16000,"obligation":{"1":2340,"2":3418,"3":3958,"4":4421,"5":4863,"6":5286}},{"upTo":17000,"obligation":{"1":2440,"2":3590,"3":4189,"4":4679,"5":5147,"6":5595}},{"upTo":18000,"obligation":{"1":2540,"2":3762,"3":4421,"4":4938,"5":5432,"6":5904}},{"upTo":19000,"obligation":{"1":2644,"2":3911,"3":4591,"4":5129,"5":5642,"6":6132}},{"upTo":20000,"obligation":{"1":2748,"2":4060,"3":4759,"4":5316,"5":5848,"6":6356}},{"upTo":22000,"obligation":{"1":2955,"2":4356,"3":5095,"4":5691,"5":6260,"6":6805}},{"upTo":24000,"obligation":{"1":3163,"2":4653,"3":5430,"4":6066,"5":6672,"6":7253}},{"upTo":26000,"obligation":{"1":3370,"2":4943,"3":5758,"4":6432,"5":7075,"6":7691}},{"upTo":28000,"obligation":{"1":3559,"2":4962,"3":5781,"4":6457,"5":7103,"6":7721}},{"upTo":30000,"obligation":{"1":3749,"2":4981,"3":5803,"4":6482,"5":7130,"6":7750}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>
