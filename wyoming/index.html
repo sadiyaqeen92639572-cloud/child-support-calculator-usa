@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wyoming Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Wyoming child support using the state's official wy bracket shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/wyoming/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Wyoming Child Support Calculator">
+<meta property="og:description" content="Free Wyoming child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/wyoming/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Wyoming Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-WY-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Wyoming?","acceptedAnswer":{"@type":"Answer","text":"Wyoming is an income-shares state that computes the base obligation using a marginal-bracket formula over combined monthly net income (a fixed base amount plus a percentage of the income within each bracket), rather than a schedule table. Add both parents' net monthly income to get combined income, then compute the total obligation using the bracket formula for the total number of children. Each parent's share of that amount is their percentage of combined net income. If each parent has more than 25% of the year's overnights (a \"shared responsibility\" arrangement), the total obligation is multiplied by 150%, split by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset. The paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the one-person federal poverty guideline, $1,255/month for 2026) -- there is no separate statutory minimum order. Above $15,000/month combined income, an exact extended formula applies (a fixed percentage of the income above $15,000, ranging from 10.3% for one child to 22.2% for five or more)."}},{"@type":"Question","name":"Does Wyoming use a schedule table like most states?","acceptedAnswer":{"@type":"Answer","text":"No. Wyoming's guideline formula (Wyo. Stat. 20-2-304) is a marginal-bracket calculation over combined net monthly income -- a base dollar amount at each of several income breakpoints, plus a percentage of income within each bracket -- rather than a printed schedule table."}},{"@type":"Question","name":"What is Wyoming's shared responsibility adjustment?","acceptedAnswer":{"@type":"Answer","text":"When each parent has more than 25% of the year's overnights, Wyoming multiplies the total obligation by 150%, then recalculates each parent's theoretical amount factoring in their income share and how much time the child spends with the OTHER parent, offsetting the two figures."}},{"@type":"Question","name":"What is Wyoming's Self-Support Reserve?","acceptedAnswer":{"@type":"Answer","text":"The current one-person federal poverty guideline ($1,255/month for 2026). If the paying parent's net income minus this reserve is less than the calculated obligation, the support amount is reduced to that difference -- Wyoming does not set a separate statutory minimum order amount."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Wyoming Child Support Calculator","item":"https://usachildsupportcalculator.com/wyoming/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Wyoming Child Support Calculator</h1>
+  <p class="badge">Updated for Wyoming's 2026-WY-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Wyoming's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Wyoming Legislature — Wyo. Stat. § 20-2-304 or a family law attorney licensed in Wyoming.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Wyoming Child Support Is Calculated</h2>
+    <ol><li>Wyoming is an income-shares state that computes the base obligation using a marginal-bracket formula over combined monthly net income (a fixed base amount plus a percentage of the income within each bracket), rather than a schedule table.</li><li>Add both parents' net monthly income to get combined income, then compute the total obligation using the bracket formula for the total number of children.</li><li>Each parent's share of that amount is their percentage of combined net income.</li><li>If each parent has more than 25% of the year's overnights (a "shared responsibility" arrangement), the total obligation is multiplied by 150%, split by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset.</li><li>The paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the one-person federal poverty guideline, $1,255/month for 2026) -- there is no separate statutory minimum order.</li><li>Above $15,000/month combined income, an exact extended formula applies (a fixed percentage of the income above $15,000, ranging from 10.3% for one child to 22.2% for five or more).</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Wyoming Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A has net monthly income of $3,000, Parent B has net monthly income of $2,000 (combined $5,000). There is one child, who lives primarily with Parent B; the child spends 50 overnights/year with Parent A (under the 25% shared-responsibility threshold).</p>
+    <ol><li>Combined net monthly income: $3,000 + $2,000 = $5,000.</li><li>Bracket formula for one child at $5,000 combined: $965 (base at $4,500) + 11.8% x $500 (the portion from $4,500 to $5,000) = about $1,023.</li><li>Parent A's income share: $3,000 / $5,000 = 60%.</li><li>Parent A pays: $1,023 x 60% = $614/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Wyoming Legislature — Wyo. Stat. § 20-2-304 · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Wyoming's official guideline schedule table. Verify against Wyoming's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Wyoming?</summary><p>Wyoming is an income-shares state that computes the base obligation using a marginal-bracket formula over combined monthly net income (a fixed base amount plus a percentage of the income within each bracket), rather than a schedule table. Add both parents' net monthly income to get combined income, then compute the total obligation using the bracket formula for the total number of children. Each parent's share of that amount is their percentage of combined net income. If each parent has more than 25% of the year's overnights (a "shared responsibility" arrangement), the total obligation is multiplied by 150%, split by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset. The paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the one-person federal poverty guideline, $1,255/month for 2026) -- there is no separate statutory minimum order. Above $15,000/month combined income, an exact extended formula applies (a fixed percentage of the income above $15,000, ranging from 10.3% for one child to 22.2% for five or more).</p></details>
+    <details><summary>Does Wyoming use a schedule table like most states?</summary><p>No. Wyoming's guideline formula (Wyo. Stat. 20-2-304) is a marginal-bracket calculation over combined net monthly income -- a base dollar amount at each of several income breakpoints, plus a percentage of income within each bracket -- rather than a printed schedule table.</p></details><details><summary>What is Wyoming's shared responsibility adjustment?</summary><p>When each parent has more than 25% of the year's overnights, Wyoming multiplies the total obligation by 150%, then recalculates each parent's theoretical amount factoring in their income share and how much time the child spends with the OTHER parent, offsetting the two figures.</p></details><details><summary>What is Wyoming's Self-Support Reserve?</summary><p>The current one-person federal poverty guideline ($1,255/month for 2026). If the paying parent's net income minus this reserve is less than the calculated obligation, the support amount is reduced to that difference -- Wyoming does not set a separate statutory minimum order amount.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: wy bracket shares. Effective 2018-07-01, guideline version 2026-WY-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/section-20-2-304/" rel="nofollow noopener">Wyoming Legislature — Wyo. Stat. § 20-2-304</a> (Wyo. Stat. §§ 20-2-304).</p>
+    <p class="deviation-note">This calculator does not model Split Custody (Wyo. Stat. 20-2-304(d), when each parent has physical custody of at least one child, a per-child-count offset calculation) or the Social Security/veterans benefit dollar-for-dollar offset (subsection (e)). Above $15,000/month combined net income, the extended formula (10.3%-22.2% of income above $15,000, depending on number of children) is presumptive but courts may deviate.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Wyoming's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Wyoming","abbr":"WY","slug":"wyoming","formula_model":"wy_bracket_shares","effective_date":"2018-07-01","last_verified":"2026-07-13","guideline_version":"2026-WY-v1","source":{"agency_name":"Wyoming Legislature — Wyo. Stat. § 20-2-304","url":"https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/section-20-2-304/","statute_ref":"Wyo. Stat. §§ 20-2-304"},"params":{"income_basis":"net"},"worksheet":{"steps":["Wyoming is an income-shares state that computes the base obligation using a marginal-bracket formula over combined monthly net income (a fixed base amount plus a percentage of the income within each bracket), rather than a schedule table.","Add both parents' net monthly income to get combined income, then compute the total obligation using the bracket formula for the total number of children.","Each parent's share of that amount is their percentage of combined net income.","If each parent has more than 25% of the year's overnights (a \"shared responsibility\" arrangement), the total obligation is multiplied by 150%, split by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset.","The paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the one-person federal poverty guideline, $1,255/month for 2026) -- there is no separate statutory minimum order.","Above $15,000/month combined income, an exact extended formula applies (a fixed percentage of the income above $15,000, ranging from 10.3% for one child to 22.2% for five or more)."],"example":{"scenario":"Example: Parent A has net monthly income of $3,000, Parent B has net monthly income of $2,000 (combined $5,000). There is one child, who lives primarily with Parent B; the child spends 50 overnights/year with Parent A (under the 25% shared-responsibility threshold).","calculation":["Combined net monthly income: $3,000 + $2,000 = $5,000.","Bracket formula for one child at $5,000 combined: $965 (base at $4,500) + 11.8% x $500 (the portion from $4,500 to $5,000) = about $1,023.","Parent A's income share: $3,000 / $5,000 = 60%.","Parent A pays: $1,023 x 60% = $614/month."]}},"faq_extra":[{"q":"Does Wyoming use a schedule table like most states?","a":"No. Wyoming's guideline formula (Wyo. Stat. 20-2-304) is a marginal-bracket calculation over combined net monthly income -- a base dollar amount at each of several income breakpoints, plus a percentage of income within each bracket -- rather than a printed schedule table."},{"q":"What is Wyoming's shared responsibility adjustment?","a":"When each parent has more than 25% of the year's overnights, Wyoming multiplies the total obligation by 150%, then recalculates each parent's theoretical amount factoring in their income share and how much time the child spends with the OTHER parent, offsetting the two figures."},{"q":"What is Wyoming's Self-Support Reserve?","a":"The current one-person federal poverty guideline ($1,255/month for 2026). If the paying parent's net income minus this reserve is less than the calculated obligation, the support amount is reduced to that difference -- Wyoming does not set a separate statutory minimum order amount."}]};
+    const RULES = {"rounding":"nearest_dollar","wy_brackets":{"shared_responsibility_threshold_overnights":91.25,"shared_responsibility_multiplier":1.5,"self_support_reserve_monthly":1255,"schedules":{"1":[{"pct":0.23,"width":1000},{"pct":0.23,"width":1000},{"pct":0.23,"width":1200},{"pct":0.201,"width":800},{"pct":0.134,"width":500},{"pct":0.118,"width":3500},{"pct":0.111,"width":7000},{"pct":0.103}],"2":[{"pct":0.351,"width":1000},{"pct":0.351,"width":1000},{"pct":0.339,"width":1200},{"pct":0.31,"width":800},{"pct":0.196,"width":500},{"pct":0.17,"width":3500},{"pct":0.16,"width":7000},{"pct":0.153}],"3":[{"pct":0.424,"width":1000},{"pct":0.424,"width":1000},{"pct":0.404,"width":1200},{"pct":0.365,"width":800},{"pct":0.228,"width":500},{"pct":0.192,"width":3500},{"pct":0.184,"width":7000},{"pct":0.181}],"4":[{"pct":0.474,"width":1000},{"pct":0.474,"width":1000},{"pct":0.452,"width":1200},{"pct":0.408,"width":800},{"pct":0.255,"width":500},{"pct":0.215,"width":3500},{"pct":0.205,"width":7000},{"pct":0.202}],"5":[{"pct":0.521,"width":1000},{"pct":0.521,"width":1000},{"pct":0.497,"width":1200},{"pct":0.448,"width":800},{"pct":0.28,"width":500},{"pct":0.236,"width":3500},{"pct":0.226,"width":7000},{"pct":0.222}]},"note":"Wyo. Stat. 20-2-304(a): marginal-bracket formula over combined monthly net income, verified against the statute's own published base amounts at each breakpoint ($1,000/2,000/3,200/4,000/4,500/8,000/15,000). Subsection (c): when each parent has more than 25% of the year's overnights (91.25 days), the total obligation is multiplied by 150%, split by income share, then cross-multiplied by each parent's time share and offset. Subsection (f): the paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the current one-person federal poverty guideline, $1,255/month for 2026), with no separate stated minimum order."},"custody_adjustment":null,"income_cap_behavior":"discretionary_above_cap","deviation_note":"This calculator does not model Split Custody (Wyo. Stat. 20-2-304(d), when each parent has physical custody of at least one child, a per-child-count offset calculation) or the Social Security/veterans benefit dollar-for-dollar offset (subsection (e)). Above $15,000/month combined net income, the extended formula (10.3%-22.2% of income above $15,000, depending on number of children) is presumptive but courts may deviate."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage' || STATE_ENTRY.formula_model === 'nd_obligor_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

@@ -2880,5 +2880,55 @@
         "a": "When the parent with less time has 35% or more of the year's overnights, West Virginia uses Worksheet B instead: the basic obligation is multiplied by 1.6, and each parent is credited for the share of time they retain the child, with the final amounts offset. This is different from the standard Worksheet A this calculator uses."
       }
     ]
+  },
+  "wy": {
+    "name": "Wyoming",
+    "abbr": "WY",
+    "slug": "wyoming",
+    "formula_model": "wy_bracket_shares",
+    "effective_date": "2018-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2026-WY-v1",
+    "source": {
+      "agency_name": "Wyoming Legislature — Wyo. Stat. § 20-2-304",
+      "url": "https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/section-20-2-304/",
+      "statute_ref": "Wyo. Stat. §§ 20-2-304"
+    },
+    "params": {
+      "income_basis": "net"
+    },
+    "worksheet": {
+      "steps": [
+        "Wyoming is an income-shares state that computes the base obligation using a marginal-bracket formula over combined monthly net income (a fixed base amount plus a percentage of the income within each bracket), rather than a schedule table.",
+        "Add both parents' net monthly income to get combined income, then compute the total obligation using the bracket formula for the total number of children.",
+        "Each parent's share of that amount is their percentage of combined net income.",
+        "If each parent has more than 25% of the year's overnights (a \"shared responsibility\" arrangement), the total obligation is multiplied by 150%, split by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset.",
+        "The paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the one-person federal poverty guideline, $1,255/month for 2026) -- there is no separate statutory minimum order.",
+        "Above $15,000/month combined income, an exact extended formula applies (a fixed percentage of the income above $15,000, ranging from 10.3% for one child to 22.2% for five or more)."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has net monthly income of $3,000, Parent B has net monthly income of $2,000 (combined $5,000). There is one child, who lives primarily with Parent B; the child spends 50 overnights/year with Parent A (under the 25% shared-responsibility threshold).",
+        "calculation": [
+          "Combined net monthly income: $3,000 + $2,000 = $5,000.",
+          "Bracket formula for one child at $5,000 combined: $965 (base at $4,500) + 11.8% x $500 (the portion from $4,500 to $5,000) = about $1,023.",
+          "Parent A's income share: $3,000 / $5,000 = 60%.",
+          "Parent A pays: $1,023 x 60% = $614/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Wyoming use a schedule table like most states?",
+        "a": "No. Wyoming's guideline formula (Wyo. Stat. 20-2-304) is a marginal-bracket calculation over combined net monthly income -- a base dollar amount at each of several income breakpoints, plus a percentage of income within each bracket -- rather than a printed schedule table."
+      },
+      {
+        "q": "What is Wyoming's shared responsibility adjustment?",
+        "a": "When each parent has more than 25% of the year's overnights, Wyoming multiplies the total obligation by 150%, then recalculates each parent's theoretical amount factoring in their income share and how much time the child spends with the OTHER parent, offsetting the two figures."
+      },
+      {
+        "q": "What is Wyoming's Self-Support Reserve?",
+        "a": "The current one-person federal poverty guideline ($1,255/month for 2026). If the paying parent's net income minus this reserve is less than the calculated obligation, the support amount is reduced to that difference -- Wyoming does not set a separate statutory minimum order amount."
+      }
+    ]
   }
 }

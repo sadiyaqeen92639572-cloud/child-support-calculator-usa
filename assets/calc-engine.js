@@ -1337,6 +1337,82 @@ function calcUtahFormula(params, rules, scheduleTable, inputs) {
   };
 }
 
+function calcWyomingFormula(params, rules, inputs) {
+  // Wyoming (Wyo. Stat. 20-2-304) computes the base obligation via marginal
+  // brackets over combined MONTHLY net income (no annual conversion, unlike
+  // Idaho's otherwise-similar bracket structure) -- verified against the
+  // statute's own published base amounts at each breakpoint (within ~$1-2,
+  // consistent with the statute's rates being rounded to one decimal place).
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost } -- net monthly incomes.
+  const wy = rules.wy_brackets;
+  const key = String(Math.min(inputs.numChildren, 5));
+  const brackets = wy.schedules[key];
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+
+  let remaining = combined;
+  let baseObligation = 0;
+  for (const b of brackets) {
+    const width = b.width === undefined ? remaining : b.width;
+    const portion = Math.min(remaining, width);
+    baseObligation += portion * b.pct;
+    remaining -= portion;
+    if (remaining <= 0) break;
+  }
+
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  let amount;
+  let adjustedForCustody = false;
+  if (payingParentOvernights > wy.shared_responsibility_threshold_overnights) {
+    // Wyo. Stat. 20-2-304(c): when EACH parent has more than 25% of the
+    // year's overnights, the total obligation is multiplied by 150%, split
+    // by income share, then each parent's share is multiplied by the
+    // percentage of time the child spends with the OTHER parent, and the
+    // two amounts are offset.
+    const sharedPool = baseObligation * wy.shared_responsibility_multiplier;
+    const custodyShareA = overnightsWithA / 365;
+    const custodyShareB = 1 - custodyShareA;
+    const aAmt = sharedPool * shareA * custodyShareB;
+    const bAmt = sharedPool * shareB * custodyShareA;
+    const soleAmount = (baseObligation + addOns) * payingShare;
+    amount = Math.min(soleAmount, Math.abs(aAmt - bAmt));
+    adjustedForCustody = true;
+  } else {
+    amount = (baseObligation + addOns) * payingShare;
+  }
+
+  let selfSupportApplied = false;
+  const available = payingParentIncome - wy.self_support_reserve_monthly;
+  if (available < amount) {
+    amount = Math.max(0, available);
+    selfSupportApplied = true;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation,
+    adjustedForCustody,
+    deviationNote: rules.deviation_note,
+    capWarning: selfSupportApplied
+      ? `Self-Support Reserve applies (Wyo. Stat. § 20-2-304(f)) — the paying parent's net income minus the reserve ($${wy.self_support_reserve_monthly.toLocaleString()}/mo) is lower than the standard obligation.`
+      : null
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1436,6 +1512,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcNorthDakotaFormula(stateEntry.params, rules, scheduleTable, inputs);
     case 'ut_low_income_or_shares':
       return calcUtahFormula(stateEntry.params, rules, scheduleTable, inputs);
+    case 'wy_bracket_shares':
+      return calcWyomingFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

@@ -1,0 +1,179 @@
+{
+  "rounding": "nearest_dollar",
+  "wy_brackets": {
+    "shared_responsibility_threshold_overnights": 91.25,
+    "shared_responsibility_multiplier": 1.5,
+    "self_support_reserve_monthly": 1255,
+    "schedules": {
+      "1": [
+        {
+          "pct": 0.23,
+          "width": 1000
+        },
+        {
+          "pct": 0.23,
+          "width": 1000
+        },
+        {
+          "pct": 0.23,
+          "width": 1200
+        },
+        {
+          "pct": 0.201,
+          "width": 800
+        },
+        {
+          "pct": 0.134,
+          "width": 500
+        },
+        {
+          "pct": 0.118,
+          "width": 3500
+        },
+        {
+          "pct": 0.111,
+          "width": 7000
+        },
+        {
+          "pct": 0.103
+        }
+      ],
+      "2": [
+        {
+          "pct": 0.351,
+          "width": 1000
+        },
+        {
+          "pct": 0.351,
+          "width": 1000
+        },
+        {
+          "pct": 0.339,
+          "width": 1200
+        },
+        {
+          "pct": 0.31,
+          "width": 800
+        },
+        {
+          "pct": 0.196,
+          "width": 500
+        },
+        {
+          "pct": 0.17,
+          "width": 3500
+        },
+        {
+          "pct": 0.16,
+          "width": 7000
+        },
+        {
+          "pct": 0.153
+        }
+      ],
+      "3": [
+        {
+          "pct": 0.424,
+          "width": 1000
+        },
+        {
+          "pct": 0.424,
+          "width": 1000
+        },
+        {
+          "pct": 0.404,
+          "width": 1200
+        },
+        {
+          "pct": 0.365,
+          "width": 800
+        },
+        {
+          "pct": 0.228,
+          "width": 500
+        },
+        {
+          "pct": 0.192,
+          "width": 3500
+        },
+        {
+          "pct": 0.184,
+          "width": 7000
+        },
+        {
+          "pct": 0.181
+        }
+      ],
+      "4": [
+        {
+          "pct": 0.474,
+          "width": 1000
+        },
+        {
+          "pct": 0.474,
+          "width": 1000
+        },
+        {
+          "pct": 0.452,
+          "width": 1200
+        },
+        {
+          "pct": 0.408,
+          "width": 800
+        },
+        {
+          "pct": 0.255,
+          "width": 500
+        },
+        {
+          "pct": 0.215,
+          "width": 3500
+        },
+        {
+          "pct": 0.205,
+          "width": 7000
+        },
+        {
+          "pct": 0.202
+        }
+      ],
+      "5": [
+        {
+          "pct": 0.521,
+          "width": 1000
+        },
+        {
+          "pct": 0.521,
+          "width": 1000
+        },
+        {
+          "pct": 0.497,
+          "width": 1200
+        },
+        {
+          "pct": 0.448,
+          "width": 800
+        },
+        {
+          "pct": 0.28,
+          "width": 500
+        },
+        {
+          "pct": 0.236,
+          "width": 3500
+        },
+        {
+          "pct": 0.226,
+          "width": 7000
+        },
+        {
+          "pct": 0.222
+        }
+      ]
+    },
+    "note": "Wyo. Stat. 20-2-304(a): marginal-bracket formula over combined monthly net income, verified against the statute's own published base amounts at each breakpoint ($1,000/2,000/3,200/4,000/4,500/8,000/15,000). Subsection (c): when each parent has more than 25% of the year's overnights (91.25 days), the total obligation is multiplied by 150%, split by income share, then cross-multiplied by each parent's time share and offset. Subsection (f): the paying parent's obligation is capped at their own net income minus the Self-Support Reserve (the current one-person federal poverty guideline, $1,255/month for 2026), with no separate stated minimum order."
+  },
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "This calculator does not model Split Custody (Wyo. Stat. 20-2-304(d), when each parent has physical custody of at least one child, a per-child-count offset calculation) or the Social Security/veterans benefit dollar-for-dollar offset (subsection (e)). Above $15,000/month combined net income, the extended formula (10.3%-22.2% of income above $15,000, depending on number of children) is presumptive but courts may deviate."
+}
