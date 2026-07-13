@@ -1,0 +1,15 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "stepped_days_table",
+    "table": [
+      { "upTo": 79, "value": 0 },
+      { "upTo": 124, "value": 0.10 },
+      { "upTo": 163, "value": 0.30 },
+      { "upTo": 365, "value": 0.30 }
+    ],
+    "note": "Form 509, Line 22: Parenting Time Percentage credit, 10% at 80-124 overnights, 30% at 125-163 overnights. Shared Equal Placement (164+ overnights each household, Rule 503(d)) uses a materially different worksheet (each child counted as half in each household) not modeled here -- the 30% credit is extended as an approximation beyond 163 nights, disclosed."
+  },
+  "income_cap_behavior": "no_cap",
+  "deviation_note": "This calculator approximates Delaware's Melson Formula: no adjustment for a parent's other dependent children (Rule 502(e), 70% multiplier), no private-school primary expense (Rule 503(c)), and health insurance/childcare are added as flat combined figures rather than the worksheet's exact 3/4-vs-1/2 premium-sharing split (Rule 503(b)(3)). Shared Equal Placement (164+ overnights each) and the Low-Income Adjustment (Rule 506) are not modeled."
+}

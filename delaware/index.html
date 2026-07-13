@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delaware Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Delaware child support using the state's official melson guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/delaware/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Delaware Child Support Calculator">
+<meta property="og:description" content="Free Delaware child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/delaware/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Delaware Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-DE-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Delaware?","acceptedAnswer":{"@type":"Answer","text":"Delaware uses the Melson Formula -- one of only 3 states (with Hawaii and Montana) that use this three-step model instead of income shares or a flat percentage. Step 1: Each parent keeps a Self-Support Allowance ($1,600/month as of 2026, 120% of the one-person federal poverty guideline) before anything else is counted -- this comes off gross income first. Step 2: The children's Primary Support need (a per-child allowance of $420 plus a per-household allowance of $380, plus childcare and health insurance) is prorated between the parents by their share of remaining income (Net Available Income, NAI). Step 3: The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER income (after their own primary share) with the children, at a percentage that rises with the number of children (12% for one, 17% for two, 21% for three, +2% each additional) -- simulating what the children would enjoy if the family lived together. A High Income Offset reduces the SOLA base by 30% of any combined income above 10 times the Self-Support Allowance ($16,000/month combined). A parenting-time credit (10% at 80-124 overnights/year, 30% at 125-163) reduces the paying parent's obligation, and a Self-Support Protection caps the obligation at 50% of that parent's own Net Available Income. A minimum order applies: $160/month for one child, $240/month for two or more."}},{"@type":"Question","name":"What is the Melson Formula, and why does only Delaware use it (with Hawaii and Montana)?","acceptedAnswer":{"@type":"Answer","text":"The Melson Formula is a three-step child support model, named after a Delaware Family Court judge, that first guarantees each parent a Self-Support Allowance before anything else counts, then prorates the children's basic Primary Support need, and finally shares each parent's LEFTOVER income with the children through a Standard of Living Adjustment (SOLA). Only Delaware, Hawaii, and Montana use this model -- most other states use income shares (combining both parents' income and looking up a table) or a flat percentage of the paying parent's income."}},{"@type":"Question","name":"What is Delaware's Standard of Living Adjustment (SOLA)?","acceptedAnswer":{"@type":"Answer","text":"After each parent's Self-Support Allowance and share of the children's Primary Support need are set aside, the SOLA shares a percentage of what's LEFT OVER with the children -- 12% for one child, 17% for two, 21% for three, plus 2% for each additional child. This simulates the standard of living children would have enjoyed if their parents lived together, rather than just covering basic needs. A High Income Offset reduces this at very high incomes (above 10 times the Self-Support Allowance)."}},{"@type":"Question","name":"Is there a minimum child support order in Delaware?","acceptedAnswer":{"@type":"Answer","text":"Yes -- $160/month for one child, $240/month for two or more, regardless of how the Melson Formula calculation comes out, unless the court finds a documented reason to deviate (such as a genuinely unable-to-pay circumstance under the Low-Income Adjustment)."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Delaware Child Support Calculator","item":"https://usachildsupportcalculator.com/delaware/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Delaware Child Support Calculator</h1>
+  <p class="badge">Updated for Delaware's 2026-DE-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Delaware's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult The Family Court of the State of Delaware (Form 509, Rules 500-509) or a family law attorney licensed in Delaware.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Delaware Child Support Is Calculated</h2>
+    <ol><li>Delaware uses the Melson Formula -- one of only 3 states (with Hawaii and Montana) that use this three-step model instead of income shares or a flat percentage.</li><li>Step 1: Each parent keeps a Self-Support Allowance ($1,600/month as of 2026, 120% of the one-person federal poverty guideline) before anything else is counted -- this comes off gross income first.</li><li>Step 2: The children's Primary Support need (a per-child allowance of $420 plus a per-household allowance of $380, plus childcare and health insurance) is prorated between the parents by their share of remaining income (Net Available Income, NAI).</li><li>Step 3: The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER income (after their own primary share) with the children, at a percentage that rises with the number of children (12% for one, 17% for two, 21% for three, +2% each additional) -- simulating what the children would enjoy if the family lived together.</li><li>A High Income Offset reduces the SOLA base by 30% of any combined income above 10 times the Self-Support Allowance ($16,000/month combined).</li><li>A parenting-time credit (10% at 80-124 overnights/year, 30% at 125-163) reduces the paying parent's obligation, and a Self-Support Protection caps the obligation at 50% of that parent's own Net Available Income.</li><li>A minimum order applies: $160/month for one child, $240/month for two or more.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Delaware Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A earns $5,000/mo, Parent B earns $3,000/mo, 2 children, Parent B is the noncustodial parent with 0 overnights.</p>
+    <ol><li>Net Available Income: Parent A = $5,000 - $1,600 = $3,400. Parent B = $3,000 - $1,600 = $1,400. Combined = $4,800.</li><li>Primary Support Need: 2 × $420 + $380 = $1,220. Parent B's share (1,400/4,800 = 29.2%): $356.</li><li>Parent B's NAI for SOLA: $1,400 - $356 = $1,044. Combined NAI for SOLA ($3,580) × 17% SOLA rate = $609 total, Parent B's 29.2% share ≈ $178.</li><li>Parent B's total obligation: $356 (primary) + $178 (SOLA) ≈ $533/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: The Family Court of the State of Delaware (Form 509, Rules 500-509) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Self-Support Allowance</td><td>$1,600/mo</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+      <tr><td>Primary allowance, per child</td><td>$420</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+      <tr><td>Primary allowance, per household</td><td>$380</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+      <tr><td>SOLA %, 1/2/3 children</td><td>12% / 17% / 21%, +2% each additional</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+      <tr><td>High Income Offset threshold</td><td>10&times; Self-Support Allowance</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+      <tr><td>Self-Support Protection</td><td>50% of paying parent's Net Available Income</td><td>Del. Fam. Ct. Civ. P. R. 500-509</td></tr>
+    </table>
+    <h3>Formula (the Melson Formula)</h3>
+    <div class="formula-code">
+      NAI(parent) = max(0, gross_income(parent) - Self-Support Allowance)<br>
+      share(parent) = NAI(parent) / combined NAI<br>
+      Primary Need = children &times; per-child allowance + per-household allowance + childcare + health insurance<br>
+      Primary Obligation(parent) = share(parent) &times; Primary Need<br>
+      NAI for SOLA(parent) = NAI(parent) - Primary Obligation(parent)<br>
+      High Income Offset = 30% &times; combined excess above 10&times; Self-Support Allowance<br>
+      SOLA = (combined NAI for SOLA - High Income Offset) &times; SOLA%<br>
+      support = paying parent's (Primary Obligation + share of SOLA)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Delaware's Melson Formula. Verify against Delaware's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Delaware?</summary><p>Delaware uses the Melson Formula -- one of only 3 states (with Hawaii and Montana) that use this three-step model instead of income shares or a flat percentage. Step 1: Each parent keeps a Self-Support Allowance ($1,600/month as of 2026, 120% of the one-person federal poverty guideline) before anything else is counted -- this comes off gross income first. Step 2: The children's Primary Support need (a per-child allowance of $420 plus a per-household allowance of $380, plus childcare and health insurance) is prorated between the parents by their share of remaining income (Net Available Income, NAI). Step 3: The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER income (after their own primary share) with the children, at a percentage that rises with the number of children (12% for one, 17% for two, 21% for three, +2% each additional) -- simulating what the children would enjoy if the family lived together. A High Income Offset reduces the SOLA base by 30% of any combined income above 10 times the Self-Support Allowance ($16,000/month combined). A parenting-time credit (10% at 80-124 overnights/year, 30% at 125-163) reduces the paying parent's obligation, and a Self-Support Protection caps the obligation at 50% of that parent's own Net Available Income. A minimum order applies: $160/month for one child, $240/month for two or more.</p></details>
+    <details><summary>What is the Melson Formula, and why does only Delaware use it (with Hawaii and Montana)?</summary><p>The Melson Formula is a three-step child support model, named after a Delaware Family Court judge, that first guarantees each parent a Self-Support Allowance before anything else counts, then prorates the children's basic Primary Support need, and finally shares each parent's LEFTOVER income with the children through a Standard of Living Adjustment (SOLA). Only Delaware, Hawaii, and Montana use this model -- most other states use income shares (combining both parents' income and looking up a table) or a flat percentage of the paying parent's income.</p></details><details><summary>What is Delaware's Standard of Living Adjustment (SOLA)?</summary><p>After each parent's Self-Support Allowance and share of the children's Primary Support need are set aside, the SOLA shares a percentage of what's LEFT OVER with the children -- 12% for one child, 17% for two, 21% for three, plus 2% for each additional child. This simulates the standard of living children would have enjoyed if their parents lived together, rather than just covering basic needs. A High Income Offset reduces this at very high incomes (above 10 times the Self-Support Allowance).</p></details><details><summary>Is there a minimum child support order in Delaware?</summary><p>Yes -- $160/month for one child, $240/month for two or more, regardless of how the Melson Formula calculation comes out, unless the court finds a documented reason to deviate (such as a genuinely unable-to-pay circumstance under the Low-Income Adjustment).</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: melson. Effective 2026-02-01, guideline version 2026-DE-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://courts.delaware.gov/forms/download.aspx?id=268" rel="nofollow noopener">The Family Court of the State of Delaware (Form 509, Rules 500-509)</a> (Del. Fam. Ct. Civ. P. R. 500-509).</p>
+    <p class="deviation-note">This calculator approximates Delaware's Melson Formula: no adjustment for a parent's other dependent children (Rule 502(e), 70% multiplier), no private-school primary expense (Rule 503(c)), and health insurance/childcare are added as flat combined figures rather than the worksheet's exact 3/4-vs-1/2 premium-sharing split (Rule 503(b)(3)). Shared Equal Placement (164+ overnights each) and the Low-Income Adjustment (Rule 506) are not modeled.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Delaware's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Delaware","abbr":"DE","slug":"delaware","formula_model":"melson","effective_date":"2026-02-01","last_verified":"2026-07-13","guideline_version":"2026-DE-v1","source":{"agency_name":"The Family Court of the State of Delaware (Form 509, Rules 500-509)","url":"https://courts.delaware.gov/forms/download.aspx?id=268","statute_ref":"Del. Fam. Ct. Civ. P. R. 500-509"},"params":{"income_basis":"gross","self_support_allowance_monthly":1600,"per_child_allowance":420,"per_household_allowance":380,"sola_percentages":{"1":0.12,"2":0.17,"3":0.21},"sola_percentage_per_additional_child":0.02,"high_income_offset_pct":0.3,"self_support_protection_pct":0.5,"minimum_order_one_child":160,"minimum_order_multiple_children":240},"worksheet":{"steps":["Delaware uses the Melson Formula -- one of only 3 states (with Hawaii and Montana) that use this three-step model instead of income shares or a flat percentage.","Step 1: Each parent keeps a Self-Support Allowance ($1,600/month as of 2026, 120% of the one-person federal poverty guideline) before anything else is counted -- this comes off gross income first.","Step 2: The children's Primary Support need (a per-child allowance of $420 plus a per-household allowance of $380, plus childcare and health insurance) is prorated between the parents by their share of remaining income (Net Available Income, NAI).","Step 3: The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER income (after their own primary share) with the children, at a percentage that rises with the number of children (12% for one, 17% for two, 21% for three, +2% each additional) -- simulating what the children would enjoy if the family lived together.","A High Income Offset reduces the SOLA base by 30% of any combined income above 10 times the Self-Support Allowance ($16,000/month combined).","A parenting-time credit (10% at 80-124 overnights/year, 30% at 125-163) reduces the paying parent's obligation, and a Self-Support Protection caps the obligation at 50% of that parent's own Net Available Income.","A minimum order applies: $160/month for one child, $240/month for two or more."],"example":{"scenario":"Example: Parent A earns $5,000/mo, Parent B earns $3,000/mo, 2 children, Parent B is the noncustodial parent with 0 overnights.","calculation":["Net Available Income: Parent A = $5,000 - $1,600 = $3,400. Parent B = $3,000 - $1,600 = $1,400. Combined = $4,800.","Primary Support Need: 2 × $420 + $380 = $1,220. Parent B's share (1,400/4,800 = 29.2%): $356.","Parent B's NAI for SOLA: $1,400 - $356 = $1,044. Combined NAI for SOLA ($3,580) × 17% SOLA rate = $609 total, Parent B's 29.2% share ≈ $178.","Parent B's total obligation: $356 (primary) + $178 (SOLA) ≈ $533/month."]}},"faq_extra":[{"q":"What is the Melson Formula, and why does only Delaware use it (with Hawaii and Montana)?","a":"The Melson Formula is a three-step child support model, named after a Delaware Family Court judge, that first guarantees each parent a Self-Support Allowance before anything else counts, then prorates the children's basic Primary Support need, and finally shares each parent's LEFTOVER income with the children through a Standard of Living Adjustment (SOLA). Only Delaware, Hawaii, and Montana use this model -- most other states use income shares (combining both parents' income and looking up a table) or a flat percentage of the paying parent's income."},{"q":"What is Delaware's Standard of Living Adjustment (SOLA)?","a":"After each parent's Self-Support Allowance and share of the children's Primary Support need are set aside, the SOLA shares a percentage of what's LEFT OVER with the children -- 12% for one child, 17% for two, 21% for three, plus 2% for each additional child. This simulates the standard of living children would have enjoyed if their parents lived together, rather than just covering basic needs. A High Income Offset reduces this at very high incomes (above 10 times the Self-Support Allowance)."},{"q":"Is there a minimum child support order in Delaware?","a":"Yes -- $160/month for one child, $240/month for two or more, regardless of how the Melson Formula calculation comes out, unless the court finds a documented reason to deviate (such as a genuinely unable-to-pay circumstance under the Low-Income Adjustment)."}]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":{"type":"stepped_days_table","table":[{"upTo":79,"value":0},{"upTo":124,"value":0.1},{"upTo":163,"value":0.3},{"upTo":365,"value":0.3}],"note":"Form 509, Line 22: Parenting Time Percentage credit, 10% at 80-124 overnights, 30% at 125-163 overnights. Shared Equal Placement (164+ overnights each household, Rule 503(d)) uses a materially different worksheet (each child counted as half in each household) not modeled here -- the 30% credit is extended as an approximation beyond 163 nights, disclosed."},"income_cap_behavior":"no_cap","deviation_note":"This calculator approximates Delaware's Melson Formula: no adjustment for a parent's other dependent children (Rule 502(e), 70% multiplier), no private-school primary expense (Rule 503(c)), and health insurance/childcare are added as flat combined figures rather than the worksheet's exact 3/4-vs-1/2 premium-sharing split (Rule 503(b)(3)). Shared Equal Placement (164+ overnights each) and the Low-Income Adjustment (Rule 506) are not modeled."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

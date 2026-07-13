@@ -190,7 +190,38 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
-  // income_shares and melson
+  if (state.formula_model === 'melson') {
+    const p = state.params;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Self-Support Allowance</td><td>$${p.self_support_allowance_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Primary allowance, per child</td><td>$${p.per_child_allowance}</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Primary allowance, per household</td><td>$${p.per_household_allowance}</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>SOLA %, 1/2/3 children</td><td>${(p.sola_percentages['1']*100).toFixed(0)}% / ${(p.sola_percentages['2']*100).toFixed(0)}% / ${(p.sola_percentages['3']*100).toFixed(0)}%, +${(p.sola_percentage_per_additional_child*100).toFixed(0)}% each additional</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>High Income Offset threshold</td><td>10&times; Self-Support Allowance</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Self-Support Protection</td><td>${(p.self_support_protection_pct*100).toFixed(0)}% of paying parent's Net Available Income</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula (the Melson Formula)</h3>
+    <div class="formula-code">
+      NAI(parent) = max(0, gross_income(parent) - Self-Support Allowance)<br>
+      share(parent) = NAI(parent) / combined NAI<br>
+      Primary Need = children &times; per-child allowance + per-household allowance + childcare + health insurance<br>
+      Primary Obligation(parent) = share(parent) &times; Primary Need<br>
+      NAI for SOLA(parent) = NAI(parent) - Primary Obligation(parent)<br>
+      High Income Offset = 30% &times; combined excess above 10&times; Self-Support Allowance<br>
+      SOLA = (combined NAI for SOLA - High Income Offset) &times; SOLA%<br>
+      support = paying parent's (Primary Obligation + share of SOLA)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on ${state.name}'s Melson Formula. Verify against ${state.name}'s official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
+  // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;
   const isPercentageOfCombined = p.schedule_type === 'percentage';

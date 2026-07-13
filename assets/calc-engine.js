@@ -700,14 +700,88 @@ function calcAlgebraicKFactor(params, rules, inputs) {
   };
 }
 
-function calcMelson(params, rules, scheduleTable, inputs) {
-  const base = calcIncomeShares(params, rules, scheduleTable, inputs);
-  if (params.sola_percentage) {
-    const solaAdjustment = base.monthlyAmount * params.sola_percentage;
-    base.monthlyAmount = applyRounding(base.monthlyAmount + solaAdjustment, rules.rounding);
-    base.solaApplied = true;
+function calcMelson(params, rules, inputs) {
+  // The real Melson Formula (Delaware Family Court Rules 502-504; also used
+  // by Hawaii and Montana). Three steps: (1) each parent keeps a
+  // Self-Support Allowance before anything else counts; (2) the children's
+  // Primary Support need is prorated by each parent's share of remaining
+  // Net Available Income (NAI); (3) a Standard of Living Adjustment (SOLA)
+  // shares each parent's LEFTOVER income (after their own primary share)
+  // with the children, at a percentage that rises with the number of
+  // children, with a High Income Offset above 10x the Self-Support
+  // Allowance. Known simplifications (disclosed in the deviation note):
+  // no other-dependents adjustment, no private-school primary expense, and
+  // health insurance/childcare are added as flat combined figures rather
+  // than the worksheet's exact 3/4-vs-1/2 premium-sharing split.
+  const ssa = params.self_support_allowance_monthly;
+  const naiA = Math.max(0, inputs.parentAGrossIncome - ssa);
+  const naiB = Math.max(0, inputs.parentBGrossIncome - ssa);
+  const combinedNAI = naiA + naiB;
+  const shareA = combinedNAI > 0 ? naiA / combinedNAI : 0.5;
+  const shareB = 1 - shareA;
+
+  const primaryAllowance = (inputs.numChildren * params.per_child_allowance) + params.per_household_allowance;
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+  const totalPrimaryNeed = primaryAllowance + addOns;
+  const primaryA = shareA * totalPrimaryNeed;
+  const primaryB = shareB * totalPrimaryNeed;
+
+  const naiForSolaA = naiA - primaryA;
+  const naiForSolaB = naiB - primaryB;
+  const highIncomeThreshold = ssa * 10;
+  const excessA = Math.max(0, naiForSolaA - highIncomeThreshold);
+  const excessB = Math.max(0, naiForSolaB - highIncomeThreshold);
+  const highIncomeOffset = (excessA + excessB) * params.high_income_offset_pct;
+  const combinedNaiForSola = Math.max(0, (naiForSolaA + naiForSolaB) - highIncomeOffset);
+
+  const bracket = inputs.numChildren >= 3 ? '3' : String(inputs.numChildren);
+  const solaPct = params.sola_percentages[bracket]
+    + (inputs.numChildren > 3 ? (inputs.numChildren - 3) * params.sola_percentage_per_additional_child : 0);
+  const solaCombined = combinedNaiForSola * solaPct;
+  const solaA = solaCombined * shareA;
+  const solaB = solaCombined * shareB;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+  let amount = (payingParent === 'A' ? (primaryA + solaA) : (primaryB + solaB));
+
+  let adjustedForCustody = false;
+  if (rules.custody_adjustment && rules.custody_adjustment.type === 'stepped_days_table') {
+    const creditPct = stepLookup(rules.custody_adjustment.table, payingParentOvernights);
+    amount = Math.max(0, amount * (1 - creditPct));
+    adjustedForCustody = creditPct > 0;
   }
-  return base;
+
+  const payingParentNAI = payingParent === 'A' ? naiA : naiB;
+  const selfSupportProtection = payingParentNAI * params.self_support_protection_pct;
+  const cappedBySelfSupportProtection = amount > selfSupportProtection;
+  if (cappedBySelfSupportProtection) amount = selfSupportProtection;
+
+  const minOrder = inputs.numChildren >= 2 ? params.minimum_order_multiple_children : params.minimum_order_one_child;
+  let minimumOrderApplied = false;
+  if (amount < minOrder) {
+    amount = minOrder;
+    minimumOrderApplied = true;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation: primaryA + primaryB,
+    adjustedForCustody,
+    selfSupportMinimumOrderApplied: minimumOrderApplied,
+    deviationNote: rules.deviation_note,
+    capWarning: minimumOrderApplied
+      ? null
+      : (cappedBySelfSupportProtection
+        ? `Self-Support Protection applies — the paying parent's obligation is capped at ${(params.self_support_protection_pct * 100).toFixed(0)}% of their own Net Available Income.`
+        : null)
+  };
 }
 
 function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
@@ -717,7 +791,7 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
     case 'income_shares':
       return calcIncomeShares(stateEntry.params, rules, scheduleTable, inputs);
     case 'melson':
-      return calcMelson(stateEntry.params, rules, scheduleTable, inputs);
+      return calcMelson(stateEntry.params, rules, inputs);
     case 'algebraic_kfactor':
       return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
     case 'michigan_formula':

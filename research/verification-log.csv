@@ -47,3 +47,4 @@ South Carolina,2024-SC-v1,"\$10900 combined gross/mo, 2 children, paying parent 
 Oregon,2007-OR-v1,"\$5000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, 100 overnights/yr)",\$280/mo (hand-verified logistic parenting-time credit formula),\$280/mo,\$0,claude-sonnet-5,2026-07-13
 Oregon,2007-OR-v1,"\$21600 combined gross/mo, 2 children, paying parent individual income \$1600/mo (below SSR after obligation)",\$100/mo minimum order (OAR 137-050-0755),\$100/mo,\$0,claude-sonnet-5,2026-07-13
 Nevada,2020-NV-v1,"Obligor \$14000/mo, 2 children (regulation's own tiered math)",\$2000/mo (\$1320+\$440+\$240 across the 3 tiers),\$2000/mo,\$0,claude-sonnet-5,2026-07-13
+Delaware,2026-DE-v1,"Parent A \$5000/mo Parent B \$3000/mo (noncustodial), 2 children",\$533/mo (hand-verified full 3-step Melson calculation),\$533/mo,\$0,claude-sonnet-5,2026-07-13

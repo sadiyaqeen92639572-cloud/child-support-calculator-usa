@@ -1645,5 +1645,69 @@
         "a": "Not automatically through a fixed formula. Nevada courts may adjust the base obligation under NAC 425.150 considering the relative income of both households and time-sharing costs, among other discretionary factors -- but there is no mandatory shared-placement cross-formula like some other states use."
       }
     ]
+  },
+  "de": {
+    "name": "Delaware",
+    "abbr": "DE",
+    "slug": "delaware",
+    "formula_model": "melson",
+    "effective_date": "2026-02-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2026-DE-v1",
+    "source": {
+      "agency_name": "The Family Court of the State of Delaware (Form 509, Rules 500-509)",
+      "url": "https://courts.delaware.gov/forms/download.aspx?id=268",
+      "statute_ref": "Del. Fam. Ct. Civ. P. R. 500-509"
+    },
+    "params": {
+      "income_basis": "gross",
+      "self_support_allowance_monthly": 1600,
+      "per_child_allowance": 420,
+      "per_household_allowance": 380,
+      "sola_percentages": {
+        "1": 0.12,
+        "2": 0.17,
+        "3": 0.21
+      },
+      "sola_percentage_per_additional_child": 0.02,
+      "high_income_offset_pct": 0.3,
+      "self_support_protection_pct": 0.5,
+      "minimum_order_one_child": 160,
+      "minimum_order_multiple_children": 240
+    },
+    "worksheet": {
+      "steps": [
+        "Delaware uses the Melson Formula -- one of only 3 states (with Hawaii and Montana) that use this three-step model instead of income shares or a flat percentage.",
+        "Step 1: Each parent keeps a Self-Support Allowance ($1,600/month as of 2026, 120% of the one-person federal poverty guideline) before anything else is counted -- this comes off gross income first.",
+        "Step 2: The children's Primary Support need (a per-child allowance of $420 plus a per-household allowance of $380, plus childcare and health insurance) is prorated between the parents by their share of remaining income (Net Available Income, NAI).",
+        "Step 3: The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER income (after their own primary share) with the children, at a percentage that rises with the number of children (12% for one, 17% for two, 21% for three, +2% each additional) -- simulating what the children would enjoy if the family lived together.",
+        "A High Income Offset reduces the SOLA base by 30% of any combined income above 10 times the Self-Support Allowance ($16,000/month combined).",
+        "A parenting-time credit (10% at 80-124 overnights/year, 30% at 125-163) reduces the paying parent's obligation, and a Self-Support Protection caps the obligation at 50% of that parent's own Net Available Income.",
+        "A minimum order applies: $160/month for one child, $240/month for two or more."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $5,000/mo, Parent B earns $3,000/mo, 2 children, Parent B is the noncustodial parent with 0 overnights.",
+        "calculation": [
+          "Net Available Income: Parent A = $5,000 - $1,600 = $3,400. Parent B = $3,000 - $1,600 = $1,400. Combined = $4,800.",
+          "Primary Support Need: 2 × $420 + $380 = $1,220. Parent B's share (1,400/4,800 = 29.2%): $356.",
+          "Parent B's NAI for SOLA: $1,400 - $356 = $1,044. Combined NAI for SOLA ($3,580) × 17% SOLA rate = $609 total, Parent B's 29.2% share ≈ $178.",
+          "Parent B's total obligation: $356 (primary) + $178 (SOLA) ≈ $533/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is the Melson Formula, and why does only Delaware use it (with Hawaii and Montana)?",
+        "a": "The Melson Formula is a three-step child support model, named after a Delaware Family Court judge, that first guarantees each parent a Self-Support Allowance before anything else counts, then prorates the children's basic Primary Support need, and finally shares each parent's LEFTOVER income with the children through a Standard of Living Adjustment (SOLA). Only Delaware, Hawaii, and Montana use this model -- most other states use income shares (combining both parents' income and looking up a table) or a flat percentage of the paying parent's income."
+      },
+      {
+        "q": "What is Delaware's Standard of Living Adjustment (SOLA)?",
+        "a": "After each parent's Self-Support Allowance and share of the children's Primary Support need are set aside, the SOLA shares a percentage of what's LEFT OVER with the children -- 12% for one child, 17% for two, 21% for three, plus 2% for each additional child. This simulates the standard of living children would have enjoyed if their parents lived together, rather than just covering basic needs. A High Income Offset reduces this at very high incomes (above 10 times the Self-Support Allowance)."
+      },
+      {
+        "q": "Is there a minimum child support order in Delaware?",
+        "a": "Yes -- $160/month for one child, $240/month for two or more, regardless of how the Melson Formula calculation comes out, unless the court finds a documented reason to deviate (such as a genuinely unable-to-pay circumstance under the Low-Income Adjustment)."
+      }
+    ]
   }
 }
