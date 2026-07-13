@@ -1560,5 +1560,90 @@
         "a": "Above $30,000/month in combined gross adjusted income (or beyond 10 children), Oregon's guideline caps the obligation at the $30,000 schedule figure rather than extrapolating further. A newer scale with a $50,000 cap and 6 children columns has been proposed by Oregon's Guidelines Advisory Committee as of 2026 but is not yet adopted into the administrative rule."
       }
     ]
+  },
+  "nv": {
+    "name": "Nevada",
+    "abbr": "NV",
+    "slug": "nevada",
+    "formula_model": "nv_tiered_percentage",
+    "effective_date": "2020-02-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2020-NV-v1",
+    "source": {
+      "agency_name": "Nevada Division of Welfare and Supportive Services (Nev. Admin. Code § 425.140)",
+      "url": "https://www.law.cornell.edu/regulations/nevada/NAC-425-140",
+      "statute_ref": "Nev. Admin. Code §§ 425.140, 425.145, 425.150"
+    },
+    "params": {
+      "income_tiers": [
+        {
+          "upTo": 6000,
+          "pct": {
+            "1": 0.16,
+            "2": 0.22,
+            "3": 0.26,
+            "4": 0.28,
+            "5": 0.3,
+            "6": 0.32
+          }
+        },
+        {
+          "upTo": 10000,
+          "pct": {
+            "1": 0.08,
+            "2": 0.11,
+            "3": 0.13,
+            "4": 0.14,
+            "5": 0.15,
+            "6": 0.16
+          }
+        },
+        {
+          "upTo": null,
+          "pct": {
+            "1": 0.04,
+            "2": 0.06,
+            "3": 0.06,
+            "4": 0.07,
+            "5": 0.075,
+            "6": 0.08
+          }
+        }
+      ],
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Nevada is NOT an income-shares state -- the base obligation is a tiered percentage of the OBLIGOR's own gross monthly income only, never combined income.",
+        "For the first $6,000/month: 16% for one child, 22% for two, 26% for three, 28% for four, plus 2% for each additional child.",
+        "For the portion between $6,000 and $10,000/month: 8% for one child, 11% for two, 13% for three, 14% for four, plus 1% for each additional child.",
+        "For the portion above $10,000/month: 4% for one child, 6% for two, 6% for three, 7% for four, plus 0.5% for each additional child -- there is no income cap.",
+        "The obligor (paying parent) is determined by which parent has the minority of overnights; Nevada has no mandatory shared-placement cross-formula -- courts adjust for time-sharing at their discretion under NAC 425.150.",
+        "If the obligor's income is very low, courts may use a separately published low-income schedule (NAC 425.145, updated annually by the Administrative Office of the Courts) instead -- not modeled by this calculator."
+      ],
+      "example": {
+        "scenario": "Example (the regulation's own worked example): obligor earns $14,000/month, 2 children.",
+        "calculation": [
+          "First $6,000: $6,000 × 22% = $1,320.",
+          "Portion between $6,000-$10,000 ($4,000): $4,000 × 11% = $440.",
+          "Portion above $10,000 ($4,000): $4,000 × 6% = $240.",
+          "Total base child support obligation: $1,320 + $440 + $240 = $2,000/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Is Nevada an income-shares state?",
+        "a": "No. Nevada's Base Child Support Obligation (NAC 425.140) is based entirely on the OBLIGOR's (paying parent's) own gross monthly income -- the other parent's income doesn't factor into the base calculation at all, unlike income-shares states such as Texas or Georgia."
+      },
+      {
+        "q": "Does Nevada have an income cap for child support?",
+        "a": "No. Unlike most states, Nevada's formula has no upper income limit -- the top tier (income above $10,000/month) simply continues to apply its percentage (4%-8% depending on number of children) to all income above that threshold, however high."
+      },
+      {
+        "q": "Does shared custody reduce child support in Nevada?",
+        "a": "Not automatically through a fixed formula. Nevada courts may adjust the base obligation under NAC 425.150 considering the relative income of both households and time-sharing costs, among other discretionary factors -- but there is no mandatory shared-placement cross-formula like some other states use."
+      }
+    ]
   }
 }

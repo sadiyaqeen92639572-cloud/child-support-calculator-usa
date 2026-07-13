@@ -131,7 +131,7 @@
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
-      if (STATE_ENTRY.formula_model === 'wi_percentage_shared') {
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
         return {
           parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
           parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,

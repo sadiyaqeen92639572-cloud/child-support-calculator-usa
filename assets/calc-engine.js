@@ -538,6 +538,47 @@ function calcMichiganFormula(params, rules, inputs) {
   };
 }
 
+function calcNevadaFormula(params, rules, inputs) {
+  // Nevada's Base Child Support Obligation (NAC 425.140). Like Wisconsin,
+  // the base calculation uses the OBLIGOR's own gross income only, never
+  // combined income — but Nevada has no shared-placement cross-formula
+  // (deviations for time-sharing are purely discretionary under NAC
+  // 425.150), and no income cap (the top tier has no upper bound).
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA }
+  const bracket = inputs.numChildren >= 6 ? '6' : String(inputs.numChildren);
+
+  function tieredPercent(monthlyIncome) {
+    let remaining = monthlyIncome;
+    let prevCap = 0;
+    let total = 0;
+    for (const tier of params.income_tiers) {
+      const cap = tier.upTo === null ? Infinity : tier.upTo;
+      const portion = Math.max(0, Math.min(remaining, cap - prevCap));
+      total += portion * tier.pct[bracket];
+      remaining -= portion;
+      prevCap = cap;
+      if (remaining <= 0) break;
+    }
+    return total;
+  }
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+  const amount = applyRounding(tieredPercent(payingIncome), rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation: null,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: null
+  };
+}
+
 function calcWisconsinFormula(params, rules, inputs) {
   // Wisconsin's Percentage of Income Standard (Wis. Admin. Code DCF 150).
   // Unlike income-shares states, the base calculation uses each parent's OWN
@@ -683,6 +724,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcMichiganFormula(stateEntry.params, rules, inputs);
     case 'wi_percentage_shared':
       return calcWisconsinFormula(stateEntry.params, rules, inputs);
+    case 'nv_tiered_percentage':
+      return calcNevadaFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

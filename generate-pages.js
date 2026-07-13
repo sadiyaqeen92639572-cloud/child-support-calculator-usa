@@ -135,6 +135,30 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'nv_tiered_percentage') {
+    const p = state.params;
+    const tierRows = p.income_tiers.map((t, i) => {
+      const label = i === 0 ? `First $${t.upTo.toLocaleString()}/mo` : (t.upTo === null ? `Above $${p.income_tiers[i-1].upTo.toLocaleString()}/mo` : `$${p.income_tiers[i-1].upTo.toLocaleString()}-$${t.upTo.toLocaleString()}/mo`);
+      return `<tr><td>${label}</td><td>1: ${(t.pct['1']*100).toFixed(1)}% · 2: ${(t.pct['2']*100).toFixed(1)}% · 3: ${(t.pct['3']*100).toFixed(1)}%</td><td>${state.source.statute_ref || ''}</td></tr>`;
+    }).join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Tiered percentages by number of children (obligor's own income)</h3>
+    <table>
+      <tr><th>Income portion</th><th>Percentage (1 / 2 / 3 children)</th><th>Source</th></tr>
+      ${tierRows}
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      support = tieredPercent(obligor_gross_income, children)<br>
+      &nbsp;&nbsp;where each income tier is taxed at its own percentage and the results summed (no combined income, no schedule table)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Nevada's Base Child Support Obligation (NAC 425.140). Verify against Nevada's official calculator for a court-ready figure.</p>
+  </section>`;
+  }
+
   if (state.formula_model === 'algebraic_kfactor') {
     const p = state.params;
     const rows = Object.entries(p.child_multipliers)
@@ -266,6 +290,24 @@ function calculatorFormFields(state) {
         <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
       </label>`;
   }
+  if (state.formula_model === 'nv_tiered_percentage') {
+    return `
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>`;
+  }
 
   // income_shares and melson share the same form shape
   const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
@@ -330,7 +372,7 @@ function calculatorScript(state) {
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
-      if (STATE_ENTRY.formula_model === 'wi_percentage_shared') {
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
         return {
           parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
           parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,

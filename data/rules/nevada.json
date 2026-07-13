@@ -1,0 +1,5 @@
+{
+  "rounding": "nearest_dollar",
+  "income_cap_behavior": "no_cap",
+  "deviation_note": "Nevada courts may adjust the base obligation under NAC 425.150 based on discretionary factors (special needs, relative income of both households, time-sharing costs, obligor's ability to pay, etc.) -- there is no mandatory shared-placement formula like some other states. This calculator does not model the low-income schedule (NAC 425.145), which is republished annually by the Administrative Office of the Courts based on federal poverty guidelines and is not part of the codified regulation text itself."
+}
