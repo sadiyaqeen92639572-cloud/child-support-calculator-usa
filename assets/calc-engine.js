@@ -1265,6 +1265,55 @@ function calcNorthDakotaFormula(params, rules, scheduleTable, inputs) {
   };
 }
 
+function calcUtahFormula(params, rules, scheduleTable, inputs) {
+  // Utah Code 81-6-304 (combined-income table) / 81-6-305 (Low-Income Table,
+  // obligor's own individual income only). Below a per-child-count individual
+  // income threshold, 81-6-305 governs directly (no proration); above it,
+  // 81-6-304's combined-income table is prorated by income share as usual.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost }
+  const ut = rules.ut_low_income;
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  const childKey = String(Math.min(inputs.numChildren, 6));
+  const threshold = ut.threshold_individual_income[childKey];
+
+  let amount;
+  let lowIncomeApplied = false;
+  if (payingParentIncome <= threshold) {
+    amount = lookupSchedule(ut.schedule, payingParentIncome, inputs.numChildren);
+    lowIncomeApplied = true;
+  } else {
+    const base = lookupSchedule(scheduleTable, combined, inputs.numChildren);
+    const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+    amount = (base + addOns) * payingShare;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation: null,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: lowIncomeApplied
+      ? "Low-Income Table applies (Utah Code 81-6-305) — computed from the paying parent's own individual income only, not combined income."
+      : (combined > scheduleTable.maxIncome
+        ? `Above $${scheduleTable.maxIncome.toLocaleString()}/mo combined income, Utah's table does not extend automatically — courts determine the amount case-by-case.`
+        : null)
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1362,6 +1411,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcMassachusettsFormula(stateEntry.params, rules, inputs);
     case 'nd_obligor_schedule':
       return calcNorthDakotaFormula(stateEntry.params, rules, scheduleTable, inputs);
+    case 'ut_low_income_or_shares':
+      return calcUtahFormula(stateEntry.params, rules, scheduleTable, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

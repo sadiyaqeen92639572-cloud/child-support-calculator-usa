@@ -2729,5 +2729,56 @@
         "a": "South Dakota has a separate Shared Parenting Child Support Obligation Worksheet for cases where both parents have substantial parenting time, which uses a different calculation than the standard primary-custody worksheet this calculator models."
       }
     ]
+  },
+  "ut": {
+    "name": "Utah",
+    "abbr": "UT",
+    "slug": "utah",
+    "formula_model": "ut_low_income_or_shares",
+    "effective_date": "2023-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2023-UT-v1",
+    "source": {
+      "agency_name": "Utah State Legislature — Utah Code Title 81, Chapter 6, Part 3 (Child Support Tables)",
+      "url": "https://le.utah.gov/xcode/Title81/Chapter6/81-6-S304.html",
+      "statute_ref": "Utah Code §§ 81-6-304, 81-6-305"
+    },
+    "params": {
+      "income_basis": "gross",
+      "schedule_table_ref": "utah_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' monthly adjusted gross income to get combined income.",
+        "If the paying parent's OWN individual income is at or below a per-child-count threshold (about $1,960/month for one child, up to about $2,450 for six), Utah's Low-Income Table (81-6-305) applies directly using that parent's income alone -- this is the full obligation, not prorated.",
+        "Otherwise, look up the combined income in the Base Combined Child Support Obligation Table (81-6-304), and each parent's share is their percentage of combined income.",
+        "This calculator models the standard sole-custody case only. Joint physical custody and split custody use different worksheets and are not modeled here.",
+        "Above $100,000/month combined income, Utah's tables do not extend automatically -- courts determine the amount case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $4,000/month, Parent B earns $2,000/month (combined $6,000). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Parent A's own income ($4,000) is above the $2,250 Low-Income Table threshold for 2 children, so the combined-income table applies.",
+          "Combined monthly income: $4,000 + $2,000 = $6,000.",
+          "Base Combined Child Support Obligation Table at $6,000 combined, two children: about $745.",
+          "Parent A's income share: $4,000 / $6,000 = 66.7%.",
+          "Parent A pays: $745 x 66.7% = $497/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Utah's Low-Income Table?",
+        "a": "Utah Code 81-6-305 sets a separate schedule based on the paying parent's OWN individual income (not combined with the other parent's) when that income is below a per-child-count threshold -- roughly $1,960/month for one child up to $2,450/month for six. Below that threshold, the Low-Income Table amount is the full obligation directly; above it, the standard combined-income table (81-6-304) applies instead."
+      },
+      {
+        "q": "What is the minimum child support amount in Utah?",
+        "a": "$30/month, which applies at the very lowest individual income levels under the Low-Income Table (81-6-305)."
+      },
+      {
+        "q": "Does joint physical custody change Utah child support?",
+        "a": "Yes -- when parents share physical custody, Utah uses a different worksheet that factors in each parent's overnights, rather than the standard sole-custody calculation this calculator uses."
+      }
+    ]
   }
 }
