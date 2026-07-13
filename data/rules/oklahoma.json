@@ -1,0 +1,15 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "ok_parenting_time_factor",
+    "threshold_overnights": 121,
+    "factor_table": [
+      { "upTo": 131, "value": 2.0 },
+      { "upTo": 143, "value": 1.75 },
+      { "upTo": 365, "value": 1.5 }
+    ],
+    "note": "43 O.S. § 118E: when the paying parent has 121+ overnights/year, the combined base obligation is multiplied by a stepped factor (2.0 for 121-131 overnights, 1.75 for 132-143, 1.5 for 144+), split between parents by income share, then each parent's share is multiplied by the percentage of time the child spends with the OTHER parent, and the two amounts are offset. The result is capped so it never exceeds the standard (non-adjusted) amount. The statute also caps the adjustment entirely at 205 overnights -- above that, a different (unmodeled) calculation applies."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $15,000/month combined gross income, Oklahoma's guideline schedule does not extend automatically -- the amount is that computed for $15,000/month plus an additional amount determined by the court (43 O.S. § 119). Above 205 overnights/year for the paying parent, this calculator does not model the different calculation that applies. This calculator does not model Split Physical Custody (each parent primary for at least one different child) or the discretionary Cash Medical Support obligation (a separate 5%-of-gross-income-capped add-on when health insurance isn't available)."
+}

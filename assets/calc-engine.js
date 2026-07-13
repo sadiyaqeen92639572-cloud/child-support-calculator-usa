@@ -415,6 +415,27 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
         amount = Math.min(amount, sharedAmount);
         adjustedForCustody = true;
       }
+    } else if (rules.custody_adjustment.type === 'ok_parenting_time_factor') {
+      // Oklahoma's Parenting Time Adjustment, 43 O.S. § 118E: triggers when
+      // the paying parent has 121+ overnights/year. The combined base
+      // obligation is multiplied by a stepped factor (2.0 / 1.75 / 1.5 for
+      // 121-131 / 132-143 / 144+ overnights), divided between parents by
+      // income share, then EACH parent's share is multiplied by the
+      // percentage of time the child spends with the OTHER parent, and the
+      // two resulting amounts are offset — capped so the result never
+      // exceeds the standard (non-adjusted) sole-custody amount.
+      const threshold = rules.custody_adjustment.threshold_overnights || 121;
+      if (payingParentOvernights >= threshold) {
+        const factor = stepLookup(rules.custody_adjustment.factor_table, payingParentOvernights);
+        const adjustedCombined = totalObligation * factor;
+        const custodyShareA = overnightsWithA / 365;
+        const custodyShareB = 1 - custodyShareA;
+        const aShare = (adjustedCombined * shareA) * custodyShareB;
+        const bShare = (adjustedCombined * shareB) * custodyShareA;
+        const sharedAmount = Math.abs(aShare - bShare);
+        amount = Math.min(amount, sharedAmount);
+        adjustedForCustody = true;
+      }
     } else if (rules.custody_adjustment.type === 'sc_shared_custody') {
       // South Carolina's shared-custody Worksheet C (both parents >109
       // overnights/year, 30%+): basic obligation x1.5, apportioned to each
