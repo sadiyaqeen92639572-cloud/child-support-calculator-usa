@@ -1,0 +1,12 @@
+{
+  "rounding": "nearest_dollar",
+  "dc_self_support": {
+    "self_support_reserve_annual": 19800,
+    "presumptive_minimum_annual": 900,
+    "total_obligation_cap_pct": 0.35,
+    "note": "D.C. Code 16-916.01(g): below the Self-Support Reserve (133% of the one-person federal poverty guideline, updated biennially by the Mayor -- approximately $1,650/month as of the most recent update), the paying parent's obligation is individualized by the court rather than computed from the schedule, with a presumption they can pay $75/month while meeting subsistence needs (rebuttable to $0 or higher). D.C. Code 16-916.01(n): the total child support obligation, including add-ons, may never exceed 35% of the paying parent's adjusted gross income."
+  },
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Income figures in this calculator are ANNUAL (D.C.'s schedule and worksheet operate in yearly dollars, unlike most states) -- the result is converted to a monthly figure for display. This calculator does not model the separate 'modified self-support reserve' comparison (D.C. Code 16-916.01(g-2), an additional ability-to-pay tier with its own reserve figure and a maximum-ability-to-pay calculation) -- it applies only the standard Self-Support Reserve and presumptive minimum. It also does not model Shared Physical Custody (Worksheet B, when both parents have substantial parenting time) or Split Custody. Above $240,000/year combined adjusted gross income, D.C.'s guideline does not apply presumptively -- courts determine the amount case-by-case."
+}

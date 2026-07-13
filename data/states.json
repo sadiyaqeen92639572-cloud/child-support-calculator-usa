@@ -2930,5 +2930,57 @@
         "a": "The current one-person federal poverty guideline ($1,255/month for 2026). If the paying parent's net income minus this reserve is less than the calculated obligation, the support amount is reduced to that difference -- Wyoming does not set a separate statutory minimum order amount."
       }
     ]
+  },
+  "dc": {
+    "name": "District of Columbia",
+    "abbr": "DC",
+    "slug": "district-of-columbia",
+    "formula_model": "dc_annual_shares",
+    "effective_date": "2016-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2016-DC-v1",
+    "source": {
+      "agency_name": "DC Law Library — D.C. Code §§ 16-916.01, 16-916.01a",
+      "url": "https://code.dccouncil.gov/us/dc/council/code/sections/16-916.01a",
+      "statute_ref": "D.C. Code §§ 16-916.01, 16-916.01a"
+    },
+    "params": {
+      "income_basis": "gross",
+      "income_period": "annual",
+      "schedule_table_ref": "district-of-columbia_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "The District of Columbia's child support schedule and worksheet operate in ANNUAL dollars, unlike most states. Add both parents' annual adjusted gross income to get combined income, then look up the Schedule of Basic Child Support Obligations for the total number of children.",
+        "Each parent's share of that amount (plus annual childcare and health insurance costs) is their percentage of combined annual income.",
+        "If the paying parent's own annual income is below the Self-Support Reserve (about $19,800/year, 133% of the one-person federal poverty guideline, updated every 2 years), the court individualizes the amount instead of using the schedule, with a presumption that the parent can pay $75/month.",
+        "The total obligation, including add-ons, may never exceed 35% of the paying parent's adjusted gross income.",
+        "Above $240,000/year combined income, the guideline does not apply presumptively -- courts determine the amount case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has annual adjusted gross income of $36,000, Parent B has annual adjusted gross income of $24,000 (combined $60,000). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined annual adjusted gross income: $36,000 + $24,000 = $60,000.",
+          "Schedule of Basic Child Support Obligations at $60,000 combined, two children: $14,638/year.",
+          "Parent A's income share: $36,000 / $60,000 = 60%.",
+          "Parent A's annual share: $14,638 x 60% = $8,783.",
+          "Converted to monthly: $8,783 / 12 = $732/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does DC use monthly or annual income for child support?",
+        "a": "Annual. Unlike most states, the District of Columbia's Schedule of Basic Child Support Obligations and worksheet are built entirely around yearly dollar figures -- this calculator asks for annual income and converts the final result to a monthly amount for display."
+      },
+      {
+        "q": "What is DC's Self-Support Reserve?",
+        "a": "133% of the one-person federal poverty guideline, updated every two years by the Mayor (approximately $19,800/year as of the most recent update). Below this threshold, courts individualize the paying parent's obligation rather than applying the schedule directly, with a presumption that the parent can pay $75/month."
+      },
+      {
+        "q": "Is there a cap on DC child support as a percentage of income?",
+        "a": "Yes. D.C. Code 16-916.01(n) caps the total child support obligation, including add-ons like childcare and health insurance, at 35% of the paying parent's adjusted gross income."
+      }
+    ]
   }
 }

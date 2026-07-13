@@ -1413,6 +1413,62 @@ function calcWyomingFormula(params, rules, inputs) {
   };
 }
 
+function calcDCFormula(params, rules, scheduleTable, inputs) {
+  // DC Code 16-916.01/16-916.01a: the schedule and worksheet operate in
+  // ANNUAL dollars (unlike most states) -- inputs here are annual income,
+  // matching the schedule's own axis; the final result is converted to
+  // monthly for display.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost } -- annual dollars.
+  const dc = rules.dc_self_support;
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  const base = lookupSchedule(scheduleTable, combined, inputs.numChildren);
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+
+  let annualAmount;
+  let selfSupportApplied = false;
+  let cappedAt35 = false;
+  if (payingParentIncome < dc.self_support_reserve_annual) {
+    // D.C. Code 16-916.01(g): below the Self-Support Reserve, the amount is
+    // individualized by the court -- simplified here to the presumptive
+    // $75/month ($900/year) minimum, rebuttable to $0 or higher.
+    annualAmount = dc.presumptive_minimum_annual;
+    selfSupportApplied = true;
+  } else {
+    annualAmount = (base + addOns) * payingShare;
+    const cap = dc.total_obligation_cap_pct * payingParentIncome;
+    if (annualAmount > cap) {
+      annualAmount = cap;
+      cappedAt35 = true;
+    }
+  }
+
+  const monthly = applyRounding(annualAmount / 12, rules.rounding);
+
+  return {
+    monthlyAmount: monthly,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation: base,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: selfSupportApplied
+      ? `Self-Support Reserve applies (D.C. Code § 16-916.01(g)) — presumptive $${(dc.presumptive_minimum_annual / 12).toFixed(0)}/month minimum, rebuttable by the court based on the paying parent's individual circumstances.`
+      : (cappedAt35
+        ? "Capped at 35% of the paying parent's adjusted gross income (D.C. Code § 16-916.01(n)), including add-ons."
+        : null)
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1514,6 +1570,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcUtahFormula(stateEntry.params, rules, scheduleTable, inputs);
     case 'wy_bracket_shares':
       return calcWyomingFormula(stateEntry.params, rules, inputs);
+    case 'dc_annual_shares':
+      return calcDCFormula(stateEntry.params, rules, scheduleTable, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }
