@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "wv_ability_to_pay": {
+    "threshold_monthly": 2600,
+    "self_support_reserve_monthly": 997,
+    "note": "W. Va. Code 48-13-403, Part II (Ability to Pay Calculation): completed only when the paying parent's adjusted gross monthly income is below $2,600. Spendable income = 80% of that income. Income available for support = spendable income minus the Self-Support Reserve ($997/month), floored at $50 if that would be less. The final order is the LESSER of the standard recommended order or that available-income figure."
+  },
+  "custody_adjustment": null,
+  "income_cap_behavior": "extended_formula",
+  "deviation_note": "Below $550/month combined gross income, W. Va. Code 48-13-302 sets the obligation at a flat $50/month (or a discretionary amount) -- this calculator instead uses the table's own $550 row for any income at or below that level, which may slightly overstate very-low-income cases. This calculator models Worksheet A (W. Va. Code 48-13-403), used when the parent with less time has under 35% (127) of the year's overnights. It does not model Extended Shared Parenting (Worksheet B, W. Va. Code 48-13-502, when the parent with less time has 35% or more of overnights -- a materially different calculation multiplying the basic obligation by 1.6 and cross-crediting each parent for their own overnight share) or Split Physical Custody."
+}

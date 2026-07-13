@@ -542,6 +542,27 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     }
   }
 
+  let wvAbilityToPayApplied = false;
+  if (rules.wv_ability_to_pay && payingParentIncome < rules.wv_ability_to_pay.threshold_monthly) {
+    // W. Va. Code 48-13-403, Part II (Ability to Pay Calculation), completed
+    // only when the payor's adjusted gross income is below the threshold
+    // (currently $2,600/mo): spendable income = 80% of that income; income
+    // available for support = spendable minus the Self-Support Reserve
+    // ($997/mo), floored at $50 if that would be less; the final order is
+    // the LESSER of the standard recommended order or that available-income
+    // figure (note: the $50 floor applies to the available-income term
+    // itself, not to the final order, so a very small recommended order can
+    // still come out below $50).
+    const wv = rules.wv_ability_to_pay;
+    const spendable = payingParentIncome * 0.80;
+    let available = spendable - wv.self_support_reserve_monthly;
+    if (available < 50) available = 50;
+    if (amount > available) {
+      amount = available;
+      wvAbilityToPayApplied = true;
+    }
+  }
+
   amount = applyRounding(amount, rules.rounding);
 
   const reserve = params.self_support_reserve_monthly;
@@ -563,9 +584,11 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
         ? (rules.or_self_support_clamp.min_order_message || "Minimum order applies — a rebuttable minimum, since the calculated amount fell below it.")
         : (neMinimumApplied
           ? "Minimum support applies (Neb. Ct. R. § 4-209) — the greater of $50 or 10% of the paying parent's net income, which may apply even below the Basic Subsistence Limitation."
-          : (custodyWarning || (belowReserve
-            ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
-            : null))))
+          : (wvAbilityToPayApplied
+            ? "Ability to Pay Calculation applies (W. Va. Code § 48-13-403, Part II) — the paying parent's income available for support (80% of income minus the $997 Self-Support Reserve, floored at $50) is lower than the standard recommended order."
+            : (custodyWarning || (belowReserve
+              ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
+              : null)))))
   };
 }
 
