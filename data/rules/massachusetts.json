@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "ma_table_a": {
+    "self_support_reserve_weekly": 391,
+    "max_weekly_combined_income": 8654,
+    "note": "Table A is transcribed verbatim (as an exact piecewise-linear formula, not an approximated step chart) from the live calculation script embedded in the official 2025 Child Support Guidelines Worksheet (CJD 304, eff. 2025-12-01): 0-301=$15; 302-391=15+round(0.20x(income-301)); 392-1000=round(0.22xincome); 1001-1600=220+round(0.21x(income-1000)); 1601-2400=346+round(0.18x(income-1600)); 2401-3500=490+round(0.14x(income-2400)); 3501-5000=644+round(0.11x(income-3500)); 5001-8654=809+round(0.10x(income-5000)). The number-of-children multiplier (Table B) is also transcribed from the same live script: 1.00/1.40/1.68/1.85/1.94 for 1/2/3/4/5 children (6+ reuses the 5-children factor, per the guidelines' own 'at least the amount for five children' floor rule)."
+  },
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "Massachusetts income figures in this calculator are WEEKLY gross income, treated as 'available income' -- it does not model the guidelines' own adjustments to available income (prior-child support paid, qualified-child deductions for other children in the home, etc.). This calculator applies the standard proportional-share calculation only. It does not model: the Parenting Time proportional adjustment (Guidelines Section II.D and Worksheet Section 6, a cap/comparison mechanism based on the recipient parent's own share of parenting time when it is substantial); the Table C age adjustment for children who are 18 or older; or cases with more than 5 children beyond reusing the 5-children multiplier as a floor. Above $450,000/yr ($8,654/week) combined available income, the guidelines state the result is only a presumptive MINIMUM, not an automatic extension -- courts have discretion to order more."
+}

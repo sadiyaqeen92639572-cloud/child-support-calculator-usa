@@ -1095,6 +1095,72 @@ function calcMaineFormula(params, rules, scheduleTable, inputs) {
   };
 }
 
+function maTableA(income) {
+  // Massachusetts Table A, transcribed VERBATIM from the live calculation
+  // script embedded in the official 2025 Child Support Guidelines Worksheet
+  // (CJD 304, eff. 2025-12-01) -- a genuine piecewise-linear formula, not a
+  // step-function chart, giving the 1-child weekly support amount.
+  const capped = Math.min(income, 8654);
+  if (capped <= 301) return 15;
+  if (capped <= 391) return 15 + Math.round(0.20 * (capped - 301));
+  if (capped <= 1000) return Math.round(0.22 * capped);
+  if (capped <= 1600) return 220 + Math.round(0.21 * (capped - 1000));
+  if (capped <= 2400) return 346 + Math.round(0.18 * (capped - 1600));
+  if (capped <= 3500) return 490 + Math.round(0.14 * (capped - 2400));
+  if (capped <= 5000) return 644 + Math.round(0.11 * (capped - 3500));
+  return 809 + Math.round(0.10 * (capped - 5000));
+}
+
+function calcMassachusettsFormula(params, rules, inputs) {
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost } -- weekly gross income.
+  const ma = rules.ma_table_a;
+  const numChildrenAdjustment = { 0: 0, 1: 1.00, 2: 1.40, 3: 1.68, 4: 1.85, 5: 1.94 };
+  const multiplier = numChildrenAdjustment[Math.min(inputs.numChildren, 5)];
+
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  let amount;
+  let selfSupportReserveApplied = false;
+  if (payingParentIncome <= ma.self_support_reserve_weekly) {
+    // Shaded area of the Guidelines Chart: use the PAYING parent's own income
+    // alone, regardless of the other parent's income -- this is their full
+    // obligation directly, with no further proration and no add-ons.
+    const base = maTableA(payingParentIncome);
+    amount = Math.round(base * multiplier);
+    selfSupportReserveApplied = true;
+  } else {
+    const base = maTableA(combined);
+    const combinedSupport = Math.round(base * multiplier);
+    const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+    amount = (combinedSupport + addOns) * payingShare;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation: null,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: selfSupportReserveApplied
+      ? `Self-Support Reserve applies (shaded area of the Guidelines Chart) — computed from the paying parent's own weekly income alone, not combined income.`
+      : (combined > ma.max_weekly_combined_income
+        ? `Above $${ma.max_weekly_combined_income.toLocaleString()}/week ($450,000/yr) combined available income, this result is only a presumptive MINIMUM — courts may order more.`
+        : null)
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1188,6 +1254,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcIdahoFormula(stateEntry.params, rules, inputs);
     case 'me_weekly_table_annual_income':
       return calcMaineFormula(stateEntry.params, rules, scheduleTable, inputs);
+    case 'ma_table_a_shares':
+      return calcMassachusettsFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

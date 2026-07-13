@@ -366,6 +366,30 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'ma_table_a_shares') {
+    const ma = rules.ma_table_a;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Number-of-children multiplier (Table B)</td><td>1.00 / 1.40 / 1.68 / 1.85 / 1.94 (1-5 children)</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Self-Support Reserve</td><td>$${ma.self_support_reserve_weekly}/week (paying parent's own income)</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Max combined available income</td><td>$${ma.max_weekly_combined_income.toLocaleString()}/week (~$450,000/yr)</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula (Table A, exact piecewise function)</h3>
+    <div class="formula-code">
+      base_1_child = Table A(combined_weekly_income) &nbsp;-- a piecewise-linear function, e.g. $346 + 18% of the amount over $1,600 for incomes $1,601-$2,400<br>
+      combined_support = round(base_1_child &times; number_of_children_multiplier)<br>
+      share_B = parentB_income / combined_income<br>
+      obligation_B = (combined_support + add-ons) &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Massachusetts's official Child Support Guidelines Worksheet (CJD 304). Verify against the official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;
