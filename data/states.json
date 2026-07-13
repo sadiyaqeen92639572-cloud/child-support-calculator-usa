@@ -1709,5 +1709,61 @@
         "a": "Yes -- $160/month for one child, $240/month for two or more, regardless of how the Melson Formula calculation comes out, unless the court finds a documented reason to deviate (such as a genuinely unable-to-pay circumstance under the Low-Income Adjustment)."
       }
     ]
+  },
+  "hi": {
+    "name": "Hawaii",
+    "abbr": "HI",
+    "slug": "hawaii",
+    "formula_model": "hi_melson",
+    "effective_date": "2024-04-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2024-HI-v1",
+    "source": {
+      "agency_name": "Hawai'i State Judiciary (2024 Child Support Guidelines, RG-AC-508)",
+      "url": "https://www.courts.state.hi.us/wp-content/uploads/2020/10/Child_Support_Guidelines_2024.pdf",
+      "statute_ref": "HRS §§ 571-52.5, 576D-7"
+    },
+    "params": {
+      "income_basis": "gross",
+      "self_support_reserve_monthly": 1693,
+      "base_primary_support_per_child": 455,
+      "sola_income_deduction": 1303,
+      "sola_percentage_per_child": 0.1,
+      "sola_percentage_max": 0.3,
+      "minimum_per_child": 91
+    },
+    "worksheet": {
+      "steps": [
+        "Hawaii uses a Modified Melson Formula -- one of only 3 states (with Delaware and Montana) that use this model, though Hawaii's version differs from Delaware's in several ways.",
+        "Net Income for each parent is gross income minus taxes (2022 federal/state/FICA tables, single filer) and the Self-Support Reserve ($1,693/month, 130% of the one-person federal poverty guideline).",
+        "The Primary Child Support Need is a flat $455 per child (no separate per-household allowance, unlike Delaware), plus childcare and health insurance costs, prorated by each parent's share of combined Net Income.",
+        "SOLA Income for each parent is gross income minus $1,303 (a separate, smaller deduction than the Self-Support Reserve). The combined SOLA Income minus the Primary Need is the pool shared with the children, at a flat 10% per child, capped at 30% (unlike Delaware's tiered 12/17/21%).",
+        "The paying parent's obligation generally may not exceed their own Net Income, and a minimum of $91/child/month applies.",
+        "Extensive Time-Sharing and Equal Time-Sharing use separate worksheets with different calculations, not modeled here."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $2,500/mo, Parent B earns $2,000/mo, 3 children, Parent A is the noncustodial parent.",
+        "calculation": [
+          "Net Income (this calculator's approximation, Self-Support Reserve only): Parent A = $2,500 - $1,693 = $807. Parent B = $2,000 - $1,693 = $307. Combined = $1,114.",
+          "Primary Need: 3 × $455 = $1,365. Parent A's share (807/1,114 = 72.4%): ≈$989 -- but capped at Parent A's own Net Income of $807.",
+          "SOLA Income: Parent A = $2,500-$1,303=$1,197. Parent B = $2,000-$1,303=$697. Combined $1,894, remaining after Primary Need ($1,365) = $529. SOLA % for 3 children = 30% (capped): $159 SOLA amount.",
+          "Parent A's total theoretical obligation exceeds their own Net Income, so it caps at $807/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How is Hawaii's Melson Formula different from Delaware's?",
+        "a": "Both use the same 3-step Melson concept (self-support first, then primary need, then a Standard of Living Adjustment), but the specific numbers differ: Hawaii's Base Primary Support is a flat $455/child with no separate per-household allowance, while Delaware adds a per-household component. Hawaii's SOLA is a flat 10% per child capped at 30%, while Delaware uses tiered percentages (12%/17%/21%) plus a High Income Offset that Hawaii doesn't have."
+      },
+      {
+        "q": "What is Hawaii's Self-Support Reserve?",
+        "a": "The Self-Support Reserve is $1,693/month (130% of the one-person federal poverty guideline), subtracted from a parent's income before calculating their Net Income for child support purposes. Hawaii's official calculation also subtracts actual income taxes using 2022 tax tables -- this calculator approximates Net Income using only the Self-Support Reserve deduction, so its result may run somewhat higher than an official calculation."
+      },
+      {
+        "q": "Is there a minimum or maximum child support amount in Hawaii?",
+        "a": "The minimum is $91 per child per month. The paying parent's obligation generally should not exceed their own monthly Net Income, if that Net Income exceeds $91 per child -- a cap built directly into the calculation, not left to judicial discretion."
+      }
+    ]
   }
 }

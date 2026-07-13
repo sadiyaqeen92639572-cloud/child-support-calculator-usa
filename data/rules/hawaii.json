@@ -1,0 +1,5 @@
+{
+  "rounding": "nearest_dollar",
+  "income_cap_behavior": "no_cap",
+  "deviation_note": "This calculator approximates Hawaii's official 'Net Income' by subtracting only the Self-Support Reserve ($1,693/mo) from gross income -- the real Table of Incomes (Appendix B) also subtracts actual 2022 federal/state tax tables for a single filer with one exemption, which this calculator does not reproduce, so the modeled Net Income runs somewhat HIGHER than the official figure. Extensive Time-Sharing and Equal Time-Sharing worksheets (materially different calculations for shared custody) and the Cash Medical Support alternative (10% of net income when no insurance is available) are not modeled."
+}

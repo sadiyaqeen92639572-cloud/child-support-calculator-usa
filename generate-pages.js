@@ -221,6 +221,35 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'hi_melson') {
+    const p = state.params;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Self-Support Reserve</td><td>$${p.self_support_reserve_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Base Primary Support, per child</td><td>$${p.base_primary_support_per_child}</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>SOLA income deduction</td><td>$${p.sola_income_deduction.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>SOLA %, per child (capped)</td><td>${(p.sola_percentage_per_child*100).toFixed(0)}% per child, max ${(p.sola_percentage_max*100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Minimum order</td><td>$${p.minimum_per_child}/child/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula (Hawaii's Modified Melson Formula)</h3>
+    <div class="formula-code">
+      Net Income(parent) = max(0, gross_income(parent) - Self-Support Reserve)<br>
+      share(parent) = Net Income(parent) / combined Net Income<br>
+      Primary Need = children &times; Base Primary Support + childcare + health insurance<br>
+      SOLA Income(parent) = max(0, gross_income(parent) - SOLA income deduction)<br>
+      Remaining SOLA = max(0, combined SOLA Income - Primary Need)<br>
+      SOLA Amount = Remaining SOLA &times; min(30%, 10% &times; children)<br>
+      support = min(paying parent's Net Income, paying parent's share &times; (Primary Need + SOLA Amount))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Hawaii's Modified Melson Formula. Verify against Hawaii's official CSG Worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;

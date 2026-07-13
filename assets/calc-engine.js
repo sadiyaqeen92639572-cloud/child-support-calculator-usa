@@ -700,6 +700,66 @@ function calcAlgebraicKFactor(params, rules, inputs) {
   };
 }
 
+function calcHawaiiMelson(params, rules, inputs) {
+  // Hawaii's Modified Melson Formula (2024 Hawai'i Child Support Guidelines,
+  // HRS §§ 571-52.5, 576D-7). Structurally different from Delaware's Melson
+  // in several ways confirmed from the primary source: Base Primary Support
+  // is a flat $455/child with NO per-household component (unlike DE's
+  // per-child + per-household split); SOLA is a flat 10%/child capped at
+  // 30% (not DE's tiered 12/17/21%+2%, and no High Income Offset); and
+  // "Net Income" is officially gross minus actual 2022 tax tables AND the
+  // Self-Support Reserve — this engine only subtracts the Self-Support
+  // Reserve ($1,693/mo) since the real tax-conversion table (Appendix B,
+  // "Table of Incomes") isn't reproducible without HI's exact 2022 federal/
+  // state tax brackets, so this OVERSTATES true net income somewhat
+  // (disclosed in the deviation note, not silently assumed exact).
+  const netIncomeA = Math.max(0, inputs.parentAGrossIncome - params.self_support_reserve_monthly);
+  const netIncomeB = Math.max(0, inputs.parentBGrossIncome - params.self_support_reserve_monthly);
+  const combinedNet = netIncomeA + netIncomeB;
+  const shareA = combinedNet > 0 ? netIncomeA / combinedNet : 0.5;
+  const shareB = 1 - shareA;
+
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+  const primaryNeed = (inputs.numChildren * params.base_primary_support_per_child) + addOns;
+
+  const solaIncomeA = Math.max(0, inputs.parentAGrossIncome - params.sola_income_deduction);
+  const solaIncomeB = Math.max(0, inputs.parentBGrossIncome - params.sola_income_deduction);
+  const combinedSolaIncome = solaIncomeA + solaIncomeB;
+  const remainingSola = Math.max(0, combinedSolaIncome - primaryNeed);
+  const solaPct = Math.min(params.sola_percentage_max, inputs.numChildren * params.sola_percentage_per_child);
+  const solaAmount = remainingSola * solaPct;
+
+  const totalChildSupport = primaryNeed + solaAmount;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingNetIncome = payingParent === 'A' ? netIncomeA : netIncomeB;
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+
+  let amount = Math.min(payingNetIncome, payingShare * totalChildSupport);
+
+  const minOrder = inputs.numChildren * params.minimum_per_child;
+  let minimumOrderApplied = false;
+  if (amount < minOrder) {
+    amount = minOrder;
+    minimumOrderApplied = true;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation: primaryNeed,
+    adjustedForCustody: false,
+    selfSupportMinimumOrderApplied: minimumOrderApplied,
+    deviationNote: rules.deviation_note,
+    capWarning: null
+  };
+}
+
 function calcMelson(params, rules, inputs) {
   // The real Melson Formula (Delaware Family Court Rules 502-504; also used
   // by Hawaii and Montana). Three steps: (1) each parent keeps a
@@ -792,6 +852,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcIncomeShares(stateEntry.params, rules, scheduleTable, inputs);
     case 'melson':
       return calcMelson(stateEntry.params, rules, inputs);
+    case 'hi_melson':
+      return calcHawaiiMelson(stateEntry.params, rules, inputs);
     case 'algebraic_kfactor':
       return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
     case 'michigan_formula':
