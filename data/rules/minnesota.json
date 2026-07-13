@@ -1,0 +1,15 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "parenting_time_pow25",
+    "power": 3,
+    "note": "Minn. Stat. § 518A.36 subd. 2: each parent's annual overnights raised to the power of 3, cross-multiplied against the other parent's dollar share of the basic support obligation. Only applies when there is a court order awarding parenting time -- without one, courts determine support without this adjustment."
+  },
+  "mn_self_support_clamp": {
+    "self_support_reserve_monthly": 1596,
+    "minimums": { "1": 50, "2": 60, "3": 70, "4": 80, "5": 90, "6": 100 },
+    "note": "Minn. Stat. § 518A.42: Self-Support Reserve = 120% of the one-person federal poverty guideline ($1,596/mo per the 2026 HHS guidelines, 48 contiguous states). If the obligor's income available after the reserve is below the guideline amount, the obligation is reduced down to that available income, floored at the statutory flat minimum ($50-$100/mo by number of children)."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $20,000/month combined parental income, Minnesota caps the presumptive obligation at the $20,000 schedule figure -- a higher amount requires the factors in Minn. Stat. 518A.43, not an automatic formula. This calculator does not model the medical-support/childcare-support reduction ordering used before basic support is reduced under the Self-Support Reserve, or cases with no parent having custody (Minn. Stat. 518A.35 subd. 1(c)-(d))."
+}

@@ -39,3 +39,5 @@ Tennessee,2021-TN-v1,"\$15900 combined gross/mo, 2 children, paying parent indiv
 Missouri,2026-MO-v1,"\$6000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, 100 overnights/yr, 10% bracket)",\$477/mo (\$1589 base x 40% minus \$158.90 credit),\$477/mo,\$0,claude-sonnet-5,2026-07-12
 Wisconsin,2020-WI-v1,"State's own example: paying parent \$14000/mo, 5000 other parent, 2 children, sole placement, high-income tiers",\$3075/mo (verbatim from DCF-P-DWSC824 guide),\$3075/mo,\$0,claude-sonnet-5,2026-07-12
 Wisconsin,2020-WI-v1,"State's own example: 2 children, Parent A \$2000/mo 60% custody, Parent B \$3000/mo 40% custody, shared placement",\$375/mo owed by Parent B (verbatim from DCF-P-DWSC824 guide),\$375/mo,\$0,claude-sonnet-5,2026-07-12
+Minnesota,2016-MN-v1,"\$5000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, 100 overnights/yr)",\$58/mo (hand-verified power-of-3 cross-formula),\$58/mo,\$0,claude-sonnet-5,2026-07-13
+Minnesota,2016-MN-v1,"\$11000 combined gross/mo, 2 children, paying parent individual income \$1000/mo (below SSR)",\$60/mo (statutory flat minimum, 2 children),\$60/mo,\$0,claude-sonnet-5,2026-07-13

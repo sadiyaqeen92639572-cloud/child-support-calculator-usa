@@ -293,19 +293,24 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       amount = Math.max(0, amount - (totalObligation * creditPct));
       adjustedForCustody = creditPct > 0;
     } else if (rules.custody_adjustment.type === 'parenting_time_pow25') {
-      // Georgia's parenting time adjustment, O.C.G.A. § 19-6-15(g)(2)(B) (SB454,
-      // eff. 2026-01-01). Raises each parent's court-ordered days with the child
-      // to the power of 2.5, then cross-multiplies against the OTHER parent's
-      // dollar share of the BASE obligation (add-ons are prorated separately,
-      // unaffected by this adjustment):
+      // Power-of-N parenting time cross-formula. Georgia: O.C.G.A. §
+      // 19-6-15(g)(2)(B) (SB454, eff. 2026-01-01), power 2.5. Minnesota:
+      // Minn. Stat. § 518A.36 subd. 2, power 3 (same structural formula,
+      // different exponent — set via rules.custody_adjustment.power,
+      // defaulting to 2.5 for backward compatibility with Georgia's rules
+      // files that don't specify one). Raises each parent's annual
+      // overnights to the power, then cross-multiplies against the OTHER
+      // parent's dollar share of the BASE obligation (add-ons are prorated
+      // separately, unaffected by this adjustment):
       //   adjustment = (ncpDaysPow * cpShare$ - cpDaysPow * ncpShare$) / (ncpDaysPow + cpDaysPow)
       //   ncpObligation = ncpShare$ + adjustment
+      const power = rules.custody_adjustment.power || 2.5;
       const ncpDays = payingParentOvernights;
       const cpDays = 365 - ncpDays;
       const ncpShareDollars = baseObligation * payingShare;
       const cpShareDollars = baseObligation - ncpShareDollars;
-      const ncpDaysPow = Math.pow(ncpDays, 2.5);
-      const cpDaysPow = Math.pow(cpDays, 2.5);
+      const ncpDaysPow = Math.pow(ncpDays, power);
+      const cpDaysPow = Math.pow(cpDays, power);
       const ptAdjustment = ((ncpDaysPow * cpShareDollars) - (cpDaysPow * ncpShareDollars)) / (ncpDaysPow + cpDaysPow);
       amount = Math.max(0, ncpShareDollars + ptAdjustment) + (addOns * payingShare);
       adjustedForCustody = true;
@@ -338,6 +343,27 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     }
   }
 
+  let mnMinimumApplied = false;
+  if (rules.mn_self_support_clamp) {
+    // Minnesota's mechanism (Minn. Stat. § 518A.42): incomeAvailable =
+    // obligor's PICS minus the Self-Support Reserve (120% of the one-person
+    // federal poverty guideline). If incomeAvailable >= the guideline
+    // amount (the parenting-time-adjusted `amount` above), no reduction. If
+    // it's between the statutory minimum and the guideline amount, the
+    // obligation is reduced down to incomeAvailable. If it's at/below the
+    // minimum, or the obligor's gross income is itself below 120% FPL, the
+    // flat statutory minimum applies instead.
+    const mn = rules.mn_self_support_clamp;
+    const minimumAmount = mn.minimums[String(inputs.numChildren >= 6 ? 6 : inputs.numChildren)];
+    const incomeAvailable = payingParentIncome - mn.self_support_reserve_monthly;
+    if (payingParentIncome < mn.self_support_reserve_monthly || incomeAvailable <= minimumAmount) {
+      amount = minimumAmount;
+      mnMinimumApplied = true;
+    } else if (incomeAvailable < amount) {
+      amount = incomeAvailable;
+    }
+  }
+
   amount = applyRounding(amount, rules.rounding);
 
   const reserve = params.self_support_reserve_monthly;
@@ -351,10 +377,13 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     baseObligation,
     adjustedForCustody,
     belowSelfSupportReserve: belowReserve,
+    selfSupportMinimumOrderApplied: mnMinimumApplied,
     deviationNote: rules.deviation_note,
-    capWarning: custodyWarning || (belowReserve
-      ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
-      : null)
+    capWarning: mnMinimumApplied
+      ? "Self-Support Reserve minimum applies (Minn. Stat. § 518A.42) — the paying parent's income available after the reserve is at or below the statutory minimum, so the flat minimum basic support amount applies instead of the guideline calculation."
+      : (custodyWarning || (belowReserve
+        ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
+        : null))
   };
 }
 
@@ -622,6 +651,20 @@ function lookupSchedule(scheduleTable, combinedIncome, numChildren) {
 
   const capped = Math.min(combinedIncome, scheduleTable.maxIncome);
   if (capped <= rows[0].upTo) return rows[0].obligation[key];
+
+  if (scheduleTable.stepBrackets) {
+    // Some states (e.g. Minnesota) define the table as literal flat
+    // brackets — a fixed dollar amount for an entire $100-wide income
+    // range — rather than a smooth curve meant to be interpolated between
+    // sparse anchors. Since every row is a real transcribed value here (not
+    // a sparse sample), a true step lookup reproduces the statute exactly
+    // instead of averaging across the bracket boundary.
+    for (const row of rows) {
+      if (capped <= row.upTo) return row.obligation[key];
+    }
+    return rows[rows.length - 1].obligation[key];
+  }
+
   for (let i = 0; i < rows.length - 1; i++) {
     const a = rows[i], b = rows[i + 1];
     if (capped > a.upTo && capped <= b.upTo) {

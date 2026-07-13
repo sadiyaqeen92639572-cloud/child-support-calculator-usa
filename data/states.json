@@ -1351,5 +1351,56 @@
         "a": "Above $7,000/month in gross income, Wisconsin applies progressively lower percentages to each additional tier of income (14%-27% between $7,000-$12,500/month, then 10%-20% above $12,500/month, depending on the number of children) rather than applying the standard percentage to the full amount or leaving it to judicial discretion."
       }
     ]
+  },
+  "mn": {
+    "name": "Minnesota",
+    "abbr": "MN",
+    "slug": "minnesota",
+    "formula_model": "income_shares",
+    "effective_date": "2016-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2016-MN-v1",
+    "source": {
+      "agency_name": "Minnesota Statutes, Chapter 518A (Office of the Revisor of Statutes)",
+      "url": "https://www.revisor.mn.gov/statutes/cite/518A.35",
+      "statute_ref": "Minn. Stat. §§ 518A.35, 518A.36, 518A.42"
+    },
+    "params": {
+      "schedule_table_ref": "minnesota_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 20000,
+      "high_income_note": "Above $20,000/month combined parental income, the presumptive obligation is capped at the $20,000 schedule figure -- a higher amount requires the factors in Minn. Stat. 518A.43."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly gross income (parental income for determining child support, PICS), then combine both for combined PICS.",
+        "Look up the basic support obligation from the official guideline table for that combined income and number of children.",
+        "Apply the parenting time adjustment: each parent's annual overnights are raised to the power of 3, then cross-multiplied against the other parent's dollar share of the basic obligation -- this can shift who pays and how much, not just apply a simple credit.",
+        "Apply the Self-Support Reserve: subtract 120% of the one-person federal poverty guideline from the paying parent's income. If what remains is less than the guideline amount, the obligation is reduced down to that remaining amount, floored at a flat statutory minimum ($50/month for one child up to $100/month for six or more).",
+        "Above $20,000/month combined income, the obligation is capped at the $20,000 schedule figure rather than extending further."
+      ],
+      "example": {
+        "scenario": "Example: combined income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 court-ordered overnights/year.",
+        "calculation": [
+          "Basic support obligation for $5,000 combined, 2 children: $1,132/month.",
+          "Parent B's pre-adjustment share: 40% × $1,132 ≈ $453/month.",
+          "The power-of-3 parenting time adjustment (100^3 vs 265^3 cross-multiplied against each parent's dollar share) reduces this to $58/month -- a much sharper reduction than a power-of-2.5 formula would produce for the same days."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How does Minnesota's parenting time adjustment work?",
+        "a": "Minnesota raises each parent's annual overnights to the POWER OF 3 (not a simple percentage credit), then cross-multiplies that against the other parent's dollar share of the basic support obligation (Minn. Stat. § 518A.36). Because the exponent is higher than similar formulas in other states (Georgia uses 2.5, for comparison), Minnesota's adjustment grows more sharply as parenting time increases. It only applies when there is a court order awarding parenting time."
+      },
+      {
+        "q": "What is Minnesota's Self-Support Reserve?",
+        "a": "The Self-Support Reserve is 120% of the federal poverty guideline for a one-person household. Minnesota subtracts this from the paying parent's income to find how much is actually available for support. If that available amount is less than the guideline obligation, the order is reduced down to the available amount -- but never below a flat statutory minimum ($50/month for one child, rising to $100/month for six or more children)."
+      },
+      {
+        "q": "What happens if combined income is above $20,000/month in Minnesota?",
+        "a": "Above $20,000/month in combined parental income, Minnesota caps the presumptive obligation at the $20,000 schedule figure rather than extrapolating further. A higher amount can be demonstrated only through the factors in Minn. Stat. 518A.43, not an automatic formula extension."
+      }
+    ]
   }
 }
