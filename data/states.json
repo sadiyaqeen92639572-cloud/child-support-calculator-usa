@@ -2780,5 +2780,55 @@
         "a": "Yes -- when parents share physical custody, Utah uses a different worksheet that factors in each parent's overnights, rather than the standard sole-custody calculation this calculator uses."
       }
     ]
+  },
+  "vt": {
+    "name": "Vermont",
+    "abbr": "VT",
+    "slug": "vermont",
+    "formula_model": "income_shares",
+    "effective_date": "2024-01-02",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2024-VT-v1",
+    "source": {
+      "agency_name": "Vermont Office of Child Support (OCS) — 15 V.S.A. §§ 654, 656",
+      "url": "https://outside.vermont.gov/dept/DCF/Shared%20Documents/OCS/Calculator/Intact.pdf",
+      "statute_ref": "15 V.S.A. §§ 654, 656"
+    },
+    "params": {
+      "income_basis": "net",
+      "schedule_table_ref": "vermont_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' after-tax (available) monthly income to get combined available income, then look up Vermont's Table of Intact Family Expenditures on Children for the total number of children.",
+        "Each parent's share of that amount is their percentage of combined available income.",
+        "The noncustodial parent's support payable may not exceed their income available for support (their own after-tax income minus the Self-Support Reserve, currently $1,596/month) -- the LESSER of the prorated share or this available-income figure is the final amount.",
+        "This calculator models Sole Custody only. Split Custody and Shared Custody use different calculations, not modeled here."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has after-tax monthly income of $1,700, Parent B has after-tax monthly income of $5,000 (combined $6,700). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined available monthly income: $1,700 + $5,000 = $6,700.",
+          "Table of Intact Family Expenditures at $6,700 combined, two children: $1,855.",
+          "Parent A's income share: $1,700 / $6,700 = 25.4%. Prorated share: $1,855 x 25.4% = $471.",
+          "Income available for support: $1,700 - $1,596 (Self-Support Reserve) = $104.",
+          "Since $104 is lower than $471, Parent A pays $104/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Vermont use gross or after-tax income?",
+        "a": "After-tax (available) income. Vermont's worksheet converts each parent's gross income to after-tax income using its own Tax Conversion Table before applying the guideline schedule -- this calculator asks for after-tax income directly rather than reproducing that conversion step."
+      },
+      {
+        "q": "What is Vermont's Self-Support Reserve?",
+        "a": "A monthly amount (currently $1,596, updated periodically) that the noncustodial parent's own after-tax income should not fall below due to a support payment. The worksheet automatically caps support payable at the paying parent's income minus this reserve, if that figure is lower than their prorated share of the combined obligation."
+      },
+      {
+        "q": "How does shared or split custody change Vermont child support?",
+        "a": "Split Custody (each parent has sole custody of at least one child) requires two worksheets whose results are offset against each other. Shared Custody (both parents have substantial time) adds further adjustments for the cost of maintaining two households. Both differ from the standard Sole Custody calculation this calculator models."
+      }
+    ]
   }
 }

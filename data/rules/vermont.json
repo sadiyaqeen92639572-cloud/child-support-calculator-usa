@@ -1,0 +1,10 @@
+{
+  "rounding": "nearest_dollar",
+  "or_self_support_clamp": {
+    "self_support_reserve_monthly": 1596,
+    "min_order_monthly": 0,
+    "note": "15 V.S.A. section 656(c): the noncustodial parent's support payable may not exceed their available income (own after-tax monthly income minus the Self-Support Reserve, updated periodically -- currently $1,596/month effective 2026-02-02). The worksheet's own Line 12 computes this as the LESSER of the prorated obligation or the available-income figure -- an automatic clamp, not merely a discretionary deviation factor. Vermont does not publish a separate statutory minimum order amount."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Income figures in this calculator are treated as already AFTER-TAX/available monthly income (not gross) -- Vermont's own worksheet converts gross to after-tax income via a separate Tax Conversion Table before this step, which this calculator does not reproduce; enter your already-known after-tax monthly income for the most accurate estimate. This calculator models Sole Custody only. Split Custody (each parent has sole custody of at least one child, an offset between two theoretical worksheets) and Shared Custody (additional adjustments for maintaining two households) use different calculations and are not modeled here. Above $30,024.99/month combined available income, Vermont's table does not extend automatically -- courts determine the amount case-by-case."
+}
