@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "This calculator models Alaska Civil Rule 90.3(a), the PRIMARY PHYSICAL CUSTODY calculation only, applied to a single non-custodial parent's already-adjusted net income. It does not model: the Rule 90.3(a)(5) Low-Income Adjustment (parents with total annual income of $30,000 or less may use total income minus $7,500/yr instead of the standard itemized-deduction adjusted income, whichever is lower -- this requires a gross-income-and-deductions breakdown beyond this calculator's single net-income input); the Rule 90.3(a)(3) Extended Visitation Credit (discretionary, up to 75% reduction for periods of 27+ consecutive days); Shared, Divided, or Hybrid Physical Custody (Rule 90.3(b), an entirely different calculation requiring both parents' figures and a 1.5x multiplier); or the grandparent-support provision (Rule 90.3(c)(4)). Courts may also vary the award for good cause under Rule 90.3(c)(1)."
+}

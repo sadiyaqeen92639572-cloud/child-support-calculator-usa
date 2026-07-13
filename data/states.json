@@ -1999,5 +1999,63 @@
         "a": "Kansas's guidelines (Section IV.G) provide an exact Extended Formula for income above the schedule's top row: a fixed coefficient (specific to the number of children) multiplied by combined income raised to the power 0.6386. The amount is presumptive, but courts retain discretion to set a different amount at very high incomes."
       }
     ]
+  },
+  "ak": {
+    "name": "Alaska",
+    "abbr": "AK",
+    "slug": "alaska",
+    "formula_model": "percentage_of_income",
+    "effective_date": "2023-10-16",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2023-AK-v1",
+    "source": {
+      "agency_name": "Alaska Court System — Alaska Civil Rule 90.3",
+      "url": "https://courts.alaska.gov/rules/docs/civ90-3.pdf",
+      "statute_ref": "Alaska Civil Rule 90.3(a)"
+    },
+    "params": {
+      "income_basis": "net",
+      "percentages": {
+        "1": 0.2,
+        "2": 0.27,
+        "3": 0.33,
+        "4": 0.36,
+        "5": 0.39,
+        "6+": 0.42
+      },
+      "net_income_cap_monthly": 11500,
+      "minimum_monthly": 50
+    },
+    "worksheet": {
+      "steps": [
+        "Alaska is a flat-percentage-of-income state (not income shares): the child support award is a percentage of the NON-CUSTODIAL parent's own adjusted annual income only -- the custodial parent's income is not part of the base calculation.",
+        "\"Adjusted annual income\" starts from total income and subtracts mandatory deductions (income tax, Social Security/self-employment tax, Medicare tax, mandatory union dues and retirement contributions), work-related child care costs for the children, health/life insurance premiums (within limits), and support already owed for other children.",
+        "Multiply adjusted annual income (capped at $138,000/year, or $11,500/month) by the percentage for the number of children: 20% for one child, 27% for two, 33% for three, plus an extra 3% for each additional child.",
+        "The minimum child support award is $50/month, regardless of income.",
+        "This is Rule 90.3(a)'s primary-custody calculation only; shared, divided, or hybrid custody (Rule 90.3(b)) use a materially different formula involving both parents' figures and are not modeled here."
+      ],
+      "example": {
+        "scenario": "Example: the non-custodial parent has an adjusted net income of $4,500/month, and there are two children.",
+        "calculation": [
+          "Adjusted monthly income ($4,500) is below the $11,500/month cap, so the full amount is used.",
+          "Percentage for two children: 27%.",
+          "Child support award: $4,500 x 27% = $1,215/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Alaska use combined parental income like most states?",
+        "a": "No. Alaska Civil Rule 90.3(a) calculates the award as a flat percentage of the NON-CUSTODIAL parent's own adjusted income only -- the custodial parent's income does not factor into the primary-custody calculation, unlike income-shares states such as Texas or Georgia."
+      },
+      {
+        "q": "What counts as a parent's \"adjusted annual income\" in Alaska?",
+        "a": "Total income from all sources, minus mandatory deductions (taxes, Social Security, Medicare, mandatory retirement contributions), work-related child care costs, certain health and life insurance premiums, and support already paid for other children (Rule 90.3(a)(1))."
+      },
+      {
+        "q": "Is there a different rule for low-income parents in Alaska?",
+        "a": "Yes. Under Rule 90.3(a)(5), a parent with total annual income of $30,000 or less may use the LESSER of the standard itemized-deduction calculation or their total income minus $7,500/year as their adjusted income -- often producing a lower support amount. This calculator does not model that alternate calculation; consult Alaska's official child support calculator or a family law attorney if this may apply to you."
+      }
+    ]
   }
 }

@@ -13,6 +13,7 @@ function calcPercentageOfIncome(params, rules, inputs) {
     : params.percentages[bracket];
   const capped = Math.min(inputs.obligorNetMonthlyIncome, params.net_income_cap_monthly);
   let amount = capped * pct;
+  if (params.minimum_monthly) amount = Math.max(amount, params.minimum_monthly);
   amount = applyRounding(amount, rules.rounding);
   const overCap = inputs.obligorNetMonthlyIncome > params.net_income_cap_monthly;
   return {

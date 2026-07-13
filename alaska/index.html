@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alaska Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Alaska child support using the state's official percentage of income guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/alaska/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Alaska Child Support Calculator">
+<meta property="og:description" content="Free Alaska child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/alaska/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Alaska Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2023-AK-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Alaska?","acceptedAnswer":{"@type":"Answer","text":"Alaska is a flat-percentage-of-income state (not income shares): the child support award is a percentage of the NON-CUSTODIAL parent's own adjusted annual income only -- the custodial parent's income is not part of the base calculation. \"Adjusted annual income\" starts from total income and subtracts mandatory deductions (income tax, Social Security/self-employment tax, Medicare tax, mandatory union dues and retirement contributions), work-related child care costs for the children, health/life insurance premiums (within limits), and support already owed for other children. Multiply adjusted annual income (capped at $138,000/year, or $11,500/month) by the percentage for the number of children: 20% for one child, 27% for two, 33% for three, plus an extra 3% for each additional child. The minimum child support award is $50/month, regardless of income. This is Rule 90.3(a)'s primary-custody calculation only; shared, divided, or hybrid custody (Rule 90.3(b)) use a materially different formula involving both parents' figures and are not modeled here."}},{"@type":"Question","name":"Does Alaska use combined parental income like most states?","acceptedAnswer":{"@type":"Answer","text":"No. Alaska Civil Rule 90.3(a) calculates the award as a flat percentage of the NON-CUSTODIAL parent's own adjusted income only -- the custodial parent's income does not factor into the primary-custody calculation, unlike income-shares states such as Texas or Georgia."}},{"@type":"Question","name":"What counts as a parent's \"adjusted annual income\" in Alaska?","acceptedAnswer":{"@type":"Answer","text":"Total income from all sources, minus mandatory deductions (taxes, Social Security, Medicare, mandatory retirement contributions), work-related child care costs, certain health and life insurance premiums, and support already paid for other children (Rule 90.3(a)(1))."}},{"@type":"Question","name":"Is there a different rule for low-income parents in Alaska?","acceptedAnswer":{"@type":"Answer","text":"Yes. Under Rule 90.3(a)(5), a parent with total annual income of $30,000 or less may use the LESSER of the standard itemized-deduction calculation or their total income minus $7,500/year as their adjusted income -- often producing a lower support amount. This calculator does not model that alternate calculation; consult Alaska's official child support calculator or a family law attorney if this may apply to you."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Alaska Child Support Calculator","item":"https://usachildsupportcalculator.com/alaska/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Alaska Child Support Calculator</h1>
+  <p class="badge">Updated for Alaska's 2023-AK-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Alaska's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Alaska Court System — Alaska Civil Rule 90.3 or a family law attorney licensed in Alaska.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Your net monthly income ($)
+        <input type="number" id="obligorNetMonthlyIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Alaska Child Support Is Calculated</h2>
+    <ol><li>Alaska is a flat-percentage-of-income state (not income shares): the child support award is a percentage of the NON-CUSTODIAL parent's own adjusted annual income only -- the custodial parent's income is not part of the base calculation.</li><li>"Adjusted annual income" starts from total income and subtracts mandatory deductions (income tax, Social Security/self-employment tax, Medicare tax, mandatory union dues and retirement contributions), work-related child care costs for the children, health/life insurance premiums (within limits), and support already owed for other children.</li><li>Multiply adjusted annual income (capped at $138,000/year, or $11,500/month) by the percentage for the number of children: 20% for one child, 27% for two, 33% for three, plus an extra 3% for each additional child.</li><li>The minimum child support award is $50/month, regardless of income.</li><li>This is Rule 90.3(a)'s primary-custody calculation only; shared, divided, or hybrid custody (Rule 90.3(b)) use a materially different formula involving both parents' figures and are not modeled here.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Alaska Child Support Worksheet Walkthrough</h2>
+    <p>Example: the non-custodial parent has an adjusted net income of $4,500/month, and there are two children.</p>
+    <ol><li>Adjusted monthly income ($4,500) is below the $11,500/month cap, so the full amount is used.</li><li>Percentage for two children: 27%.</li><li>Child support award: $4,500 x 27% = $1,215/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Alaska Court System — Alaska Civil Rule 90.3 · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>1 child</td><td>20%</td><td>Alaska Civil Rule 90.3(a)</td></tr><tr><td>2 children</td><td>27%</td><td>Alaska Civil Rule 90.3(a)</td></tr><tr><td>3 children</td><td>33%</td><td>Alaska Civil Rule 90.3(a)</td></tr><tr><td>4 children</td><td>36%</td><td>Alaska Civil Rule 90.3(a)</td></tr><tr><td>5 children</td><td>39%</td><td>Alaska Civil Rule 90.3(a)</td></tr><tr><td>6+ children</td><td>42%</td><td>Alaska Civil Rule 90.3(a)</td></tr>
+      
+      <tr><td>Minimum order</td><td>$50/mo</td><td>Alaska Civil Rule 90.3(a)</td></tr>
+      <tr><td>Net income cap</td><td>$11,500/mo</td><td>Alaska Civil Rule 90.3(a)</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      net_resources = min(obligor_net_income, 11500)<br>
+      pct = (obligor_net_income &lt; 0) ? low_income_percentages[children] : percentages[children]<br>
+      monthly_support = net_resources &times; pct
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Alaska's official guideline schedule. Verify against Alaska's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Alaska?</summary><p>Alaska is a flat-percentage-of-income state (not income shares): the child support award is a percentage of the NON-CUSTODIAL parent's own adjusted annual income only -- the custodial parent's income is not part of the base calculation. "Adjusted annual income" starts from total income and subtracts mandatory deductions (income tax, Social Security/self-employment tax, Medicare tax, mandatory union dues and retirement contributions), work-related child care costs for the children, health/life insurance premiums (within limits), and support already owed for other children. Multiply adjusted annual income (capped at $138,000/year, or $11,500/month) by the percentage for the number of children: 20% for one child, 27% for two, 33% for three, plus an extra 3% for each additional child. The minimum child support award is $50/month, regardless of income. This is Rule 90.3(a)'s primary-custody calculation only; shared, divided, or hybrid custody (Rule 90.3(b)) use a materially different formula involving both parents' figures and are not modeled here.</p></details>
+    <details><summary>Does Alaska use combined parental income like most states?</summary><p>No. Alaska Civil Rule 90.3(a) calculates the award as a flat percentage of the NON-CUSTODIAL parent's own adjusted income only -- the custodial parent's income does not factor into the primary-custody calculation, unlike income-shares states such as Texas or Georgia.</p></details><details><summary>What counts as a parent's "adjusted annual income" in Alaska?</summary><p>Total income from all sources, minus mandatory deductions (taxes, Social Security, Medicare, mandatory retirement contributions), work-related child care costs, certain health and life insurance premiums, and support already paid for other children (Rule 90.3(a)(1)).</p></details><details><summary>Is there a different rule for low-income parents in Alaska?</summary><p>Yes. Under Rule 90.3(a)(5), a parent with total annual income of $30,000 or less may use the LESSER of the standard itemized-deduction calculation or their total income minus $7,500/year as their adjusted income -- often producing a lower support amount. This calculator does not model that alternate calculation; consult Alaska's official child support calculator or a family law attorney if this may apply to you.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: percentage of income. Effective 2023-10-16, guideline version 2023-AK-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://courts.alaska.gov/rules/docs/civ90-3.pdf" rel="nofollow noopener">Alaska Court System — Alaska Civil Rule 90.3</a> (Alaska Civil Rule 90.3(a)).</p>
+    <p class="deviation-note">This calculator models Alaska Civil Rule 90.3(a), the PRIMARY PHYSICAL CUSTODY calculation only, applied to a single non-custodial parent's already-adjusted net income. It does not model: the Rule 90.3(a)(5) Low-Income Adjustment (parents with total annual income of $30,000 or less may use total income minus $7,500/yr instead of the standard itemized-deduction adjusted income, whichever is lower -- this requires a gross-income-and-deductions breakdown beyond this calculator's single net-income input); the Rule 90.3(a)(3) Extended Visitation Credit (discretionary, up to 75% reduction for periods of 27+ consecutive days); Shared, Divided, or Hybrid Physical Custody (Rule 90.3(b), an entirely different calculation requiring both parents' figures and a 1.5x multiplier); or the grandparent-support provision (Rule 90.3(c)(4)). Courts may also vary the award for good cause under Rule 90.3(c)(1).</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Alaska's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Alaska","abbr":"AK","slug":"alaska","formula_model":"percentage_of_income","effective_date":"2023-10-16","last_verified":"2026-07-13","guideline_version":"2023-AK-v1","source":{"agency_name":"Alaska Court System — Alaska Civil Rule 90.3","url":"https://courts.alaska.gov/rules/docs/civ90-3.pdf","statute_ref":"Alaska Civil Rule 90.3(a)"},"params":{"income_basis":"net","percentages":{"1":0.2,"2":0.27,"3":0.33,"4":0.36,"5":0.39,"6+":0.42},"net_income_cap_monthly":11500,"minimum_monthly":50},"worksheet":{"steps":["Alaska is a flat-percentage-of-income state (not income shares): the child support award is a percentage of the NON-CUSTODIAL parent's own adjusted annual income only -- the custodial parent's income is not part of the base calculation.","\"Adjusted annual income\" starts from total income and subtracts mandatory deductions (income tax, Social Security/self-employment tax, Medicare tax, mandatory union dues and retirement contributions), work-related child care costs for the children, health/life insurance premiums (within limits), and support already owed for other children.","Multiply adjusted annual income (capped at $138,000/year, or $11,500/month) by the percentage for the number of children: 20% for one child, 27% for two, 33% for three, plus an extra 3% for each additional child.","The minimum child support award is $50/month, regardless of income.","This is Rule 90.3(a)'s primary-custody calculation only; shared, divided, or hybrid custody (Rule 90.3(b)) use a materially different formula involving both parents' figures and are not modeled here."],"example":{"scenario":"Example: the non-custodial parent has an adjusted net income of $4,500/month, and there are two children.","calculation":["Adjusted monthly income ($4,500) is below the $11,500/month cap, so the full amount is used.","Percentage for two children: 27%.","Child support award: $4,500 x 27% = $1,215/month."]}},"faq_extra":[{"q":"Does Alaska use combined parental income like most states?","a":"No. Alaska Civil Rule 90.3(a) calculates the award as a flat percentage of the NON-CUSTODIAL parent's own adjusted income only -- the custodial parent's income does not factor into the primary-custody calculation, unlike income-shares states such as Texas or Georgia."},{"q":"What counts as a parent's \"adjusted annual income\" in Alaska?","a":"Total income from all sources, minus mandatory deductions (taxes, Social Security, Medicare, mandatory retirement contributions), work-related child care costs, certain health and life insurance premiums, and support already paid for other children (Rule 90.3(a)(1))."},{"q":"Is there a different rule for low-income parents in Alaska?","a":"Yes. Under Rule 90.3(a)(5), a parent with total annual income of $30,000 or less may use the LESSER of the standard itemized-deduction calculation or their total income minus $7,500/year as their adjusted income -- often producing a lower support amount. This calculator does not model that alternate calculation; consult Alaska's official child support calculator or a family law attorney if this may apply to you."}]};
+    const RULES = {"rounding":"nearest_dollar","custody_adjustment":null,"income_cap_behavior":"flat_at_cap","deviation_note":"This calculator models Alaska Civil Rule 90.3(a), the PRIMARY PHYSICAL CUSTODY calculation only, applied to a single non-custodial parent's already-adjusted net income. It does not model: the Rule 90.3(a)(5) Low-Income Adjustment (parents with total annual income of $30,000 or less may use total income minus $7,500/yr instead of the standard itemized-deduction adjusted income, whichever is lower -- this requires a gross-income-and-deductions breakdown beyond this calculator's single net-income input); the Rule 90.3(a)(3) Extended Visitation Credit (discretionary, up to 75% reduction for periods of 27+ consecutive days); Shared, Divided, or Hybrid Physical Custody (Rule 90.3(b), an entirely different calculation requiring both parents' figures and a 1.5x multiplier); or the grandparent-support provision (Rule 90.3(c)(4)). Courts may also vary the award for good cause under Rule 90.3(c)(1)."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

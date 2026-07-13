@@ -52,6 +52,9 @@ function formulaSection(state, rules) {
     const lowIncomeRow = p.low_income_threshold_monthly
       ? `<tr><td>Low-income threshold</td><td>$${p.low_income_threshold_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>`
       : '';
+    const minimumRow = p.minimum_monthly
+      ? `<tr><td>Minimum order</td><td>$${p.minimum_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>`
+      : '';
     return `
   <section class="formula-section">
     <h2>How This Calculator Works — Formula &amp; Constants</h2>
@@ -61,6 +64,7 @@ function formulaSection(state, rules) {
       <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
       ${rows}
       ${lowIncomeRow}
+      ${minimumRow}
       <tr><td>Net income cap</td><td>$${p.net_income_cap_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
     </table>
     <h3>Formula</h3>
