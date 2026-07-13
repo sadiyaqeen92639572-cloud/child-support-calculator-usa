@@ -2629,5 +2629,55 @@
         "a": "The schedule does not automatically extend. Courts use the amount computed for $15,000/month combined income as a base, then add an additional amount determined case-by-case (43 O.S. § 119)."
       }
     ]
+  },
+  "ri": {
+    "name": "Rhode Island",
+    "abbr": "RI",
+    "slug": "rhode-island",
+    "formula_model": "income_shares",
+    "effective_date": "2023-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2023-RI-v1",
+    "source": {
+      "agency_name": "Rhode Island Family Court — Administrative Order 2023-02",
+      "url": "https://ocss.ri.gov/sites/g/files/xkgbur511/files/2023-07/23-02.pdf",
+      "statute_ref": "RI Gen. Laws § 15-5-16.2(a); Family Court Administrative Order 2023-02"
+    },
+    "params": {
+      "income_basis": "net",
+      "schedule_table_ref": "rhode-island_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' net monthly income (after Rhode Island's own Gross-to-Net Conversion Table) to get combined income, then look up the Schedule of Basic Child Support Obligations for the total number of children.",
+        "Each parent's share of that amount is their percentage of combined net income.",
+        "Rhode Island's schedule presumes the noncustodial parent has at least 20% of the overnight parenting time. When both parents have at least a 49% share of parenting time, a different calculation applies (Administrative Order 2018-01), not modeled here.",
+        "The schedule already builds in a $250/year per-child allowance for ordinary medical expenses; childcare and most other health costs are added separately.",
+        "Above $40,000/month combined net income, the schedule does not extend automatically -- courts determine the amount case-by-case."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has net monthly income of $2,500, Parent B has net monthly income of $1,700 (combined $4,200). There are four children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined net monthly income: $2,500 + $1,700 = $4,200.",
+          "Schedule of Basic Child Support Obligations at $4,200 combined, four children: $1,603.",
+          "Parent A's income share: $2,500 / $4,200 = 59.5%.",
+          "Parent A pays: $1,603 x 59.5% = $954/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Rhode Island use gross or net income?",
+        "a": "Net income. Rhode Island converts gross income to net using its own published Gross-to-Net Conversion Table (accounting for taxes and other standard deductions) before applying the Schedule of Basic Child Support Obligations."
+      },
+      {
+        "q": "What is Rhode Island's Self-Support Reserve?",
+        "a": "$1,333/month (based on federal poverty guidelines) as of the 2023 schedule. The schedule's own lowest combined-income row ($1,350) reflects this, applying a flat $50/month minimum regardless of the number of children."
+      },
+      {
+        "q": "How does shared parenting time affect Rhode Island child support?",
+        "a": "The standard schedule assumes the noncustodial parent has at least 20% of the overnights. When both parents have at least a 49% share of parenting time, Administrative Order 2018-01 provides a different calculation method, which this calculator does not model."
+      }
+    ]
   }
 }

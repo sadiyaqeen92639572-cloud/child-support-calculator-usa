@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Rhode Island's schedule presumes a 'standard' parenting time arrangement where the noncustodial parent has at least 20% of the overnights. This calculator does not model the different calculation that applies when both parents have at least a 49% share of parenting time (Administrative Order 2018-01), Split Custody, or the discretionary add-ons for a parent's extraordinary medical expenses, pension/retirement payments, life insurance premiums, or assigned marital debts (Worksheet lines 3a-3e). Above $40,000/month combined income, Rhode Island's guideline schedule does not extend automatically -- courts determine the amount case-by-case. The schedule already includes a per-child allowance of $250/year for ordinary medical expenses, and is indexed by NET income (after the state's own Gross-to-Net Conversion Table), not gross."
+}
