@@ -157,6 +157,53 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
+  if (rules.ky_lesser_of_ssr_or_credit) {
+    // Kentucky's mechanism (KRS 403.212(5), 403.2122(3)(c)): the Self-Support
+    // Reserve and the Shared Parenting Time Credit are NOT applied together
+    // — the obligor pays whichever produces the LESSER amount. SSR: if the
+    // paying parent's income is at/below a per-child-count ceiling, the
+    // obligation is a schedule lookup at that parent's own income alone
+    // (KRS 403.212(5)(b)). Shared parenting credit: a stepped percentage
+    // (88+ days/year, 15%-50%) of the FULL combined obligation, subtracted
+    // from the standard prorated share (KRS 403.2122(4)).
+    const ky = rules.ky_lesser_of_ssr_or_credit;
+    const proratedAmount = totalObligation * payingShare;
+    let creditAdjustedAmount = proratedAmount;
+    let creditApplied = false;
+    if (payingParentOvernights >= ky.credit_threshold_days) {
+      const creditPct = stepLookup(ky.credit_table, payingParentOvernights);
+      creditAdjustedAmount = Math.max(0, proratedAmount - (baseObligation * creditPct));
+      creditApplied = creditPct > 0;
+    }
+
+    const bracket = String(inputs.numChildren >= 6 ? 6 : inputs.numChildren);
+    const shadedCeiling = ky.self_support_zone_max[bracket];
+    let finalAmount = creditAdjustedAmount;
+    let ssrApplied = false;
+    if (shadedCeiling && payingParentIncome <= shadedCeiling) {
+      const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+      if (individualObligation < finalAmount) {
+        finalAmount = individualObligation;
+        ssrApplied = true;
+      }
+    }
+
+    if (finalAmount < ky.minimum_order_monthly) finalAmount = ky.minimum_order_monthly;
+    const amount = applyRounding(finalAmount, rules.rounding);
+
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: creditApplied && !ssrApplied,
+      deviationNote: rules.deviation_note,
+      capWarning: ssrApplied
+        ? "Self-Support Reserve applies (KRS 403.212(5)(b)) — computed from the paying parent's own income alone, since it produced a lower amount than the shared parenting time credit."
+        : null
+    };
+  }
+
   const skipLesserOfForSharedCustody = rules.custody_adjustment
     && rules.custody_adjustment.type === 'sc_shared_custody'
     && payingParentOvernights > (rules.custody_adjustment.threshold_days || 109);

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kentucky Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Kentucky child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/kentucky/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Kentucky Child Support Calculator">
+<meta property="og:description" content="Free Kentucky child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/kentucky/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Kentucky Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2025-KY-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Kentucky?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted parental gross income. Look up the basic child support obligation from the official guidelines table for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic obligation. If the paying parent has 88 or more parenting days per year, a stepped Shared Parenting Time Credit (15% at 88-115 days, rising to 50% at 182-182.5 days) reduces their share -- computed on the FULL basic obligation, not just their prorated share. If the paying parent's income is at or below a per-child-count threshold ($1,100 for one child up to $1,600 for six or more), the Self-Support Reserve applies: the obligation is computed using that parent's own income alone, not combined income. The Self-Support Reserve and the Shared Parenting Time Credit are NOT applied together -- the paying parent owes whichever produces the LOWER amount. A minimum of $60/month applies. Above $30,000/month combined income, courts use discretion rather than an automatic formula."}},{"@type":"Question","name":"How does Kentucky's Shared Parenting Time Credit work?","acceptedAnswer":{"@type":"Answer","text":"If the paying parent has 88 or more parenting days per year, Kentucky applies a stepped percentage credit (15% at 88-115 days, rising through fixed brackets to 50% at 182-182.5 days, KRS 403.2122). This credit is calculated on the FULL combined basic obligation (not just the paying parent's prorated share) and then subtracted from that parent's share. It was created by 2024 legislation, effective July 15, 2024."}},{"@type":"Question","name":"Does Kentucky have a self-support reserve for low-income parents?","acceptedAnswer":{"@type":"Answer","text":"Yes. If the paying parent's income is at or below a threshold that varies by number of children ($1,100/month for one child up to $1,600/month for six or more), the obligation is computed using that parent's own income alone rather than combined income (KRS 403.212(5)(b)). Kentucky's law explicitly says this and the Shared Parenting Time Credit are not applied together -- the paying parent owes whichever produces the lower amount."}},{"@type":"Question","name":"What happens if combined income is above $30,000/month in Kentucky?","acceptedAnswer":{"@type":"Answer","text":"Above $30,000/month in combined adjusted parental gross income, Kentucky's guidelines table has no further value, and courts use judicial discretion (KRS 403.212(7)) rather than extending the formula automatically."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Kentucky Child Support Calculator","item":"https://usachildsupportcalculator.com/kentucky/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Kentucky Child Support Calculator</h1>
+  <p class="badge">Updated for Kentucky's 2025-KY-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Kentucky's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Kentucky Revised Statutes § 403.212 (Legislative Research Commission) or a family law attorney licensed in Kentucky.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Kentucky Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted parental gross income.</li><li>Look up the basic child support obligation from the official guidelines table for that combined income and number of children.</li><li>Each parent's share equals their income divided by combined income, applied to the basic obligation.</li><li>If the paying parent has 88 or more parenting days per year, a stepped Shared Parenting Time Credit (15% at 88-115 days, rising to 50% at 182-182.5 days) reduces their share -- computed on the FULL basic obligation, not just their prorated share.</li><li>If the paying parent's income is at or below a per-child-count threshold ($1,100 for one child up to $1,600 for six or more), the Self-Support Reserve applies: the obligation is computed using that parent's own income alone, not combined income.</li><li>The Self-Support Reserve and the Shared Parenting Time Credit are NOT applied together -- the paying parent owes whichever produces the LOWER amount.</li><li>A minimum of $60/month applies. Above $30,000/month combined income, courts use discretion rather than an automatic formula.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Kentucky Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 parenting days/year (88-115 day bracket, 15% credit).</p>
+    <ol><li>Basic child support obligation for $5,000 combined, 2 children: $1,102.50/month.</li><li>Parent B's pre-credit share: 40% × $1,102.50 ≈ $441/month.</li><li>Shared Parenting Time Credit at 100 days (88-115 day bracket, 15%): $1,102.50 × 15% ≈ $165 credit, reducing Parent B's obligation to $276/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Kentucky Revised Statutes § 403.212 (Legislative Research Commission) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Kentucky's official guideline schedule table. Verify against Kentucky's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Kentucky?</summary><p>Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted parental gross income. Look up the basic child support obligation from the official guidelines table for that combined income and number of children. Each parent's share equals their income divided by combined income, applied to the basic obligation. If the paying parent has 88 or more parenting days per year, a stepped Shared Parenting Time Credit (15% at 88-115 days, rising to 50% at 182-182.5 days) reduces their share -- computed on the FULL basic obligation, not just their prorated share. If the paying parent's income is at or below a per-child-count threshold ($1,100 for one child up to $1,600 for six or more), the Self-Support Reserve applies: the obligation is computed using that parent's own income alone, not combined income. The Self-Support Reserve and the Shared Parenting Time Credit are NOT applied together -- the paying parent owes whichever produces the LOWER amount. A minimum of $60/month applies. Above $30,000/month combined income, courts use discretion rather than an automatic formula.</p></details>
+    <details><summary>How does Kentucky's Shared Parenting Time Credit work?</summary><p>If the paying parent has 88 or more parenting days per year, Kentucky applies a stepped percentage credit (15% at 88-115 days, rising through fixed brackets to 50% at 182-182.5 days, KRS 403.2122). This credit is calculated on the FULL combined basic obligation (not just the paying parent's prorated share) and then subtracted from that parent's share. It was created by 2024 legislation, effective July 15, 2024.</p></details><details><summary>Does Kentucky have a self-support reserve for low-income parents?</summary><p>Yes. If the paying parent's income is at or below a threshold that varies by number of children ($1,100/month for one child up to $1,600/month for six or more), the obligation is computed using that parent's own income alone rather than combined income (KRS 403.212(5)(b)). Kentucky's law explicitly says this and the Shared Parenting Time Credit are not applied together -- the paying parent owes whichever produces the lower amount.</p></details><details><summary>What happens if combined income is above $30,000/month in Kentucky?</summary><p>Above $30,000/month in combined adjusted parental gross income, Kentucky's guidelines table has no further value, and courts use judicial discretion (KRS 403.212(7)) rather than extending the formula automatically.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2025-07-01, guideline version 2025-KY-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=55832" rel="nofollow noopener">Kentucky Revised Statutes § 403.212 (Legislative Research Commission)</a> (KRS 403.212, 403.2122).</p>
+    <p class="deviation-note">Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula. This calculator does not model split custody arrangements (KRS 403.212(8), two separate worksheets offset against each other) or the equal-parenting-time obligor-determination rule (KRS 403.2122(3)(a)(1)(b)).</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Kentucky's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Kentucky","abbr":"KY","slug":"kentucky","formula_model":"income_shares","effective_date":"2025-07-01","last_verified":"2026-07-13","guideline_version":"2025-KY-v1","source":{"agency_name":"Kentucky Revised Statutes § 403.212 (Legislative Research Commission)","url":"https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=55832","statute_ref":"KRS 403.212, 403.2122"},"params":{"schedule_table_ref":"kentucky_schedule.json","income_basis":"gross","income_cap_monthly":30000,"high_income_note":"Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula."},"worksheet":{"steps":["Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted parental gross income.","Look up the basic child support obligation from the official guidelines table for that combined income and number of children.","Each parent's share equals their income divided by combined income, applied to the basic obligation.","If the paying parent has 88 or more parenting days per year, a stepped Shared Parenting Time Credit (15% at 88-115 days, rising to 50% at 182-182.5 days) reduces their share -- computed on the FULL basic obligation, not just their prorated share.","If the paying parent's income is at or below a per-child-count threshold ($1,100 for one child up to $1,600 for six or more), the Self-Support Reserve applies: the obligation is computed using that parent's own income alone, not combined income.","The Self-Support Reserve and the Shared Parenting Time Credit are NOT applied together -- the paying parent owes whichever produces the LOWER amount.","A minimum of $60/month applies. Above $30,000/month combined income, courts use discretion rather than an automatic formula."],"example":{"scenario":"Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 parenting days/year (88-115 day bracket, 15% credit).","calculation":["Basic child support obligation for $5,000 combined, 2 children: $1,102.50/month.","Parent B's pre-credit share: 40% × $1,102.50 ≈ $441/month.","Shared Parenting Time Credit at 100 days (88-115 day bracket, 15%): $1,102.50 × 15% ≈ $165 credit, reducing Parent B's obligation to $276/month."]}},"faq_extra":[{"q":"How does Kentucky's Shared Parenting Time Credit work?","a":"If the paying parent has 88 or more parenting days per year, Kentucky applies a stepped percentage credit (15% at 88-115 days, rising through fixed brackets to 50% at 182-182.5 days, KRS 403.2122). This credit is calculated on the FULL combined basic obligation (not just the paying parent's prorated share) and then subtracted from that parent's share. It was created by 2024 legislation, effective July 15, 2024."},{"q":"Does Kentucky have a self-support reserve for low-income parents?","a":"Yes. If the paying parent's income is at or below a threshold that varies by number of children ($1,100/month for one child up to $1,600/month for six or more), the obligation is computed using that parent's own income alone rather than combined income (KRS 403.212(5)(b)). Kentucky's law explicitly says this and the Shared Parenting Time Credit are not applied together -- the paying parent owes whichever produces the lower amount."},{"q":"What happens if combined income is above $30,000/month in Kentucky?","a":"Above $30,000/month in combined adjusted parental gross income, Kentucky's guidelines table has no further value, and courts use judicial discretion (KRS 403.212(7)) rather than extending the formula automatically."}]};
+    const RULES = {"rounding":"nearest_dollar","ky_lesser_of_ssr_or_credit":{"self_support_zone_max":{"1":1100,"2":1300,"3":1400,"4":1500,"5":1500,"6":1600},"credit_threshold_days":88,"credit_table":[{"upTo":115,"value":0.15},{"upTo":129,"value":0.205},{"upTo":142,"value":0.25},{"upTo":152,"value":0.305},{"upTo":162,"value":0.36},{"upTo":172,"value":0.42},{"upTo":181,"value":0.485},{"upTo":365,"value":0.5}],"minimum_order_monthly":60,"note":"KRS 403.212(5)(b): obligor's income at/below a per-child-count ceiling ($1,100-$1,600) uses a schedule lookup at that parent's own income alone. KRS 403.2122(4): a stepped shared-parenting-time credit (15%-50% of the base obligation, 88+ days/year). Per KRS 403.2122(3)(c), these two are NOT applied together -- the obligor pays whichever is lower."},"income_cap_behavior":"discretionary_above_cap","deviation_note":"Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula. This calculator does not model split custody arrangements (KRS 403.212(8), two separate worksheets offset against each other) or the equal-parenting-time obligor-determination rule (KRS 403.2122(3)(a)(1)(b))."};
+    const SCHEDULE = {"maxIncome":30000,"source":"KRS 403.212(9), Child Support Guidelines Table, eff. 2025-07-01, https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=55832","note":"47 real anchor points transcribed directly from the full official table (301 rows, $0-$30,000 combined monthly adjusted parental gross income in $100 increments), extracted via pdftotext -layout from the primary PDF, not OCR. Below $900/mo the schedule is flat at $60 (statutory minimum). Above $30,000/mo, courts use discretion (KRS 403.212(7)) rather than an automatic formula. Engine interpolates linearly between anchors.","rows":[{"upTo":0,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":100,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":300,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":500,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":700,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":900,"obligation":{"1":60,"2":60,"3":60,"4":60,"5":60,"6":60}},{"upTo":1100,"obligation":{"1":148,"2":150,"3":152,"4":154,"5":155,"6":157}},{"upTo":1300,"obligation":{"1":216,"2":312,"3":316,"4":320,"5":323,"6":327}},{"upTo":1500,"obligation":{"1":247,"2":362,"3":437,"4":486,"5":491,"6":497}},{"upTo":1700,"obligation":{"1":277,"2":406,"3":491,"4":548,"5":603,"6":655}},{"upTo":1900,"obligation":{"1":307,"2":450,"3":544,"4":607,"5":668,"6":726}},{"upTo":2100,"obligation":{"1":337,"2":494,"3":597,"4":667,"5":734,"6":797}},{"upTo":2300,"obligation":{"1":367,"2":538,"3":650,"4":726,"5":799,"6":869}},{"upTo":2500,"obligation":{"1":397,"2":582,"3":704,"4":786,"5":865,"6":940}},{"upTo":2700,"obligation":{"1":427,"2":626,"3":757,"4":845,"5":930,"6":1011}},{"upTo":2900,"obligation":{"1":457,"2":670,"3":810,"4":905,"5":995,"6":1082}},{"upTo":3200,"obligation":{"1":502,"2":737,"3":890,"4":994,"5":1094,"6":1189}},{"upTo":3600,"obligation":{"1":562,"2":825,"3":997,"4":1113,"5":1224,"6":1331}},{"upTo":4000,"obligation":{"1":621,"2":912,"3":1102,"4":1230,"5":1353,"6":1471}},{"upTo":4400,"obligation":{"1":673,"2":988,"3":1194,"4":1334,"5":1467,"6":1595}},{"upTo":4800,"obligation":{"1":725,"2":1064,"3":1286,"4":1437,"5":1580,"6":1718}},{"upTo":5200,"obligation":{"1":777,"2":1141,"3":1379,"4":1540,"5":1694,"6":1841}},{"upTo":5600,"obligation":{"1":810,"2":1181,"3":1423,"4":1590,"5":1749,"6":1901}},{"upTo":6000,"obligation":{"1":831,"2":1200,"3":1439,"4":1607,"5":1768,"6":1922}},{"upTo":6400,"obligation":{"1":858,"2":1234,"3":1479,"4":1652,"5":1817,"6":1975}},{"upTo":6800,"obligation":{"1":892,"2":1278,"3":1530,"4":1709,"5":1880,"6":2044}},{"upTo":7200,"obligation":{"1":935,"2":1335,"3":1600,"4":1787,"5":1965,"6":2136}},{"upTo":7600,"obligation":{"1":969,"2":1384,"3":1657,"4":1851,"5":2036,"6":2213}},{"upTo":8000,"obligation":{"1":996,"2":1426,"3":1704,"4":1903,"5":2094,"6":2276}},{"upTo":8500,"obligation":{"1":1016,"2":1444,"3":1727,"4":1929,"5":2122,"6":2306}},{"upTo":9500,"obligation":{"1":1075,"2":1511,"3":1807,"4":2018,"5":2220,"6":2413}},{"upTo":10500,"obligation":{"1":1130,"2":1571,"3":1889,"4":2110,"5":2321,"6":2523}},{"upTo":11500,"obligation":{"1":1207,"2":1685,"3":2004,"4":2239,"5":2462,"6":2677}},{"upTo":12500,"obligation":{"1":1282,"2":1778,"3":2128,"4":2377,"5":2615,"6":2842}},{"upTo":13500,"obligation":{"1":1353,"2":1868,"3":2247,"4":2510,"5":2761,"6":3001}},{"upTo":14500,"obligation":{"1":1406,"2":1935,"3":2327,"4":2599,"5":2859,"6":3108}},{"upTo":15500,"obligation":{"1":1454,"2":1997,"3":2401,"4":2682,"5":2950,"6":3207}},{"upTo":17000,"obligation":{"1":1534,"2":2089,"3":2508,"4":2801,"5":3082,"6":3350}},{"upTo":18500,"obligation":{"1":1616,"2":2178,"3":2609,"4":2915,"5":3206,"6":3485}},{"upTo":20000,"obligation":{"1":1696,"2":2265,"3":2709,"4":3025,"5":3328,"6":3617}},{"upTo":21500,"obligation":{"1":1749,"2":2343,"3":2795,"4":3122,"5":3434,"6":3733}},{"upTo":23000,"obligation":{"1":1798,"2":2418,"3":2879,"4":3216,"5":3537,"6":3845}},{"upTo":24500,"obligation":{"1":1847,"2":2494,"3":2963,"4":3310,"5":3641,"6":3957}},{"upTo":26000,"obligation":{"1":1895,"2":2570,"3":3047,"4":3404,"5":3744,"6":4070}},{"upTo":27500,"obligation":{"1":1944,"2":2645,"3":3131,"4":3498,"5":3847,"6":4182}},{"upTo":29000,"obligation":{"1":1984,"2":2704,"3":3197,"4":3571,"5":3930,"6":4272}},{"upTo":30000,"obligation":{"1":2003,"2":2730,"3":3227,"4":3604,"5":3968,"6":4314}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

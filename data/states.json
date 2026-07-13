@@ -1837,5 +1837,58 @@
         "a": "Yes. For parents whose income exceeds the Personal Allowance, the minimum contribution is 12% of their income after the Personal Allowance is subtracted. For parents whose income is at or below the Personal Allowance, a separate graduated table (based on an income-ratio calculation) applies instead -- not modeled by this calculator, since it's a narrow edge case for very low-income parents."
       }
     ]
+  },
+  "ky": {
+    "name": "Kentucky",
+    "abbr": "KY",
+    "slug": "kentucky",
+    "formula_model": "income_shares",
+    "effective_date": "2025-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2025-KY-v1",
+    "source": {
+      "agency_name": "Kentucky Revised Statutes § 403.212 (Legislative Research Commission)",
+      "url": "https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=55832",
+      "statute_ref": "KRS 403.212, 403.2122"
+    },
+    "params": {
+      "schedule_table_ref": "kentucky_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 30000,
+      "high_income_note": "Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly adjusted gross income, then combine both for combined monthly adjusted parental gross income.",
+        "Look up the basic child support obligation from the official guidelines table for that combined income and number of children.",
+        "Each parent's share equals their income divided by combined income, applied to the basic obligation.",
+        "If the paying parent has 88 or more parenting days per year, a stepped Shared Parenting Time Credit (15% at 88-115 days, rising to 50% at 182-182.5 days) reduces their share -- computed on the FULL basic obligation, not just their prorated share.",
+        "If the paying parent's income is at or below a per-child-count threshold ($1,100 for one child up to $1,600 for six or more), the Self-Support Reserve applies: the obligation is computed using that parent's own income alone, not combined income.",
+        "The Self-Support Reserve and the Shared Parenting Time Credit are NOT applied together -- the paying parent owes whichever produces the LOWER amount.",
+        "A minimum of $60/month applies. Above $30,000/month combined income, courts use discretion rather than an automatic formula."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and is the noncustodial parent with 100 parenting days/year (88-115 day bracket, 15% credit).",
+        "calculation": [
+          "Basic child support obligation for $5,000 combined, 2 children: $1,102.50/month.",
+          "Parent B's pre-credit share: 40% × $1,102.50 ≈ $441/month.",
+          "Shared Parenting Time Credit at 100 days (88-115 day bracket, 15%): $1,102.50 × 15% ≈ $165 credit, reducing Parent B's obligation to $276/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How does Kentucky's Shared Parenting Time Credit work?",
+        "a": "If the paying parent has 88 or more parenting days per year, Kentucky applies a stepped percentage credit (15% at 88-115 days, rising through fixed brackets to 50% at 182-182.5 days, KRS 403.2122). This credit is calculated on the FULL combined basic obligation (not just the paying parent's prorated share) and then subtracted from that parent's share. It was created by 2024 legislation, effective July 15, 2024."
+      },
+      {
+        "q": "Does Kentucky have a self-support reserve for low-income parents?",
+        "a": "Yes. If the paying parent's income is at or below a threshold that varies by number of children ($1,100/month for one child up to $1,600/month for six or more), the obligation is computed using that parent's own income alone rather than combined income (KRS 403.212(5)(b)). Kentucky's law explicitly says this and the Shared Parenting Time Credit are not applied together -- the paying parent owes whichever produces the lower amount."
+      },
+      {
+        "q": "What happens if combined income is above $30,000/month in Kentucky?",
+        "a": "Above $30,000/month in combined adjusted parental gross income, Kentucky's guidelines table has no further value, and courts use judicial discretion (KRS 403.212(7)) rather than extending the formula automatically."
+      }
+    ]
   }
 }

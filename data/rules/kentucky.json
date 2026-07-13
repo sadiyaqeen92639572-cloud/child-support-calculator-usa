@@ -1,0 +1,21 @@
+{
+  "rounding": "nearest_dollar",
+  "ky_lesser_of_ssr_or_credit": {
+    "self_support_zone_max": { "1": 1100, "2": 1300, "3": 1400, "4": 1500, "5": 1500, "6": 1600 },
+    "credit_threshold_days": 88,
+    "credit_table": [
+      { "upTo": 115, "value": 0.15 },
+      { "upTo": 129, "value": 0.205 },
+      { "upTo": 142, "value": 0.25 },
+      { "upTo": 152, "value": 0.305 },
+      { "upTo": 162, "value": 0.36 },
+      { "upTo": 172, "value": 0.42 },
+      { "upTo": 181, "value": 0.485 },
+      { "upTo": 365, "value": 0.50 }
+    ],
+    "minimum_order_monthly": 60,
+    "note": "KRS 403.212(5)(b): obligor's income at/below a per-child-count ceiling ($1,100-$1,600) uses a schedule lookup at that parent's own income alone. KRS 403.2122(4): a stepped shared-parenting-time credit (15%-50% of the base obligation, 88+ days/year). Per KRS 403.2122(3)(c), these two are NOT applied together -- the obligor pays whichever is lower."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula. This calculator does not model split custody arrangements (KRS 403.212(8), two separate worksheets offset against each other) or the equal-parenting-time obligor-determination rule (KRS 403.2122(3)(a)(1)(b))."
+}
