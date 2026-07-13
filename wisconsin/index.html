@@ -144,6 +144,16 @@
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
       if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
         return {
           parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,

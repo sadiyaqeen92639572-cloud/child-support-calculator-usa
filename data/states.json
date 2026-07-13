@@ -1943,5 +1943,61 @@
         "a": "Yes -- when parents have Joint (Equally Shared) Physical Care, Iowa uses an entirely different worksheet (Rule 9.9A) that doesn't apply the low-income Area A/B adjustment at all, using combined incomes regardless of either parent's income level. This calculator models the standard primary-care scenario only."
       }
     ]
+  },
+  "ks": {
+    "name": "Kansas",
+    "abbr": "KS",
+    "slug": "kansas",
+    "formula_model": "ks_age_schedule",
+    "effective_date": "2025-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2025-KS-v1",
+    "source": {
+      "agency_name": "Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121)",
+      "url": "https://kscourts.gov/KSCourts/media/KsCourts/Child%20Support%20Guidelines/2024-Child-Support-Guidlines-adopted-May-1-2025-clean.pdf",
+      "statute_ref": "Kansas Child Support Guidelines, Sections IV.A-H, Appendix II"
+    },
+    "params": {
+      "income_basis": "gross",
+      "schedule_table_ref": "kansas_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Kansas is unique among the states modeled here: its child support schedule (Appendix II) varies not just by combined income and total number of children, but by each child's AGE -- there are separate 0-5, 6-11, and 12-18 columns, and a separate full schedule table for families with 1, 2, 3, 4, 5, or 6 (or more) children.",
+        "Add both parents' gross monthly income to get combined income, then look up the base per-child amount for the 12-18 age bracket in the schedule matching your total number of children.",
+        "For each child, adjust that base amount for their own age: multiply by 0.84 for a child age 0-5, by 0.94 for a child age 6-11, or use it unchanged for a child age 12-18 -- this is the guidelines' own stated method for deriving the age columns.",
+        "Add up each child's adjusted amount to get the total gross child support obligation.",
+        "Each parent's share of that total is their proportion of combined income; the parent with the minority of overnights (under 182.5/year) pays their share to the other parent.",
+        "If the parent paying support has 35% or more of the child’s time (a \"Parenting Time Adjustment\" under Section IV.H.2), the obligation is reduced: 10% at 35-39%, 20% at 40-44%, 30% at 45-49%. At 50% or more, Kansas uses a different shared-residency worksheet not modeled here.",
+        "Above $18,000/month combined income, the schedule's top row does not apply automatically -- Kansas's Extended Formula (Section IV.G) computes a presumptive amount from combined income raised to a fixed power, but courts retain discretion at that level."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $4,000/month gross, Parent B earns $3,000/month gross (combined $7,000). They have two children -- one age 4 (0-5 bracket) and one age 14 (12-18 bracket). The child spends 100 overnights/year with Parent A (27% of the year), so Parent B is the custodial parent and Parent A pays support.",
+        "calculation": [
+          "Combined gross monthly income: $4,000 + $3,000 = $7,000.",
+          "Two-Child Families schedule at $7,000 combined income, 12-18 base amount: interpolated to about $948/child.",
+          "Age 0-5 child's amount: $948 x 0.84 = $796 (rounded).",
+          "Age 12-18 child's amount: $948 (unchanged).",
+          "Total gross child support obligation: $796 + $948 = $1,744/month.",
+          "Parent A's income share: $4,000 / $7,000 = 57.1%.",
+          "Parent A's time with the child (27%) is below the 35% Parenting Time Adjustment threshold, so no reduction applies.",
+          "Parent A pays: $1,744 x 57.1% = about $997/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Why does Kansas ask for each child's age instead of just the number of children?",
+        "a": "Kansas's official schedule (Appendix II) publishes a different dollar amount for each child depending on whether they are 0-5, 6-11, or 12-18 years old -- younger children have a lower base amount (84% and 94% of the 12-18 rate, respectively). Most other states use one schedule regardless of a child's specific age."
+      },
+      {
+        "q": "Does Kansas use gross or net income?",
+        "a": "Gross income. Kansas's schedule (Appendix II) is indexed by combined GROSS monthly income -- the schedule itself already builds in an allowance for taxes and other income deductions, so no separate net-income conversion step is required before the lookup."
+      },
+      {
+        "q": "What happens above Kansas's $18,000/month schedule ceiling?",
+        "a": "Kansas's guidelines (Section IV.G) provide an exact Extended Formula for income above the schedule's top row: a fixed coefficient (specific to the number of children) multiplied by combined income raised to the power 0.6386. The amount is presumptive, but courts retain discretion to set a different amount at very high incomes."
+      }
+    ]
   }
 }

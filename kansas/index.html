@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kansas Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Kansas child support using the state's official ks age schedule guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/kansas/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Kansas Child Support Calculator">
+<meta property="og:description" content="Free Kansas child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/kansas/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Kansas Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2025-KS-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Kansas?","acceptedAnswer":{"@type":"Answer","text":"Kansas is unique among the states modeled here: its child support schedule (Appendix II) varies not just by combined income and total number of children, but by each child's AGE -- there are separate 0-5, 6-11, and 12-18 columns, and a separate full schedule table for families with 1, 2, 3, 4, 5, or 6 (or more) children. Add both parents' gross monthly income to get combined income, then look up the base per-child amount for the 12-18 age bracket in the schedule matching your total number of children. For each child, adjust that base amount for their own age: multiply by 0.84 for a child age 0-5, by 0.94 for a child age 6-11, or use it unchanged for a child age 12-18 -- this is the guidelines' own stated method for deriving the age columns. Add up each child's adjusted amount to get the total gross child support obligation. Each parent's share of that total is their proportion of combined income; the parent with the minority of overnights (under 182.5/year) pays their share to the other parent. If the parent paying support has 35% or more of the child’s time (a \"Parenting Time Adjustment\" under Section IV.H.2), the obligation is reduced: 10% at 35-39%, 20% at 40-44%, 30% at 45-49%. At 50% or more, Kansas uses a different shared-residency worksheet not modeled here. Above $18,000/month combined income, the schedule's top row does not apply automatically -- Kansas's Extended Formula (Section IV.G) computes a presumptive amount from combined income raised to a fixed power, but courts retain discretion at that level."}},{"@type":"Question","name":"Why does Kansas ask for each child's age instead of just the number of children?","acceptedAnswer":{"@type":"Answer","text":"Kansas's official schedule (Appendix II) publishes a different dollar amount for each child depending on whether they are 0-5, 6-11, or 12-18 years old -- younger children have a lower base amount (84% and 94% of the 12-18 rate, respectively). Most other states use one schedule regardless of a child's specific age."}},{"@type":"Question","name":"Does Kansas use gross or net income?","acceptedAnswer":{"@type":"Answer","text":"Gross income. Kansas's schedule (Appendix II) is indexed by combined GROSS monthly income -- the schedule itself already builds in an allowance for taxes and other income deductions, so no separate net-income conversion step is required before the lookup."}},{"@type":"Question","name":"What happens above Kansas's $18,000/month schedule ceiling?","acceptedAnswer":{"@type":"Answer","text":"Kansas's guidelines (Section IV.G) provide an exact Extended Formula for income above the schedule's top row: a fixed coefficient (specific to the number of children) multiplied by combined income raised to the power 0.6386. The amount is presumptive, but courts retain discretion to set a different amount at very high incomes."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Kansas Child Support Calculator","item":"https://usachildsupportcalculator.com/kansas/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Kansas Child Support Calculator</h1>
+  <p class="badge">Updated for Kansas's 2025-KS-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Kansas's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121) or a family law attorney licensed in Kansas.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children age 0-5
+        <input type="number" id="children0to5" min="0" step="1" value="0">
+      </label>
+      <label>Number of children age 6-11
+        <input type="number" id="children6to11" min="0" step="1" value="1">
+      </label>
+      <label>Number of children age 12-18
+        <input type="number" id="children12to18" min="0" step="1" value="0">
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Kansas Child Support Is Calculated</h2>
+    <ol><li>Kansas is unique among the states modeled here: its child support schedule (Appendix II) varies not just by combined income and total number of children, but by each child's AGE -- there are separate 0-5, 6-11, and 12-18 columns, and a separate full schedule table for families with 1, 2, 3, 4, 5, or 6 (or more) children.</li><li>Add both parents' gross monthly income to get combined income, then look up the base per-child amount for the 12-18 age bracket in the schedule matching your total number of children.</li><li>For each child, adjust that base amount for their own age: multiply by 0.84 for a child age 0-5, by 0.94 for a child age 6-11, or use it unchanged for a child age 12-18 -- this is the guidelines' own stated method for deriving the age columns.</li><li>Add up each child's adjusted amount to get the total gross child support obligation.</li><li>Each parent's share of that total is their proportion of combined income; the parent with the minority of overnights (under 182.5/year) pays their share to the other parent.</li><li>If the parent paying support has 35% or more of the child’s time (a "Parenting Time Adjustment" under Section IV.H.2), the obligation is reduced: 10% at 35-39%, 20% at 40-44%, 30% at 45-49%. At 50% or more, Kansas uses a different shared-residency worksheet not modeled here.</li><li>Above $18,000/month combined income, the schedule's top row does not apply automatically -- Kansas's Extended Formula (Section IV.G) computes a presumptive amount from combined income raised to a fixed power, but courts retain discretion at that level.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Kansas Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A earns $4,000/month gross, Parent B earns $3,000/month gross (combined $7,000). They have two children -- one age 4 (0-5 bracket) and one age 14 (12-18 bracket). The child spends 100 overnights/year with Parent A (27% of the year), so Parent B is the custodial parent and Parent A pays support.</p>
+    <ol><li>Combined gross monthly income: $4,000 + $3,000 = $7,000.</li><li>Two-Child Families schedule at $7,000 combined income, 12-18 base amount: interpolated to about $948/child.</li><li>Age 0-5 child's amount: $948 x 0.84 = $796 (rounded).</li><li>Age 12-18 child's amount: $948 (unchanged).</li><li>Total gross child support obligation: $796 + $948 = $1,744/month.</li><li>Parent A's income share: $4,000 / $7,000 = 57.1%.</li><li>Parent A's time with the child (27%) is below the 35% Parenting Time Adjustment threshold, so no reduction applies.</li><li>Parent A pays: $1,744 x 57.1% = about $997/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Age 0-5 multiplier</td><td>0.84 &times; the 12-18 base amount</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr>
+      <tr><td>Age 6-11 multiplier</td><td>0.94 &times; the 12-18 base amount</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr>
+      <tr><td>Extended-formula exponent (above $18,000 combined income)</td><td>income ^ 0.6386</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr>
+      <tr><td>35-39% nonresidential parenting time</td><td>10% reduction</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr><tr><td>40-44% nonresidential parenting time</td><td>20% reduction</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr><tr><td>45-49% nonresidential parenting time</td><td>30% reduction</td><td>Kansas Child Support Guidelines, Sections IV.A-H, Appendix II</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_12to18 = schedule_lookup(combined_income, total_children) &nbsp;(or coefficient[children] &times; combined_income^0.6386 above $18,000)<br>
+      per_child_0to5 = round(base_12to18 &times; 0.84), per_child_6to11 = round(base_12to18 &times; 0.94)<br>
+      base_obligation = sum of each child's per-child amount for their own age bracket<br>
+      share_B = parentB_income / combined_income<br>
+      obligation_B = base_obligation &times; share_B &times; (1 - parenting_time_reduction)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Kansas's official age-differentiated child support schedule (Appendix II). Verify against Kansas's official worksheet for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Kansas?</summary><p>Kansas is unique among the states modeled here: its child support schedule (Appendix II) varies not just by combined income and total number of children, but by each child's AGE -- there are separate 0-5, 6-11, and 12-18 columns, and a separate full schedule table for families with 1, 2, 3, 4, 5, or 6 (or more) children. Add both parents' gross monthly income to get combined income, then look up the base per-child amount for the 12-18 age bracket in the schedule matching your total number of children. For each child, adjust that base amount for their own age: multiply by 0.84 for a child age 0-5, by 0.94 for a child age 6-11, or use it unchanged for a child age 12-18 -- this is the guidelines' own stated method for deriving the age columns. Add up each child's adjusted amount to get the total gross child support obligation. Each parent's share of that total is their proportion of combined income; the parent with the minority of overnights (under 182.5/year) pays their share to the other parent. If the parent paying support has 35% or more of the child’s time (a "Parenting Time Adjustment" under Section IV.H.2), the obligation is reduced: 10% at 35-39%, 20% at 40-44%, 30% at 45-49%. At 50% or more, Kansas uses a different shared-residency worksheet not modeled here. Above $18,000/month combined income, the schedule's top row does not apply automatically -- Kansas's Extended Formula (Section IV.G) computes a presumptive amount from combined income raised to a fixed power, but courts retain discretion at that level.</p></details>
+    <details><summary>Why does Kansas ask for each child's age instead of just the number of children?</summary><p>Kansas's official schedule (Appendix II) publishes a different dollar amount for each child depending on whether they are 0-5, 6-11, or 12-18 years old -- younger children have a lower base amount (84% and 94% of the 12-18 rate, respectively). Most other states use one schedule regardless of a child's specific age.</p></details><details><summary>Does Kansas use gross or net income?</summary><p>Gross income. Kansas's schedule (Appendix II) is indexed by combined GROSS monthly income -- the schedule itself already builds in an allowance for taxes and other income deductions, so no separate net-income conversion step is required before the lookup.</p></details><details><summary>What happens above Kansas's $18,000/month schedule ceiling?</summary><p>Kansas's guidelines (Section IV.G) provide an exact Extended Formula for income above the schedule's top row: a fixed coefficient (specific to the number of children) multiplied by combined income raised to the power 0.6386. The amount is presumptive, but courts retain discretion to set a different amount at very high incomes.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: ks age schedule. Effective 2025-07-01, guideline version 2025-KS-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://kscourts.gov/KSCourts/media/KsCourts/Child%20Support%20Guidelines/2024-Child-Support-Guidlines-adopted-May-1-2025-clean.pdf" rel="nofollow noopener">Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121)</a> (Kansas Child Support Guidelines, Sections IV.A-H, Appendix II).</p>
+    <p class="deviation-note">This calculator does not model: the Extended Parenting Time Adjustment (14+ consecutive days, IV.H.3, discretionary), the Non-Exercise of Parenting Time Adjustment (IV.H.4, discretionary), the shared-residency formula for 50%+ nonresidential parenting time, divided residency (each parent primary for different children, IV.D.4), the multiple-family application, or the cost-of-living differential. All are discretionary or require case-specific facts beyond a single guideline lookup.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Kansas's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Kansas","abbr":"KS","slug":"kansas","formula_model":"ks_age_schedule","effective_date":"2025-07-01","last_verified":"2026-07-13","guideline_version":"2025-KS-v1","source":{"agency_name":"Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121)","url":"https://kscourts.gov/KSCourts/media/KsCourts/Child%20Support%20Guidelines/2024-Child-Support-Guidlines-adopted-May-1-2025-clean.pdf","statute_ref":"Kansas Child Support Guidelines, Sections IV.A-H, Appendix II"},"params":{"income_basis":"gross","schedule_table_ref":"kansas_schedule.json"},"worksheet":{"steps":["Kansas is unique among the states modeled here: its child support schedule (Appendix II) varies not just by combined income and total number of children, but by each child's AGE -- there are separate 0-5, 6-11, and 12-18 columns, and a separate full schedule table for families with 1, 2, 3, 4, 5, or 6 (or more) children.","Add both parents' gross monthly income to get combined income, then look up the base per-child amount for the 12-18 age bracket in the schedule matching your total number of children.","For each child, adjust that base amount for their own age: multiply by 0.84 for a child age 0-5, by 0.94 for a child age 6-11, or use it unchanged for a child age 12-18 -- this is the guidelines' own stated method for deriving the age columns.","Add up each child's adjusted amount to get the total gross child support obligation.","Each parent's share of that total is their proportion of combined income; the parent with the minority of overnights (under 182.5/year) pays their share to the other parent.","If the parent paying support has 35% or more of the child’s time (a \"Parenting Time Adjustment\" under Section IV.H.2), the obligation is reduced: 10% at 35-39%, 20% at 40-44%, 30% at 45-49%. At 50% or more, Kansas uses a different shared-residency worksheet not modeled here.","Above $18,000/month combined income, the schedule's top row does not apply automatically -- Kansas's Extended Formula (Section IV.G) computes a presumptive amount from combined income raised to a fixed power, but courts retain discretion at that level."],"example":{"scenario":"Example: Parent A earns $4,000/month gross, Parent B earns $3,000/month gross (combined $7,000). They have two children -- one age 4 (0-5 bracket) and one age 14 (12-18 bracket). The child spends 100 overnights/year with Parent A (27% of the year), so Parent B is the custodial parent and Parent A pays support.","calculation":["Combined gross monthly income: $4,000 + $3,000 = $7,000.","Two-Child Families schedule at $7,000 combined income, 12-18 base amount: interpolated to about $948/child.","Age 0-5 child's amount: $948 x 0.84 = $796 (rounded).","Age 12-18 child's amount: $948 (unchanged).","Total gross child support obligation: $796 + $948 = $1,744/month.","Parent A's income share: $4,000 / $7,000 = 57.1%.","Parent A's time with the child (27%) is below the 35% Parenting Time Adjustment threshold, so no reduction applies.","Parent A pays: $1,744 x 57.1% = about $997/month."]}},"faq_extra":[{"q":"Why does Kansas ask for each child's age instead of just the number of children?","a":"Kansas's official schedule (Appendix II) publishes a different dollar amount for each child depending on whether they are 0-5, 6-11, or 12-18 years old -- younger children have a lower base amount (84% and 94% of the 12-18 rate, respectively). Most other states use one schedule regardless of a child's specific age."},{"q":"Does Kansas use gross or net income?","a":"Gross income. Kansas's schedule (Appendix II) is indexed by combined GROSS monthly income -- the schedule itself already builds in an allowance for taxes and other income deductions, so no separate net-income conversion step is required before the lookup."},{"q":"What happens above Kansas's $18,000/month schedule ceiling?","a":"Kansas's guidelines (Section IV.G) provide an exact Extended Formula for income above the schedule's top row: a fixed coefficient (specific to the number of children) multiplied by combined income raised to the power 0.6386. The amount is presumptive, but courts retain discretion to set a different amount at very high incomes."}]};
+    const RULES = {"rounding":"nearest_dollar","ks_age_schedule":{"extended_formula_exponent":0.6386,"extended_formula_coefficients":{"1":4.8982,"2":3.5596,"3":3.0359,"4":2.6015,"5":2.3175,"6":2.1083},"age_multipliers":{"0-5":0.84,"6-11":0.94,"12-18":1},"parenting_time_adjustment_table":[{"minPct":35,"maxPct":39,"reductionPct":0.1},{"minPct":40,"maxPct":44,"reductionPct":0.2},{"minPct":45,"maxPct":49,"reductionPct":0.3}],"note":"Kansas Child Support Guidelines (Admin. Order 2025-RL-121, eff. 2025-07-01), Section IV and Appendix II. Combined GROSS monthly income is looked up per child against the schedule matching the total number of children in the family (six-child schedule used for 6 or more, per IV.D.3 which directs a greater-than-six-child amount be set by the court above that floor). Each child's per-child amount is the schedule's 12-18 base value for that family size, adjusted by the child's own age bracket (0-5 = base x 0.84, 6-11 = base x 0.94, 12-18 = base), per the schedule's own stated method. Above the schedule's $18,000 combined-income ceiling, the extended formula (coefficient x income^0.6386) applies per family size, per Section IV.G. The Parenting Time Adjustment (IV.H.2) reduces the total obligation by 10/20/30% when the nonresidential parent has 35-39%/40-44%/45-49% of the child's time; 50%+ triggers a distinct shared-residency formula that is not modeled here."},"income_cap_behavior":"extended_formula","deviation_note":"This calculator does not model: the Extended Parenting Time Adjustment (14+ consecutive days, IV.H.3, discretionary), the Non-Exercise of Parenting Time Adjustment (IV.H.4, discretionary), the shared-residency formula for 50%+ nonresidential parenting time, divided residency (each parent primary for different children, IV.D.4), the multiple-family application, or the cost-of-living differential. All are discretionary or require case-specific facts beyond a single guideline lookup."};
+    const SCHEDULE = {"maxIncome":18000,"note":"Values are the 12-18 age-bracket per-child dollar amount from Appendix II (One/Two/Three/Four/Five/Six Child Families schedules), Kansas Child Support Guidelines eff. 2025-07-01. Obligation keys 1-6 = number of children in the family (6 = six-or-more per guideline III.D.3, which directs an amount greater than the six-child schedule for 7+ children, left to discretion). The 0-5 and 6-11 per-child amounts are derived at calculation time from this 12-18 base by the guidelines' own stated method: 0-5 = base x 0.84, 6-11 = base x 0.94 (Appendix II footnote), each rounded to the nearest dollar.","rows":[{"upTo":50,"obligation":{"1":9,"2":9,"3":7,"4":6,"5":5,"6":5}},{"upTo":200,"obligation":{"1":47,"2":36,"3":29,"4":24,"5":21,"6":18}},{"upTo":400,"obligation":{"1":94,"2":73,"3":58,"4":48,"5":41,"6":37}},{"upTo":600,"obligation":{"1":142,"2":109,"3":87,"4":72,"5":62,"6":55}},{"upTo":800,"obligation":{"1":189,"2":146,"3":117,"4":96,"5":83,"6":73}},{"upTo":1000,"obligation":{"1":236,"2":182,"3":146,"4":120,"5":104,"6":91}},{"upTo":1200,"obligation":{"1":283,"2":218,"3":175,"4":144,"5":124,"6":110}},{"upTo":1400,"obligation":{"1":331,"2":255,"3":204,"4":168,"5":145,"6":128}},{"upTo":1600,"obligation":{"1":378,"2":291,"3":233,"4":192,"5":166,"6":146}},{"upTo":1800,"obligation":{"1":425,"2":327,"3":262,"4":216,"5":187,"6":165}},{"upTo":2000,"obligation":{"1":472,"2":364,"3":292,"4":240,"5":207,"6":183}},{"upTo":2200,"obligation":{"1":514,"2":400,"3":321,"4":264,"5":228,"6":201}},{"upTo":2400,"obligation":{"1":549,"2":437,"3":350,"4":288,"5":249,"6":219}},{"upTo":2800,"obligation":{"1":618,"2":493,"3":408,"4":336,"5":290,"6":256}},{"upTo":3200,"obligation":{"1":684,"2":543,"3":456,"4":384,"5":332,"6":292}},{"upTo":3600,"obligation":{"1":748,"2":590,"3":497,"4":426,"5":373,"6":329}},{"upTo":4000,"obligation":{"1":811,"2":636,"3":536,"4":459,"5":409,"6":366}},{"upTo":4400,"obligation":{"1":872,"2":681,"3":574,"4":492,"5":438,"6":399}},{"upTo":4800,"obligation":{"1":932,"2":724,"3":611,"4":524,"5":467,"6":424}},{"upTo":5200,"obligation":{"1":991,"2":767,"3":647,"4":555,"5":494,"6":450}},{"upTo":5600,"obligation":{"1":1048,"2":808,"3":683,"4":585,"5":521,"6":474}},{"upTo":6000,"obligation":{"1":1105,"2":849,"3":718,"4":615,"5":548,"6":498}},{"upTo":6400,"obligation":{"1":1161,"2":889,"3":752,"4":644,"5":574,"6":522}},{"upTo":6800,"obligation":{"1":1216,"2":928,"3":785,"4":673,"5":600,"6":545}},{"upTo":7200,"obligation":{"1":1270,"2":967,"3":818,"4":701,"5":625,"6":568}},{"upTo":7600,"obligation":{"1":1323,"2":1005,"3":851,"4":729,"5":650,"6":591}},{"upTo":8000,"obligation":{"1":1376,"2":1042,"3":883,"4":757,"5":674,"6":613}},{"upTo":8400,"obligation":{"1":1428,"2":1079,"3":915,"4":784,"5":698,"6":635}},{"upTo":8800,"obligation":{"1":1480,"2":1116,"3":946,"4":811,"5":722,"6":657}},{"upTo":9200,"obligation":{"1":1531,"2":1152,"3":977,"4":837,"5":746,"6":678}},{"upTo":9600,"obligation":{"1":1582,"2":1187,"3":1007,"4":863,"5":769,"6":699}},{"upTo":10000,"obligation":{"1":1632,"2":1222,"3":1037,"4":889,"5":792,"6":720}},{"upTo":10400,"obligation":{"1":1681,"2":1257,"3":1067,"4":914,"5":814,"6":741}},{"upTo":10800,"obligation":{"1":1730,"2":1291,"3":1096,"4":939,"5":837,"6":761}},{"upTo":11200,"obligation":{"1":1779,"2":1325,"3":1125,"4":964,"5":859,"6":782}},{"upTo":11600,"obligation":{"1":1827,"2":1358,"3":1154,"4":989,"5":881,"6":802}},{"upTo":12000,"obligation":{"1":1875,"2":1392,"3":1183,"4":1013,"5":903,"6":821}},{"upTo":12400,"obligation":{"1":1923,"2":1425,"3":1211,"4":1038,"5":924,"6":841}},{"upTo":12800,"obligation":{"1":1970,"2":1457,"3":1239,"4":1062,"5":946,"6":860}},{"upTo":13200,"obligation":{"1":2017,"2":1490,"3":1267,"4":1086,"5":967,"6":880}},{"upTo":13600,"obligation":{"1":2063,"2":1522,"3":1294,"4":1109,"5":988,"6":899}},{"upTo":14000,"obligation":{"1":2109,"2":1553,"3":1322,"4":1133,"5":1009,"6":918}},{"upTo":14400,"obligation":{"1":2155,"2":1585,"3":1349,"4":1156,"5":1030,"6":937}},{"upTo":14800,"obligation":{"1":2201,"2":1616,"3":1376,"4":1179,"5":1050,"6":955}},{"upTo":15200,"obligation":{"1":2246,"2":1647,"3":1402,"4":1202,"5":1071,"6":974}},{"upTo":15600,"obligation":{"1":2291,"2":1678,"3":1429,"4":1224,"5":1091,"6":992}},{"upTo":16000,"obligation":{"1":2336,"2":1708,"3":1455,"4":1247,"5":1111,"6":1011}},{"upTo":16400,"obligation":{"1":2380,"2":1739,"3":1481,"4":1269,"5":1131,"6":1029}},{"upTo":16800,"obligation":{"1":2424,"2":1769,"3":1507,"4":1292,"5":1151,"6":1047}},{"upTo":17200,"obligation":{"1":2468,"2":1799,"3":1533,"4":1314,"5":1170,"6":1065}},{"upTo":17600,"obligation":{"1":2512,"2":1828,"3":1559,"4":1336,"5":1190,"6":1082}},{"upTo":18000,"obligation":{"1":2555,"2":1858,"3":1584,"4":1357,"5":1209,"6":1100}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

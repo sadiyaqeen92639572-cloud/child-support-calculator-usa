@@ -955,6 +955,73 @@ function calcMelson(params, rules, inputs) {
   };
 }
 
+function calcKansasFormula(params, rules, scheduleTable, inputs) {
+  // Kansas is the only state modeled here whose schedule varies by the AGE of
+  // each child, not just the total count (Appendix II: separate One/Two/.../
+  // Six Child Families tables, each with 0-5, 6-11, 12-18 columns). The
+  // schedule file stores only the 12-18 base value per family size; the 0-5
+  // and 6-11 amounts are derived at calc time via the guideline's own stated
+  // method (base x 0.84, base x 0.94), not an approximation.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, children0to5, children6to11,
+  //           children12to18, overnightsWithA }
+  const ks = rules.ks_age_schedule;
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const numChildren = (inputs.children0to5 || 0) + (inputs.children6to11 || 0) + (inputs.children12to18 || 0);
+  const familySizeKey = numChildren >= 6 ? '6' : String(Math.max(numChildren, 1));
+
+  let base12to18;
+  if (combined > scheduleTable.maxIncome) {
+    const coef = ks.extended_formula_coefficients[familySizeKey];
+    base12to18 = coef * Math.pow(combined, ks.extended_formula_exponent);
+  } else {
+    base12to18 = lookupSchedule(scheduleTable, combined, numChildren);
+  }
+
+  const perChild0to5 = Math.round(base12to18 * ks.age_multipliers['0-5']);
+  const perChild6to11 = Math.round(base12to18 * ks.age_multipliers['6-11']);
+  const perChild12to18 = Math.round(base12to18);
+
+  const baseObligation = (inputs.children0to5 || 0) * perChild0to5
+    + (inputs.children6to11 || 0) * perChild6to11
+    + (inputs.children12to18 || 0) * perChild12to18;
+
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+  const nonresidentialTimePct = (payingParentOvernights / 365) * 100;
+
+  let amount = baseObligation * payingShare;
+  let adjustedForCustody = false;
+  for (const tier of ks.parenting_time_adjustment_table) {
+    if (nonresidentialTimePct >= tier.minPct && nonresidentialTimePct <= tier.maxPct) {
+      amount = amount * (1 - tier.reductionPct);
+      adjustedForCustody = true;
+      break;
+    }
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation,
+    adjustedForCustody,
+    deviationNote: rules.deviation_note,
+    capWarning: nonresidentialTimePct >= 50
+      ? 'At 50% or more parenting time, Kansas uses a distinct shared-residency worksheet not modeled by this calculator — consult the official worksheet.'
+      : (combined > scheduleTable.maxIncome
+        ? `Above $${scheduleTable.maxIncome.toLocaleString()}/mo combined income, Kansas's extended formula is presumptive but the court retains discretion (Section IV.G).`
+        : null)
+  };
+}
+
 function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
   switch (stateEntry.formula_model) {
     case 'percentage_of_income':
@@ -975,6 +1042,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcWisconsinFormula(stateEntry.params, rules, inputs);
     case 'nv_tiered_percentage':
       return calcNevadaFormula(stateEntry.params, rules, inputs);
+    case 'ks_age_schedule':
+      return calcKansasFormula(stateEntry.params, rules, scheduleTable, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

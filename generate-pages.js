@@ -281,6 +281,35 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'ks_age_schedule') {
+    const ks = rules.ks_age_schedule;
+    const ptRows = ks.parenting_time_adjustment_table
+      .map(t => `<tr><td>${t.minPct}-${t.maxPct}% nonresidential parenting time</td><td>${(t.reductionPct * 100).toFixed(0)}% reduction</td><td>${state.source.statute_ref || ''}</td></tr>`).join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Age 0-5 multiplier</td><td>${ks.age_multipliers['0-5']} &times; the 12-18 base amount</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Age 6-11 multiplier</td><td>${ks.age_multipliers['6-11']} &times; the 12-18 base amount</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Extended-formula exponent (above $18,000 combined income)</td><td>income ^ ${ks.extended_formula_exponent}</td><td>${state.source.statute_ref || ''}</td></tr>
+      ${ptRows}
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_12to18 = schedule_lookup(combined_income, total_children) &nbsp;(or coefficient[children] &times; combined_income^${ks.extended_formula_exponent} above $18,000)<br>
+      per_child_0to5 = round(base_12to18 &times; ${ks.age_multipliers['0-5']}), per_child_6to11 = round(base_12to18 &times; ${ks.age_multipliers['6-11']})<br>
+      base_obligation = sum of each child's per-child amount for their own age bracket<br>
+      share_B = parentB_income / combined_income<br>
+      obligation_B = base_obligation &times; share_B &times; (1 - parenting_time_reduction)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Kansas's official age-differentiated child support schedule (Appendix II). Verify against Kansas's official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;
@@ -400,6 +429,28 @@ function calculatorFormFields(state) {
       </label>`;
   }
 
+  if (state.formula_model === 'ks_age_schedule') {
+    return `
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children age 0-5
+        <input type="number" id="children0to5" min="0" step="1" value="0">
+      </label>
+      <label>Number of children age 6-11
+        <input type="number" id="children6to11" min="0" step="1" value="1">
+      </label>
+      <label>Number of children age 12-18
+        <input type="number" id="children12to18" min="0" step="1" value="0">
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>`;
+  }
+
   // income_shares and melson share the same form shape
   const incomeLabel = state.params.income_basis === 'net' ? 'net' : 'gross';
   const period = state.params.income_period === 'weekly' ? 'weekly' : (state.params.income_period === 'annual' ? 'annual' : 'monthly');
@@ -460,6 +511,16 @@ function calculatorScript(state) {
           parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
           parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
           numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }

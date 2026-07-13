@@ -1,0 +1,16 @@
+{
+  "rounding": "nearest_dollar",
+  "ks_age_schedule": {
+    "extended_formula_exponent": 0.6386,
+    "extended_formula_coefficients": { "1": 4.8982, "2": 3.5596, "3": 3.0359, "4": 2.6015, "5": 2.3175, "6": 2.1083 },
+    "age_multipliers": { "0-5": 0.84, "6-11": 0.94, "12-18": 1.0 },
+    "parenting_time_adjustment_table": [
+      { "minPct": 35, "maxPct": 39, "reductionPct": 0.10 },
+      { "minPct": 40, "maxPct": 44, "reductionPct": 0.20 },
+      { "minPct": 45, "maxPct": 49, "reductionPct": 0.30 }
+    ],
+    "note": "Kansas Child Support Guidelines (Admin. Order 2025-RL-121, eff. 2025-07-01), Section IV and Appendix II. Combined GROSS monthly income is looked up per child against the schedule matching the total number of children in the family (six-child schedule used for 6 or more, per IV.D.3 which directs a greater-than-six-child amount be set by the court above that floor). Each child's per-child amount is the schedule's 12-18 base value for that family size, adjusted by the child's own age bracket (0-5 = base x 0.84, 6-11 = base x 0.94, 12-18 = base), per the schedule's own stated method. Above the schedule's $18,000 combined-income ceiling, the extended formula (coefficient x income^0.6386) applies per family size, per Section IV.G. The Parenting Time Adjustment (IV.H.2) reduces the total obligation by 10/20/30% when the nonresidential parent has 35-39%/40-44%/45-49% of the child's time; 50%+ triggers a distinct shared-residency formula that is not modeled here."
+  },
+  "income_cap_behavior": "extended_formula",
+  "deviation_note": "This calculator does not model: the Extended Parenting Time Adjustment (14+ consecutive days, IV.H.3, discretionary), the Non-Exercise of Parenting Time Adjustment (IV.H.4, discretionary), the shared-residency formula for 50%+ nonresidential parenting time, divided residency (each parent primary for different children, IV.D.4), the multiple-family application, or the cost-of-living differential. All are discretionary or require case-specific facts beyond a single guideline lookup."
+}
