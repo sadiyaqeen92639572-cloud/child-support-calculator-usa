@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "ne_subsistence_clamp": {
+    "basic_subsistence_limitation_monthly": 1330,
+    "minimum_flat_amount": 50,
+    "minimum_pct_of_income": 0.10,
+    "note": "Neb. Ct. R. § 4-218 (amended eff. 2026-01-01): a parent's support, child care, and health care obligation may not reduce their net income below $1,330/month (or the applicable federal poverty guideline, whichever is used by the court) -- except that minimum support (§ 4-209: the greater of $50/month or 10% of the obligor's net income) may still be ordered even if it dips below that limitation."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "This calculator does not model: the discretionary Visitation or Parenting Time Adjustment (§ 4-210 -- up to an 80% reduction during parenting time periods of 28+ days per 90-day period, entirely at the court's discretion, not a fixed formula); Joint Physical Custody (§ 4-212 -- when each parent's parenting time exceeds 142 days/year, a rebuttable presumption requires an entirely different Worksheet 3 calculation); or Split Custody (§ 4-211, a separate Worksheet 2 offset calculation). This calculator models the standard primary-custody case (Worksheet 1) only. Above the $20,000/month combined income shown in Table 1, Nebraska's guidelines do not provide an automatic extension formula -- courts determine the amount case-by-case."
+}

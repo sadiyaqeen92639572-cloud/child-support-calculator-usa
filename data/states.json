@@ -2378,5 +2378,57 @@
         "a": "Gross income from virtually all sources (wages, self-employment, investments, benefits, etc.), minus taxes, Social Security, mandatory retirement contributions, and support already ordered for other children (Miss. Code Ann. § 43-19-101(3))."
       }
     ]
+  },
+  "ne": {
+    "name": "Nebraska",
+    "abbr": "NE",
+    "slug": "nebraska",
+    "formula_model": "income_shares",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2026-NE-v1",
+    "source": {
+      "agency_name": "Nebraska Judicial Branch — Nebraska Supreme Court Rules, Chapter 4, Article 2 (Child Support Guidelines)",
+      "url": "https://nebraskajudicial.gov/sites/default/files/childsup_table.pdf",
+      "statute_ref": "Neb. Ct. R. §§ 4-201 to 4-222"
+    },
+    "params": {
+      "income_basis": "net",
+      "schedule_table_ref": "nebraska_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' net monthly income (annualized income divided by 12) to get combined monthly net income.",
+        "Look up the combined income and number of children in Table 1 (Income Shares Formula) to get the basic child support amount.",
+        "Each parent's share is their percentage of combined net income, multiplied by the Table 1 amount.",
+        "The paying parent's obligation may not reduce their own net income below the Basic Subsistence Limitation ($1,330/month as of 2026) -- except that a minimum support amount (the greater of $50/month or 10% of the paying parent's net income) may still be ordered even if it dips below that limitation.",
+        "This calculator models the standard primary-custody case (Worksheet 1) only. Joint Physical Custody (each parent has more than 142 parenting days/year) and Split Custody use entirely different worksheets and are not modeled here. The discretionary Visitation/Parenting Time reduction (up to 80% for extended periods) is also not modeled."
+      ],
+      "example": {
+        "scenario": "Example (adapted from the guidelines' own illustration, updated for the current 2026 Basic Subsistence Limitation): Parent F has net monthly income of $1,500, Parent M has net monthly income of $500 (combined $2,000). There are three children, in Parent M's custody.",
+        "calculation": [
+          "Combined net monthly income: $1,500 + $500 = $2,000.",
+          "Table 1 at $2,000 combined, three children: $712.",
+          "Parent F's income share: $1,500 / $2,000 = 75%.",
+          "Parent F's raw prorated share: $712 x 75% = $534.",
+          "Basic Subsistence Limitation check: Parent F's own income ($1,500) minus the $1,330 limitation leaves only $170 available for support -- since $534 would leave Parent F with just $966 (below $1,330), the obligation is capped at $170.",
+          "Parent F pays: $170/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Nebraska's Basic Subsistence Limitation?",
+        "a": "A paying parent's support, child care, and health care obligation may not reduce their own net income below $1,330/month (updated annually, Neb. Ct. R. § 4-218) or the applicable federal poverty guideline -- except that the separate minimum support amount (the greater of $50/month or 10% of net income) can still apply even if it dips below that floor."
+      },
+      {
+        "q": "How does Joint Physical Custody change Nebraska child support?",
+        "a": "When each parent's parenting time exceeds 142 days per year, Nebraska applies a rebuttable presumption that support should be calculated using a different form (Worksheet 3), not the standard primary-custody worksheet this calculator uses. Between 109 and 142 days for one parent, using Worksheet 3 is at the court's discretion."
+      },
+      {
+        "q": "What is Nebraska's minimum child support amount?",
+        "a": "Neb. Ct. R. § 4-209 sets minimum support at whichever is greater: $50/month or 10% of the paying parent's net income. This minimum can apply even in cases where it would otherwise reduce the paying parent below the Basic Subsistence Limitation."
+      }
+    ]
   }
 }

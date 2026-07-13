@@ -481,6 +481,23 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     }
   }
 
+  let neMinimumApplied = false;
+  if (rules.ne_subsistence_clamp) {
+    // Nebraska Ct. R. section 4-218 / 4-209: the paying parent's obligation
+    // may not reduce their net income below the Basic Subsistence Limitation,
+    // EXCEPT that the minimum support amount (the greater of $50 or 10% of
+    // the obligor's net income, section 4-209) may still be ordered even if
+    // it dips below that limitation.
+    const ne = rules.ne_subsistence_clamp;
+    const availableIncome = Math.max(0, payingParentIncome - ne.basic_subsistence_limitation_monthly);
+    if (amount > availableIncome) amount = availableIncome;
+    const statutoryMinimum = Math.max(ne.minimum_flat_amount, ne.minimum_pct_of_income * payingParentIncome);
+    if (amount < statutoryMinimum) {
+      amount = statutoryMinimum;
+      neMinimumApplied = true;
+    }
+  }
+
   amount = applyRounding(amount, rules.rounding);
 
   const reserve = params.self_support_reserve_monthly;
@@ -494,15 +511,17 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     baseObligation,
     adjustedForCustody,
     belowSelfSupportReserve: belowReserve,
-    selfSupportMinimumOrderApplied: mnMinimumApplied || orMinimumApplied,
+    selfSupportMinimumOrderApplied: mnMinimumApplied || orMinimumApplied || neMinimumApplied,
     deviationNote: rules.deviation_note,
     capWarning: mnMinimumApplied
       ? "Self-Support Reserve minimum applies (Minn. Stat. § 518A.42) — the paying parent's income available after the reserve is at or below the statutory minimum, so the flat minimum basic support amount applies instead of the guideline calculation."
       : (orMinimumApplied
         ? "Minimum order applies (OAR 137-050-0755) — a rebuttable $100/month minimum, since the calculated amount fell below it."
-        : (custodyWarning || (belowReserve
-          ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
-          : null)))
+        : (neMinimumApplied
+          ? "Minimum support applies (Neb. Ct. R. § 4-209) — the greater of $50 or 10% of the paying parent's net income, which may apply even below the Basic Subsistence Limitation."
+          : (custodyWarning || (belowReserve
+            ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
+            : null))))
   };
 }
 
