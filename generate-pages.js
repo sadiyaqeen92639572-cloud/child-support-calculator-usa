@@ -163,6 +163,28 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'nd_obligor_schedule') {
+    const nd = rules.nd_extended_parenting_time;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Extended Parenting Time threshold</td><td>${nd.extended_parenting_time_threshold_overnights} overnights/yr</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      base_obligation = schedule_lookup(paying_parent_own_net_income, children) &nbsp;(no combined income, no proration -- the other parent's income is not used)<br>
+      if paying_parent_overnights &gt; ${nd.extended_parenting_time_threshold_overnights}:<br>
+      &nbsp;&nbsp;credit_factor = max(0, 365 - overnights &times; 0.32) / 365<br>
+      &nbsp;&nbsp;obligation = base_obligation &times; credit_factor
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on North Dakota's official Child Support Guidelines schedule (NDAC 75-02-04.1-10). Verify against North Dakota's official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   if (state.formula_model === 'algebraic_kfactor') {
     const p = state.params;
     const rows = Object.entries(p.child_multipliers)
@@ -508,6 +530,24 @@ function calculatorFormFields(state) {
         <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
       </label>`;
   }
+  if (state.formula_model === 'nd_obligor_schedule') {
+    return `
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Annual overnights with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>`;
+  }
 
   if (state.formula_model === 'ks_age_schedule') {
     return `
@@ -604,7 +644,7 @@ function calculatorScript(state) {
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
-      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage' || STATE_ENTRY.formula_model === 'nd_obligor_schedule') {
         return {
           parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
           parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,

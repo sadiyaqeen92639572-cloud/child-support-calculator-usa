@@ -2531,5 +2531,53 @@
         "a": "Gross income (with allowed deductions such as support already owed for other children). New Mexico's Basic Child Support Schedule is indexed by combined ADJUSTED GROSS monthly income, unlike states that require a full net-income conversion before the lookup."
       }
     ]
+  },
+  "nd": {
+    "name": "North Dakota",
+    "abbr": "ND",
+    "slug": "north-dakota",
+    "formula_model": "nd_obligor_schedule",
+    "effective_date": "2023-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2023-ND-v1",
+    "source": {
+      "agency_name": "North Dakota Legislative Council — N.D. Admin. Code § 75-02-04.1-10",
+      "url": "https://ndlegis.gov/information/acdata/pdf/75-02-04.1.pdf",
+      "statute_ref": "N.D. Admin. Code § 75-02-04.1-10"
+    },
+    "params": {
+      "income_basis": "net",
+      "schedule_table_ref": "north-dakota_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "North Dakota is NOT an income-shares state -- the child support amount is based entirely on the paying (obligor) parent's OWN monthly net income and the number of children. The other parent's income is never part of the calculation.",
+        "Look up the paying parent's net monthly income and the number of children in the official Child Support Guidelines schedule to get the base support amount.",
+        "If the paying parent's court-ordered parenting time exceeds 100 overnights per year (\"Extended Parenting Time\"), the amount is reduced by a credit factor of (365 minus overnights times 0.32), divided by 365.",
+        "This calculator does not model Equal Residential Responsibility (when both parents have exactly equal time, a different cross-offset calculation applies) or Split Custody (each parent primary for at least one different child)."
+      ],
+      "example": {
+        "scenario": "Example: the paying parent has net monthly income of $2,000, and there are two children. The children spend 150 overnights per year with the paying parent (Extended Parenting Time, since it exceeds 100).",
+        "calculation": [
+          "Base amount from the schedule at $2,000 net income, two children: $562/month.",
+          "Extended Parenting Time credit factor: (365 - 150 x 0.32) / 365 = 317 / 365 = 86.85%.",
+          "Adjusted obligation: $562 x 86.85% = $488/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does North Dakota consider both parents' incomes?",
+        "a": "No. Unlike most states, North Dakota's guideline schedule (NDAC 75-02-04.1-10) is based entirely on the paying (obligor) parent's own net monthly income -- the other parent's income does not factor into the base calculation at all."
+      },
+      {
+        "q": "What is North Dakota's Extended Parenting Time Adjustment?",
+        "a": "When the paying parent's court-ordered parenting time exceeds 100 overnights per year, the guideline amount is reduced using the formula (365 - overnights x 0.32) / 365 -- more overnights produce a larger reduction. This adjustment doesn't apply when the parents have exactly Equal Residential Responsibility, which uses a separate calculation instead."
+      },
+      {
+        "q": "What income does North Dakota use -- gross or net?",
+        "a": "Net income: gross income minus federal and North Dakota state income taxes, FICA, mandatory retirement contributions, union dues, and health insurance premiums for the children."
+      }
+    ]
   }
 }

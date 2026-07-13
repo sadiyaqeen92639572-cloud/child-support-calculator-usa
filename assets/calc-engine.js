@@ -1180,6 +1180,47 @@ function calcMassachusettsFormula(params, rules, inputs) {
   };
 }
 
+function calcNorthDakotaFormula(params, rules, scheduleTable, inputs) {
+  // North Dakota (NDAC 75-02-04.1-10) is an obligor-only schedule model, like
+  // Nevada -- no combined income, no proration; the custodial parent's income
+  // never factors in. The schedule is a real dollar-amount table (not a
+  // tiered percentage), looked up directly against the paying parent's own
+  // monthly net income.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA }
+  const nd = rules.nd_extended_parenting_time;
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+
+  const baseObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+  let amount = baseObligation;
+  let adjustedForCustody = false;
+
+  if (payingParentOvernights > nd.extended_parenting_time_threshold_overnights) {
+    // NDAC 75-02-04.1-08.1: creditFactor = (365 - overnights x 0.32) / 365,
+    // applied per child then summed -- since every child here shares the
+    // same overnights figure, this collapses to one multiplicative factor
+    // on the total obligation.
+    const creditFactor = Math.max(0, 365 - payingParentOvernights * 0.32) / 365;
+    amount = baseObligation * creditFactor;
+    adjustedForCustody = true;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation,
+    adjustedForCustody,
+    deviationNote: rules.deviation_note,
+    capWarning: null
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1275,6 +1316,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcMaineFormula(stateEntry.params, rules, scheduleTable, inputs);
     case 'ma_table_a_shares':
       return calcMassachusettsFormula(stateEntry.params, rules, inputs);
+    case 'nd_obligor_schedule':
+      return calcNorthDakotaFormula(stateEntry.params, rules, scheduleTable, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

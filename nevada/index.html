@@ -144,7 +144,7 @@
           overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
         };
       }
-      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage' || STATE_ENTRY.formula_model === 'nd_obligor_schedule') {
         return {
           parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
           parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,

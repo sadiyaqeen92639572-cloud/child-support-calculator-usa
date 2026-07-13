@@ -1,0 +1,9 @@
+{
+  "rounding": "nearest_dollar",
+  "nd_extended_parenting_time": {
+    "extended_parenting_time_threshold_overnights": 100,
+    "note": "NDAC 75-02-04.1-08.1: when the paying (obligor) parent's court-ordered parenting time exceeds 100 overnights/year, the obligation is reduced by a credit factor of (365 - overnights x 0.32) / 365. Not authorized when the parents have Equal Residential Responsibility (75-02-04.1-08.2), which uses a different cross-offset calculation instead."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "North Dakota's guideline amount is based on the OBLIGOR'S OWN monthly net income alone -- the other parent's income is never part of the calculation (this is not an income-shares state). This calculator does not model: Equal Residential Responsibility (NDAC 75-02-04.1-08.2, when both parents have exactly equal time, an entirely different cross-offset calculation); Split Custody (75-02-04.1-03, each parent primary for at least one different child); or the multiple-family adjustment for other children the obligor supports (75-02-04.1-06.1). Above $24,900/month net income, North Dakota's guideline schedule does not provide an automatic extension -- courts determine the amount case-by-case."
+}
