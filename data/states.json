@@ -2481,5 +2481,55 @@
         "a": "Not automatically. RSA 458-C:5, I(h) explicitly states that equal or approximately equal parenting residential responsibilities do NOT by themselves eliminate the need for child support or justify an adjustment -- any reduction for a shared schedule is case-by-case and requires the court to make specific findings, not a fixed formula."
       }
     ]
+  },
+  "nm": {
+    "name": "New Mexico",
+    "abbr": "NM",
+    "slug": "new-mexico",
+    "formula_model": "income_shares",
+    "effective_date": "2024-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2024-NM-v1",
+    "source": {
+      "agency_name": "New Mexico Courts / Human Services Department — NMSA 1978 § 40-4-11.1, 8.50.108 NMAC",
+      "url": "https://nmcourts.gov/wp-content/uploads/sites/21/2024/03/2024NMChildSupportGuidelinesandSchedule.pdf",
+      "statute_ref": "NMSA 1978 § 40-4-11.1; 8.50.108 NMAC"
+    },
+    "params": {
+      "income_basis": "gross",
+      "schedule_table_ref": "new-mexico_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "New Mexico is an income-shares state (Worksheet A, used when the noncustodial parent has less than 35% of the year's parenting time). Add both parents' gross monthly income to get combined income.",
+        "Look up the combined income and number of children in the Basic Child Support Schedule to get the basic support amount.",
+        "If the paying parent's OWN gross income (not combined) falls at or below a per-child-count Self-Support Reserve threshold (about $1,800/month for one child, up to about $3,100/month for six), the schedule is instead looked up using that parent's income alone -- this is their obligation directly, with no add-ons.",
+        "Otherwise, each parent's share of the basic support amount, plus childcare and health insurance costs, is their percentage of combined income.",
+        "When each parent has at least 35% of the year's parenting time (\"shared responsibility\"), New Mexico uses a different calculation (Worksheet B) that is not modeled by this calculator."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $3,000/month gross, Parent B earns $2,000/month gross (combined $5,000). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined gross monthly income: $3,000 + $2,000 = $5,000.",
+          "Basic Child Support Schedule at $5,000 combined, two children: about $1,233.",
+          "Parent A's income share: $3,000 / $5,000 = 60%.",
+          "Parent A pays: $1,233 x 60% = $740/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is New Mexico's Self-Support Reserve?",
+        "a": "Effective January 1, 2024, New Mexico's Basic Child Support Schedule incorporates a Self-Support Reserve ($1,200/month for one person). If the paying parent's own income and number of children fall within the schedule's shaded area, their obligation is calculated from their own income alone, not combined income -- this protects a paying parent's basic subsistence needs at low income levels."
+      },
+      {
+        "q": "What is the difference between Worksheet A and Worksheet B in New Mexico?",
+        "a": "Worksheet A (Basic Visitation) applies when the noncustodial parent has less than 35% of the year's parenting time -- the standard prorated calculation this tool uses. Worksheet B (Shared Responsibility) applies when each parent has at least 35%, using a different calculation where each parent retains a share of support proportional to their own time with the children, with the amounts cross-offset rather than simply prorated."
+      },
+      {
+        "q": "Does New Mexico use gross or net income?",
+        "a": "Gross income (with allowed deductions such as support already owed for other children). New Mexico's Basic Child Support Schedule is indexed by combined ADJUSTED GROSS monthly income, unlike states that require a full net-income conversion before the lookup."
+      }
+    ]
   }
 }

@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "self_support_reserve": {
+    "min_order_threshold_monthly": 0,
+    "min_order_amount": 0,
+    "shaded_zone_max_obligor_income": { "1": 1800, "2": 2200, "3": 2500, "4": 2700, "5": 2900, "6": 3100 },
+    "note": "8.50.108.10 NMAC (eff. 2024-01-01): New Mexico's Self-Support Reserve is $1,200/month for one person, built into the shaded area of the Basic Child Support Schedule (Appendix 1). If the paying parent's own income and number of children fall within the shaded area, the schedule is looked up using that parent's income ALONE (not combined income), and that is their obligation directly. The shaded-area boundary rises with the number of children (confirmed by reading the schedule's own shading directly from the published table image): about $1,800/mo for one child, up to about $3,100/mo for six children."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "This calculator models Worksheet A (Basic Visitation -- the paying parent has less than 35% of the year's parenting time) only. It does not model Worksheet B (Shared Responsibility, when each parent has at least 35% of the year), which uses a materially different calculation: each parent retains a share of the basic obligation proportional to their own time with the children, and the amounts are cross-offset rather than simply prorated. Above the schedule's $35,050/month combined income ceiling, New Mexico's guidelines do not provide an automatic extension -- courts determine the amount case-by-case."
+}
