@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "or_self_support_clamp": {
+    "self_support_reserve_monthly": 1695,
+    "min_order_monthly": 50,
+    "min_order_message": "Minimum Support Order applies (RSA 458-C:2, IV) — a rebuttable $50/month minimum, since the paying parent's income is below the Self-Support Reserve or the calculated amount fell below it.",
+    "note": "RSA 458-C:2, X and RSA 458-C:3, IV: Self-Support Reserve = 115% of the federal poverty guideline for one person ($1,695/month as published for the current guideline year). If the paying parent's own gross income is below this reserve, a Minimum Support Order of $50/month applies (rebuttable to a lower amount). If their income is above the reserve but paying the full guideline amount would reduce their adjusted gross income below it, the presumptive obligation is instead the difference between the reserve and their income -- never less than the $50 minimum."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "This calculator does not model New Hampshire's Reasonable Medical Support Obligation (RSA 458-C:3, V: a presumptive additional 4% of each parent's own gross income, separate from the childcare/health-insurance add-ons here) or the many discretionary Special Circumstances adjustments under RSA 458-C:5 (high/low income, equal parenting-time arrangements, tax consequences, etc.) -- New Hampshire's guidelines explicitly state that equal or approximately equal parenting time does NOT by itself reduce support; any adjustment for shared parenting is case-by-case and discretionary, not a fixed formula. Above the guideline table's top published income level, courts determine the amount case-by-case."
+}

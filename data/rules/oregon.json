@@ -7,6 +7,7 @@
   "or_self_support_clamp": {
     "self_support_reserve_monthly": 1522,
     "min_order_monthly": 100,
+    "min_order_message": "Minimum order applies (OAR 137-050-0755) — a rebuttable $100/month minimum, since the calculated amount fell below it.",
     "note": "OAR 137-050-0745: the paying parent's total obligation may not exceed their income available for support (income minus the Self-Support Reserve, 2026 guideline). OAR 137-050-0755: a rebuttable $100/month minimum order applies, except at exactly equal (182.5/182.5) parenting time."
   },
   "income_cap_behavior": "discretionary_above_cap",

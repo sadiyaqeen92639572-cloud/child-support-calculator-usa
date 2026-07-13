@@ -516,7 +516,7 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     capWarning: mnMinimumApplied
       ? "Self-Support Reserve minimum applies (Minn. Stat. § 518A.42) — the paying parent's income available after the reserve is at or below the statutory minimum, so the flat minimum basic support amount applies instead of the guideline calculation."
       : (orMinimumApplied
-        ? "Minimum order applies (OAR 137-050-0755) — a rebuttable $100/month minimum, since the calculated amount fell below it."
+        ? (rules.or_self_support_clamp.min_order_message || "Minimum order applies — a rebuttable minimum, since the calculated amount fell below it.")
         : (neMinimumApplied
           ? "Minimum support applies (Neb. Ct. R. § 4-209) — the greater of $50 or 10% of the paying parent's net income, which may apply even below the Basic Subsistence Limitation."
           : (custodyWarning || (belowReserve

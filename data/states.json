@@ -2430,5 +2430,56 @@
         "a": "Neb. Ct. R. § 4-209 sets minimum support at whichever is greater: $50/month or 10% of the paying parent's net income. This minimum can apply even in cases where it would otherwise reduce the paying parent below the Basic Subsistence Limitation."
       }
     ]
+  },
+  "nh": {
+    "name": "New Hampshire",
+    "abbr": "NH",
+    "slug": "new-hampshire",
+    "formula_model": "income_shares",
+    "effective_date": "2025-04-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2025-NH-v1",
+    "source": {
+      "agency_name": "New Hampshire Department of Health and Human Services — Bureau of Child Support Services",
+      "url": "https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents2/css-guidelines-book.pdf",
+      "statute_ref": "RSA 458-C:2, 458-C:3"
+    },
+    "params": {
+      "income_basis": "gross",
+      "schedule_table_ref": "new-hampshire_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' gross monthly income to get combined gross income, then look up New Hampshire's official Child Support Guideline Calculation Table for the total number of children -- the table already converts gross to net internally (deducting standard federal tax and FICA/Medicare withholding) and applies the RSA 458-C:3 percentage, which itself varies gradually with income level.",
+        "Each parent's share of that total obligation is their percentage of combined gross income.",
+        "If the paying parent's own gross income is below the Self-Support Reserve (115% of the federal poverty guideline for one person, $1,695/month), a flat Minimum Support Order of $50/month applies instead (rebuttable to a lower amount).",
+        "If the paying parent's income is above the reserve, but the calculated obligation would push their income below it, the obligation is instead reduced to exactly the difference between the reserve and their income -- never less than $50.",
+        "This calculator does not include New Hampshire's separate Reasonable Medical Support Obligation (a presumptive additional 4% of each parent's own gross income) or any of the discretionary Special Circumstances adjustments -- notably, New Hampshire's guidelines state that equal or approximately equal parenting time does NOT by itself reduce support."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $3,500/month gross, Parent B earns $1,500/month gross (combined $5,000/month). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined gross monthly income: $3,500 + $1,500 = $5,000.",
+          "Guideline table at $5,000 combined, two children: about $1,317 (interpolated).",
+          "Parent A's income share: $3,500 / $5,000 = 70%.",
+          "Parent A pays: $1,317 x 70% = $922/month.",
+          "Self-Support Reserve check: Parent A's income ($3,500) minus $922 leaves $2,578, well above the $1,695 reserve, so no adjustment applies."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does New Hampshire use a flat percentage or a schedule table?",
+        "a": "A schedule table, but one built from a percentage formula that gradually changes with income (RSA 458-C:3, I(a): from about 25.6% for one child at lower incomes down to 19% at $125,000+ combined net income). The state publishes a pre-computed table (interpolated in $100 income increments) rather than requiring the percentage calculation by hand."
+      },
+      {
+        "q": "What is New Hampshire's Self-Support Reserve?",
+        "a": "115% of the federal poverty guideline for a single person -- $1,695/month under the current guidelines. If the paying parent's own gross income is below this, only the $50/month Minimum Support Order applies. If their income is above it but paying the full guideline amount would push them below it, the obligation is reduced to exactly the gap between their income and the reserve."
+      },
+      {
+        "q": "Does shared parenting time reduce child support in New Hampshire?",
+        "a": "Not automatically. RSA 458-C:5, I(h) explicitly states that equal or approximately equal parenting residential responsibilities do NOT by themselves eliminate the need for child support or justify an adjustment -- any reduction for a shared schedule is case-by-case and requires the court to make specific findings, not a fixed formula."
+      }
+    ]
   }
 }
