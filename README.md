@@ -4,7 +4,7 @@ Free child support calculator using each US state's official guideline formula, 
 
 ## Status
 
-Phase 0/1 in progress. Texas shipped and verified. See `research/sourcing-tracker.csv` for per-state research status.
+All 50 states + DC shipped and verified. See `research/sourcing-tracker.csv` and `research/verification-log.csv` for per-state research/verification status, and `research/PHASE3-RECAP.md` for a summary of known limitations and unmodeled edge cases.
 
 ## Architecture
 
@@ -25,3 +25,7 @@ node generate-sitemap.js
 ## Deploy
 
 Cloudflare Pages, build command `node generate-pages.js && node generate-sitemap.js`, output directory `.`.
+
+## Free Companion Tools
+
+- [Overnight Parenting Time Calculator](https://sadiyaqeen92639572-cloud.github.io/overnight-custody-percentage-calculator/) — converts a parenting schedule's yearly overnights into an exact custody percentage and shows which states' shared-custody thresholds it crosses. Powered by [usachildsupportcalculator.com](https://usachildsupportcalculator.com/) for the actual state-by-state dollar calculation.
