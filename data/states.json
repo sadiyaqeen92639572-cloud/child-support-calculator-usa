@@ -2162,5 +2162,58 @@
         "a": "Yes. New guidelines take effect August 1, 2026, introducing a three-parent worksheet framework and expanding the income cap to $312,000/year -- a significant change from the current $4,000/week (about $208,000/year) cap modeled here. This calculator reflects the guidelines in effect as of July 2026; check with the Connecticut Judicial Branch for the post-August 2026 version."
       }
     ]
+  },
+  "id": {
+    "name": "Idaho",
+    "abbr": "ID",
+    "slug": "idaho",
+    "formula_model": "id_bracket_shares",
+    "effective_date": "2025-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2025-ID-v1",
+    "source": {
+      "agency_name": "Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120",
+      "url": "https://isc.idaho.gov/rules-procedure/print/irfl/120",
+      "statute_ref": "Idaho R. Fam. L. P. 120"
+    },
+    "params": {
+      "income_basis": "gross"
+    },
+    "worksheet": {
+      "steps": [
+        "Idaho is an income-shares state, but calculates the basic obligation using a MARGINAL BRACKET schedule over annual combined gross income (like a tax bracket) rather than a single schedule lookup -- each bracket's percentage applies only to the portion of income within that bracket.",
+        "Multiply both parents' combined monthly gross income by 12 to get annual combined Guidelines Income, then sum each bracket's contribution (rate x the portion of income in that bracket) to get the annual basic obligation, then divide by 12.",
+        "If one parent has 25% or less of the year's overnights, the basic obligation (plus childcare/health insurance add-ons) is simply prorated by each parent's share of combined income -- the lower-overnight parent pays their share.",
+        "If BOTH parents have more than 25% of the overnights (Shared Physical Custody), the basic obligation is multiplied by 1.5, each parent's share of that pool is multiplied by their income share and then by the percentage of time the child spends with the OTHER parent, and the two resulting amounts are offset -- capped so neither parent ever pays more than they would have under the standard (non-shared) calculation.",
+        "If the paying parent's monthly income is below $800, courts individually review the case, with a rebuttable presumption of a $50/child/month minimum.",
+        "This calculator does not model Extended Visits, Split Physical Custody (each parent primary for different children), or the undefined 6-or-more-children schedule (Idaho's guidelines only define rates through 5 children)."
+      ],
+      "example": {
+        "scenario": "Example (the rule's own worked example): Parent A earns $25,000/year, Parent B earns $10,000/year (combined $35,000/year), 2 children. The child spends 30 overnights/year with Parent A (about 8%, well under 25%), so Parent A pays.",
+        "calculation": [
+          "First $10,000 of combined income at the 2-children 26% rate: $2,600/yr ($217/mo).",
+          "Next $10,000 at 25%: $2,500/yr ($208/mo).",
+          "Next $10,000 at 23%: $2,300/yr ($192/mo).",
+          "Remaining $5,000 at 22%: $1,100/yr ($92/mo).",
+          "Total basic child support obligation: $217 + $208 + $192 + $92 = $709/month.",
+          "Parent A's income share: $25,000 / $35,000 = 71.4%.",
+          "Parent A pays: $709 x 71.4% = $506/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Why does Idaho use income brackets instead of a schedule table?",
+        "a": "Idaho Rule 120 sets the basic child support obligation as a series of marginal brackets over combined ANNUAL gross income -- similar to a tax bracket -- rather than a single lookup table used by most other states. Each bracket's percentage rate applies only to the portion of income that falls within that bracket."
+      },
+      {
+        "q": "What is Idaho's Shared Physical Custody adjustment?",
+        "a": "When both parents have more than 25% of the year's overnights, Idaho multiplies the basic obligation by 1.5, calculates each parent's proportional amount factoring in how much time the child spends with the OTHER parent, and offsets the two amounts -- with a cap ensuring neither parent pays more than they would under the standard calculation."
+      },
+      {
+        "q": "Does Idaho have a schedule for large families?",
+        "a": "Idaho's guidelines only publish specific bracket rates through 5 children, explicitly stating the schedule is not a limitation for families with more children. This calculator uses the 5-children rates as an estimate for 6 or more children, since Idaho's guidelines leave that case to case-by-case discretion."
+      }
+    ]
   }
 }

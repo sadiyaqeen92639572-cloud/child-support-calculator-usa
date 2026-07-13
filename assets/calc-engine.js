@@ -956,6 +956,95 @@ function calcMelson(params, rules, inputs) {
   };
 }
 
+function calcIdahoFormula(params, rules, inputs) {
+  // Idaho Rule 120 computes the Basic Child Support obligation as a series of
+  // MARGINAL brackets over ANNUAL combined Guidelines Income (like a tax
+  // bracket, not a flat schedule lookup) -- e.g. for 2 children: 26% of the
+  // first $10,000, 25% of the next $10,000, 23% of the next $10,000, etc.
+  // Verified exactly against the rule's own worked example: $25,000 +
+  // $10,000 combined = $35,000, 2 children -> $217+$208+$192+$92 = $709/mo.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost } -- gross MONTHLY incomes.
+  const id = rules.id_brackets;
+  const key = String(Math.min(inputs.numChildren, 5));
+  const brackets = id.schedules[key];
+  const combinedMonthly = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const annualCombined = combinedMonthly * 12;
+
+  let remaining = annualCombined;
+  let annualObligation = 0;
+  for (const b of brackets) {
+    const portion = Math.min(remaining, b.width);
+    annualObligation += portion * b.pct;
+    remaining -= portion;
+    if (remaining <= 0) break;
+  }
+  const baseObligation = annualObligation / 12;
+
+  const shareA = inputs.parentAGrossIncome / combinedMonthly;
+  const shareB = 1 - shareA;
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const overnightsWithB = 365 - overnightsWithA;
+  const aPct = (overnightsWithA / 365) * 100;
+  const bPct = 100 - aPct;
+
+  let payingParent;
+  let amount;
+  let adjustedForCustody = false;
+
+  if (aPct <= 25 || bPct <= 25) {
+    // Primary Parenting Time (Rule 120(3)(B)): one parent has 25% or less of
+    // the overnights -- standard prorated calculation, no adjustment.
+    payingParent = aPct <= bPct ? 'A' : 'B';
+    const payingShare = payingParent === 'A' ? shareA : shareB;
+    amount = (baseObligation + addOns) * payingShare;
+  } else {
+    // Shared Physical Custody (Rule 120(4)(B)): both parents have more than
+    // 25% of the overnights. The basic obligation is multiplied by 1.5, each
+    // parent's share of that pool is multiplied by their income share, then
+    // by the percentage of time the child spends with the OTHER parent. The
+    // two results are offset (the larger payer pays the difference), capped
+    // so neither parent pays more than they would have under sole custody.
+    const sharedPool = baseObligation * 1.5;
+    const aAmt = sharedPool * shareA * (bPct / 100);
+    const bAmt = sharedPool * shareB * (aPct / 100);
+    payingParent = aAmt > bAmt ? 'A' : 'B';
+    const payingShare = payingParent === 'A' ? shareA : shareB;
+    const diff = Math.abs(aAmt - bAmt);
+    const soleCustodyCap = baseObligation * payingShare;
+    amount = Math.min(diff, soleCustodyCap) + (addOns * payingShare);
+    adjustedForCustody = true;
+  }
+
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+  let selfSupportReviewApplies = false;
+  if (payingParentIncome < id.self_support_review_threshold_monthly) {
+    const presumptiveMinimum = id.minimum_per_child_monthly * inputs.numChildren;
+    if (amount < presumptiveMinimum) {
+      amount = presumptiveMinimum;
+    }
+    selfSupportReviewApplies = true;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combinedMonthly,
+    baseObligation,
+    adjustedForCustody,
+    deviationNote: rules.deviation_note,
+    capWarning: selfSupportReviewApplies
+      ? `Paying parent's monthly income is below $${id.self_support_review_threshold_monthly.toLocaleString()} -- Idaho courts review the case individually here, with a rebuttable presumption of at least $${id.minimum_per_child_monthly}/child/month.`
+      : (annualCombined > id.max_annual_combined_income
+        ? `Above $${id.max_annual_combined_income.toLocaleString()}/yr combined Guidelines Income, Idaho's bracket schedule does not extend further -- this result is capped at the top bracket.`
+        : null)
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1045,6 +1134,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcNevadaFormula(stateEntry.params, rules, inputs);
     case 'ks_age_schedule':
       return calcKansasFormula(stateEntry.params, rules, scheduleTable, inputs);
+    case 'id_bracket_shares':
+      return calcIdahoFormula(stateEntry.params, rules, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

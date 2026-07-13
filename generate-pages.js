@@ -314,6 +314,34 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'id_bracket_shares') {
+    const id = rules.id_brackets;
+    const bracketRows = id.schedules['2']
+      .map((b, i) => `<tr><td>Bracket ${i + 1} (2 children)</td><td>${(b.pct * 100).toFixed(0)}% of ${b.width >= 100000 ? 'the next $' + b.width.toLocaleString() : '$' + b.width.toLocaleString()}</td><td>${state.source.statute_ref || ''}</td></tr>`).join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used (2-children bracket schedule shown as an example -- 1, 3, 4, and 5-children schedules use different rates)</h3>
+    <table>
+      <tr><th>Bracket</th><th>Rate</th><th>Source</th></tr>
+      ${bracketRows}
+      <tr><td>Max combined annual income</td><td>$${id.max_annual_combined_income.toLocaleString()}/yr</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Self-support review threshold</td><td>$${id.self_support_review_threshold_monthly.toLocaleString()}/mo (paying parent)</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Presumptive minimum</td><td>$${id.minimum_per_child_monthly}/child/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      annual_combined_income = (parentA_income + parentB_income) &times; 12<br>
+      basic_obligation = sum of each bracket's rate &times; the portion of annual_combined_income within that bracket (like a tax bracket), &divide; 12<br>
+      share_B = parentB_income / combined_income<br>
+      If either parent has 25% or less of the overnights: obligation_B = (basic_obligation + add-ons) &times; share_B<br>
+      If both parents have more than 25%: pool = basic_obligation &times; 1.5; each parent's amount = pool &times; their income share &times; the OTHER parent's overnight share; the two amounts are offset (capped at the sole-custody amount)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Idaho's official marginal-bracket child support schedule (Rule 120). Verify against Idaho's official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;

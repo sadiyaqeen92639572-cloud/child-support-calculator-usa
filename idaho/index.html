@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Idaho Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Idaho child support using the state's official id bracket shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/idaho/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Idaho Child Support Calculator">
+<meta property="og:description" content="Free Idaho child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/idaho/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Idaho Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2025-ID-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Idaho?","acceptedAnswer":{"@type":"Answer","text":"Idaho is an income-shares state, but calculates the basic obligation using a MARGINAL BRACKET schedule over annual combined gross income (like a tax bracket) rather than a single schedule lookup -- each bracket's percentage applies only to the portion of income within that bracket. Multiply both parents' combined monthly gross income by 12 to get annual combined Guidelines Income, then sum each bracket's contribution (rate x the portion of income in that bracket) to get the annual basic obligation, then divide by 12. If one parent has 25% or less of the year's overnights, the basic obligation (plus childcare/health insurance add-ons) is simply prorated by each parent's share of combined income -- the lower-overnight parent pays their share. If BOTH parents have more than 25% of the overnights (Shared Physical Custody), the basic obligation is multiplied by 1.5, each parent's share of that pool is multiplied by their income share and then by the percentage of time the child spends with the OTHER parent, and the two resulting amounts are offset -- capped so neither parent ever pays more than they would have under the standard (non-shared) calculation. If the paying parent's monthly income is below $800, courts individually review the case, with a rebuttable presumption of a $50/child/month minimum. This calculator does not model Extended Visits, Split Physical Custody (each parent primary for different children), or the undefined 6-or-more-children schedule (Idaho's guidelines only define rates through 5 children)."}},{"@type":"Question","name":"Why does Idaho use income brackets instead of a schedule table?","acceptedAnswer":{"@type":"Answer","text":"Idaho Rule 120 sets the basic child support obligation as a series of marginal brackets over combined ANNUAL gross income -- similar to a tax bracket -- rather than a single lookup table used by most other states. Each bracket's percentage rate applies only to the portion of income that falls within that bracket."}},{"@type":"Question","name":"What is Idaho's Shared Physical Custody adjustment?","acceptedAnswer":{"@type":"Answer","text":"When both parents have more than 25% of the year's overnights, Idaho multiplies the basic obligation by 1.5, calculates each parent's proportional amount factoring in how much time the child spends with the OTHER parent, and offsets the two amounts -- with a cap ensuring neither parent pays more than they would under the standard calculation."}},{"@type":"Question","name":"Does Idaho have a schedule for large families?","acceptedAnswer":{"@type":"Answer","text":"Idaho's guidelines only publish specific bracket rates through 5 children, explicitly stating the schedule is not a limitation for families with more children. This calculator uses the 5-children rates as an estimate for 6 or more children, since Idaho's guidelines leave that case to case-by-case discretion."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Idaho Child Support Calculator","item":"https://usachildsupportcalculator.com/idaho/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Idaho Child Support Calculator</h1>
+  <p class="badge">Updated for Idaho's 2025-ID-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Idaho's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120 or a family law attorney licensed in Idaho.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Idaho Child Support Is Calculated</h2>
+    <ol><li>Idaho is an income-shares state, but calculates the basic obligation using a MARGINAL BRACKET schedule over annual combined gross income (like a tax bracket) rather than a single schedule lookup -- each bracket's percentage applies only to the portion of income within that bracket.</li><li>Multiply both parents' combined monthly gross income by 12 to get annual combined Guidelines Income, then sum each bracket's contribution (rate x the portion of income in that bracket) to get the annual basic obligation, then divide by 12.</li><li>If one parent has 25% or less of the year's overnights, the basic obligation (plus childcare/health insurance add-ons) is simply prorated by each parent's share of combined income -- the lower-overnight parent pays their share.</li><li>If BOTH parents have more than 25% of the overnights (Shared Physical Custody), the basic obligation is multiplied by 1.5, each parent's share of that pool is multiplied by their income share and then by the percentage of time the child spends with the OTHER parent, and the two resulting amounts are offset -- capped so neither parent ever pays more than they would have under the standard (non-shared) calculation.</li><li>If the paying parent's monthly income is below $800, courts individually review the case, with a rebuttable presumption of a $50/child/month minimum.</li><li>This calculator does not model Extended Visits, Split Physical Custody (each parent primary for different children), or the undefined 6-or-more-children schedule (Idaho's guidelines only define rates through 5 children).</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Idaho Child Support Worksheet Walkthrough</h2>
+    <p>Example (the rule's own worked example): Parent A earns $25,000/year, Parent B earns $10,000/year (combined $35,000/year), 2 children. The child spends 30 overnights/year with Parent A (about 8%, well under 25%), so Parent A pays.</p>
+    <ol><li>First $10,000 of combined income at the 2-children 26% rate: $2,600/yr ($217/mo).</li><li>Next $10,000 at 25%: $2,500/yr ($208/mo).</li><li>Next $10,000 at 23%: $2,300/yr ($192/mo).</li><li>Remaining $5,000 at 22%: $1,100/yr ($92/mo).</li><li>Total basic child support obligation: $217 + $208 + $192 + $92 = $709/month.</li><li>Parent A's income share: $25,000 / $35,000 = 71.4%.</li><li>Parent A pays: $709 x 71.4% = $506/month.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120 · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used (2-children bracket schedule shown as an example -- 1, 3, 4, and 5-children schedules use different rates)</h3>
+    <table>
+      <tr><th>Bracket</th><th>Rate</th><th>Source</th></tr>
+      <tr><td>Bracket 1 (2 children)</td><td>26% of $10,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 2 (2 children)</td><td>25% of $10,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 3 (2 children)</td><td>23% of $10,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 4 (2 children)</td><td>22% of $10,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 5 (2 children)</td><td>20% of $10,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 6 (2 children)</td><td>17% of $20,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 7 (2 children)</td><td>13% of $20,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 8 (2 children)</td><td>9% of $20,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 9 (2 children)</td><td>8% of $20,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 10 (2 children)</td><td>8% of $20,000</td><td>Idaho R. Fam. L. P. 120</td></tr><tr><td>Bracket 11 (2 children)</td><td>8% of the next $290,000</td><td>Idaho R. Fam. L. P. 120</td></tr>
+      <tr><td>Max combined annual income</td><td>$440,000/yr</td><td>Idaho R. Fam. L. P. 120</td></tr>
+      <tr><td>Self-support review threshold</td><td>$800/mo (paying parent)</td><td>Idaho R. Fam. L. P. 120</td></tr>
+      <tr><td>Presumptive minimum</td><td>$50/child/mo</td><td>Idaho R. Fam. L. P. 120</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      annual_combined_income = (parentA_income + parentB_income) &times; 12<br>
+      basic_obligation = sum of each bracket's rate &times; the portion of annual_combined_income within that bracket (like a tax bracket), &divide; 12<br>
+      share_B = parentB_income / combined_income<br>
+      If either parent has 25% or less of the overnights: obligation_B = (basic_obligation + add-ons) &times; share_B<br>
+      If both parents have more than 25%: pool = basic_obligation &times; 1.5; each parent's amount = pool &times; their income share &times; the OTHER parent's overnight share; the two amounts are offset (capped at the sole-custody amount)
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Idaho's official marginal-bracket child support schedule (Rule 120). Verify against Idaho's official worksheet for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Idaho?</summary><p>Idaho is an income-shares state, but calculates the basic obligation using a MARGINAL BRACKET schedule over annual combined gross income (like a tax bracket) rather than a single schedule lookup -- each bracket's percentage applies only to the portion of income within that bracket. Multiply both parents' combined monthly gross income by 12 to get annual combined Guidelines Income, then sum each bracket's contribution (rate x the portion of income in that bracket) to get the annual basic obligation, then divide by 12. If one parent has 25% or less of the year's overnights, the basic obligation (plus childcare/health insurance add-ons) is simply prorated by each parent's share of combined income -- the lower-overnight parent pays their share. If BOTH parents have more than 25% of the overnights (Shared Physical Custody), the basic obligation is multiplied by 1.5, each parent's share of that pool is multiplied by their income share and then by the percentage of time the child spends with the OTHER parent, and the two resulting amounts are offset -- capped so neither parent ever pays more than they would have under the standard (non-shared) calculation. If the paying parent's monthly income is below $800, courts individually review the case, with a rebuttable presumption of a $50/child/month minimum. This calculator does not model Extended Visits, Split Physical Custody (each parent primary for different children), or the undefined 6-or-more-children schedule (Idaho's guidelines only define rates through 5 children).</p></details>
+    <details><summary>Why does Idaho use income brackets instead of a schedule table?</summary><p>Idaho Rule 120 sets the basic child support obligation as a series of marginal brackets over combined ANNUAL gross income -- similar to a tax bracket -- rather than a single lookup table used by most other states. Each bracket's percentage rate applies only to the portion of income that falls within that bracket.</p></details><details><summary>What is Idaho's Shared Physical Custody adjustment?</summary><p>When both parents have more than 25% of the year's overnights, Idaho multiplies the basic obligation by 1.5, calculates each parent's proportional amount factoring in how much time the child spends with the OTHER parent, and offsets the two amounts -- with a cap ensuring neither parent pays more than they would under the standard calculation.</p></details><details><summary>Does Idaho have a schedule for large families?</summary><p>Idaho's guidelines only publish specific bracket rates through 5 children, explicitly stating the schedule is not a limitation for families with more children. This calculator uses the 5-children rates as an estimate for 6 or more children, since Idaho's guidelines leave that case to case-by-case discretion.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: id bracket shares. Effective 2025-07-01, guideline version 2025-ID-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://isc.idaho.gov/rules-procedure/print/irfl/120" rel="nofollow noopener">Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120</a> (Idaho R. Fam. L. P. 120).</p>
+    <p class="deviation-note">This calculator models Idaho's standard Primary Parenting Time (one parent has 25% or less of the overnights, no adjustment) and Shared Physical Custody (both parents have more than 25%, Rule 120(4)(B)'s 1.5x cross-formula) cases. It does not model: Extended Visits (a discretionary further reduction, often 50%, when a 25%-or-less parent has the child for 14+ consecutive days); Split Physical Custody (each parent primary for at least one different child, a separate per-child-multiplier offset calculation, Rule 120(6)); the schedule for 6 or more children (undefined by the guidelines themselves, extrapolated here from the 5-children rates); or discretionary deviations. The $800/month self-support review and $50/child/month minimum are both explicitly described as rebuttable presumptions, not fixed rules.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Idaho's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Idaho","abbr":"ID","slug":"idaho","formula_model":"id_bracket_shares","effective_date":"2025-07-01","last_verified":"2026-07-13","guideline_version":"2025-ID-v1","source":{"agency_name":"Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120","url":"https://isc.idaho.gov/rules-procedure/print/irfl/120","statute_ref":"Idaho R. Fam. L. P. 120"},"params":{"income_basis":"gross"},"worksheet":{"steps":["Idaho is an income-shares state, but calculates the basic obligation using a MARGINAL BRACKET schedule over annual combined gross income (like a tax bracket) rather than a single schedule lookup -- each bracket's percentage applies only to the portion of income within that bracket.","Multiply both parents' combined monthly gross income by 12 to get annual combined Guidelines Income, then sum each bracket's contribution (rate x the portion of income in that bracket) to get the annual basic obligation, then divide by 12.","If one parent has 25% or less of the year's overnights, the basic obligation (plus childcare/health insurance add-ons) is simply prorated by each parent's share of combined income -- the lower-overnight parent pays their share.","If BOTH parents have more than 25% of the overnights (Shared Physical Custody), the basic obligation is multiplied by 1.5, each parent's share of that pool is multiplied by their income share and then by the percentage of time the child spends with the OTHER parent, and the two resulting amounts are offset -- capped so neither parent ever pays more than they would have under the standard (non-shared) calculation.","If the paying parent's monthly income is below $800, courts individually review the case, with a rebuttable presumption of a $50/child/month minimum.","This calculator does not model Extended Visits, Split Physical Custody (each parent primary for different children), or the undefined 6-or-more-children schedule (Idaho's guidelines only define rates through 5 children)."],"example":{"scenario":"Example (the rule's own worked example): Parent A earns $25,000/year, Parent B earns $10,000/year (combined $35,000/year), 2 children. The child spends 30 overnights/year with Parent A (about 8%, well under 25%), so Parent A pays.","calculation":["First $10,000 of combined income at the 2-children 26% rate: $2,600/yr ($217/mo).","Next $10,000 at 25%: $2,500/yr ($208/mo).","Next $10,000 at 23%: $2,300/yr ($192/mo).","Remaining $5,000 at 22%: $1,100/yr ($92/mo).","Total basic child support obligation: $217 + $208 + $192 + $92 = $709/month.","Parent A's income share: $25,000 / $35,000 = 71.4%.","Parent A pays: $709 x 71.4% = $506/month."]}},"faq_extra":[{"q":"Why does Idaho use income brackets instead of a schedule table?","a":"Idaho Rule 120 sets the basic child support obligation as a series of marginal brackets over combined ANNUAL gross income -- similar to a tax bracket -- rather than a single lookup table used by most other states. Each bracket's percentage rate applies only to the portion of income that falls within that bracket."},{"q":"What is Idaho's Shared Physical Custody adjustment?","a":"When both parents have more than 25% of the year's overnights, Idaho multiplies the basic obligation by 1.5, calculates each parent's proportional amount factoring in how much time the child spends with the OTHER parent, and offsets the two amounts -- with a cap ensuring neither parent pays more than they would under the standard calculation."},{"q":"Does Idaho have a schedule for large families?","a":"Idaho's guidelines only publish specific bracket rates through 5 children, explicitly stating the schedule is not a limitation for families with more children. This calculator uses the 5-children rates as an estimate for 6 or more children, since Idaho's guidelines leave that case to case-by-case discretion."}]};
+    const RULES = {"rounding":"nearest_dollar","id_brackets":{"max_annual_combined_income":440000,"self_support_review_threshold_monthly":800,"minimum_per_child_monthly":50,"schedules":{"1":[{"width":10000,"pct":0.18},{"width":10000,"pct":0.17},{"width":10000,"pct":0.15},{"width":10000,"pct":0.14},{"width":10000,"pct":0.13},{"width":20000,"pct":0.12},{"width":20000,"pct":0.09},{"width":20000,"pct":0.06},{"width":20000,"pct":0.05},{"width":20000,"pct":0.05},{"width":290000,"pct":0.05}],"2":[{"width":10000,"pct":0.26},{"width":10000,"pct":0.25},{"width":10000,"pct":0.23},{"width":10000,"pct":0.22},{"width":10000,"pct":0.2},{"width":20000,"pct":0.17},{"width":20000,"pct":0.13},{"width":20000,"pct":0.09},{"width":20000,"pct":0.08},{"width":20000,"pct":0.08},{"width":290000,"pct":0.08}],"3":[{"width":10000,"pct":0.3},{"width":10000,"pct":0.29},{"width":10000,"pct":0.27},{"width":10000,"pct":0.26},{"width":10000,"pct":0.24},{"width":10000,"pct":0.2},{"width":10000,"pct":0.16},{"width":10000,"pct":0.12},{"width":10000,"pct":0.11},{"width":10000,"pct":0.11},{"width":290000,"pct":0.11}],"4":[{"width":10000,"pct":0.33},{"width":10000,"pct":0.32},{"width":10000,"pct":0.3},{"width":10000,"pct":0.29},{"width":10000,"pct":0.27},{"width":10000,"pct":0.22},{"width":10000,"pct":0.18},{"width":10000,"pct":0.14},{"width":10000,"pct":0.13},{"width":10000,"pct":0.13},{"width":290000,"pct":0.13}],"5":[{"width":10000,"pct":0.36},{"width":10000,"pct":0.35},{"width":10000,"pct":0.33},{"width":10000,"pct":0.32},{"width":10000,"pct":0.3},{"width":10000,"pct":0.24},{"width":10000,"pct":0.2},{"width":10000,"pct":0.16},{"width":10000,"pct":0.15},{"width":10000,"pct":0.15},{"width":290000,"pct":0.15}]},"note":"Idaho Rules of Family Law Procedure, Rule 120(g)(1): the Basic Child Support obligation is computed as a marginal bracket schedule over ANNUAL combined Guidelines (gross) Income -- each bracket's percentage applies only to the portion of income within that bracket, like a tax bracket, summed across all filled brackets plus a prorated partial final bracket. Verified exactly against the rule's own worked example (2 children, $25,000 + $10,000 = $35,000 combined annual income -> $709/month total, $506/month paid by the higher earner). The 4-children table's published final bracket width ($20,000) is very likely a publishing error inconsistent with every other child-count table and with the officially cited $440,000/year combined-income cap -- this calculator uses $290,000 for that final bracket (matching the 1/2/3/5-children pattern exactly) rather than reproducing what appears to be a typo verbatim. Idaho's guidelines do not define a schedule for 6 or more children ('the guidelines income and the children's schedules...are not limitations on child support for more than five children') -- this calculator reuses the 5-children rates for 6+, disclosed as an extrapolation beyond the guideline's own defined range."},"income_cap_behavior":"flat_at_cap","deviation_note":"This calculator models Idaho's standard Primary Parenting Time (one parent has 25% or less of the overnights, no adjustment) and Shared Physical Custody (both parents have more than 25%, Rule 120(4)(B)'s 1.5x cross-formula) cases. It does not model: Extended Visits (a discretionary further reduction, often 50%, when a 25%-or-less parent has the child for 14+ consecutive days); Split Physical Custody (each parent primary for at least one different child, a separate per-child-multiplier offset calculation, Rule 120(6)); the schedule for 6 or more children (undefined by the guidelines themselves, extrapolated here from the 5-children rates); or discretionary deviations. The $800/month self-support review and $50/child/month minimum are both explicitly described as rebuttable presumptions, not fixed rules."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'ks_age_schedule') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          children0to5: Number(document.getElementById('children0to5').value) || 0,
+          children6to11: Number(document.getElementById('children6to11').value) || 0,
+          children12to18: Number(document.getElementById('children12to18').value) || 0,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>
