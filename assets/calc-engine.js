@@ -330,12 +330,25 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       // childcare/health-insurance figure — approximated here as entirely
       // the custodial parent's cost, disclosed in the deviation note.
       const threshold = rules.custody_adjustment.threshold_days || 90;
+      const multiplier = rules.custody_adjustment.multiplier || 1.4;
       if (payingParentOvernights > threshold) {
         const custodyShareA = overnightsWithA / 365;
         const custodyShareB = 1 - custodyShareA;
-        const sharedSupportNeed = baseObligation * 1.4;
-        const aTheoretical = (sharedSupportNeed * custodyShareB + addOns) * shareA;
-        const bTheoretical = (sharedSupportNeed * custodyShareA + addOns) * shareB;
+        const sharedSupportNeed = baseObligation * multiplier;
+        let aTheoretical = (sharedSupportNeed * custodyShareB + addOns) * shareA;
+        let bTheoretical = (sharedSupportNeed * custodyShareA + addOns) * shareB;
+        // Maryland-style narrow-band bonus (Md. Fam. Law § 12-204(m)(2)(ii)):
+        // in our convention payingParentOvernights is always the FEWER of the
+        // two (<=182.5), so a narrow low-end band (e.g. 92-109 nights) can
+        // only ever apply to the paying parent's theoretical amount, never
+        // the custodial parent's.
+        const nb = rules.custody_adjustment.narrow_band_bonus;
+        if (nb && payingParentOvernights >= (rules.custody_adjustment.narrow_band_min || 0)
+            && payingParentOvernights <= (rules.custody_adjustment.narrow_band_max || Infinity)) {
+          const bonusPct = stepLookup(nb, payingParentOvernights);
+          if (payingParent === 'A') aTheoretical += aTheoretical * bonusPct;
+          else bTheoretical += bTheoretical * bonusPct;
+        }
         const sharedAmount = Math.abs(aTheoretical - bTheoretical);
         amount = Math.min(amount, sharedAmount);
         adjustedForCustody = true;

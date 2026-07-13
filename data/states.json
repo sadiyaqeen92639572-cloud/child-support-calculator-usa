@@ -1402,5 +1402,58 @@
         "a": "Above $20,000/month in combined parental income, Minnesota caps the presumptive obligation at the $20,000 schedule figure rather than extrapolating further. A higher amount can be demonstrated only through the factors in Minn. Stat. 518A.43, not an automatic formula extension."
       }
     ]
+  },
+  "md": {
+    "name": "Maryland",
+    "abbr": "MD",
+    "slug": "maryland",
+    "formula_model": "income_shares",
+    "effective_date": "2022-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2022-MD-v1",
+    "source": {
+      "agency_name": "Maryland General Assembly, Md. Code, Family Law § 12-204",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gfl&section=12-204",
+      "statute_ref": "Md. Code, Family Law § 12-204"
+    },
+    "params": {
+      "schedule_table_ref": "maryland_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 30000,
+      "high_income_note": "Above $30,000/month combined adjusted actual income, Maryland's schedule has no further value -- courts use discretion in setting support."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly adjusted actual income, then combine both for combined monthly adjusted actual income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Child Support Obligations for that combined income and number of children -- the schedule's own self-support reserve adjustment is already built into its lower-income rows.",
+        "If neither parent has shared physical custody (92+ overnights/year for the parent with less time), each parent's share of the basic obligation plus childcare/health costs is the standard proration.",
+        "If both parents have shared physical custody (92+ overnights each), a cross-formula applies instead: the basic obligation is multiplied by 1.5, then each parent's share is cross-multiplied by the OTHER parent's time share -- the difference is the support owed, paid by whichever parent's theoretical amount is larger.",
+        "In the narrow 92-109 overnight band specifically, an additional graduated bonus (2%-10%, higher for fewer nights within that band) increases the paying parent's theoretical amount.",
+        "The shared-custody result is capped at the sole-custody amount if that would be lower.",
+        "Above $30,000/month combined income, courts use discretion rather than an automatic formula."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted actual income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share), Parent B earns $2,000/mo (40% share) and has 100 overnights/year (in the narrow 92-109 bonus band).",
+        "calculation": [
+          "Basic child support obligation for $5,000 combined, 2 children: $1,356/month.",
+          "Adjusted (x1.5) basic obligation for the shared-custody cross-formula: $2,034/month.",
+          "Cross-multiplying each parent's income share and time share, plus the narrow-band bonus for Parent B's 100 overnights (99-102 night bracket, +6%), produces $292/month owed by Parent B -- below the $542/month sole-custody amount, so the shared-custody result applies."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Maryland's narrow-band shared custody bonus?",
+        "a": "When a parent with shared physical custody has between 92 and 109 overnights per year (25%-30% of the time), Maryland adds an EXTRA graduated bonus to that parent's theoretical obligation in the cross-formula -- 10% at 92-94 nights, stepping down to 2% at 106-109 nights. This is on top of the standard shared-custody cross-multiplication, and only applies in this specific narrow range."
+      },
+      {
+        "q": "Is Maryland's self-support reserve a separate calculation?",
+        "a": "No -- unlike some states that compare two separate calculations, Maryland bakes the self-support reserve adjustment directly into the printed Schedule of Basic Child Support Obligations. Rows below roughly $1,650/month combined income (marked with an asterisk in the statute) already reflect the reduced, reserve-adjusted amount, so no extra step is needed beyond the standard schedule lookup."
+      },
+      {
+        "q": "What happens if combined income is above $30,000/month in Maryland?",
+        "a": "Above $30,000/month in combined adjusted actual income, Maryland's schedule provides no further value. Courts use their discretion in setting the support amount (Md. Fam. Law § 12-204(d)) rather than extending the schedule with an automatic formula."
+      }
+    ]
   }
 }

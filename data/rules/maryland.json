@@ -1,0 +1,20 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "va_shared_custody",
+    "threshold_days": 91,
+    "multiplier": 1.5,
+    "narrow_band_bonus": [
+      { "upTo": 94, "value": 0.10 },
+      { "upTo": 98, "value": 0.08 },
+      { "upTo": 102, "value": 0.06 },
+      { "upTo": 105, "value": 0.04 },
+      { "upTo": 109, "value": 0.02 }
+    ],
+    "narrow_band_min": 92,
+    "narrow_band_max": 109,
+    "note": "Md. Fam. Law 12-204(m): shared physical custody (both parents 92+ overnights/year) triggers a cross-formula (basic obligation x1.5, cross-multiplied by each parent's income share and the OTHER parent's time share) instead of simple proration. In the narrow 92-109 overnight band, an additional graduated bonus (2%-10%, higher for fewer nights in that band) is added to the paying parent's theoretical amount. The result is capped at the sole-custody amount if that would be lower."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $30,000/month combined adjusted actual income, Maryland's schedule has no further value -- courts use discretion in setting support (Md. Fam. Law 12-204(d)) rather than an automatic formula. This calculator approximates the shared-custody formula's add-on cost split (each parent's own childcare/health costs credited separately) as a single combined figure, since it collects one childcare/health-insurance amount rather than a separate figure per parent."
+}
