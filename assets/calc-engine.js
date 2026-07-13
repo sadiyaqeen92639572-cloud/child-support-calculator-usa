@@ -290,6 +290,16 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
       // discount on the parent's own share).
       amount = Math.max(0, amount - (totalObligation * creditPct));
       adjustedForCustody = creditPct > 0;
+    } else if (rules.custody_adjustment.type === 'oregon_sigmoid_credit') {
+      // Oregon's exact parenting time credit formula, OAR 137-050-0730(6):
+      //   credit% = 1/(1+e^(-7.14*((overnights/365)-0.5))) - 0.0274 + (2*0.0274*(overnights/365))
+      // a genuine logistic curve, not a lookup table — verbatim from the
+      // rule text, not approximated. Applied to the basic obligation
+      // (before add-ons), then subtracted from the paying parent's share.
+      const f = payingParentOvernights / 365;
+      const creditPct = 1 / (1 + Math.exp(-7.14 * (f - 0.5))) - 0.0274 + (2 * 0.0274 * f);
+      amount = Math.max(0, amount - (baseObligation * creditPct));
+      adjustedForCustody = creditPct > 0;
     } else if (rules.custody_adjustment.type === 'stepped_days_table') {
       // e.g. Arizona's Parenting Time Table — a true step function by day-range,
       // NOT interpolated (a real 100-114 day range all uses the same .175 credit).
@@ -408,6 +418,21 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     }
   }
 
+  let orMinimumApplied = false;
+  if (rules.or_self_support_clamp) {
+    // Oregon's mechanism (OAR 137-050-0745, -0755): the paying parent's
+    // total obligation may not exceed their income available for support
+    // (income minus the Self-Support Reserve), and a rebuttable $100/mo
+    // minimum order applies (except at exactly equal parenting time).
+    const or_ = rules.or_self_support_clamp;
+    const availableIncome = Math.max(0, payingParentIncome - or_.self_support_reserve_monthly);
+    if (amount > availableIncome) amount = availableIncome;
+    if (amount < or_.min_order_monthly && payingParentOvernights !== 182.5) {
+      amount = or_.min_order_monthly;
+      orMinimumApplied = true;
+    }
+  }
+
   amount = applyRounding(amount, rules.rounding);
 
   const reserve = params.self_support_reserve_monthly;
@@ -421,13 +446,15 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     baseObligation,
     adjustedForCustody,
     belowSelfSupportReserve: belowReserve,
-    selfSupportMinimumOrderApplied: mnMinimumApplied,
+    selfSupportMinimumOrderApplied: mnMinimumApplied || orMinimumApplied,
     deviationNote: rules.deviation_note,
     capWarning: mnMinimumApplied
       ? "Self-Support Reserve minimum applies (Minn. Stat. § 518A.42) — the paying parent's income available after the reserve is at or below the statutory minimum, so the flat minimum basic support amount applies instead of the guideline calculation."
-      : (custodyWarning || (belowReserve
-        ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
-        : null))
+      : (orMinimumApplied
+        ? "Minimum order applies (OAR 137-050-0755) — a rebuttable $100/month minimum, since the calculated amount fell below it."
+        : (custodyWarning || (belowReserve
+          ? `This result would leave the paying parent below the state's self-support reserve ($${reserve.toLocaleString()}${reservePeriodLabel}) — courts typically adjust in this situation.`
+          : null)))
   };
 }
 

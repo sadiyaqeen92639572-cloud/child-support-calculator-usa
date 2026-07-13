@@ -1,0 +1,14 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": {
+    "type": "oregon_sigmoid_credit",
+    "note": "OAR 137-050-0730(6): credit% = 1/(1+e^(-7.14*((overnights/365)-0.5))) - 0.0274 + (2*0.0274*(overnights/365)), an exact logistic formula (not a lookup table), applied to the basic obligation and subtracted from the paying parent's share."
+  },
+  "or_self_support_clamp": {
+    "self_support_reserve_monthly": 1522,
+    "min_order_monthly": 100,
+    "note": "OAR 137-050-0745: the paying parent's total obligation may not exceed their income available for support (income minus the Self-Support Reserve, 2026 guideline). OAR 137-050-0755: a rebuttable $100/month minimum order applies, except at exactly equal (182.5/182.5) parenting time."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $30,000/month combined gross income, or beyond 10 children, Oregon's schedule has no further value -- the obligation is the same as for $30,000/month (OAR 137-050-0725(3)-(4)), not extrapolated further. This calculator does not model split custody (each parent primary for at least one child) or the Social Security/veterans benefits dollar-for-dollar reduction."
+}
