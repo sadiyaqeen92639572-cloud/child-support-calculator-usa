@@ -1045,6 +1045,56 @@ function calcIdahoFormula(params, rules, inputs) {
   };
 }
 
+function calcMaineFormula(params, rules, scheduleTable, inputs) {
+  // Maine's Schedule of Basic Support Obligation (19-A M.R.S. section 2006) has
+  // a genuine unit mismatch: the table's left-hand axis is COMBINED ANNUAL
+  // gross income, but each cell's dollar value is WEEKLY. inputs here are
+  // annual gross incomes (matching the table's own axis exactly); the
+  // looked-up weekly figure is converted to monthly (x 52/12) for display,
+  // consistent with the rest of the site.
+  // inputs: { parentAGrossIncome, parentBGrossIncome, numChildren, overnightsWithA,
+  //           childcareCost, healthInsuranceCost } -- all in ANNUAL dollars.
+  const me = rules.me_self_support_reserve;
+  const combined = inputs.parentAGrossIncome + inputs.parentBGrossIncome;
+  const shareA = inputs.parentAGrossIncome / combined;
+  const shareB = 1 - shareA;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingShare = payingParent === 'A' ? shareA : shareB;
+  const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
+
+  let amount;
+  let selfSupportReserveApplied = false;
+  if (payingParentIncome > 0 && payingParentIncome <= me.self_support_reserve_ceiling_annual) {
+    const weeklyAmount = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    amount = weeklyAmount * (52 / 12);
+    selfSupportReserveApplied = true;
+  } else {
+    const weeklyBase = lookupSchedule(scheduleTable, combined, inputs.numChildren);
+    const basicEntitlementMonthly = weeklyBase * (52 / 12);
+    const addOnsMonthly = ((inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0)) / 12;
+    amount = (basicEntitlementMonthly + addOnsMonthly) * payingShare;
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: combined,
+    baseObligation: null,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: selfSupportReserveApplied
+      ? `Self-Support Reserve applies (19-A M.R.S. section 2006(5)(C)) — computed from the paying parent's own annual income only, not combined income, with no add-ons.`
+      : (combined > scheduleTable.maxIncome
+        ? `Above $${scheduleTable.maxIncome.toLocaleString()}/yr combined income, the table amount is only a presumptive MINIMUM (19-A M.R.S. section 2006(5)(B)) — courts may order more.`
+        : null)
+  };
+}
+
 function calcKansasFormula(params, rules, scheduleTable, inputs) {
   // Kansas is the only state modeled here whose schedule varies by the AGE of
   // each child, not just the total count (Appendix II: separate One/Two/.../
@@ -1136,6 +1186,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcKansasFormula(stateEntry.params, rules, scheduleTable, inputs);
     case 'id_bracket_shares':
       return calcIdahoFormula(stateEntry.params, rules, inputs);
+    case 'me_weekly_table_annual_income':
+      return calcMaineFormula(stateEntry.params, rules, scheduleTable, inputs);
     default:
       throw new Error(`Unknown formula_model: ${stateEntry.formula_model}`);
   }

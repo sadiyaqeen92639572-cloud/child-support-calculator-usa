@@ -1,0 +1,9 @@
+{
+  "rounding": "nearest_dollar",
+  "me_self_support_reserve": {
+    "self_support_reserve_ceiling_annual": 22800,
+    "note": "19-A M.R.S. section 2006(5)(C): if the nonprimary (paying) parent's own annual gross income, without adjustments, is at or below $22,800/yr, that parent's obligation is looked up in the Self-Support Reserve (shaded) area of the table using their OWN income alone, for the total number of children -- regardless of the parties' combined income, and with no childcare/health insurance add-ons. Applies only if it produces a smaller amount than the standard calculation."
+  },
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "Maine income figures in this calculator are ANNUAL gross income (matching the Child Support Table's own axis), but the table's cell values are WEEKLY -- converted to monthly for display. Below $16,800/yr combined income, the table has no row; 19-A M.R.S. section 2006(5)(C) instead caps the nonprimary parent's obligation at 10% of their own weekly gross income when their income is below the federal poverty guideline -- this calculator approximates that zone using the table's lowest published row instead of the exact 10%-of-income rule, since the federal poverty guideline changes annually and isn't stated in this rule text. This calculator models the standard primary-residential-care case only. It does not model: Substantially Equal Care with equal incomes (19-A M.R.S. section 2006(5)(D), no support owed either way), Substantially Equal Care with unequal incomes (section 2006(5)(D-1), an 'enhanced support entitlement' cross-offset calculation), or the case where each parent has primary care of at least one different child (section 2006(5)(E), a per-household offset calculation)."
+}

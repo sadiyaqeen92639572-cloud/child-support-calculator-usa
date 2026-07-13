@@ -342,6 +342,30 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'me_weekly_table_annual_income') {
+    const me = rules.me_self_support_reserve;
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Self-Support Reserve ceiling</td><td>$${me.self_support_reserve_ceiling_annual.toLocaleString()}/yr (paying parent's own income)</td><td>${state.source.statute_ref || ''}</td></tr>
+      <tr><td>Combined income cap</td><td>$400,000/yr (presumptive minimum above this)</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_annual_income = parentA_annual_income + parentB_annual_income<br>
+      weekly_basic_entitlement = schedule_lookup(combined_annual_income, children) &nbsp;(Maine's table axis is annual income, but its cell values are WEEKLY dollars)<br>
+      monthly_basic_entitlement = weekly_basic_entitlement &times; 52 &divide; 12<br>
+      share_B = parentB_annual_income / combined_annual_income<br>
+      obligation_B = (monthly_basic_entitlement + monthly_add_ons) &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Maine's official Schedule of Basic Support Obligation (19-A M.R.S. § 2006). Verify against Maine's official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;

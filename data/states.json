@@ -2215,5 +2215,59 @@
         "a": "Idaho's guidelines only publish specific bracket rates through 5 children, explicitly stating the schedule is not a limitation for families with more children. This calculator uses the 5-children rates as an estimate for 6 or more children, since Idaho's guidelines leave that case to case-by-case discretion."
       }
     ]
+  },
+  "me": {
+    "name": "Maine",
+    "abbr": "ME",
+    "slug": "maine",
+    "formula_model": "me_weekly_table_annual_income",
+    "effective_date": "2022-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2022-ME-v1",
+    "source": {
+      "agency_name": "Maine Department of Health and Human Services / 19-A M.R.S. Chapter 63",
+      "url": "https://www.maine.gov/dhhs/sites/maine.gov.dhhs/files/inline-files/Maine%20Child%20Support%20Table.pdf",
+      "statute_ref": "19-A M.R.S. § 2006"
+    },
+    "params": {
+      "income_basis": "gross",
+      "income_period": "annual",
+      "schedule_table_ref": "maine_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Maine is an income-shares state with an unusual table: the left-hand axis is combined ANNUAL gross income, but each cell's dollar value is a WEEKLY amount.",
+        "Add both parents' annual gross income to get combined annual gross income, then look up the Schedule of Basic Support Obligation for the total number of children -- the table's own column already reflects the total for that many children, not a per-child amount to be multiplied further.",
+        "Convert the weekly table amount to a monthly figure, then add monthly childcare costs, health insurance premiums, and extraordinary medical expenses to get the total basic support obligation.",
+        "Each parent's share is their percentage of combined annual income; the parent not providing primary residential care pays their share to the parent who does.",
+        "If the paying parent's OWN annual income (not combined) is at or below $22,800/year, their obligation is instead looked up directly using their own income alone in the table's Self-Support Reserve zone, with no add-ons.",
+        "Above $400,000/year combined income, the table does not extend automatically -- the $400,000 row amount is only a presumptive MINIMUM, and courts may order more.",
+        "This models the standard primary-residential-care case only. Substantially Equal Care (both 'equal income' and 'unequal income' variants) and cases where each parent has primary care of at least one different child use different calculations and are not modeled here."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has annual gross income of $60,000, Parent B has annual gross income of $39,600 (combined $99,600/year). There is one child, who lives primarily with Parent B.",
+        "calculation": [
+          "Combined annual gross income: $60,000 + $39,600 = $99,600.",
+          "Schedule of Basic Support Obligation at $99,600 combined, one child: $260/week.",
+          "Converted to monthly: $260 x 52 / 12 = $1,126.67.",
+          "Parent A's income share: $60,000 / $99,600 = 60.2%.",
+          "Parent A pays: $1,126.67 x 60.2% = $679/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Maine use annual or weekly income for child support?",
+        "a": "Both, in a way that trips people up: Maine's Child Support Table is indexed by combined ANNUAL gross income, but each dollar figure in the table is a WEEKLY amount. This calculator asks for annual income (matching the table) and converts the result to a monthly figure for display."
+      },
+      {
+        "q": "What is Maine's Self-Support Reserve?",
+        "a": "If the paying (nonprimary) parent's own annual gross income is $22,800 or less, Maine looks up that parent's obligation using their own income alone in the table's shaded Self-Support Reserve area, regardless of the other parent's income, and does not add childcare or health insurance costs on top (19-A M.R.S. § 2006(5)(C))."
+      },
+      {
+        "q": "What happens above the $400,000 combined income cap in Maine?",
+        "a": "The Child Support Table does not extend past $400,000/year combined gross income. Above that, the amount shown at the $400,000 row is only a presumptive MINIMUM -- courts have discretion to order a higher amount based on the case's circumstances (19-A M.R.S. § 2006(5)(B))."
+      }
+    ]
   }
 }
