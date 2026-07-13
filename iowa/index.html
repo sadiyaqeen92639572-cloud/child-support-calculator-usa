@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iowa Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Iowa child support using the state's official income shares guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/iowa/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Iowa Child Support Calculator">
+<meta property="og:description" content="Free Iowa child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/iowa/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Iowa Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-IA-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Iowa?","acceptedAnswer":{"@type":"Answer","text":"Determine each parent's adjusted net monthly income (after federal/state taxes, FICA, and other statutory deductions), then combine both for combined adjusted net income. Look up the basic support obligation from the official Iowa Schedule of Basic Support Obligations for that combined income and number of children. Area A (obligor income $0-$1,250): only the noncustodial parent's own income is used, not combined income. Area B (obligor income $1,251-$2,650): the guideline amount is the LESSER of the obligor-only lookup vs. the combined-income proration. Area C (above $2,650): combined income is used, prorated by each parent's share. Joint (equally shared) physical care uses a different worksheet entirely, with no low-income adjustment -- not modeled by this calculator. Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month."}},{"@type":"Question","name":"What are Iowa's Area A, B, and C on the child support schedule?","acceptedAnswer":{"@type":"Answer","text":"Iowa's Schedule of Basic Support Obligations is divided into three zones based on the noncustodial parent's income: Area A ($0-$1,250) uses only that parent's own income, with no comparison to combined income. Area B ($1,251-$2,650) uses whichever is LOWER: the obligor-only lookup or the combined-income proration. Area C (above $2,650) uses combined income exclusively. This low-income adjustment phases out gradually as income rises through these zones."}},{"@type":"Question","name":"Is Iowa child support based on gross or net income?","acceptedAnswer":{"@type":"Answer","text":"Net income. Iowa's guidelines require a detailed adjusted net income computation (Rule 9.27, Form 1) that subtracts federal and state taxes, FICA, mandatory pension contributions, and other statutory deductions from gross income -- not just take-home pay. This calculator asks for your already-computed net income rather than performing that tax computation itself."}},{"@type":"Question","name":"Does Iowa have a different formula for shared custody?","acceptedAnswer":{"@type":"Answer","text":"Yes -- when parents have Joint (Equally Shared) Physical Care, Iowa uses an entirely different worksheet (Rule 9.9A) that doesn't apply the low-income Area A/B adjustment at all, using combined incomes regardless of either parent's income level. This calculator models the standard primary-care scenario only."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Iowa Child Support Calculator","item":"https://usachildsupportcalculator.com/iowa/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Iowa Child Support Calculator</h1>
+  <p class="badge">Updated for Iowa's 2026-IA-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Iowa's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines) or a family law attorney licensed in Iowa.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A net monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B net monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Iowa Child Support Is Calculated</h2>
+    <ol><li>Determine each parent's adjusted net monthly income (after federal/state taxes, FICA, and other statutory deductions), then combine both for combined adjusted net income.</li><li>Look up the basic support obligation from the official Iowa Schedule of Basic Support Obligations for that combined income and number of children.</li><li>Area A (obligor income $0-$1,250): only the noncustodial parent's own income is used, not combined income.</li><li>Area B (obligor income $1,251-$2,650): the guideline amount is the LESSER of the obligor-only lookup vs. the combined-income proration.</li><li>Area C (above $2,650): combined income is used, prorated by each parent's share.</li><li>Joint (equally shared) physical care uses a different worksheet entirely, with no low-income adjustment -- not modeled by this calculator.</li><li>Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Iowa Child Support Worksheet Walkthrough</h2>
+    <p>Example: combined adjusted net income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent (above the $2,650 Area C threshold).</p>
+    <ol><li>Basic support obligation for $6,000 combined, 2 children: $1,778/month.</li><li>Individual-income lookup for Parent B alone ($2,400/mo, 2 children): $833/month.</li><li>Combined-income proration: 40% × $1,778 ≈ $711/month. Iowa uses the LESSER of the two: $711/month guideline child support paid by Parent B.</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <h3>Formula</h3>
+    <div class="formula-code">
+      combined_income = parentA_income + parentB_income<br>
+      base_obligation = schedule_lookup(combined_income, children)<br>
+      share_B = parentB_income / combined_income<br>
+      total_obligation = base_obligation + childcare_cost + health_insurance_cost<br>
+      obligation_B = total_obligation &times; share_B
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Iowa's official guideline schedule table. Verify against Iowa's official calculator for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Iowa?</summary><p>Determine each parent's adjusted net monthly income (after federal/state taxes, FICA, and other statutory deductions), then combine both for combined adjusted net income. Look up the basic support obligation from the official Iowa Schedule of Basic Support Obligations for that combined income and number of children. Area A (obligor income $0-$1,250): only the noncustodial parent's own income is used, not combined income. Area B (obligor income $1,251-$2,650): the guideline amount is the LESSER of the obligor-only lookup vs. the combined-income proration. Area C (above $2,650): combined income is used, prorated by each parent's share. Joint (equally shared) physical care uses a different worksheet entirely, with no low-income adjustment -- not modeled by this calculator. Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month.</p></details>
+    <details><summary>What are Iowa's Area A, B, and C on the child support schedule?</summary><p>Iowa's Schedule of Basic Support Obligations is divided into three zones based on the noncustodial parent's income: Area A ($0-$1,250) uses only that parent's own income, with no comparison to combined income. Area B ($1,251-$2,650) uses whichever is LOWER: the obligor-only lookup or the combined-income proration. Area C (above $2,650) uses combined income exclusively. This low-income adjustment phases out gradually as income rises through these zones.</p></details><details><summary>Is Iowa child support based on gross or net income?</summary><p>Net income. Iowa's guidelines require a detailed adjusted net income computation (Rule 9.27, Form 1) that subtracts federal and state taxes, FICA, mandatory pension contributions, and other statutory deductions from gross income -- not just take-home pay. This calculator asks for your already-computed net income rather than performing that tax computation itself.</p></details><details><summary>Does Iowa have a different formula for shared custody?</summary><p>Yes -- when parents have Joint (Equally Shared) Physical Care, Iowa uses an entirely different worksheet (Rule 9.9A) that doesn't apply the low-income Area A/B adjustment at all, using combined incomes regardless of either parent's income level. This calculator models the standard primary-care scenario only.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: income shares. Effective 2026-01-01, guideline version 2026-IA-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://www.legis.iowa.gov/docs/ACO/CourtRulesChapter/9.pdf" rel="nofollow noopener">Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines)</a> (Iowa Ct. R. 9.1-9.27).</p>
+    <p class="deviation-note">Above $30,000/month combined net income, Iowa's schedule obligation is deemed the same as for $30,000/month (Rule 9.26, note 3) -- courts have discretion to set an amount at or above that floor, not an automatic formula extension. This calculator does not model Joint (Equally Shared) Physical Care or split custody arrangements.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Iowa's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Iowa","abbr":"IA","slug":"iowa","formula_model":"income_shares","effective_date":"2026-01-01","last_verified":"2026-07-13","guideline_version":"2026-IA-v1","source":{"agency_name":"Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines)","url":"https://www.legis.iowa.gov/docs/ACO/CourtRulesChapter/9.pdf","statute_ref":"Iowa Ct. R. 9.1-9.27"},"params":{"schedule_table_ref":"iowa_schedule.json","income_basis":"net","income_cap_monthly":30000,"high_income_note":"Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month (Rule 9.26) -- not extrapolated further."},"worksheet":{"steps":["Determine each parent's adjusted net monthly income (after federal/state taxes, FICA, and other statutory deductions), then combine both for combined adjusted net income.","Look up the basic support obligation from the official Iowa Schedule of Basic Support Obligations for that combined income and number of children.","Area A (obligor income $0-$1,250): only the noncustodial parent's own income is used, not combined income.","Area B (obligor income $1,251-$2,650): the guideline amount is the LESSER of the obligor-only lookup vs. the combined-income proration.","Area C (above $2,650): combined income is used, prorated by each parent's share.","Joint (equally shared) physical care uses a different worksheet entirely, with no low-income adjustment -- not modeled by this calculator.","Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month."],"example":{"scenario":"Example: combined adjusted net income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent (above the $2,650 Area C threshold).","calculation":["Basic support obligation for $6,000 combined, 2 children: $1,778/month.","Individual-income lookup for Parent B alone ($2,400/mo, 2 children): $833/month.","Combined-income proration: 40% × $1,778 ≈ $711/month. Iowa uses the LESSER of the two: $711/month guideline child support paid by Parent B."]}},"faq_extra":[{"q":"What are Iowa's Area A, B, and C on the child support schedule?","a":"Iowa's Schedule of Basic Support Obligations is divided into three zones based on the noncustodial parent's income: Area A ($0-$1,250) uses only that parent's own income, with no comparison to combined income. Area B ($1,251-$2,650) uses whichever is LOWER: the obligor-only lookup or the combined-income proration. Area C (above $2,650) uses combined income exclusively. This low-income adjustment phases out gradually as income rises through these zones."},{"q":"Is Iowa child support based on gross or net income?","a":"Net income. Iowa's guidelines require a detailed adjusted net income computation (Rule 9.27, Form 1) that subtracts federal and state taxes, FICA, mandatory pension contributions, and other statutory deductions from gross income -- not just take-home pay. This calculator asks for your already-computed net income rather than performing that tax computation itself."},{"q":"Does Iowa have a different formula for shared custody?","a":"Yes -- when parents have Joint (Equally Shared) Physical Care, Iowa uses an entirely different worksheet (Rule 9.9A) that doesn't apply the low-income Area A/B adjustment at all, using combined incomes regardless of either parent's income level. This calculator models the standard primary-care scenario only."}]};
+    const RULES = {"rounding":"nearest_dollar","pa_lesser_of_calculations":{"self_support_reserve_monthly":1250,"note":"Iowa Court Rule 9.3(2): Area A ($0-$1,250 obligor income) uses only the noncustodial parent's own income. Area B ($1,251-$2,650) uses the LESSER of the obligor-only lookup vs the combined-income proration. Area C (above $2,650) uses combined income. Modeled here as the lesser of individual-income lookup vs combined-times-share applied uniformly, which self-selects the correct behavior across all three zones."},"income_cap_behavior":"capped_at_max","deviation_note":"Above $30,000/month combined net income, Iowa's schedule obligation is deemed the same as for $30,000/month (Rule 9.26, note 3) -- courts have discretion to set an amount at or above that floor, not an automatic formula extension. This calculator does not model Joint (Equally Shared) Physical Care or split custody arrangements."};
+    const SCHEDULE = {"maxIncome":30000,"source":"Iowa Court Rules Chapter 9, Rule 9.26 Child Support Guidelines Schedule, eff. 2026-01-01, https://www.legis.iowa.gov/docs/ACO/CourtRulesChapter/9.pdf","note":"116 real anchor points transcribed directly from the full official 2026 schedule (roughly 600 rows, $0-$30,000 combined/individual adjusted net monthly income in mostly $50-$100 increments, read directly from the primary PDF's table images, not OCR). Area A ($0-$1,250): obligor-only income used, no comparison. Area B ($1,251-$2,650): lesser of obligor-only lookup vs combined-income proration (this calculator applies that comparison uniformly across the whole table via the pa_lesser_of_calculations engine feature, which self-selects the correct answer in Area C too since the individual-only lookup naturally loses the comparison for higher earners). Above $30,000/month, the obligation is the same as for $30,000 (not extrapolated further). Engine interpolates linearly between anchors.","rows":[{"upTo":100,"obligation":{"1":50,"2":75,"3":100,"4":100,"5":100}},{"upTo":200,"obligation":{"1":56,"2":83,"3":109,"4":111,"5":112}},{"upTo":300,"obligation":{"1":62,"2":92,"3":118,"4":121,"5":125}},{"upTo":400,"obligation":{"1":68,"2":100,"3":127,"4":132,"5":137}},{"upTo":500,"obligation":{"1":73,"2":108,"3":136,"4":143,"5":150}},{"upTo":600,"obligation":{"1":79,"2":116,"3":145,"4":154,"5":162}},{"upTo":700,"obligation":{"1":85,"2":125,"3":154,"4":164,"5":174}},{"upTo":800,"obligation":{"1":91,"2":133,"3":163,"4":175,"5":187}},{"upTo":850,"obligation":{"1":97,"2":141,"3":172,"4":186,"5":199}},{"upTo":900,"obligation":{"1":103,"2":150,"3":181,"4":197,"5":212}},{"upTo":950,"obligation":{"1":108,"2":158,"3":190,"4":207,"5":224}},{"upTo":1000,"obligation":{"1":114,"2":166,"3":199,"4":218,"5":236}},{"upTo":1050,"obligation":{"1":120,"2":175,"3":208,"4":229,"5":249}},{"upTo":1100,"obligation":{"1":126,"2":183,"3":217,"4":239,"5":261}},{"upTo":1150,"obligation":{"1":132,"2":191,"3":226,"4":250,"5":273}},{"upTo":1200,"obligation":{"1":138,"2":199,"3":235,"4":261,"5":286}},{"upTo":1250,"obligation":{"1":143,"2":208,"3":244,"4":272,"5":298}},{"upTo":1300,"obligation":{"1":149,"2":216,"3":253,"4":282,"5":311}},{"upTo":1350,"obligation":{"1":174,"2":246,"3":285,"4":315,"5":348}},{"upTo":1400,"obligation":{"1":199,"2":276,"3":318,"4":347,"5":386}},{"upTo":1450,"obligation":{"1":224,"2":306,"3":350,"4":380,"5":423}},{"upTo":1500,"obligation":{"1":249,"2":336,"3":383,"4":412,"5":461}},{"upTo":1550,"obligation":{"1":274,"2":366,"3":415,"4":445,"5":498}},{"upTo":1600,"obligation":{"1":299,"2":396,"3":448,"4":477,"5":536}},{"upTo":1650,"obligation":{"1":324,"2":426,"3":480,"4":510,"5":573}},{"upTo":1700,"obligation":{"1":349,"2":456,"3":513,"4":542,"5":611}},{"upTo":1750,"obligation":{"1":374,"2":486,"3":545,"4":575,"5":648}},{"upTo":1800,"obligation":{"1":399,"2":516,"3":578,"4":607,"5":686}},{"upTo":1850,"obligation":{"1":421,"2":546,"3":610,"4":640,"5":723}},{"upTo":1900,"obligation":{"1":432,"2":576,"3":643,"4":672,"5":761}},{"upTo":1950,"obligation":{"1":444,"2":606,"3":675,"4":705,"5":798}},{"upTo":2000,"obligation":{"1":455,"2":636,"3":708,"4":737,"5":836}},{"upTo":2050,"obligation":{"1":467,"2":666,"3":740,"4":770,"5":873}},{"upTo":2100,"obligation":{"1":478,"2":696,"3":773,"4":802,"5":911}},{"upTo":2150,"obligation":{"1":490,"2":726,"3":805,"4":835,"5":935}},{"upTo":2200,"obligation":{"1":501,"2":756,"3":838,"4":867,"5":957}},{"upTo":2250,"obligation":{"1":513,"2":781,"3":870,"4":900,"5":979}},{"upTo":2300,"obligation":{"1":524,"2":798,"3":903,"4":932,"5":1001}},{"upTo":2350,"obligation":{"1":536,"2":816,"3":935,"4":965,"5":1023}},{"upTo":2400,"obligation":{"1":547,"2":833,"3":968,"4":997,"5":1045}},{"upTo":2450,"obligation":{"1":559,"2":851,"3":1000,"4":1030,"5":1067}},{"upTo":2500,"obligation":{"1":570,"2":869,"3":1033,"4":1062,"5":1089}},{"upTo":2550,"obligation":{"1":582,"2":886,"3":1065,"4":1086,"5":1111}},{"upTo":2600,"obligation":{"1":593,"2":904,"3":1092,"4":1107,"5":1133}},{"upTo":2650,"obligation":{"1":605,"2":921,"3":1114,"4":1129,"5":1155}},{"upTo":2700,"obligation":{"1":616,"2":939,"3":1135,"4":1150,"5":1177}},{"upTo":2750,"obligation":{"1":628,"2":956,"3":1156,"4":1172,"5":1199}},{"upTo":2800,"obligation":{"1":640,"2":974,"3":1177,"4":1193,"5":1221}},{"upTo":2900,"obligation":{"1":663,"2":1009,"3":1220,"4":1236,"5":1265}},{"upTo":3000,"obligation":{"1":686,"2":1044,"3":1262,"4":1279,"5":1309}},{"upTo":3100,"obligation":{"1":709,"2":1079,"3":1304,"4":1322,"5":1353}},{"upTo":3200,"obligation":{"1":732,"2":1114,"3":1347,"4":1365,"5":1397}},{"upTo":3300,"obligation":{"1":755,"2":1149,"3":1389,"4":1408,"5":1441}},{"upTo":3400,"obligation":{"1":778,"2":1182,"3":1428,"4":1451,"5":1485}},{"upTo":3500,"obligation":{"1":801,"2":1212,"3":1463,"4":1494,"5":1529}},{"upTo":3600,"obligation":{"1":824,"2":1243,"3":1498,"4":1537,"5":1573}},{"upTo":3700,"obligation":{"1":847,"2":1273,"3":1532,"4":1580,"5":1617}},{"upTo":3800,"obligation":{"1":870,"2":1304,"3":1567,"4":1623,"5":1661}},{"upTo":3900,"obligation":{"1":892,"2":1335,"3":1604,"4":1666,"5":1705}},{"upTo":4000,"obligation":{"1":913,"2":1369,"3":1644,"4":1709,"5":1749}},{"upTo":4100,"obligation":{"1":934,"2":1403,"3":1684,"4":1752,"5":1793}},{"upTo":4200,"obligation":{"1":955,"2":1437,"3":1725,"4":1795,"5":1837}},{"upTo":4300,"obligation":{"1":975,"2":1471,"3":1765,"4":1838,"5":1881}},{"upTo":4400,"obligation":{"1":995,"2":1503,"3":1802,"4":1881,"5":1925}},{"upTo":4500,"obligation":{"1":1012,"2":1528,"3":1832,"4":1924,"5":1969}},{"upTo":5000,"obligation":{"1":1095,"2":1651,"3":1976,"4":2149,"5":2211}},{"upTo":5500,"obligation":{"1":1141,"2":1714,"3":2048,"4":2288,"5":2421}},{"upTo":6000,"obligation":{"1":1191,"2":1778,"3":2107,"4":2353,"5":2589}},{"upTo":6500,"obligation":{"1":1257,"2":1883,"3":2239,"4":2501,"5":2752}},{"upTo":7000,"obligation":{"1":1300,"2":1935,"3":2285,"4":2553,"5":2808}},{"upTo":7500,"obligation":{"1":1362,"2":2017,"3":2371,"4":2648,"5":2913}},{"upTo":8000,"obligation":{"1":1444,"2":2133,"3":2500,"4":2792,"5":3071}},{"upTo":8500,"obligation":{"1":1512,"2":2238,"3":2629,"4":2936,"5":3230}},{"upTo":9000,"obligation":{"1":1570,"2":2333,"3":2750,"4":3071,"5":3379}},{"upTo":9500,"obligation":{"1":1613,"2":2392,"3":2814,"4":3144,"5":3458}},{"upTo":10000,"obligation":{"1":1667,"2":2465,"3":2892,"4":3230,"5":3553}},{"upTo":10500,"obligation":{"1":1734,"2":2554,"3":2983,"4":3332,"5":3665}},{"upTo":11000,"obligation":{"1":1789,"2":2626,"3":3055,"4":3412,"5":3753}},{"upTo":11500,"obligation":{"1":1820,"2":2665,"3":3087,"4":3454,"5":3799}},{"upTo":12000,"obligation":{"1":1869,"2":2732,"3":3166,"4":3537,"5":3890}},{"upTo":12500,"obligation":{"1":1940,"2":2827,"3":3278,"4":3662,"5":4028}},{"upTo":13000,"obligation":{"1":2011,"2":2944,"3":3415,"4":3815,"5":4196}},{"upTo":13500,"obligation":{"1":2078,"2":3039,"3":3523,"4":3935,"5":4329}},{"upTo":14000,"obligation":{"1":2135,"2":3114,"3":3600,"4":4021,"5":4433}},{"upTo":14500,"obligation":{"1":2191,"2":3189,"3":3677,"4":4108,"5":4518}},{"upTo":15000,"obligation":{"1":2248,"2":3264,"3":3754,"4":4194,"5":4613}},{"upTo":15500,"obligation":{"1":2308,"2":3351,"3":3853,"4":4304,"5":4734}},{"upTo":16000,"obligation":{"1":2358,"2":3437,"3":3969,"4":4433,"5":4876}},{"upTo":16500,"obligation":{"1":2418,"2":3531,"3":4096,"4":4575,"5":5033}},{"upTo":17000,"obligation":{"1":2458,"2":3608,"3":4200,"4":4692,"5":5161}},{"upTo":17500,"obligation":{"1":2508,"2":3694,"3":4316,"4":4821,"5":5303}},{"upTo":18000,"obligation":{"1":2558,"2":3780,"3":4432,"4":4951,"5":5446}},{"upTo":18500,"obligation":{"1":2603,"2":3856,"3":4532,"4":5063,"5":5569}},{"upTo":19000,"obligation":{"1":2655,"2":3930,"3":4616,"4":5156,"5":5672}},{"upTo":19500,"obligation":{"1":2707,"2":4005,"3":4700,"4":5250,"5":5775}},{"upTo":20000,"obligation":{"1":2759,"2":4079,"3":4784,"4":5344,"5":5878}},{"upTo":20500,"obligation":{"1":2811,"2":4153,"3":4868,"4":5438,"5":5981}},{"upTo":21000,"obligation":{"1":2863,"2":4227,"3":4952,"4":5531,"5":6084}},{"upTo":21500,"obligation":{"1":2915,"2":4301,"3":5036,"4":5625,"5":6188}},{"upTo":22000,"obligation":{"1":2967,"2":4375,"3":5120,"4":5719,"5":6291}},{"upTo":22500,"obligation":{"1":3019,"2":4450,"3":5204,"4":5812,"5":6394}},{"upTo":23000,"obligation":{"1":3070,"2":4524,"3":5288,"4":5906,"5":6497}},{"upTo":23500,"obligation":{"1":3122,"2":4598,"3":5371,"4":6000,"5":6600}},{"upTo":24000,"obligation":{"1":3174,"2":4672,"3":5455,"4":6094,"5":6703}},{"upTo":24500,"obligation":{"1":3226,"2":4746,"3":5539,"4":6187,"5":6806}},{"upTo":25000,"obligation":{"1":3278,"2":4820,"3":5623,"4":6281,"5":6909}},{"upTo":25500,"obligation":{"1":3330,"2":4895,"3":5715,"4":6384,"5":7023}},{"upTo":26000,"obligation":{"1":3382,"2":4969,"3":5791,"4":6468,"5":7115}},{"upTo":26500,"obligation":{"1":3434,"2":5043,"3":5875,"4":6562,"5":7218}},{"upTo":27000,"obligation":{"1":3446,"2":5050,"3":5887,"4":6578,"5":7235}},{"upTo":27500,"obligation":{"1":3457,"2":5055,"3":5896,"4":6588,"5":7247}},{"upTo":28000,"obligation":{"1":3467,"2":5060,"3":5905,"4":6597,"5":7257}},{"upTo":28500,"obligation":{"1":3477,"2":5064,"3":5914,"4":6605,"5":7266}},{"upTo":29000,"obligation":{"1":3488,"2":5069,"3":5924,"4":6617,"5":7278}},{"upTo":29500,"obligation":{"1":3499,"2":5074,"3":5933,"4":6628,"5":7291}},{"upTo":30000,"obligation":{"1":3509,"2":5078,"3":5941,"4":6636,"5":7300}}]};
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

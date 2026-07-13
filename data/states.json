@@ -1890,5 +1890,58 @@
         "a": "Above $30,000/month in combined adjusted parental gross income, Kentucky's guidelines table has no further value, and courts use judicial discretion (KRS 403.212(7)) rather than extending the formula automatically."
       }
     ]
+  },
+  "ia": {
+    "name": "Iowa",
+    "abbr": "IA",
+    "slug": "iowa",
+    "formula_model": "income_shares",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2026-IA-v1",
+    "source": {
+      "agency_name": "Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines)",
+      "url": "https://www.legis.iowa.gov/docs/ACO/CourtRulesChapter/9.pdf",
+      "statute_ref": "Iowa Ct. R. 9.1-9.27"
+    },
+    "params": {
+      "schedule_table_ref": "iowa_schedule.json",
+      "income_basis": "net",
+      "income_cap_monthly": 30000,
+      "high_income_note": "Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month (Rule 9.26) -- not extrapolated further."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's adjusted net monthly income (after federal/state taxes, FICA, and other statutory deductions), then combine both for combined adjusted net income.",
+        "Look up the basic support obligation from the official Iowa Schedule of Basic Support Obligations for that combined income and number of children.",
+        "Area A (obligor income $0-$1,250): only the noncustodial parent's own income is used, not combined income.",
+        "Area B (obligor income $1,251-$2,650): the guideline amount is the LESSER of the obligor-only lookup vs. the combined-income proration.",
+        "Area C (above $2,650): combined income is used, prorated by each parent's share.",
+        "Joint (equally shared) physical care uses a different worksheet entirely, with no low-income adjustment -- not modeled by this calculator.",
+        "Above $30,000/month combined net income, the obligation is deemed the same as for $30,000/month."
+      ],
+      "example": {
+        "scenario": "Example: combined adjusted net income $6,000/month, 2 children, Parent A earns $3,600/mo (60% share), Parent B earns $2,400/mo (40% share) and is the noncustodial parent (above the $2,650 Area C threshold).",
+        "calculation": [
+          "Basic support obligation for $6,000 combined, 2 children: $1,778/month.",
+          "Individual-income lookup for Parent B alone ($2,400/mo, 2 children): $833/month.",
+          "Combined-income proration: 40% × $1,778 ≈ $711/month. Iowa uses the LESSER of the two: $711/month guideline child support paid by Parent B."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Iowa's Area A, B, and C on the child support schedule?",
+        "a": "Iowa's Schedule of Basic Support Obligations is divided into three zones based on the noncustodial parent's income: Area A ($0-$1,250) uses only that parent's own income, with no comparison to combined income. Area B ($1,251-$2,650) uses whichever is LOWER: the obligor-only lookup or the combined-income proration. Area C (above $2,650) uses combined income exclusively. This low-income adjustment phases out gradually as income rises through these zones."
+      },
+      {
+        "q": "Is Iowa child support based on gross or net income?",
+        "a": "Net income. Iowa's guidelines require a detailed adjusted net income computation (Rule 9.27, Form 1) that subtracts federal and state taxes, FICA, mandatory pension contributions, and other statutory deductions from gross income -- not just take-home pay. This calculator asks for your already-computed net income rather than performing that tax computation itself."
+      },
+      {
+        "q": "Does Iowa have a different formula for shared custody?",
+        "a": "Yes -- when parents have Joint (Equally Shared) Physical Care, Iowa uses an entirely different worksheet (Rule 9.9A) that doesn't apply the low-income Area A/B adjustment at all, using combined incomes regardless of either parent's income level. This calculator models the standard primary-care scenario only."
+      }
+    ]
   }
 }

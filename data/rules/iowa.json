@@ -1,0 +1,9 @@
+{
+  "rounding": "nearest_dollar",
+  "pa_lesser_of_calculations": {
+    "self_support_reserve_monthly": 1250,
+    "note": "Iowa Court Rule 9.3(2): Area A ($0-$1,250 obligor income) uses only the noncustodial parent's own income. Area B ($1,251-$2,650) uses the LESSER of the obligor-only lookup vs the combined-income proration. Area C (above $2,650) uses combined income. Modeled here as the lesser of individual-income lookup vs combined-times-share applied uniformly, which self-selects the correct behavior across all three zones."
+  },
+  "income_cap_behavior": "capped_at_max",
+  "deviation_note": "Above $30,000/month combined net income, Iowa's schedule obligation is deemed the same as for $30,000/month (Rule 9.26, note 3) -- courts have discretion to set an amount at or above that floor, not an automatic formula extension. This calculator does not model Joint (Equally Shared) Physical Care or split custody arrangements."
+}

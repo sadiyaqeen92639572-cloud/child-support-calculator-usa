@@ -51,3 +51,5 @@ Delaware,2026-DE-v1,"Parent A \$5000/mo Parent B \$3000/mo (noncustodial), 2 chi
 Hawaii,2024-HI-v1,"Parent A \$2500/mo (noncustodial) Parent B \$2000/mo, 3 children",\$807/mo (hand-verified, capped at Parent A's own approximated Net Income),\$807/mo,\$0,claude-sonnet-5,2026-07-13
 Montana,2026-MT-v1,"Parent A \$4000/mo Parent B \$2500/mo (nonresidential, 80 parenting days/yr), 2 children",\$335/mo (hand-verified full Melson calculation),\$335/mo,\$0,claude-sonnet-5,2026-07-13
 Kentucky,2025-KY-v1,"\$5000 combined gross/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, 100 parenting days/yr, 15% credit bracket)",\$276/mo (\$1102.50 base x 40% minus 15% credit),\$276/mo,\$0,claude-sonnet-5,2026-07-13
+Iowa,2026-IA-v1,"\$6000 combined net/mo, 2 children, Parent A 60% Parent B 40% (noncustodial, Area C)",\$711/mo (\$1778 base x 40%, lower than the \$833 individual lookup),\$711/mo,\$0,claude-sonnet-5,2026-07-13
+Iowa,2026-IA-v1,"\$10900 combined net/mo, 2 children, paying parent individual income \$900/mo (Area A)",\$150/mo (individual-only lookup, real anchor value),\$150/mo,\$0,claude-sonnet-5,2026-07-13
