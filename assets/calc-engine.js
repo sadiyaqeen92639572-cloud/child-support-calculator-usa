@@ -1124,5 +1124,6 @@ function stepLookup(table, value) {
 function applyRounding(amount, mode) {
   if (mode === 'nearest_dollar') return Math.round(amount);
   if (mode === 'nearest_cent') return Math.round(amount * 100) / 100;
+  if (mode === 'round_down_whole_dollar') return Math.floor(amount);
   return amount;
 }

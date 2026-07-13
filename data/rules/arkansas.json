@@ -1,0 +1,11 @@
+{
+  "rounding": "round_down_whole_dollar",
+  "self_support_reserve": {
+    "min_order_threshold_monthly": 0,
+    "min_order_amount": 125,
+    "shaded_zone_max_obligor_income": { "1": 1150, "2": 1350, "3": 1500, "4": 1600, "5": 1700, "6": 1800 },
+    "note": "Arkansas's official calculator (ChildSupp.js, 'minValues' array): if the paying parent's own gross monthly income is greater than $0 and at or below this per-child-count ceiling, the chart is looked up using the paying parent's OWN income alone (not combined income), and childcare/health insurance costs are excluded from that calculation entirely. Above the ceiling, combined income is used and add-ons are prorated normally."
+  },
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "Arkansas rounds the final amount DOWN to the whole dollar (not nearest-dollar). This calculator models Non-Joint (primary) custody only (Administrative Order 10, Section V). It does not model Joint Custody (both parents have the child at least 141 overnights/year, which uses a distinct offset calculation between each parent's obligation, plus a discretionary additional credit the court may apply based on income disparity), Split Custody, or Third-Party Custody arrangements -- all use materially different worksheets."
+}

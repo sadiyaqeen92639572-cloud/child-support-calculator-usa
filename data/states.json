@@ -2057,5 +2057,57 @@
         "a": "Yes. Under Rule 90.3(a)(5), a parent with total annual income of $30,000 or less may use the LESSER of the standard itemized-deduction calculation or their total income minus $7,500/year as their adjusted income -- often producing a lower support amount. This calculator does not model that alternate calculation; consult Alaska's official child support calculator or a family law attorney if this may apply to you."
       }
     ]
+  },
+  "ar": {
+    "name": "Arkansas",
+    "abbr": "AR",
+    "slug": "arkansas",
+    "formula_model": "income_shares",
+    "effective_date": "2022-10-06",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2022-AR-v1",
+    "source": {
+      "agency_name": "Arkansas Judiciary — Administrative Order Number 10 (Arkansas Child Support Guidelines)",
+      "url": "https://www.arcourts.gov/child-support-calculator/ChildSupp.html",
+      "statute_ref": "Arkansas Administrative Order No. 10, Section V"
+    },
+    "params": {
+      "income_basis": "gross",
+      "schedule_table_ref": "arkansas_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Arkansas moved to the Income Shares Model on July 1, 2020 (previously it used only the non-custodial parent's net income). Both parents' GROSS monthly income is now combined -- there is no separate tax/withholding deduction step.",
+        "Look up the combined gross monthly income and number of children in the official Family Support Chart to get the basic child support obligation. Arkansas rounds DOWN to the previous $50 chart bracket rather than interpolating between rows.",
+        "If the paying parent's own gross income is $1,150-$1,800 or less (the exact ceiling depends on the number of children), the chart is instead looked up using that parent's income ALONE, and childcare/health insurance costs are not added -- this is Arkansas's Self-Support Reserve zone.",
+        "Otherwise, each parent's share of the basic obligation is their percentage of combined income, and childcare/health insurance costs are added to the total obligation and prorated the same way.",
+        "This models Non-Joint (primary) custody only. Joint Custody (both parents have the child 141+ overnights/year) uses a different offset calculation between each parent's obligation and is not modeled here.",
+        "The final amount is rounded DOWN to the nearest whole dollar."
+      ],
+      "example": {
+        "scenario": "Example (adapted from the Arkansas Judiciary's own published sample calculation): Parent A earns $2,000/month gross, Parent B earns $1,000/month gross (combined $3,000). They have one child, who lives primarily with Parent B; Parent B pays $200/month in work-related childcare costs.",
+        "calculation": [
+          "Combined gross monthly income: $2,000 + $1,000 = $3,000.",
+          "Family Support Chart at $3,000 combined income, one child: $469.",
+          "Parent A's income share: $2,000 / $3,000 = 66.67%.",
+          "Total obligation including the $200 childcare add-on: $469 + $200 = $669.",
+          "Parent A pays: $669 x 66.67% = $446/month (rounded down)."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Arkansas use gross or net income for child support?",
+        "a": "Gross income. Since Arkansas's July 2020 switch to the Income Shares Model, child support is based on both parents' GROSS monthly income (before taxes) -- there is no longer a separate net-income conversion step, unlike the pre-2020 rule."
+      },
+      {
+        "q": "What is Arkansas's Self-Support Reserve?",
+        "a": "If the paying parent's own gross monthly income is at or below a per-child-count threshold ($1,150 for one child, up to $1,800 for six or more), Arkansas's chart is looked up using that parent's income alone (not combined with the other parent's), and childcare/health insurance costs are excluded -- this prevents the obligation from leaving a low-income paying parent with too little to live on."
+      },
+      {
+        "q": "How does Joint Custody change Arkansas child support?",
+        "a": "When both parents have the child at least 141 overnights per year, Arkansas uses a different calculation: each parent's obligation under the standard worksheet is computed as if the OTHER parent had primary custody, and the parent with the larger obligation pays the difference to the other. Courts may also apply an additional discretionary credit based on income disparity. This calculator models the standard (non-joint) primary-custody case only."
+      }
+    ]
   }
 }
