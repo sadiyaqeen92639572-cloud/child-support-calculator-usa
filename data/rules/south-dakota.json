@@ -1,0 +1,7 @@
+{
+  "rounding": "nearest_dollar",
+  "sd_lesser_of_monthly": true,
+  "custody_adjustment": null,
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "SDCL 25-7-6.2: if the obligation computed from the paying parent's OWN monthly net income alone falls within the schedule's emboldened (self-support-reserve) areas, that amount is compared to the standard combined-income-prorated amount, and the LESSER applies. This calculator models the standard (primary-custody) case only -- it does not model South Dakota's Shared Parenting Child Support Obligation Worksheet (used when both parents have substantial parenting time) or Split Custody. Above $20,000/month combined net income, SDCL 25-7-6.2 does not provide an automatic extension -- the obligation is established at an appropriate level considering the needs and standard of living of the child, determined case-by-case."
+}

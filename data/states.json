@@ -2679,5 +2679,55 @@
         "a": "The standard schedule assumes the noncustodial parent has at least 20% of the overnights. When both parents have at least a 49% share of parenting time, Administrative Order 2018-01 provides a different calculation method, which this calculator does not model."
       }
     ]
+  },
+  "sd": {
+    "name": "South Dakota",
+    "abbr": "SD",
+    "slug": "south-dakota",
+    "formula_model": "income_shares",
+    "effective_date": "2021-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2021-SD-v1",
+    "source": {
+      "agency_name": "South Dakota Department of Social Services — SDCL 25-7-6.2",
+      "url": "https://dss.sd.gov/docs/childsupport/childsupportobligations.pdf",
+      "statute_ref": "SDCL 25-7-6.2"
+    },
+    "params": {
+      "income_basis": "net",
+      "schedule_table_ref": "south-dakota_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Add both parents' net monthly income to get combined income, then look up South Dakota's Support Obligation Schedule for the total number of children.",
+        "Each parent's share of that amount is their percentage of combined net income.",
+        "If the obligation computed from the paying parent's OWN income alone (looked up in the schedule directly) is lower than their prorated share of the combined-income amount, the LOWER figure applies -- this is South Dakota's Self-Support Reserve mechanism, built directly into the schedule's 'emboldened areas.'",
+        "Above $20,000/month combined net income, the schedule does not extend automatically -- the obligation is set case-by-case considering the child's needs and standard of living."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has net monthly income of $1,200, Parent B has net monthly income of $1,300 (combined $2,500). There are two children, who live primarily with Parent B.",
+        "calculation": [
+          "Combined net monthly income: $1,200 + $1,300 = $2,500.",
+          "Support Obligation Schedule at $2,500 combined, two children: $890.",
+          "Parent A's income share: $1,200 / $2,500 = 48%. Prorated share: $890 x 48% = $427.",
+          "Individual lookup using Parent A's own income ($1,200) alone, two children: $359.",
+          "Since $359 is lower than $427, the Self-Support Reserve applies: Parent A pays $359/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is South Dakota's Self-Support Reserve?",
+        "a": "SDCL 25-7-6.2 compares two figures for lower-income paying parents: (1) the standard prorated share of the combined-income schedule amount, and (2) the schedule amount looked up using the paying parent's OWN income alone. Whichever is LOWER becomes the child support order -- this protects paying parents with limited income from an obligation that exceeds what their own income alone would produce."
+      },
+      {
+        "q": "Does South Dakota use gross or net income?",
+        "a": "Net income. South Dakota's Support Obligation Schedule (SDCL 25-7-6.2) is indexed by combined monthly NET income for both parents."
+      },
+      {
+        "q": "How does shared parenting time affect South Dakota child support?",
+        "a": "South Dakota has a separate Shared Parenting Child Support Obligation Worksheet for cases where both parents have substantial parenting time, which uses a different calculation than the standard primary-custody worksheet this calculator models."
+      }
+    ]
   }
 }

@@ -127,6 +127,29 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
+  if (rules.sd_lesser_of_monthly) {
+    // South Dakota (SDCL 25-7-6.2): if the obligation using ONLY the paying
+    // parent's own monthly net income falls within the schedule's emboldened
+    // (self-support-reserve) areas, compare it to the standard combined-
+    // income-prorated amount and use the LESSER — already in monthly terms
+    // (unlike Ohio's annual worksheet), so no /12 conversion is needed here.
+    const individualObligation = lookupSchedule(scheduleTable, payingParentIncome, inputs.numChildren);
+    const proratedObligation = baseObligation * payingShare;
+    const ssrApplied = individualObligation < proratedObligation;
+    const amount = applyRounding(Math.min(individualObligation, proratedObligation) + addOns, rules.rounding);
+    return {
+      monthlyAmount: amount,
+      payingParent,
+      combinedIncome: combined,
+      baseObligation,
+      adjustedForCustody: false,
+      deviationNote: rules.deviation_note,
+      capWarning: ssrApplied
+        ? "Self-Support Reserve applies (SDCL 25-7-6.2) — the paying parent's own-income schedule lookup is lower than the standard prorated amount, so the lower figure applies."
+        : null
+    };
+  }
+
   if (rules.mo_lesser_of_with_credit) {
     // Missouri's mechanism (Form 14 Directions, Line 5/11 comments): the
     // overnight-visitation credit (a stepped percentage of the FULL basic
