@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "custody_adjustment": null,
+  "income_cap_behavior": "review_threshold_not_cap",
+  "deviation_note": "Miss. Code Ann. section 43-19-101(4): when the noncustodial parent's adjusted gross income is more than $100,000/yr or less than $10,000/yr, the court must make a written finding on whether applying these percentages is reasonable -- this is a required REVIEW, not an automatic cap or reduction, so this calculator applies the same percentage at any income level and does not model that written-finding requirement. This calculator does not model Mississippi's discretionary deviation criteria (Section 43-19-103: extraordinary expenses, shared parenting arrangements, seasonal income, etc.) or the adjustments available for court-ordered support of other children or other children living in the noncustodial parent's home (Section 43-19-101(3)(c)-(d))."
+}
