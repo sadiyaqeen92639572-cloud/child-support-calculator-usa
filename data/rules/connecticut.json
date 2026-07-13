@@ -1,0 +1,11 @@
+{
+  "rounding": "nearest_dollar",
+  "self_support_reserve": {
+    "min_order_threshold_monthly": 0,
+    "min_order_amount": 0,
+    "shaded_zone_max_obligor_income": { "1": 280, "2": 320, "3": 360, "4": 400, "5": 440, "6": 480 },
+    "note": "Connecticut's 'darker shaded area' of the Schedule of Basic Child Support Obligations: if the noncustodial parent's own net weekly income (rounded to the nearest $10) falls at or below this per-child-count threshold, that parent is a 'low-income obligor' and the schedule is looked up using their income ALONE (not combined income) -- the dollar amount shown is their full obligation directly, with no proration and no childcare/health insurance add-ons. Thresholds confirmed by visually reading the shaded cells in the official schedule (Regs. Conn. State Agencies 46b-215a-2c(e)): $280/week for one child, rising to $480/week for six or more children."
+  },
+  "income_cap_behavior": "flat_at_cap",
+  "deviation_note": "Connecticut income figures in this calculator are WEEKLY net income, not monthly. Above $4,000/week combined net income, the guidelines do not extend the schedule automatically: the amount shown at the $4,000 row is the MINIMUM presumptive support obligation, and courts may award up to combined income multiplied by the percentage shown at the $4,000 row, decided case-by-case -- this calculator shows only the $4,000-row minimum in that scenario, not the full discretionary range. This calculator models the standard (sole-custody) case only. It does not model Shared Physical Custody (Regs. Conn. State Agencies 46b-215a-1(23): when each parent has at least roughly equal time, the presumptive order equals the HIGHER-net-income parent's own calculated share, paid to the other parent, unadjusted for the specific time split) or Split Custody (each parent primary for different children, calculated as an offset between two worksheets). Connecticut's guidelines are also scheduled for a major overhaul effective 2026-08-01 (a new three-parent worksheet and an expanded income cap to $312,000/year) that is not reflected here."
+}

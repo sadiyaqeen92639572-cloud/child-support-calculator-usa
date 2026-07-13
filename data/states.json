@@ -2109,5 +2109,58 @@
         "a": "When both parents have the child at least 141 overnights per year, Arkansas uses a different calculation: each parent's obligation under the standard worksheet is computed as if the OTHER parent had primary custody, and the parent with the larger obligation pays the difference to the other. Courts may also apply an additional discretionary credit based on income disparity. This calculator models the standard (non-joint) primary-custody case only."
       }
     ]
+  },
+  "ct": {
+    "name": "Connecticut",
+    "abbr": "CT",
+    "slug": "connecticut",
+    "formula_model": "income_shares",
+    "effective_date": "2015-07-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2015-CT-v1",
+    "source": {
+      "agency_name": "Connecticut Judicial Branch — Commission for Child Support Guidelines",
+      "url": "https://www.jud.ct.gov/publications/childsupport/csguidelines.pdf",
+      "statute_ref": "Regs. Conn. State Agencies § 46b-215a-2c"
+    },
+    "params": {
+      "income_basis": "net",
+      "income_period": "weekly",
+      "schedule_table_ref": "connecticut_schedule.json"
+    },
+    "worksheet": {
+      "steps": [
+        "Connecticut is an income-shares state, but uniquely uses WEEKLY net income (not monthly, and not gross) as its unit throughout the guidelines.",
+        "Add both parents' net weekly income to get combined net weekly income, rounded to the nearest $10.",
+        "Look up the combined income and number of children in the official Schedule of Basic Child Support Obligations to get the basic weekly support amount.",
+        "If the noncustodial parent's OWN net weekly income (not combined) falls at or below a per-child-count threshold ($280/week for one child, up to $480/week for six or more), that parent is a 'low-income obligor' -- the schedule is looked up using their income alone, and this is their full obligation directly (no add-ons, no proration).",
+        "Otherwise, each parent's share of the basic obligation is their percentage of combined net weekly income.",
+        "Above $4,000/week combined income, the schedule does not extend automatically: the $4,000-row amount is the minimum presumptive obligation, and courts set the exact amount case-by-case up to a stated maximum.",
+        "This models the standard sole-custody case. Shared Physical Custody and Split Custody use different, non-prorated calculations and are not modeled here."
+      ],
+      "example": {
+        "scenario": "Example: Parent A has net weekly income of $400, Parent B has net weekly income of $300 (combined $700/week). There is one child, who lives primarily with Parent B.",
+        "calculation": [
+          "Combined net weekly income: $400 + $300 = $700.",
+          "Schedule of Basic Child Support Obligations at $700 combined, one child: $169/week.",
+          "Parent A's income share: $400 / $700 = 57.14%.",
+          "Parent A pays: $169 x 57.14% = $97/week."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Connecticut use weekly or monthly income for child support?",
+        "a": "Weekly. Connecticut's guidelines and its Schedule of Basic Child Support Obligations are built entirely around NET WEEKLY income -- unlike most states, there is no monthly conversion step; the worksheet, schedule, and resulting order are all denominated in dollars per week."
+      },
+      {
+        "q": "What is Connecticut's 'low-income obligor' provision?",
+        "a": "If the noncustodial parent's own net weekly income falls at or below a threshold that rises with the number of children ($280/week for one child, up to $480/week for six or more), the schedule is looked up using that parent's income alone rather than combined income, with no add-ons for childcare or health insurance -- this is the 'darker shaded area' of the official schedule."
+      },
+      {
+        "q": "Are Connecticut child support guidelines changing soon?",
+        "a": "Yes. New guidelines take effect August 1, 2026, introducing a three-parent worksheet framework and expanding the income cap to $312,000/year -- a significant change from the current $4,000/week (about $208,000/year) cap modeled here. This calculator reflects the guidelines in effect as of July 2026; check with the Connecticut Judicial Branch for the post-August 2026 version."
+      }
+    ]
   }
 }
