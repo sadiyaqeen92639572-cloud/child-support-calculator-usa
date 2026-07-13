@@ -700,6 +700,70 @@ function calcAlgebraicKFactor(params, rules, inputs) {
   };
 }
 
+function calcMontanaFormula(params, rules, inputs) {
+  // Montana's Modified Melson Formula (ARM 37.62.101-148, tables eff.
+  // 2026-02-01). NAI(parent) = income minus the Personal Allowance
+  // ($1,729/mo, ARM 37.62.114). Primary Child Support Allowance is a fixed
+  // monthly amount by number of children (ARM 37.62.121: 0.30x Personal
+  // Allowance for the 1st child + 0.20x each for the 2nd/3rd + 0.10x each
+  // additional — verified this formula reproduces the published table
+  // exactly), prorated by each parent's share of combined NAI. SOLA is the
+  // parent's remaining NAI (after their own primary share) times a factor
+  // that rises with the number of children (ARM 37.62.128). Below 110
+  // parenting days/year with the nonresidential parent, the transfer
+  // payment IS simply that parent's total support amount — no further
+  // cross-adjustment (unlike Delaware/Hawaii's Melson variants).
+  const bracket = inputs.numChildren >= 8 ? '8' : String(inputs.numChildren);
+  const naiA = Math.max(0, inputs.parentAGrossIncome - params.personal_allowance_monthly);
+  const naiB = Math.max(0, inputs.parentBGrossIncome - params.personal_allowance_monthly);
+  const combinedNAI = naiA + naiB;
+  const shareA = combinedNAI > 0 ? naiA / combinedNAI : 0.5;
+  const shareB = 1 - shareA;
+
+  const addOns = (inputs.childcareCost || 0) + (inputs.healthInsuranceCost || 0);
+  const primaryAllowance = params.primary_allowance_monthly[bracket] + addOns;
+  const primaryA = shareA * primaryAllowance;
+  const primaryB = shareB * primaryAllowance;
+
+  const solaFactor = params.sola_factors[bracket];
+  const solaBaseA = Math.max(0, naiA - primaryA);
+  const solaBaseB = Math.max(0, naiB - primaryB);
+  const solaA = solaBaseA * solaFactor;
+  const solaB = solaBaseB * solaFactor;
+
+  const totalSupportA = primaryA + solaA;
+  const totalSupportB = primaryB + solaB;
+
+  const overnightsWithA = inputs.overnightsWithA || 0;
+  const aIsCustodial = overnightsWithA > 182.5;
+  const payingParent = aIsCustodial ? 'B' : 'A';
+  const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
+  const payingNAI = payingParent === 'A' ? naiA : naiB;
+  let amount = payingParent === 'A' ? totalSupportA : totalSupportB;
+
+  if (payingNAI > 0) {
+    const minimumContribution = payingNAI * params.minimum_contribution_pct;
+    amount = Math.max(amount, minimumContribution);
+  }
+
+  amount = applyRounding(amount, rules.rounding);
+
+  const parentingDaysThreshold = rules.parenting_days_threshold || 110;
+  const complexAllocation = payingParentOvernights > parentingDaysThreshold;
+
+  return {
+    monthlyAmount: amount,
+    payingParent,
+    combinedIncome: inputs.parentAGrossIncome + inputs.parentBGrossIncome,
+    baseObligation: primaryA + primaryB,
+    adjustedForCustody: false,
+    deviationNote: rules.deviation_note,
+    capWarning: complexAllocation
+      ? `The nonresidential parent has more than ${parentingDaysThreshold} days/year with the child — ARM 37.62.134(2)(b) requires a per-child reallocation of each parent's obligation that this calculator does not compute. The amount shown is the standard (no-adjustment) figure only.`
+      : null
+  };
+}
+
 function calcHawaiiMelson(params, rules, inputs) {
   // Hawaii's Modified Melson Formula (2024 Hawai'i Child Support Guidelines,
   // HRS §§ 571-52.5, 576D-7). Structurally different from Delaware's Melson
@@ -854,6 +918,8 @@ function calculateChildSupport(stateEntry, rules, scheduleTable, inputs) {
       return calcMelson(stateEntry.params, rules, inputs);
     case 'hi_melson':
       return calcHawaiiMelson(stateEntry.params, rules, inputs);
+    case 'mt_melson':
+      return calcMontanaFormula(stateEntry.params, rules, inputs);
     case 'algebraic_kfactor':
       return calcAlgebraicKFactor(stateEntry.params, rules, inputs);
     case 'michigan_formula':

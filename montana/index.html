@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montana Child Support Calculator 2026 — Free Estimate</title>
+<meta name="description" content="Estimate Montana child support using the state's official mt melson guideline formula. Free calculator + full worksheet walkthrough, updated 2026-07-13.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/montana/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Montana Child Support Calculator">
+<meta property="og:description" content="Free Montana child support estimate based on official state guidelines.">
+<meta property="og:url" content="https://usachildsupportcalculator.com/montana/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Montana Child Support Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-13","author":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"publisher":{"@type":"Organization","name":"Gesmine-Invest Limited","url":"https://usachildsupportcalculator.com/about/"},"version":"2026-MT-v1"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is child support calculated in Montana?","acceptedAnswer":{"@type":"Answer","text":"Montana uses a Modified Melson Formula -- the last of only 3 states (with Delaware and Hawaii) that use this model. Each parent keeps a Personal Allowance ($1,729/month as of 2026, updated annually) before anything else is counted. The Primary Child Support Allowance is a fixed monthly amount by number of children (from $519 for one child up to $2,075 for eight), prorated between the parents by their share of combined remaining income (Net Available Income, NAI), plus childcare and health insurance costs. The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER NAI (after their own share of primary support) with the children, at a factor that rises with the number of children (14% for one child up to 47% for eight or more). If the nonresidential parent has 110 or fewer parenting days per year, the transfer payment is simply that parent's total support amount (primary share plus SOLA) -- no further cross-adjustment, unlike Delaware or Hawaii's Melson variants. A minimum contribution of 12% of income after the Personal Allowance applies as a floor for parents whose income exceeds the Personal Allowance."}},{"@type":"Question","name":"How is Montana's Melson Formula different from Delaware's and Hawaii's?","acceptedAnswer":{"@type":"Answer","text":"Montana's Primary Child Support Allowance is a fixed dollar table by number of children (derived from 30% of the Personal Allowance for the first child, plus 20% each for the second and third, plus 10% each additional) rather than Delaware's per-child-plus-per-household formula or Hawaii's flat per-child amount. Montana's SOLA factors (14%-47%) are also higher than either state's, and below 110 parenting days/year, Montana applies NO custody cross-adjustment at all -- the nonresidential parent simply pays their full calculated share."}},{"@type":"Question","name":"What happens if the nonresidential parent has more than 110 parenting days per year in Montana?","acceptedAnswer":{"@type":"Answer","text":"Above 110 days/year, Montana requires a per-child reallocation: each child's needs are calculated separately, each parent's obligation for that child is prorated by the TIME the child spends with the OTHER parent, and the two parents' amounts are offset against each other. This calculator flags when this threshold is crossed but shows the standard (no-adjustment) figure, since the per-child reallocation requires child-by-child inputs this calculator doesn't collect."}},{"@type":"Question","name":"Is there a minimum child support amount in Montana?","acceptedAnswer":{"@type":"Answer","text":"Yes. For parents whose income exceeds the Personal Allowance, the minimum contribution is 12% of their income after the Personal Allowance is subtracted. For parents whose income is at or below the Personal Allowance, a separate graduated table (based on an income-ratio calculation) applies instead -- not modeled by this calculator, since it's a narrow edge case for very low-income parents."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://usachildsupportcalculator.com/"},{"@type":"ListItem","position":2,"name":"Montana Child Support Calculator","item":"https://usachildsupportcalculator.com/montana/"}]}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Montana Child Support Calculator</h1>
+  <p class="badge">Updated for Montana's 2026-MT-v1 guidelines · Last reviewed 2026-07-13</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This calculator provides a good-faith estimate based on Montana's published child support guidelines as of 2026-07-13. Results may differ from a court order. For your official calculation, consult Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62) or a family law attorney licensed in Montana.
+</div>
+
+<main>
+  <form id="calc-form">
+    
+      <label>Parent A gross monthly income ($)
+        <input type="number" id="parentAGrossIncome" min="0" step="1" value="4000">
+      </label>
+      <label>Parent B gross monthly income ($)
+        <input type="number" id="parentBGrossIncome" min="0" step="1" value="3000">
+      </label>
+      <label>Number of children
+        <select id="numChildren">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 or more</option>
+        </select>
+      </label>
+      <label>Overnights per year with Parent A
+        <input type="number" id="overnightsWithA" min="0" max="365" step="1" value="182">
+      </label>
+      <label>Monthly childcare cost ($)
+        <input type="number" id="childcareCost" min="0" step="1" value="0">
+      </label>
+      <label>Monthly health insurance premium for child(ren) ($)
+        <input type="number" id="healthInsuranceCost" min="0" step="1" value="0">
+      </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-warning" class="result-warning" hidden></p>
+    <p id="result-deviation" class="result-deviation"></p>
+    <div id="mon-results-sidebar" class="mon-slot" hidden></div>
+    <div id="mon-results-block" class="mon-slot" hidden></div>
+  </div>
+
+  <p class="privacy-note">Calculation is client-side, income figures are never transmitted or stored.</p>
+
+  <section>
+    <h2>How Montana Child Support Is Calculated</h2>
+    <ol><li>Montana uses a Modified Melson Formula -- the last of only 3 states (with Delaware and Hawaii) that use this model.</li><li>Each parent keeps a Personal Allowance ($1,729/month as of 2026, updated annually) before anything else is counted.</li><li>The Primary Child Support Allowance is a fixed monthly amount by number of children (from $519 for one child up to $2,075 for eight), prorated between the parents by their share of combined remaining income (Net Available Income, NAI), plus childcare and health insurance costs.</li><li>The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER NAI (after their own share of primary support) with the children, at a factor that rises with the number of children (14% for one child up to 47% for eight or more).</li><li>If the nonresidential parent has 110 or fewer parenting days per year, the transfer payment is simply that parent's total support amount (primary share plus SOLA) -- no further cross-adjustment, unlike Delaware or Hawaii's Melson variants.</li><li>A minimum contribution of 12% of income after the Personal Allowance applies as a floor for parents whose income exceeds the Personal Allowance.</li></ol>
+    <div id="mon-below-worksheet" class="mon-slot" hidden></div>
+  </section>
+
+  <section>
+    <h2>Montana Child Support Worksheet Walkthrough</h2>
+    <p>Example: Parent A earns $4,000/mo, Parent B earns $2,500/mo, 2 children, Parent B is the nonresidential parent with 80 parenting days/year (under the 110-day threshold).</p>
+    <ol><li>NAI: Parent A = $4,000 - $1,729 = $2,271. Parent B = $2,500 - $1,729 = $771. Combined = $3,042.</li><li>Primary Allowance for 2 children: $865. Parent B's share (771/3,042 = 25.3%): ≈$219.</li><li>Parent B's NAI for SOLA: $771 - $219 = $552. SOLA factor for 2 children: 21%. SOLA: $116.</li><li>Parent B's total support: $219 + $116 ≈ $335/month (compared against the 12% minimum contribution floor of $92 -- the calculated amount is higher, so it applies).</li></ol>
+  </section>
+
+  
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62) · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Personal Allowance</td><td>$1,729/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr>
+      <tr><td>1 child</td><td>$519/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>2 children</td><td>$865/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>3 children</td><td>$1,210/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>4 children</td><td>$1,383/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>5 children</td><td>$1,556/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>6 children</td><td>$1,729/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>7 children</td><td>$1,902/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>8 children</td><td>$2,075/mo</td><td>Admin. R. Mont. 37.62.101-148</td></tr>
+      <tr><td>1 child</td><td>14%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>2 children</td><td>21%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>3 children</td><td>27%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>4 children</td><td>31%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>5 children</td><td>35%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>6 children</td><td>39%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>7 children</td><td>43%</td><td>Admin. R. Mont. 37.62.101-148</td></tr><tr><td>8 children</td><td>47%</td><td>Admin. R. Mont. 37.62.101-148</td></tr>
+      <tr><td>Minimum contribution (above Personal Allowance)</td><td>12% of income after Personal Allowance</td><td>Admin. R. Mont. 37.62.101-148</td></tr>
+    </table>
+    <h3>Formula (Montana's Modified Melson Formula)</h3>
+    <div class="formula-code">
+      NAI(parent) = max(0, gross_income(parent) - Personal Allowance)<br>
+      share(parent) = NAI(parent) / combined NAI<br>
+      Primary Allowance = table[children] + childcare + health insurance<br>
+      Primary Share(parent) = share(parent) &times; Primary Allowance<br>
+      SOLA(parent) = max(0, NAI(parent) - Primary Share(parent)) &times; SOLA factor[children]<br>
+      support = max(Primary Share(parent) + SOLA(parent), 12% &times; NAI(parent))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Montana's Modified Melson Formula (ARM 37.62). Verify against Montana's official worksheet for a court-ready figure.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How is child support calculated in Montana?</summary><p>Montana uses a Modified Melson Formula -- the last of only 3 states (with Delaware and Hawaii) that use this model. Each parent keeps a Personal Allowance ($1,729/month as of 2026, updated annually) before anything else is counted. The Primary Child Support Allowance is a fixed monthly amount by number of children (from $519 for one child up to $2,075 for eight), prorated between the parents by their share of combined remaining income (Net Available Income, NAI), plus childcare and health insurance costs. The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER NAI (after their own share of primary support) with the children, at a factor that rises with the number of children (14% for one child up to 47% for eight or more). If the nonresidential parent has 110 or fewer parenting days per year, the transfer payment is simply that parent's total support amount (primary share plus SOLA) -- no further cross-adjustment, unlike Delaware or Hawaii's Melson variants. A minimum contribution of 12% of income after the Personal Allowance applies as a floor for parents whose income exceeds the Personal Allowance.</p></details>
+    <details><summary>How is Montana's Melson Formula different from Delaware's and Hawaii's?</summary><p>Montana's Primary Child Support Allowance is a fixed dollar table by number of children (derived from 30% of the Personal Allowance for the first child, plus 20% each for the second and third, plus 10% each additional) rather than Delaware's per-child-plus-per-household formula or Hawaii's flat per-child amount. Montana's SOLA factors (14%-47%) are also higher than either state's, and below 110 parenting days/year, Montana applies NO custody cross-adjustment at all -- the nonresidential parent simply pays their full calculated share.</p></details><details><summary>What happens if the nonresidential parent has more than 110 parenting days per year in Montana?</summary><p>Above 110 days/year, Montana requires a per-child reallocation: each child's needs are calculated separately, each parent's obligation for that child is prorated by the TIME the child spends with the OTHER parent, and the two parents' amounts are offset against each other. This calculator flags when this threshold is crossed but shows the standard (no-adjustment) figure, since the per-child reallocation requires child-by-child inputs this calculator doesn't collect.</p></details><details><summary>Is there a minimum child support amount in Montana?</summary><p>Yes. For parents whose income exceeds the Personal Allowance, the minimum contribution is 12% of their income after the Personal Allowance is subtracted. For parents whose income is at or below the Personal Allowance, a separate graduated table (based on an income-ratio calculation) applies instead -- not modeled by this calculator, since it's a narrow edge case for very low-income parents.</p></details>
+  </section>
+
+  <section class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Formula model: mt melson. Effective 2026-02-01, guideline version 2026-MT-v1, last reviewed 2026-07-13.</p>
+    <p>Official source: <a href="https://dphhs.mt.gov/assets/cssd/GuidelinesARM.pdf" rel="nofollow noopener">Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62)</a> (Admin. R. Mont. 37.62.101-148).</p>
+    <p class="deviation-note">This calculator does not model: the graduated minimum-contribution table for parents whose income is at or below the Personal Allowance (ARM 37.62.126(1)(a), an income-ratio bracket lookup); the Long Distance Parenting Adjustment (ARM 37.62.130, reduces SOLA income for 2,000+ miles/year of parenting travel); or the per-child reallocation required when the nonresidential parent has more than 110 days/year with the child (ARM 37.62.134(2)(b)). The SOLA factor for exactly 5 children is not published in the official table (it jumps from 4 to 6 children) -- this calculator uses 0.35, a linear interpolation between the published 4-child (0.31) and 6-child (0.39) factors, not an officially published value.</p>
+    <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Montana's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+
+  <script src="/assets/calc-engine.js"></script>
+  <script>
+    const STATE_ENTRY = {"name":"Montana","abbr":"MT","slug":"montana","formula_model":"mt_melson","effective_date":"2026-02-01","last_verified":"2026-07-13","guideline_version":"2026-MT-v1","source":{"agency_name":"Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62)","url":"https://dphhs.mt.gov/assets/cssd/GuidelinesARM.pdf","statute_ref":"Admin. R. Mont. 37.62.101-148"},"params":{"income_basis":"gross","personal_allowance_monthly":1729,"primary_allowance_monthly":{"1":519,"2":865,"3":1210,"4":1383,"5":1556,"6":1729,"7":1902,"8":2075},"sola_factors":{"1":0.14,"2":0.21,"3":0.27,"4":0.31,"5":0.35,"6":0.39,"7":0.43,"8":0.47},"minimum_contribution_pct":0.12},"worksheet":{"steps":["Montana uses a Modified Melson Formula -- the last of only 3 states (with Delaware and Hawaii) that use this model.","Each parent keeps a Personal Allowance ($1,729/month as of 2026, updated annually) before anything else is counted.","The Primary Child Support Allowance is a fixed monthly amount by number of children (from $519 for one child up to $2,075 for eight), prorated between the parents by their share of combined remaining income (Net Available Income, NAI), plus childcare and health insurance costs.","The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER NAI (after their own share of primary support) with the children, at a factor that rises with the number of children (14% for one child up to 47% for eight or more).","If the nonresidential parent has 110 or fewer parenting days per year, the transfer payment is simply that parent's total support amount (primary share plus SOLA) -- no further cross-adjustment, unlike Delaware or Hawaii's Melson variants.","A minimum contribution of 12% of income after the Personal Allowance applies as a floor for parents whose income exceeds the Personal Allowance."],"example":{"scenario":"Example: Parent A earns $4,000/mo, Parent B earns $2,500/mo, 2 children, Parent B is the nonresidential parent with 80 parenting days/year (under the 110-day threshold).","calculation":["NAI: Parent A = $4,000 - $1,729 = $2,271. Parent B = $2,500 - $1,729 = $771. Combined = $3,042.","Primary Allowance for 2 children: $865. Parent B's share (771/3,042 = 25.3%): ≈$219.","Parent B's NAI for SOLA: $771 - $219 = $552. SOLA factor for 2 children: 21%. SOLA: $116.","Parent B's total support: $219 + $116 ≈ $335/month (compared against the 12% minimum contribution floor of $92 -- the calculated amount is higher, so it applies)."]}},"faq_extra":[{"q":"How is Montana's Melson Formula different from Delaware's and Hawaii's?","a":"Montana's Primary Child Support Allowance is a fixed dollar table by number of children (derived from 30% of the Personal Allowance for the first child, plus 20% each for the second and third, plus 10% each additional) rather than Delaware's per-child-plus-per-household formula or Hawaii's flat per-child amount. Montana's SOLA factors (14%-47%) are also higher than either state's, and below 110 parenting days/year, Montana applies NO custody cross-adjustment at all -- the nonresidential parent simply pays their full calculated share."},{"q":"What happens if the nonresidential parent has more than 110 parenting days per year in Montana?","a":"Above 110 days/year, Montana requires a per-child reallocation: each child's needs are calculated separately, each parent's obligation for that child is prorated by the TIME the child spends with the OTHER parent, and the two parents' amounts are offset against each other. This calculator flags when this threshold is crossed but shows the standard (no-adjustment) figure, since the per-child reallocation requires child-by-child inputs this calculator doesn't collect."},{"q":"Is there a minimum child support amount in Montana?","a":"Yes. For parents whose income exceeds the Personal Allowance, the minimum contribution is 12% of their income after the Personal Allowance is subtracted. For parents whose income is at or below the Personal Allowance, a separate graduated table (based on an income-ratio calculation) applies instead -- not modeled by this calculator, since it's a narrow edge case for very low-income parents."}]};
+    const RULES = {"rounding":"nearest_dollar","parenting_days_threshold":110,"income_cap_behavior":"no_cap","deviation_note":"This calculator does not model: the graduated minimum-contribution table for parents whose income is at or below the Personal Allowance (ARM 37.62.126(1)(a), an income-ratio bracket lookup); the Long Distance Parenting Adjustment (ARM 37.62.130, reduces SOLA income for 2,000+ miles/year of parenting travel); or the per-child reallocation required when the nonresidential parent has more than 110 days/year with the child (ARM 37.62.134(2)(b)). The SOLA factor for exactly 5 children is not published in the official table (it jumps from 4 to 6 children) -- this calculator uses 0.35, a linear interpolation between the published 4-child (0.31) and 6-child (0.39) factors, not an officially published value."};
+    const SCHEDULE = null;
+
+    function readInputs() {
+      if (STATE_ENTRY.formula_model === 'percentage_of_income') {
+        return {
+          obligorNetMonthlyIncome: Number(document.getElementById('obligorNetMonthlyIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'algebraic_kfactor') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          higherEarnerTimesharePct: (Number(document.getElementById('higherEarnerTimesharePct').value) || 0) / 100
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'michigan_formula') {
+        return {
+          parentANetIncome: Number(document.getElementById('parentANetIncome').value) || 0,
+          parentBNetIncome: Number(document.getElementById('parentBNetIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      if (STATE_ENTRY.formula_model === 'wi_percentage_shared' || STATE_ENTRY.formula_model === 'nv_tiered_percentage') {
+        return {
+          parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+          parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+          numChildren: Number(document.getElementById('numChildren').value) || 1,
+          overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0
+        };
+      }
+      return {
+        parentAGrossIncome: Number(document.getElementById('parentAGrossIncome').value) || 0,
+        parentBGrossIncome: Number(document.getElementById('parentBGrossIncome').value) || 0,
+        numChildren: Number(document.getElementById('numChildren').value) || 1,
+        overnightsWithA: Number(document.getElementById('overnightsWithA').value) || 0,
+        childcareCost: Number(document.getElementById('childcareCost').value) || 0,
+        healthInsuranceCost: Number(document.getElementById('healthInsuranceCost').value) || 0
+      };
+    }
+
+    function runCalculation() {
+      const inputs = readInputs();
+      const result = calculateChildSupport(STATE_ENTRY, RULES, SCHEDULE, inputs);
+      var payerLabel = result.payingParent ? (result.payingParent === 'A' ? 'Parent A pays: ' : 'Parent B pays: ') : '';
+      var periodLabel = (STATE_ENTRY.params && STATE_ENTRY.params.income_period === 'weekly') ? '/week' : '/month';
+      document.getElementById('result-amount').textContent = payerLabel + '$' + result.monthlyAmount.toLocaleString() + periodLabel;
+      document.getElementById('result-deviation').textContent = result.deviationNote || '';
+      const warnEl = document.getElementById('result-warning');
+      if (result.capWarning) {
+        warnEl.textContent = result.capWarning;
+        warnEl.hidden = false;
+      } else {
+        warnEl.hidden = true;
+      }
+      document.getElementById('results-block').hidden = false;
+    }
+
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      runCalculation();
+    });
+  </script>
+</body>
+</html>

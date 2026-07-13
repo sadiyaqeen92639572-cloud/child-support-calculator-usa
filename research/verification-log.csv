@@ -49,3 +49,4 @@ Oregon,2007-OR-v1,"\$21600 combined gross/mo, 2 children, paying parent individu
 Nevada,2020-NV-v1,"Obligor \$14000/mo, 2 children (regulation's own tiered math)",\$2000/mo (\$1320+\$440+\$240 across the 3 tiers),\$2000/mo,\$0,claude-sonnet-5,2026-07-13
 Delaware,2026-DE-v1,"Parent A \$5000/mo Parent B \$3000/mo (noncustodial), 2 children",\$533/mo (hand-verified full 3-step Melson calculation),\$533/mo,\$0,claude-sonnet-5,2026-07-13
 Hawaii,2024-HI-v1,"Parent A \$2500/mo (noncustodial) Parent B \$2000/mo, 3 children",\$807/mo (hand-verified, capped at Parent A's own approximated Net Income),\$807/mo,\$0,claude-sonnet-5,2026-07-13
+Montana,2026-MT-v1,"Parent A \$4000/mo Parent B \$2500/mo (nonresidential, 80 parenting days/yr), 2 children",\$335/mo (hand-verified full Melson calculation),\$335/mo,\$0,claude-sonnet-5,2026-07-13

@@ -1765,5 +1765,77 @@
         "a": "The minimum is $91 per child per month. The paying parent's obligation generally should not exceed their own monthly Net Income, if that Net Income exceeds $91 per child -- a cap built directly into the calculation, not left to judicial discretion."
       }
     ]
+  },
+  "mt": {
+    "name": "Montana",
+    "abbr": "MT",
+    "slug": "montana",
+    "formula_model": "mt_melson",
+    "effective_date": "2026-02-01",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2026-MT-v1",
+    "source": {
+      "agency_name": "Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62)",
+      "url": "https://dphhs.mt.gov/assets/cssd/GuidelinesARM.pdf",
+      "statute_ref": "Admin. R. Mont. 37.62.101-148"
+    },
+    "params": {
+      "income_basis": "gross",
+      "personal_allowance_monthly": 1729,
+      "primary_allowance_monthly": {
+        "1": 519,
+        "2": 865,
+        "3": 1210,
+        "4": 1383,
+        "5": 1556,
+        "6": 1729,
+        "7": 1902,
+        "8": 2075
+      },
+      "sola_factors": {
+        "1": 0.14,
+        "2": 0.21,
+        "3": 0.27,
+        "4": 0.31,
+        "5": 0.35,
+        "6": 0.39,
+        "7": 0.43,
+        "8": 0.47
+      },
+      "minimum_contribution_pct": 0.12
+    },
+    "worksheet": {
+      "steps": [
+        "Montana uses a Modified Melson Formula -- the last of only 3 states (with Delaware and Hawaii) that use this model.",
+        "Each parent keeps a Personal Allowance ($1,729/month as of 2026, updated annually) before anything else is counted.",
+        "The Primary Child Support Allowance is a fixed monthly amount by number of children (from $519 for one child up to $2,075 for eight), prorated between the parents by their share of combined remaining income (Net Available Income, NAI), plus childcare and health insurance costs.",
+        "The Standard of Living Adjustment (SOLA) shares each parent's LEFTOVER NAI (after their own share of primary support) with the children, at a factor that rises with the number of children (14% for one child up to 47% for eight or more).",
+        "If the nonresidential parent has 110 or fewer parenting days per year, the transfer payment is simply that parent's total support amount (primary share plus SOLA) -- no further cross-adjustment, unlike Delaware or Hawaii's Melson variants.",
+        "A minimum contribution of 12% of income after the Personal Allowance applies as a floor for parents whose income exceeds the Personal Allowance."
+      ],
+      "example": {
+        "scenario": "Example: Parent A earns $4,000/mo, Parent B earns $2,500/mo, 2 children, Parent B is the nonresidential parent with 80 parenting days/year (under the 110-day threshold).",
+        "calculation": [
+          "NAI: Parent A = $4,000 - $1,729 = $2,271. Parent B = $2,500 - $1,729 = $771. Combined = $3,042.",
+          "Primary Allowance for 2 children: $865. Parent B's share (771/3,042 = 25.3%): ≈$219.",
+          "Parent B's NAI for SOLA: $771 - $219 = $552. SOLA factor for 2 children: 21%. SOLA: $116.",
+          "Parent B's total support: $219 + $116 ≈ $335/month (compared against the 12% minimum contribution floor of $92 -- the calculated amount is higher, so it applies)."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How is Montana's Melson Formula different from Delaware's and Hawaii's?",
+        "a": "Montana's Primary Child Support Allowance is a fixed dollar table by number of children (derived from 30% of the Personal Allowance for the first child, plus 20% each for the second and third, plus 10% each additional) rather than Delaware's per-child-plus-per-household formula or Hawaii's flat per-child amount. Montana's SOLA factors (14%-47%) are also higher than either state's, and below 110 parenting days/year, Montana applies NO custody cross-adjustment at all -- the nonresidential parent simply pays their full calculated share."
+      },
+      {
+        "q": "What happens if the nonresidential parent has more than 110 parenting days per year in Montana?",
+        "a": "Above 110 days/year, Montana requires a per-child reallocation: each child's needs are calculated separately, each parent's obligation for that child is prorated by the TIME the child spends with the OTHER parent, and the two parents' amounts are offset against each other. This calculator flags when this threshold is crossed but shows the standard (no-adjustment) figure, since the per-child reallocation requires child-by-child inputs this calculator doesn't collect."
+      },
+      {
+        "q": "Is there a minimum child support amount in Montana?",
+        "a": "Yes. For parents whose income exceeds the Personal Allowance, the minimum contribution is 12% of their income after the Personal Allowance is subtracted. For parents whose income is at or below the Personal Allowance, a separate graduated table (based on an income-ratio calculation) applies instead -- not modeled by this calculator, since it's a narrow edge case for very low-income parents."
+      }
+    ]
   }
 }

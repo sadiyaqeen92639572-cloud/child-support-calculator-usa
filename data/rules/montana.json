@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_dollar",
+  "parenting_days_threshold": 110,
+  "income_cap_behavior": "no_cap",
+  "deviation_note": "This calculator does not model: the graduated minimum-contribution table for parents whose income is at or below the Personal Allowance (ARM 37.62.126(1)(a), an income-ratio bracket lookup); the Long Distance Parenting Adjustment (ARM 37.62.130, reduces SOLA income for 2,000+ miles/year of parenting travel); or the per-child reallocation required when the nonresidential parent has more than 110 days/year with the child (ARM 37.62.134(2)(b)). The SOLA factor for exactly 5 children is not published in the official table (it jumps from 4 to 6 children) -- this calculator uses 0.35, a linear interpolation between the published 4-child (0.31) and 6-child (0.39) factors, not an officially published value."
+}

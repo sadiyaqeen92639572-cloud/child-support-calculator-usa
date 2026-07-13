@@ -250,6 +250,37 @@ function formulaSection(state, rules) {
   </section>`;
   }
 
+  if (state.formula_model === 'mt_melson') {
+    const p = state.params;
+    const primaryRows = Object.entries(p.primary_allowance_monthly)
+      .map(([k, v]) => `<tr><td>${k} ${k === '1' ? 'child' : 'children'}</td><td>$${v.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>`).join('');
+    const solaRows = Object.entries(p.sola_factors)
+      .map(([k, v]) => `<tr><td>${k} ${k === '1' ? 'child' : 'children'}</td><td>${(v*100).toFixed(0)}%</td><td>${state.source.statute_ref || ''}</td></tr>`).join('');
+    return `
+  <section class="formula-section">
+    <h2>How This Calculator Works — Formula &amp; Constants</h2>
+    <p class="source-line">Source: ${state.source.agency_name} · Calcul déterministe — no AI, no arbitrary estimate.</p>
+    <h3>Constants used</h3>
+    <table>
+      <tr><th>Constant</th><th>Value</th><th>Source</th></tr>
+      <tr><td>Personal Allowance</td><td>$${p.personal_allowance_monthly.toLocaleString()}/mo</td><td>${state.source.statute_ref || ''}</td></tr>
+      ${primaryRows}
+      ${solaRows}
+      <tr><td>Minimum contribution (above Personal Allowance)</td><td>${(p.minimum_contribution_pct*100).toFixed(0)}% of income after Personal Allowance</td><td>${state.source.statute_ref || ''}</td></tr>
+    </table>
+    <h3>Formula (Montana's Modified Melson Formula)</h3>
+    <div class="formula-code">
+      NAI(parent) = max(0, gross_income(parent) - Personal Allowance)<br>
+      share(parent) = NAI(parent) / combined NAI<br>
+      Primary Allowance = table[children] + childcare + health insurance<br>
+      Primary Share(parent) = share(parent) &times; Primary Allowance<br>
+      SOLA(parent) = max(0, NAI(parent) - Primary Share(parent)) &times; SOLA factor[children]<br>
+      support = max(Primary Share(parent) + SOLA(parent), 12% &times; NAI(parent))
+    </div>
+    <p class="formula-footnote">Deterministic calculation based on Montana's Modified Melson Formula (ARM 37.62). Verify against Montana's official worksheet for a court-ready figure.</p>
+  </section>`;
+  }
+
   // income_shares (schedule-table based)
   const p = state.params;
   const custody = rules.custody_adjustment;
