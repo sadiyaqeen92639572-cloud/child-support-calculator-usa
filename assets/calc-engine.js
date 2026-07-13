@@ -42,7 +42,7 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
   // obligation. overnightsWithA is nights/year the child spends with Parent A.
   const overnightsWithA = inputs.overnightsWithA || 0;
   const aIsCustodial = overnightsWithA > 182.5;
-  const payingParent = aIsCustodial ? 'B' : 'A';
+  let payingParent = aIsCustodial ? 'B' : 'A';
   const payingShare = payingParent === 'A' ? shareA : shareB;
   const payingParentOvernights = payingParent === 'A' ? overnightsWithA : (365 - overnightsWithA);
   const payingParentIncome = payingParent === 'A' ? inputs.parentAGrossIncome : inputs.parentBGrossIncome;
@@ -157,7 +157,11 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
     };
   }
 
-  if (rules.pa_lesser_of_calculations) {
+  const skipLesserOfForSharedCustody = rules.custody_adjustment
+    && rules.custody_adjustment.type === 'sc_shared_custody'
+    && payingParentOvernights > (rules.custody_adjustment.threshold_days || 109);
+
+  if (rules.pa_lesser_of_calculations && !skipLesserOfForSharedCustody) {
     // Pennsylvania's mechanism (Pa.R.Civ.P. 1910.16-2(e)(1)(ii)): when the
     // paying parent's income and number of children fall in the schedule's
     // shaded (self-support reserve) area, the obligation is the LESSER of
@@ -351,6 +355,33 @@ function calcIncomeShares(params, rules, scheduleTable, inputs) {
         }
         const sharedAmount = Math.abs(aTheoretical - bTheoretical);
         amount = Math.min(amount, sharedAmount);
+        adjustedForCustody = true;
+      }
+    } else if (rules.custody_adjustment.type === 'sc_shared_custody') {
+      // South Carolina's shared-custody Worksheet C (both parents >109
+      // overnights/year, 30%+): basic obligation x1.5, apportioned to each
+      // parent by THEIR OWN income share, then multiplied by the percentage
+      // of time the child spends WITH THAT SAME parent (not the other
+      // parent — this is the opposite cross-multiplication direction from
+      // Virginia/Maryland's formula, verified against the rule text
+      // verbatim). Whichever parent's result is larger pays the difference.
+      // The 109-128 overnight graduated transition zone is not modeled here
+      // (disclosed as a known gap) — this applies the full shared formula
+      // whenever the threshold is met.
+      const threshold = rules.custody_adjustment.threshold_days || 109;
+      if (payingParentOvernights > threshold) {
+        const custodyShareA = overnightsWithA / 365;
+        const custodyShareB = 1 - custodyShareA;
+        const sharedObligation = baseObligation * 1.5;
+        const aObligation = sharedObligation * shareA * custodyShareA;
+        const bObligation = sharedObligation * shareB * custodyShareB;
+        // Unlike the standard majority-overnights convention used elsewhere,
+        // this formula can make EITHER parent the actual payer — determined
+        // here strictly from which computed obligation is larger, not from
+        // who has more parenting time.
+        payingParent = aObligation > bObligation ? 'A' : 'B';
+        const finalShare = payingParent === 'A' ? shareA : shareB;
+        amount = Math.abs(aObligation - bObligation) + (addOns * finalShare);
         adjustedForCustody = true;
       }
     }

@@ -1455,5 +1455,58 @@
         "a": "Above $30,000/month in combined adjusted actual income, Maryland's schedule provides no further value. Courts use their discretion in setting the support amount (Md. Fam. Law § 12-204(d)) rather than extending the schedule with an automatic formula."
       }
     ]
+  },
+  "sc": {
+    "name": "South Carolina",
+    "abbr": "SC",
+    "slug": "south-carolina",
+    "formula_model": "income_shares",
+    "effective_date": "2024-01-15",
+    "last_verified": "2026-07-13",
+    "guideline_version": "2024-SC-v1",
+    "source": {
+      "agency_name": "South Carolina Department of Social Services, Child Support Guidelines (DSS Booklet 2819, Nov. 2024)",
+      "url": "https://dss.sc.gov/media/lmdj4cnh/dss-booklet-2819-nov-24.pdf",
+      "statute_ref": "S.C. Code Ann. § 63-17-470; 27 S.C. Code Regs. 114-4710 to 114-4750"
+    },
+    "params": {
+      "schedule_table_ref": "south-carolina_schedule.json",
+      "income_basis": "gross",
+      "income_cap_monthly": 40000,
+      "high_income_note": "Above $40,000/month combined gross income, South Carolina courts determine awards case-by-case rather than an automatic formula."
+    },
+    "worksheet": {
+      "steps": [
+        "Determine each parent's monthly gross income, then combine both for combined monthly gross income.",
+        "Look up the basic child support obligation from the official Schedule of Basic Support Obligations for that combined income and number of children.",
+        "For sole custody (Worksheet A), compare the standard proration to a lookup using the paying parent's own income alone (self-support reserve, $1,010.50/month) -- the lower amount applies.",
+        "For shared physical custody (both parents more than 109 overnights/year, Worksheet C), a different formula applies: the basic obligation is multiplied by 1.5, apportioned to each parent by their OWN income share, then multiplied by the percentage of time the child spends WITH THAT SAME parent. Whichever parent's result is larger pays the difference -- unlike some states, this can make the majority-time parent the one who pays.",
+        "A graduated transition applies between 110 and 128 overnights, blending the sole-custody and shared-custody amounts -- not modeled by this calculator.",
+        "Above $40,000/month combined income, courts determine awards case-by-case rather than extending the schedule."
+      ],
+      "example": {
+        "scenario": "Example: combined gross income $5,000/month, 2 children, Parent A earns $3,000/mo (60% share, 60% of the child's time), Parent B earns $2,000/mo (40% share, 40% of the child's time) -- shared custody, both over the 109-overnight threshold.",
+        "calculation": [
+          "Basic child support obligation for $5,000 combined, 2 children (official schedule): $1,226/month.",
+          "Shared custody obligation (x1.5): $1,839/month.",
+          "Parent A's obligation: $1,839 × 60% × 60% ≈ $662. Parent B's obligation: $1,839 × 40% × 40% ≈ $294.",
+          "Parent A's result is larger, so Parent A pays the difference: $662 − $294 ≈ $368/month."
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "How is South Carolina's shared custody formula different from other states?",
+        "a": "In South Carolina's Worksheet C (both parents with more than 109 overnights/year), each parent's notional obligation is their OWN income share multiplied by their OWN time share with the child -- not the other parent's time share, which is how Virginia and Maryland compute it. Whichever parent's result is larger pays the difference. This can mean the parent with MORE time and MORE income ends up paying support, which surprises people used to the more common cross-multiplication formula."
+      },
+      {
+        "q": "What is South Carolina's self-support reserve?",
+        "a": "The self-support reserve is $1,010.50/month as of the 2024 guidelines update. For sole-custody cases, South Carolina compares the standard proration against a schedule lookup using only the paying parent's own income, and uses whichever is lower -- protecting low-income parents from being reduced below a basic subsistence level."
+      },
+      {
+        "q": "What happens if combined income is above $40,000/month in South Carolina?",
+        "a": "Above $40,000/month in combined gross income (raised from $30,000 by the 2024 guidelines update, the first revision since 2014), South Carolina's schedule provides no further value. Courts determine the award case-by-case rather than extrapolating the formula."
+      }
+    ]
   }
 }

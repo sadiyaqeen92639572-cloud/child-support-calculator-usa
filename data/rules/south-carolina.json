@@ -1,0 +1,14 @@
+{
+  "rounding": "nearest_dollar",
+  "pa_lesser_of_calculations": {
+    "self_support_reserve_monthly": 1010.50,
+    "note": "DSS Booklet 2819 (Nov. 2024), section 11: when the obligor's income and children count fall in the schedule's shaded self-support-reserve area, the obligation is calculated using the obligor's income only (not combined). Modeled here as the lesser of an individual-income lookup vs. the standard combined-income proration, which converges to the correct answer without needing the exact shaded-zone boundary."
+  },
+  "custody_adjustment": {
+    "type": "sc_shared_custody",
+    "threshold_days": 109,
+    "note": "Shared physical custody (both parents more than 109 overnights/year, 30%+): basic obligation x1.5, apportioned to each parent by their OWN income share, multiplied by the percentage of time the child spends WITH THAT SAME parent. Whichever parent's result is larger pays the difference -- this can make the majority-time parent the payer, not just the minority-time parent. The 110-128 overnight graduated transition zone (Worksheet A/C blend) is not modeled -- disclosed as a gap."
+  },
+  "income_cap_behavior": "discretionary_above_cap",
+  "deviation_note": "Above $40,000/month combined gross income, South Carolina's schedule has no further value -- courts determine awards on a case-by-case basis rather than an automatic formula. This calculator does not model the 110-128 overnight graduated shared-custody transition or split custody (Worksheet B, two or more children divided between parents)."
+}
