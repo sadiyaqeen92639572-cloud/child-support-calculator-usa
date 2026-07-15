@@ -5,6 +5,14 @@ const states = require('./data/states.json');
 const monetization = require('./data/monetization-config.json');
 const DOMAIN = 'https://usachildsupportcalculator.com';
 const YEAR = new Date().getFullYear();
+const GESMINE_ORG = {
+  '@type': 'Organization',
+  name: 'Gesmine-Invest Limited',
+  legalName: 'Gesmine-Invest Limited',
+  url: DOMAIN + '/about/',
+  identifier: { '@type': 'PropertyValue', propertyID: 'UK Company Number', value: '14120136' },
+  address: { '@type': 'PostalAddress', streetAddress: 'Hardy House, 269 Poynders Gardens', addressLocality: 'London', postalCode: 'SW4 8PQ', addressCountry: 'GB' }
+};
 
 function assertComplete(state) {
   const required = ['source', 'last_verified', 'guideline_version'];
@@ -697,8 +705,8 @@ function jsonLd(state) {
         operatingSystem: 'Any',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         dateModified: state.last_verified,
-        author: { '@type': 'Organization', name: 'Gesmine-Invest Limited', url: DOMAIN + '/about/' },
-        publisher: { '@type': 'Organization', name: 'Gesmine-Invest Limited', url: DOMAIN + '/about/' },
+        author: GESMINE_ORG,
+        publisher: GESMINE_ORG,
         version: state.guideline_version
       },
       {
@@ -804,7 +812,7 @@ function renderStatePage(state) {
 </main>
 
 <footer>
-  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
 </footer>
 
@@ -847,7 +855,7 @@ function renderChangelogPage() {
 </main>
 
 <footer>
-  <p>Gesmine-Invest Limited, registered UK company number 14120136, Hardy House, 269 Poynders Gardens, London, SW4 8PQ.</p>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
 </footer>
 </body>
