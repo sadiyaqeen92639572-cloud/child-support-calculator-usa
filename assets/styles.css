@@ -38,3 +38,17 @@ main > section > table th, main > section > table td { text-align: left; padding
 .formula-footnote { font-size: 1.56rem; color: #94a3b8; margin-top: 12px; }
 .mon-slot[hidden] { display: none; }
 .cta-leadgen { display: inline-block; background: #111827; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+
+@media (max-width: 640px) {
+  header .badge { font-size: .85rem; }
+  .disclaimer-banner { font-size: .85rem; }
+  .result-warning { font-size: .85rem; }
+  .result-deviation { font-size: .8rem; }
+  .privacy-note { font-size: .8rem; }
+  .methodology { font-size: .85rem; }
+  footer { font-size: .8rem; }
+  .formula-section .source-line { font-size: .78rem; }
+  .formula-section table, main > section > table { font-size: .85rem; }
+  .formula-code { font-size: .82rem; }
+  .formula-footnote { font-size: .78rem; }
+}
