@@ -11,7 +11,9 @@
 body { font-family: system-ui, -apple-system, sans-serif; color: var(--text); margin: 0; background: #fff; line-height: 1.5; }
 header { background: var(--brand); color: #fff; padding: 32px 20px; }
 header a { color: rgba(255,255,255,.9); text-decoration: none; }
-header h1 { margin: 12px 0 4px; }
+header h1 { margin: 12px 0 4px; font-size: 1.8rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
 header .badge { color: rgba(255,255,255,.85); font-size: 1.7rem; }
 .disclaimer-banner { background: #fef3c7; border-bottom: 1px solid #fde68a; padding: 12px 20px; font-size: 1.7rem; color: #78350f; }
 main { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
@@ -40,6 +42,10 @@ main > section > table th, main > section > table td { text-align: left; padding
 .cta-leadgen { display: inline-block; background: #111827; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }
 
 @media (max-width: 640px) {
+  header h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.15rem; }
+  h3 { font-size: 1rem; }
+  .formula-code { padding: 12px 14px; line-height: 1.6; }
   header .badge { font-size: .85rem; }
   .disclaimer-banner { font-size: .85rem; }
   .result-warning { font-size: .85rem; }
