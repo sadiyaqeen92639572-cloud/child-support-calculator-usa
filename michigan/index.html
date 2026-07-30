@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Michigan Child Support Calculator</h1>
   <p class="badge">Updated for Michigan's 2025-MCSF-v1 guidelines · Last reviewed 2026-07-11</p>
+  <p class="verified-badge">✓ Cross-checked against Michigan's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -49,6 +50,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Michigan Child Support Calculator · 2025-MCSF-v1 guidelines, effective 2025-01-01 · Source: Michigan Child Support Formula Manual (State Court Administrative Office) (MCL 552.605 et seq.; 2025 MCSF §§3.02-3.03) · usachildsupportcalculator.com/michigan/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -101,6 +104,12 @@
     <p>Official source: <a href="https://www.courts.michigan.gov/4a7a53/siteassets/court-administration/standardsguidelines/foc/2025mcsf.pdf" rel="nofollow noopener">Michigan Child Support Formula Manual (State Court Administrative Office)</a> (MCL 552.605 et seq.; 2025 MCSF §§3.02-3.03).</p>
     <p class="deviation-note">Courts may deviate from the guideline amount for documented reasons (Section 1.04) — this calculator shows the presumptive guideline amount only, not a court order. Simplification: this calculator does not model the per-parent family-income exclusion nuance (MCSF 2.09(B)) when one parent's income is near the Low Income Threshold — consult Michigan's official Support Estimator for edge cases near $1,255/month.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Michigan's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -188,6 +197,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

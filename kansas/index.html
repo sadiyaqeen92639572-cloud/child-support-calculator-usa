@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Kansas Child Support Calculator</h1>
   <p class="badge">Updated for Kansas's 2025-KS-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Kansas's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -52,6 +53,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Kansas Child Support Calculator · 2025-KS-v1 guidelines, effective 2025-07-01 · Source: Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121) (Kansas Child Support Guidelines, Sections IV.A-H, Appendix II) · usachildsupportcalculator.com/kansas/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -106,6 +109,12 @@
     <p>Official source: <a href="https://kscourts.gov/KSCourts/media/KsCourts/Child%20Support%20Guidelines/2024-Child-Support-Guidlines-adopted-May-1-2025-clean.pdf" rel="nofollow noopener">Kansas Judicial Branch — Kansas Child Support Guidelines (Administrative Order 2025-RL-121)</a> (Kansas Child Support Guidelines, Sections IV.A-H, Appendix II).</p>
     <p class="deviation-note">This calculator does not model: the Extended Parenting Time Adjustment (14+ consecutive days, IV.H.3, discretionary), the Non-Exercise of Parenting Time Adjustment (IV.H.4, discretionary), the shared-residency formula for 50%+ nonresidential parenting time, divided residency (each parent primary for different children, IV.D.4), the multiple-family application, or the cost-of-living differential. All are discretionary or require case-specific facts beyond a single guideline lookup.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Kansas's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -193,6 +202,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

@@ -1,0 +1,274 @@
+[
+  {
+    "slug": "50-50-custody-child-support",
+    "title": "Does 50/50 Custody Mean No Child Support?",
+    "target_keyword": "50/50 custody child support",
+    "meta_description": "Equal parenting time doesn't automatically mean $0 in child support. Here's why income differences still usually mean someone pays, and how to check your state's exact rule.",
+    "intro": "Splitting parenting time exactly in half feels like it should zero out child support — but in most states, it doesn't. Child support formulas start from each parent's income, not just the calendar.",
+    "sections": [
+      {"h2": "Why 50/50 custody usually still means a payment", "body": "Most state guideline formulas (the \"income shares\" model used by roughly 40 states) prorate the total cost of raising a child between both parents based on income share, then adjust for parenting time. If one parent earns significantly more, that income gap generally survives the custody adjustment — the higher earner typically still owes something, even at exactly equal overnights."},
+      {"h2": "What actually changes at 50/50", "body": "What an equal schedule usually does is reduce the amount owed compared to a sole-custody arrangement, not eliminate it. Many states apply a parenting-time credit, a shared-custody worksheet, or a cross-multiplication formula once both parents cross a certain overnight threshold — see our <a href=\"/joint-custody-child-support-calculator/\">joint custody guide</a> for how that threshold varies by state."},
+      {"h2": "When 50/50 custody really can mean $0", "body": "It's genuinely possible for the number to come out to zero (or close to it) when both parents have similar incomes and similar custody time — the formulas are designed so a truly equal case, income and time both, produces a small or no transfer payment. The bigger the income gap, the less true that becomes."}
+    ],
+    "faqs": [
+      {"q": "Is there a state where 50/50 custody always means no child support?", "a": "No. Even states with generous shared-custody credits still factor in each parent's income — a large income gap will typically still produce a support obligation."},
+      {"q": "How do I find my exact number?", "a": "Use your state's calculator on this site, entering your actual overnight count — every calculator that has a custody adjustment applies your state's specific formula automatically."}
+    ],
+    "related": [{"href": "/joint-custody-child-support-calculator/", "label": "Joint Custody Child Support Calculator"}, {"href": "/", "label": "Find your state's calculator"}]
+  },
+  {
+    "slug": "income-shares-vs-percentage-of-income",
+    "title": "Income Shares vs Percentage of Income: How States Calculate Child Support",
+    "target_keyword": "income shares vs percentage of income child support",
+    "meta_description": "Most states use one of three child support models. Here's the difference between income shares, percentage of income, and the Melson formula — and why it matters for your number.",
+    "intro": "Not every state calculates child support the same way. Roughly 40 states use \"income shares,\" about a dozen use \"percentage of income,\" and three (Delaware, Hawaii, Montana) use a variant of the \"Melson formula.\" The model your state uses changes which numbers actually matter.",
+    "sections": [
+      {"h2": "Income shares (the majority model)", "body": "Income shares combines both parents' income, looks up (or calculates) what a household at that combined income level would typically spend raising the number of children involved, then splits that amount between the parents in proportion to their income share. Both parents' income matters directly."},
+      {"h2": "Percentage of income", "body": "States like Texas and Wisconsin instead apply a flat percentage to just the paying parent's own income — the other parent's income generally isn't part of the base calculation at all (though it can matter for parenting-time credits). Fewer inputs, but the outcome can differ sharply from an income-shares state with the same facts."},
+      {"h2": "The Melson formula", "body": "Delaware, Hawaii, and Montana use a more layered approach: each parent first keeps a self-support allowance, then a primary support need for the children is prorated by remaining income, then a standard-of-living adjustment shares any income above that. It's the most complex of the three models but aims to protect a parent's own basic needs before calculating support."}
+    ],
+    "faqs": [
+      {"q": "Which model does my state use?", "a": "Check your state's calculator page on this site — the formula model and the exact statute it's based on are listed in the \"How This Calculator Works\" section of every state page."},
+      {"q": "Does the model change how much I'll pay?", "a": "It can — the same income and custody facts can produce meaningfully different results depending on which model your state uses, since each one weighs the two parents' incomes differently."}
+    ],
+    "related": [{"href": "/", "label": "Find your state's calculator"}, {"href": "/compare/", "label": "Compare two states side by side"}]
+  },
+  {
+    "slug": "self-employed-child-support-income",
+    "title": "Child Support and Self-Employment Income: How Courts Calculate It",
+    "target_keyword": "self employed child support calculation",
+    "meta_description": "Self-employment income isn't a paycheck — here's how courts typically define income for business owners, freelancers, and contractors in a child support case.",
+    "intro": "When you're self-employed, \"income\" for child support purposes usually isn't your bank balance or your tax return's bottom line — it's a court's assessment of what you actually have available, after legitimate business expenses but before you start writing off things a court won't recognize.",
+    "sections": [
+      {"h2": "Gross receipts minus legitimate expenses", "body": "Most guideline definitions start from gross business receipts and subtract ordinary, necessary business expenses to reach a net income figure — similar to, but not always identical to, the net profit on a Schedule C. Courts routinely add back deductions they consider personal in substance (a business vehicle used mostly for personal trips, for example), even if the IRS allowed the deduction."},
+      {"h2": "Why self-employed cases get more scrutiny", "body": "Because self-employment income is harder to verify than a W-2, these cases often involve more documentation — profit and loss statements, bank records, sometimes a forensic accountant — and courts have more discretion to look past what a tax return shows to what a business owner can actually pay."},
+      {"h2": "Averaging irregular income", "body": "Many guidelines average self-employment or commission income over a period (often 2-3 years) rather than using a single year, to smooth out normal business fluctuations, though a court can depart from that if a recent, sustained change (a business closing, a major new contract) makes the average misleading."}
+    ],
+    "faqs": [
+      {"q": "Can I just use my tax return's net profit figure?", "a": "It's a starting point, not the final word — courts commonly adjust it for expenses they don't consider legitimate business costs for support purposes."},
+      {"q": "What if my income varies a lot year to year?", "a": "Ask about averaging — most states have a mechanism for it, though the exact period and method varies. This is a case-specific legal question best raised with a family law attorney."}
+    ],
+    "related": [{"href": "/high-income-child-support-calculator/", "label": "High Income Child Support Calculator"}, {"href": "/guides/imputed-income-underemployment/", "label": "Imputed income and underemployment"}]
+  },
+  {
+    "slug": "imputed-income-underemployment",
+    "title": "Imputed Income: What Happens If You're Voluntarily Unemployed or Underemployed",
+    "target_keyword": "imputed income child support",
+    "meta_description": "Quitting a job or taking a lower-paying one doesn't automatically lower your child support. Here's how courts decide whether to impute income at your prior earning level.",
+    "intro": "If a parent voluntarily quits a job, gets fired for cause, or takes a lower-paying job without a good reason, most states let a court calculate support based on what that parent could and should be earning — not what they're actually earning. This is called imputing income.",
+    "sections": [
+      {"h2": "What triggers imputation", "body": "Courts generally look at whether the reduction in income was voluntary and whether it was done in bad faith (specifically to reduce support) or for a legitimate reason (a documented layoff, a genuine career change with a reasonable transition period, a disability). The burden of proof and exact standard varies by state."},
+      {"h2": "How the imputed amount is set", "body": "When a court does impute income, it typically looks at the parent's work history, education, occupational qualifications, and the prevailing wage for similar work in the local job market — sometimes with expert vocational testimony in contested cases — rather than picking an arbitrary number."},
+      {"h2": "It cuts both ways", "body": "Imputation isn't only used against paying parents. A parent who could work but chooses not to, on either side of a case, can have income imputed to them for calculation purposes — the goal is an accurate picture of earning capacity, not a penalty aimed at one side."}
+    ],
+    "faqs": [
+      {"q": "Can income be imputed if I lost my job through no fault of my own?", "a": "Generally no — an involuntary, good-faith job loss is treated differently than a voluntary reduction, though you may still need to show you're making reasonable efforts to find comparable work."},
+      {"q": "Does staying home with a young child count as voluntary underemployment?", "a": "This varies significantly by state and by the child's age — some states have specific carve-outs for a parent caring for a very young child. Consult a family law attorney for your state's rule."}
+    ],
+    "related": [{"href": "/guides/self-employed-child-support-income/", "label": "Self-employment income and child support"}, {"href": "/child-support-modification-calculator/", "label": "Child Support Modification Calculator"}]
+  },
+  {
+    "slug": "child-support-modification-triggers",
+    "title": "What Triggers a Child Support Modification?",
+    "target_keyword": "what triggers child support modification",
+    "meta_description": "Job loss, a raise, a new custody schedule — not every life change qualifies for a child support modification. Here's what usually does, and how to check your state's threshold.",
+    "intro": "Life changes, but a child support order doesn't update itself. To change an existing order, most states require you to show that circumstances have changed enough to meet a specific legal standard — and many set an actual numeric threshold for what \"enough\" means.",
+    "sections": [
+      {"h2": "Common qualifying changes", "body": "The most common triggers are a significant, sustained change in either parent's income (a job loss, a big raise, a new job), a change in the custody or parenting-time schedule, a change in the child's needs (a new medical condition, for example), or simply enough time passing since the last order — many states allow a no-fault review every few years regardless of whether anything else changed."},
+      {"h2": "Why a small change usually isn't enough", "body": "Courts generally won't reopen a case over a minor fluctuation — that would make every order permanently unstable. Most states set a specific percentage (commonly in the 10-20% range) or dollar-amount difference between the old order and what current guidelines would produce, below which a court presumes the change isn't \"substantial\" enough to modify."},
+      {"h2": "Checking your state's exact threshold", "body": "The exact percentage, dollar floor, and any waiting period since the last order varies significantly by state — some states use a pure percentage test, others combine a percentage with a minimum dollar change, and a few use no fixed number at all, leaving it to a general case-by-case standard."}
+    ],
+    "faqs": [
+      {"q": "Does meeting the threshold automatically change my order?", "a": "No — meeting a state's numeric threshold generally means you have grounds to file a modification petition, not that the amount changes automatically. You still need to file, and in most states, get a court's approval."},
+      {"q": "How do I check whether my situation qualifies?", "a": "Use our <a href=\"/child-support-modification-calculator/\">modification calculator</a> — enter your current order and a new guideline amount (from your state's calculator) to see whether the difference meets your state's threshold."}
+    ],
+    "related": [{"href": "/child-support-modification-calculator/", "label": "Child Support Modification Calculator"}, {"href": "/guides/imputed-income-underemployment/", "label": "Imputed income and underemployment"}]
+  },
+  {
+    "slug": "is-child-support-taxable",
+    "title": "Is Child Support Taxable? Tax Rules Every Parent Should Know",
+    "target_keyword": "is child support taxable",
+    "meta_description": "Unlike alimony before 2019, child support has one consistent federal tax rule. Here's what it is, and what it doesn't cover — like the dependency exemption and tax credits.",
+    "intro": "Of all the numbers in a divorce or custody case, child support is one of the simpler ones at tax time — federal law treats it the same way regardless of which state you're in.",
+    "sections": [
+      {"h2": "The basic federal rule", "body": "Child support is not taxable income to the parent who receives it, and it is not tax-deductible for the parent who pays it. This has been consistent federal tax law for decades and is unaffected by which state guideline formula was used to calculate the amount."},
+      {"h2": "What child support doesn't decide", "body": "Child support and the dependency exemption/child tax credit are separate questions. Which parent can claim a child on their taxes is generally governed by IRS rules about which parent the child lived with for more than half the year, unless the parents have a written agreement (often via IRS Form 8332) assigning the claim differently."},
+      {"h2": "Don't confuse it with alimony", "body": "Spousal support (alimony) used to have different tax treatment, but for divorce or separation agreements executed after December 31, 2018, alimony is also no longer deductible by the payer or taxable to the recipient under federal law — bringing it in line with how child support has always been treated. Older agreements may still follow the pre-2019 rules; check with a tax professional if your agreement predates that change."}
+    ],
+    "faqs": [
+      {"q": "Do I need to report child support I receive as income?", "a": "No — child support is not reportable as income on a federal tax return."},
+      {"q": "Can I deduct child support I pay?", "a": "No — child support payments are not tax-deductible, regardless of the amount or how it was calculated."}
+    ],
+    "related": [{"href": "/guides/child-support-and-multiple-families/", "label": "Child support with multiple families"}, {"href": "/", "label": "Find your state's calculator"}]
+  },
+  {
+    "slug": "health-insurance-childcare-addons",
+    "title": "How Health Insurance and Childcare Costs Affect Your Child Support Order",
+    "target_keyword": "health insurance childcare child support",
+    "meta_description": "In most income-shares states, health insurance premiums and work-related childcare costs are added on top of the base child support calculation, not absorbed into it.",
+    "intro": "The base child support number many people picture — a percentage of income, or a schedule lookup — usually isn't the whole story. In most income-shares states, the cost of the child's health insurance premium and work-related childcare gets added on top, then split between the parents.",
+    "sections": [
+      {"h2": "Why these costs are added separately", "body": "The base guideline amount is generally meant to cover a household's ordinary child-rearing costs (housing, food, clothing) at a given income level. Health insurance and childcare are treated as extraordinary or add-on expenses because they vary enormously between families and aren't well captured by an average, so most states add the actual dollar cost on top rather than baking in an estimate."},
+      {"h2": "How the split usually works", "body": "Once the add-on costs are added to the base obligation, the combined total is typically prorated between the parents by income share — the same ratio used for the base amount — though a few states apply a different split specifically to add-ons."},
+      {"h2": "What counts as \"work-related\" childcare", "body": "Most guidelines only add in childcare costs that are necessary for a parent to work, look for work, or attend school/training — not childcare for a parent's personal time. Only the child's own health insurance premium (or the child's portion of a family plan) typically counts, not the parent's own coverage."}
+    ],
+    "faqs": [
+      {"q": "Does every state add these costs the same way?", "a": "No — the exact treatment (whether it's added at all, how it's split, what counts) varies by state and by formula model. Percentage-of-income states in particular sometimes don't factor these in the same way income-shares states do."},
+      {"q": "Where do I enter these in the calculator?", "a": "Most state calculators on this site that use the income-shares or Melson model include childcare cost and health insurance premium fields directly in the form."}
+    ],
+    "related": [{"href": "/", "label": "Find your state's calculator"}, {"href": "/guides/what-does-child-support-cover/", "label": "What child support actually covers"}]
+  },
+  {
+    "slug": "child-support-enforcement-wage-garnishment",
+    "title": "Child Support Enforcement: Wage Garnishment, License Suspension, and More",
+    "target_keyword": "child support enforcement wage garnishment",
+    "meta_description": "States have significant tools to collect unpaid child support — from automatic wage withholding to license suspension and federal tax refund interception.",
+    "intro": "Unpaid child support isn't treated like an ordinary debt. States and the federal government have a specific, powerful set of enforcement tools most other creditors don't have access to.",
+    "sections": [
+      {"h2": "Income withholding", "body": "In most cases, child support is withheld directly from a paying parent's paycheck by their employer, automatically, from the very start of the order — not just after a payment is missed. This is generally the default collection method nationwide, not a last resort."},
+      {"h2": "License and passport actions", "body": "States commonly have authority to suspend driver's licenses, professional or occupational licenses, and even recreational licenses (hunting, fishing) for parents significantly behind on support. At the federal level, the State Department can deny or revoke a passport for parents who owe more than a statutory threshold in arrears."},
+      {"h2": "Tax refund interception and other tools", "body": "The federal Treasury Offset Program can intercept federal tax refunds to cover certified child support arrears. States can also report arrears to credit bureaus, place liens on property, and in serious or willful nonpayment cases, pursue contempt of court proceedings that can include jail time."}
+    ],
+    "faqs": [
+      {"q": "Does interest get added to unpaid child support?", "a": "In many states, yes — see our <a href=\"/child-support-arrears-calculator/\">arrears calculator</a> for state-by-state interest rates and whether accrual is automatic or requires a court order."},
+      {"q": "What if I can't pay because I lost my job?", "a": "Contact the court or your state's child support agency as soon as possible — a modification request for a genuine, documented income loss is generally treated very differently than simply stopping payments."}
+    ],
+    "related": [{"href": "/child-support-arrears-calculator/", "label": "Child Support Arrears Calculator"}, {"href": "/child-support-modification-calculator/", "label": "Child Support Modification Calculator"}]
+  },
+  {
+    "slug": "when-does-child-support-end",
+    "title": "When Does Child Support End?",
+    "target_keyword": "when does child support end",
+    "meta_description": "Most states end child support at 18 or high school graduation, but the exact rule — and exceptions for college or disability — varies significantly by state.",
+    "intro": "There's no single national age at which child support ends. Most states use 18 or high school graduation (whichever is later), but the details — and the exceptions — vary enough that it's worth checking your specific state.",
+    "sections": [
+      {"h2": "The common baseline", "body": "A common pattern is that support continues until the child turns 18, or graduates high school if that happens after 18 (common for students who started school a year late or repeated a grade), whichever comes later — but plenty of states have their own variation on this."},
+      {"h2": "Exceptions that extend support", "body": "Many states allow support to continue past the usual cutoff for a child with a significant disability that prevents self-support, and a smaller number of states allow (or require, if agreed to in the original order) support to continue through college for a defined period."},
+      {"h2": "It doesn't always stop automatically", "body": "In some states and some cases, an order doesn't terminate itself the moment a child turns 18 — depending on how the original order was written and your state's procedure, you may need to file paperwork to formally end the withholding, especially if there are multiple children on one order and only the oldest has aged out."}
+    ],
+    "faqs": [
+      {"q": "Does child support automatically stop at 18 everywhere?", "a": "No — some states tie it to high school graduation instead, some extend it for disability or, less commonly, college, and the exact mechanics of ending an order vary by state."},
+      {"q": "What if there are multiple children of different ages on one order?", "a": "Typically the total amount is meant to decrease as each child ages out, though whether that happens automatically or requires a new filing depends on the state and how the original order was structured."}
+    ],
+    "related": [{"href": "/guides/does-child-support-cover-college/", "label": "Does child support cover college?"}, {"href": "/", "label": "Find your state's calculator"}]
+  },
+  {
+    "slug": "what-does-child-support-cover",
+    "title": "What Does Child Support Actually Cover?",
+    "target_keyword": "what does child support cover",
+    "meta_description": "Child support isn't earmarked for specific bills — it's meant to cover a child's overall share of household costs, from housing to food to extracurriculars.",
+    "intro": "Child support generally isn't a reimbursement for specific receipts — it's calculated to cover a child's proportional share of the costs of running a household, and the receiving parent typically isn't required to itemize how it's spent.",
+    "sections": [
+      {"h2": "The core categories", "body": "Guideline formulas are generally built around economic data on what households at a given income level typically spend raising children — covering housing, food, clothing, transportation, and other everyday costs, distributed across the household rather than tracked per child."},
+      {"h2": "What's usually added on top", "body": "Health insurance premiums and work-related childcare are commonly added to the base calculation as separate line items rather than assumed to be included — see our guide on <a href=\"/guides/health-insurance-childcare-addons/\">health insurance and childcare add-ons</a>. Uninsured medical expenses above a certain amount are also frequently split separately."},
+      {"h2": "What it typically doesn't require itemizing", "body": "Because the base amount is meant to cover ordinary costs broadly, the receiving parent generally isn't required to account for exactly how each dollar was spent — a common misconception is that support has to be spent on the child's direct costs only, dollar-for-dollar, which isn't how most guideline formulas are designed to work."}
+    ],
+    "faqs": [
+      {"q": "Can I ask for an accounting of how child support is spent?", "a": "In most states, no — courts generally don't require itemized accounting of ordinary support payments, since the amount is meant to cover a child's broad share of household costs, not specific receipts."},
+      {"q": "Are extracurricular activities or private school included?", "a": "This varies by state and by case — some states treat these as deviations or additional add-ons that require a specific court finding, rather than assuming they're covered by the base amount."}
+    ],
+    "related": [{"href": "/guides/health-insurance-childcare-addons/", "label": "Health insurance and childcare add-ons"}, {"href": "/", "label": "Find your state's calculator"}]
+  },
+  {
+    "slug": "self-support-reserve-low-income",
+    "title": "The Self-Support Reserve: How Low-Income Child Support Cases Work",
+    "target_keyword": "self support reserve child support",
+    "meta_description": "Many states protect a minimum amount of a low-income paying parent's income before calculating child support. Here's what a self-support reserve is and how it changes the math.",
+    "intro": "Standard child support formulas can produce unrealistic results for very low-income parents — a straight percentage of a minimum-wage income can leave someone unable to cover their own basic living costs. Many states build in a specific protection against that.",
+    "sections": [
+      {"h2": "What a self-support reserve does", "body": "A self-support reserve sets aside a baseline amount of a paying parent's income (often pegged to a multiple of the federal poverty guideline) before calculating support, or caps the support obligation so it doesn't push that parent's remaining income below the reserve amount."},
+      {"h2": "How it typically changes the calculation", "body": "In states with a self-support reserve, low-income cases are often calculated differently than higher-income cases — sometimes using the paying parent's own income alone rather than combined income, sometimes applying a reduced percentage, sometimes flooring the result at a fixed minimum order rather than letting it hit zero."},
+      {"h2": "It's not the same as a minimum order", "body": "Some states have both a self-support reserve and a separate flat minimum order (a smallest possible support amount, often in the $50-100/month range, that applies regardless of how low income is) — these are related but distinct mechanisms, and not every state has both."}
+    ],
+    "faqs": [
+      {"q": "Does every state have a self-support reserve?", "a": "No — this protection varies significantly by state; some have a well-defined reserve amount tied to federal poverty guidelines, others don't formally use this concept at all."},
+      {"q": "Will my calculator show if this applies to me?", "a": "Yes — every state calculator on this site that has a self-support reserve mechanism will show a note in your results when it affects your calculation."}
+    ],
+    "related": [{"href": "/", "label": "Find your state's calculator"}, {"href": "/guides/imputed-income-underemployment/", "label": "Imputed income and underemployment"}]
+  },
+  {
+    "slug": "child-support-arrears-guide",
+    "title": "Child Support Arrears: What Happens When Payments Are Missed",
+    "target_keyword": "child support arrears explained",
+    "meta_description": "Missed child support payments become arrears — a legally enforceable debt that, in many states, accrues interest and doesn't go away in bankruptcy.",
+    "intro": "When a required child support payment isn't made, it doesn't just disappear — it becomes \"arrears,\" a specific kind of legal debt with its own rules, many of which are stricter than an ordinary unpaid bill.",
+    "sections": [
+      {"h2": "Arrears are a real, enforceable debt", "body": "Each missed payment typically becomes a judgment by operation of law in many states — meaning it doesn't require a separate court hearing to become legally collectible, and it generally can't be modified retroactively (a court usually can't forgive support that was already due, only change future payments going forward)."},
+      {"h2": "Interest often applies", "body": "Many, though not all, states charge interest on unpaid arrears — rates and whether accrual is automatic or requires a court finding vary widely. See our <a href=\"/child-support-arrears-calculator/\">arrears calculator</a> for state-by-state statutory rates and sourcing."},
+      {"h2": "It generally survives bankruptcy", "body": "Child support arrears are considered a domestic support obligation under federal bankruptcy law, which generally makes them non-dischargeable — meaning bankruptcy typically won't erase the debt, unlike many other unsecured debts."}
+    ],
+    "faqs": [
+      {"q": "Can arrears be waived or forgiven?", "a": "This varies significantly by state and by whether the arrears are owed to the other parent (private) or to the state (if public assistance was involved) — some states allow negotiated compromises on privately-owed arrears, others are much more restrictive."},
+      {"q": "How is interest calculated?", "a": "Use our <a href=\"/child-support-arrears-calculator/\">arrears calculator</a> — it uses each state's own statutory interest rate, with notes on whether accrual is automatic or requires a court order."}
+    ],
+    "related": [{"href": "/child-support-arrears-calculator/", "label": "Child Support Arrears Calculator"}, {"href": "/guides/child-support-enforcement-wage-garnishment/", "label": "Child support enforcement tools"}]
+  },
+  {
+    "slug": "retroactive-child-support",
+    "title": "Retroactive Child Support: Can You Get Back Pay?",
+    "target_keyword": "retroactive child support",
+    "meta_description": "In some cases, a court can order child support back to before the case was filed — but the rules for how far back, and under what circumstances, vary by state.",
+    "intro": "Most child support orders apply going forward from the date they're entered — but in specific circumstances, some states allow support to be ordered retroactively, covering a period before the order (or even before the case) existed.",
+    "sections": [
+      {"h2": "When retroactive support commonly applies", "body": "The most common scenario is establishing paternity and a first support order for a child where no prior order existed — many states allow support to be ordered back to the child's birth, the date of filing, or the date the other parent was served, depending on the state's specific rule."},
+      {"h2": "Retroactive modification is different and more limited", "body": "Changing an existing order retroactively (rather than establishing a first order) is generally much more restricted — most states only allow a modification to apply back to the date the modification petition was filed, not earlier, specifically because retroactively changing an already-due obligation creates real unfairness for the other parent."},
+      {"h2": "Why the distinction matters", "body": "\"Retroactive to the first order\" and \"retroactive modification of an existing order\" are legally different questions with very different rules in most states — conflating them is a common source of confusion. If you're asking about back-owed support, it's worth being specific about which situation applies to your case."}
+    ],
+    "faqs": [
+      {"q": "Can I get retroactive support for a child born years ago?", "a": "This depends heavily on your state's rule and the specifics of your case (paternity establishment date, when a case was filed) — consult a family law attorney for your state's exact limitation."},
+      {"q": "Can a modification be backdated before I filed?", "a": "In most states, no — modifications generally only apply from the filing date forward, not retroactively to before the petition was filed."}
+    ],
+    "related": [{"href": "/child-support-modification-calculator/", "label": "Child Support Modification Calculator"}, {"href": "/guides/child-support-modification-triggers/", "label": "What triggers a modification"}]
+  },
+  {
+    "slug": "child-support-and-multiple-families",
+    "title": "Child Support With Multiple Families: How Other Children Affect Your Order",
+    "target_keyword": "child support multiple children different mothers",
+    "meta_description": "Having children from more than one relationship can affect child support calculations — most states have a specific adjustment for a parent's other legal support obligations.",
+    "intro": "When a paying parent has children from more than one relationship, most states have a mechanism to account for that — but it's rarely a simple, proportional split, and the exact method varies a lot by state.",
+    "sections": [
+      {"h2": "Why other children matter to the calculation", "body": "Guideline formulas generally aim to be fair across all of a parent's legal support obligations, not just the one currently being calculated — a parent who's already paying (or living with and supporting) other children typically has that fact recognized in some way, since their income has to stretch further."},
+      {"h2": "Common approaches", "body": "States commonly handle this through one of a few mechanisms: deducting an amount for other legal dependents before calculating the current case's support, adjusting the number-of-children bracket used in a schedule lookup, or allowing a court to consider it as a deviation factor without a fixed formula."},
+      {"h2": "Order of cases can matter", "body": "In some states, which order was established first can affect how later orders account for it — an existing, prior support order sometimes gets different treatment than children who aren't yet the subject of any order. This is a genuinely state-specific and fact-specific area."}
+    ],
+    "faqs": [
+      {"q": "Does having more children automatically lower my existing order?", "a": "Generally no, not automatically — you'd typically need to file for a modification and show that your state's specific mechanism for other dependents applies to your case."},
+      {"q": "Does my calculator on this site account for this?", "a": "Not by default — this is a known simplification across most calculators on this site. If you have other legal support obligations, treat the standard calculator result as a starting point and consult a family law attorney for your state's specific adjustment."}
+    ],
+    "related": [{"href": "/", "label": "Find your state's calculator"}, {"href": "/guides/child-support-modification-triggers/", "label": "What triggers a modification"}]
+  },
+  {
+    "slug": "child-support-without-going-to-court",
+    "title": "Can Parents Agree to Child Support Without Going to Court?",
+    "target_keyword": "child support agreement without court",
+    "meta_description": "Parents can often negotiate their own child support amount, but most states still require court approval — and an amount below the guideline usually needs a specific justification.",
+    "intro": "Two parents can often agree on a child support number between themselves — but in most states, that agreement isn't the end of the story. It generally still needs to go through the court to become a real, enforceable order.",
+    "sections": [
+      {"h2": "Why courts still get involved", "body": "Child support is generally treated as the child's right, not just something the parents can privately contract away — most states require a judge to review and approve any agreement, specifically to confirm it's not against the child's interests, before it becomes an enforceable order."},
+      {"h2": "Agreeing below the guideline amount", "body": "If parents agree to an amount lower than what the state's guideline formula would produce, most states require the agreement to include a specific written justification (sometimes called a \"deviation\") for why the lower amount still serves the child's best interests — a court generally won't just rubber-stamp a below-guideline number without one."},
+      {"h2": "An informal handshake agreement carries real risk", "body": "An agreement that never goes through the court isn't enforceable the way an order is — it typically can't be enforced through wage garnishment, license suspension, or other state enforcement tools, and either parent can generally walk away from it at any time without consequence."}
+    ],
+    "faqs": [
+      {"q": "Can we just agree to no child support at all?", "a": "This is difficult in most states — since child support is generally considered the child's right rather than the parents', a court usually needs a specific, justified reason to approve $0 in a case where the guideline formula would produce more."},
+      {"q": "Do we need a lawyer to formalize an agreement?", "a": "Not always required, but recommended for anything beyond the simplest cases — a family law attorney can help make sure an agreement will actually hold up and get approved."}
+    ],
+    "related": [{"href": "/", "label": "Find your state's calculator"}, {"href": "/guides/child-support-modification-triggers/", "label": "What triggers a modification"}]
+  },
+  {
+    "slug": "does-child-support-cover-college",
+    "title": "Does Child Support Cover College Expenses?",
+    "target_keyword": "does child support cover college",
+    "meta_description": "Most states end child support at 18 or high school graduation, before college even starts. Whether support extends to cover college costs varies significantly by state.",
+    "intro": "For most families, regular child support ends around the time a child would be starting college, not during it. Whether — and how — college costs get addressed after that point varies a lot from state to state.",
+    "sections": [
+      {"h2": "The general rule: support usually ends first", "body": "Since most states end the standard support obligation at 18 or high school graduation (see our guide on <a href=\"/guides/when-does-child-support-end/\">when child support ends</a>), college expenses in most states fall outside of what the ordinary guideline calculation covers."},
+      {"h2": "States that do address college costs", "body": "A minority of states have specific statutory authority allowing a court to order continued support, or a contribution toward college costs, for a defined period — sometimes tied to full-time enrollment, a minimum GPA, or an age cap (commonly in the low-to-mid 20s where it exists at all)."},
+      {"h2": "Voluntary agreements are common", "body": "Even in states without a statutory college-support provision, parents can voluntarily agree (often as part of a divorce settlement) to contribute to college costs — this is a private agreement between the parents rather than something a court would order under the standard guideline formula."}
+    ],
+    "faqs": [
+      {"q": "Will my state's calculator show a college support number?", "a": "No — none of the calculators on this site model college expense contributions, since it's a distinct legal question from the standard guideline calculation and varies enormously by state (and often isn't formula-driven at all)."},
+      {"q": "How do I find out if my state addresses this?", "a": "This is a state-specific legal question best answered by a family law attorney, since the availability, standard, and age cap (where it exists) vary significantly and change over time."}
+    ],
+    "related": [{"href": "/guides/when-does-child-support-end/", "label": "When does child support end"}, {"href": "/", "label": "Find your state's calculator"}]
+  }
+]

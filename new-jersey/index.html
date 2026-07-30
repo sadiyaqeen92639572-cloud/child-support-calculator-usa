@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>New Jersey Child Support Calculator</h1>
   <p class="badge">Updated for New Jersey's 2025-NJ-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against New Jersey's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">New Jersey Child Support Calculator · 2025-NJ-v1 guidelines, effective 2025-09-01 · Source: New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts) (N.J. Ct. R. 5:6A, Appendix IX-A through IX-F) · usachildsupportcalculator.com/new-jersey/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://www.njcourts.gov/sites/default/files/attorneys/rules-of-court/app9f.pdf" rel="nofollow noopener">New Jersey Court Rules, Appendix IX-F (Administrative Office of the Courts)</a> (N.J. Ct. R. 5:6A, Appendix IX-A through IX-F).</p>
     <p class="deviation-note">Below $180/week combined net income, and above the $3,600/week cap ($187,200/year), New Jersey's guideline is explicitly discretionary -- the rule text says "DO NOT EXTRAPOLATE THIS SCHEDULE." Above the cap, courts apply the $3,600 guideline amount as a minimum and add a discretionary amount based on the factors in N.J.S.A. 2A:34-23. This calculator does not model NJ's Parenting Time (PAR) adjustment, which changes the sole-parenting worksheet calculation when the non-custodial parent has substantial parenting time.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New Jersey's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

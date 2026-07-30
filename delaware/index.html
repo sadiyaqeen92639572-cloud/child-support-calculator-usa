@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Delaware Child Support Calculator</h1>
   <p class="badge">Updated for Delaware's 2026-DE-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Delaware's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Delaware Child Support Calculator · 2026-DE-v1 guidelines, effective 2026-02-01 · Source: The Family Court of the State of Delaware (Form 509, Rules 500-509) (Del. Fam. Ct. Civ. P. R. 500-509) · usachildsupportcalculator.com/delaware/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -112,6 +115,12 @@
     <p>Official source: <a href="https://courts.delaware.gov/forms/download.aspx?id=268" rel="nofollow noopener">The Family Court of the State of Delaware (Form 509, Rules 500-509)</a> (Del. Fam. Ct. Civ. P. R. 500-509).</p>
     <p class="deviation-note">This calculator approximates Delaware's Melson Formula: no adjustment for a parent's other dependent children (Rule 502(e), 70% multiplier), no private-school primary expense (Rule 503(c)), and health insurance/childcare are added as flat combined figures rather than the worksheet's exact 3/4-vs-1/2 premium-sharing split (Rule 503(b)(3)). Shared Equal Placement (164+ overnights each) and the Low-Income Adjustment (Rule 506) are not modeled.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Delaware's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -199,6 +208,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

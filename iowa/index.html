@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Iowa Child Support Calculator</h1>
   <p class="badge">Updated for Iowa's 2026-IA-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Iowa's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Iowa Child Support Calculator · 2026-IA-v1 guidelines, effective 2026-01-01 · Source: Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines) (Iowa Ct. R. 9.1-9.27) · usachildsupportcalculator.com/iowa/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://www.legis.iowa.gov/docs/ACO/CourtRulesChapter/9.pdf" rel="nofollow noopener">Iowa Judicial Branch, Iowa Court Rules Chapter 9 (Child Support Guidelines)</a> (Iowa Ct. R. 9.1-9.27).</p>
     <p class="deviation-note">Above $30,000/month combined net income, Iowa's schedule obligation is deemed the same as for $30,000/month (Rule 9.26, note 3) -- courts have discretion to set an amount at or above that floor, not an automatic formula extension. This calculator does not model Joint (Equally Shared) Physical Care or split custody arrangements.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Iowa's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

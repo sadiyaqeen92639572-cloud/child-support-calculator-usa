@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Virginia Child Support Calculator</h1>
   <p class="badge">Updated for Virginia's 2025-VA-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against Virginia's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Virginia Child Support Calculator · 2025-VA-v1 guidelines, effective 2025-07-01 · Source: Code of Virginia § 20-108.2 (Virginia Legislative Information System) (Va. Code § 20-108.2) · usachildsupportcalculator.com/virginia/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://law.lis.virginia.gov/vacode/title20/chapter6/section20-108.2/" rel="nofollow noopener">Code of Virginia § 20-108.2 (Virginia Legislative Information System)</a> (Va. Code § 20-108.2).</p>
     <p class="deviation-note">Above $42,500/month combined gross income (raised from $35,000 by SB 805, eff. 2025-07-01), Virginia's own statutory formula applies directly: the $42,500 obligation plus a percentage of income above that (2.6%-5.0% by number of children) -- not a discretionary court determination. The shared-custody formula's add-on cost split (each parent's own childcare/health insurance costs credited separately) is approximated here as a single combined figure, since this calculator collects one childcare/health-insurance amount rather than a separate figure per parent.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Virginia's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Maryland Child Support Calculator</h1>
   <p class="badge">Updated for Maryland's 2022-MD-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Maryland's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Maryland Child Support Calculator · 2022-MD-v1 guidelines, effective 2022-07-01 · Source: Maryland General Assembly, Md. Code, Family Law § 12-204 (Md. Code, Family Law § 12-204) · usachildsupportcalculator.com/maryland/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gfl&section=12-204" rel="nofollow noopener">Maryland General Assembly, Md. Code, Family Law § 12-204</a> (Md. Code, Family Law § 12-204).</p>
     <p class="deviation-note">Above $30,000/month combined adjusted actual income, Maryland's schedule has no further value -- courts use discretion in setting support (Md. Fam. Law 12-204(d)) rather than an automatic formula. This calculator approximates the shared-custody formula's add-on cost split (each parent's own childcare/health costs credited separately) as a single combined figure, since it collects one childcare/health-insurance amount rather than a separate figure per parent.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Maryland's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

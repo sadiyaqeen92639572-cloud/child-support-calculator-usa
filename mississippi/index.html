@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Mississippi Child Support Calculator</h1>
   <p class="badge">Updated for Mississippi's 2020-MS-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Mississippi's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -43,6 +44,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Mississippi Child Support Calculator · 2020-MS-v1 guidelines, effective 1994-01-01 · Source: Mississippi Department of Human Services — Miss. Code Ann. § 43-19-101 (Miss. Code Ann. § 43-19-101) · usachildsupportcalculator.com/mississippi/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -94,6 +97,12 @@
     <p>Official source: <a href="https://www.mdhs.ms.gov/wp-content/uploads/2020/05/Child-Support-Guidelines-Revised.pdf" rel="nofollow noopener">Mississippi Department of Human Services — Miss. Code Ann. § 43-19-101</a> (Miss. Code Ann. § 43-19-101).</p>
     <p class="deviation-note">Miss. Code Ann. section 43-19-101(4): when the noncustodial parent's adjusted gross income is more than $100,000/yr or less than $10,000/yr, the court must make a written finding on whether applying these percentages is reasonable -- this is a required REVIEW, not an automatic cap or reduction, so this calculator applies the same percentage at any income level and does not model that written-finding requirement. This calculator does not model Mississippi's discretionary deviation criteria (Section 43-19-103: extraordinary expenses, shared parenting arrangements, seasonal income, etc.) or the adjustments available for court-ordered support of other children or other children living in the noncustodial parent's home (Section 43-19-101(3)(c)-(d)).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Mississippi's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/high-income-child-support-calculator/">High Income Child Support Calculator</a> — how this state's income cap works</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -181,6 +190,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

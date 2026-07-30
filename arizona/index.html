@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Arizona Child Support Calculator</h1>
   <p class="badge">Updated for Arizona's 2022-AZ-v1 guidelines · Last reviewed 2026-07-11</p>
+  <p class="verified-badge">✓ Cross-checked against Arizona's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Arizona Child Support Calculator · 2022-AZ-v1 guidelines, effective 2022-01-01 · Source: Arizona Child Support Guidelines (Arizona Supreme Court) (A.R.S. § 25-320) · usachildsupportcalculator.com/arizona/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://superiorcourt.maricopa.gov/media/0zqj3ip2/child-support-guidelines-2022.pdf" rel="nofollow noopener">Arizona Child Support Guidelines (Arizona Supreme Court)</a> (A.R.S. § 25-320).</p>
     <p class="deviation-note">Courts may deviate if combined income exceeds $30,000/month with significant income disparity, or for other documented reasons (Section IX) — this calculator shows the presumptive guideline amount only, not a court order. Note: at exactly equal (50/50) parenting time, Arizona's guidelines may still order the higher-earning parent to pay support based on income disparity alone — this calculator determines the paying parent from parenting-time majority and may not reflect that specific scenario; consult an attorney if your parenting time is exactly equal.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Arizona's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

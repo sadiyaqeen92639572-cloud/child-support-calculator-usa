@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>California Child Support Calculator</h1>
   <p class="badge">Updated for California's 2025-CA-SB343-v1 guidelines · Last reviewed 2026-07-11</p>
+  <p class="verified-badge">✓ Cross-checked against California's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -51,6 +52,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">California Child Support Calculator · 2025-CA-SB343-v1 guidelines, effective 2025-09-01 · Source: California Family Code (via leginfo.legislature.ca.gov) (Cal. Fam. Code § 4055) · usachildsupportcalculator.com/california/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -106,6 +109,12 @@
     <p>Official source: <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=4055.&lawCode=FAM" rel="nofollow noopener">California Family Code (via leginfo.legislature.ca.gov)</a> (Cal. Fam. Code § 4055).</p>
     <p class="deviation-note">Courts may deviate from the guideline amount for documented reasons — this calculator shows the presumptive guideline amount only, not a court order. A separate low-income adjustment applies when the obligor's net disposable income is below full-time minimum-wage earnings (Fam. Code § 4055(b)(7)) — not modeled in this calculator; consult California's official Guideline Calculator for low-income cases.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against California's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -193,6 +202,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

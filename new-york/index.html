@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>New York Child Support Calculator</h1>
   <p class="badge">Updated for New York's 2026-NY-CSSA-v1 guidelines · Last reviewed 2026-07-11</p>
+  <p class="verified-badge">✓ Cross-checked against New York's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">New York Child Support Calculator · 2026-NY-CSSA-v1 guidelines, effective 2026-03-01 · Source: New York State Child Support Standards Act (CSSA) (N.Y. Dom. Rel. Law § 240; Family Court Act § 413) · usachildsupportcalculator.com/new-york/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://childsupport.ny.gov/" rel="nofollow noopener">New York State Child Support Standards Act (CSSA)</a> (N.Y. Dom. Rel. Law § 240; Family Court Act § 413).</p>
     <p class="deviation-note">Above the combined income cap, courts apply 10 statutory factors rather than the automatic percentage. Courts may also deviate below the cap for documented reasons — this calculator shows the presumptive guideline amount only, not a court order.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New York's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/high-income-child-support-calculator/">High Income Child Support Calculator</a> — how this state's income cap works</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

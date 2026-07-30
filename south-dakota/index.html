@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>South Dakota Child Support Calculator</h1>
   <p class="badge">Updated for South Dakota's 2021-SD-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against South Dakota's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">South Dakota Child Support Calculator · 2021-SD-v1 guidelines, effective 2021-07-01 · Source: South Dakota Department of Social Services — SDCL 25-7-6.2 (SDCL 25-7-6.2) · usachildsupportcalculator.com/south-dakota/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://dss.sd.gov/docs/childsupport/childsupportobligations.pdf" rel="nofollow noopener">South Dakota Department of Social Services — SDCL 25-7-6.2</a> (SDCL 25-7-6.2).</p>
     <p class="deviation-note">SDCL 25-7-6.2: if the obligation computed from the paying parent's OWN monthly net income alone falls within the schedule's emboldened (self-support-reserve) areas, that amount is compared to the standard combined-income-prorated amount, and the LESSER applies. This calculator models the standard (primary-custody) case only -- it does not model South Dakota's Shared Parenting Child Support Obligation Worksheet (used when both parents have substantial parenting time) or Split Custody. Above $20,000/month combined net income, SDCL 25-7-6.2 does not provide an automatic extension -- the obligation is established at an appropriate level considering the needs and standard of living of the child, determined case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against South Dakota's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>New Hampshire Child Support Calculator</h1>
   <p class="badge">Updated for New Hampshire's 2025-NH-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against New Hampshire's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">New Hampshire Child Support Calculator · 2025-NH-v1 guidelines, effective 2025-04-01 · Source: New Hampshire Department of Health and Human Services — Bureau of Child Support Services (RSA 458-C:2, 458-C:3) · usachildsupportcalculator.com/new-hampshire/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents2/css-guidelines-book.pdf" rel="nofollow noopener">New Hampshire Department of Health and Human Services — Bureau of Child Support Services</a> (RSA 458-C:2, 458-C:3).</p>
     <p class="deviation-note">This calculator does not model New Hampshire's Reasonable Medical Support Obligation (RSA 458-C:3, V: a presumptive additional 4% of each parent's own gross income, separate from the childcare/health-insurance add-ons here) or the many discretionary Special Circumstances adjustments under RSA 458-C:5 (high/low income, equal parenting-time arrangements, tax consequences, etc.) -- New Hampshire's guidelines explicitly state that equal or approximately equal parenting time does NOT by itself reduce support; any adjustment for shared parenting is case-by-case and discretionary, not a fixed formula. Above the guideline table's top published income level, courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New Hampshire's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

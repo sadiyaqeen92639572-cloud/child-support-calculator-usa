@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Rhode Island Child Support Calculator</h1>
   <p class="badge">Updated for Rhode Island's 2023-RI-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Rhode Island's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Rhode Island Child Support Calculator · 2023-RI-v1 guidelines, effective 2023-07-01 · Source: Rhode Island Family Court — Administrative Order 2023-02 (RI Gen. Laws § 15-5-16.2(a); Family Court Administrative Order 2023-02) · usachildsupportcalculator.com/rhode-island/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://ocss.ri.gov/sites/g/files/xkgbur511/files/2023-07/23-02.pdf" rel="nofollow noopener">Rhode Island Family Court — Administrative Order 2023-02</a> (RI Gen. Laws § 15-5-16.2(a); Family Court Administrative Order 2023-02).</p>
     <p class="deviation-note">Rhode Island's schedule presumes a 'standard' parenting time arrangement where the noncustodial parent has at least 20% of the overnights. This calculator does not model the different calculation that applies when both parents have at least a 49% share of parenting time (Administrative Order 2018-01), Split Custody, or the discretionary add-ons for a parent's extraordinary medical expenses, pension/retirement payments, life insurance premiums, or assigned marital debts (Worksheet lines 3a-3e). Above $40,000/month combined income, Rhode Island's guideline schedule does not extend automatically -- courts determine the amount case-by-case. The schedule already includes a per-child allowance of $250/year for ordinary medical expenses, and is indexed by NET income (after the state's own Gross-to-Net Conversion Table), not gross.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Rhode Island's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

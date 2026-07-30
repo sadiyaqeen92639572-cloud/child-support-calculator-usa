@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Idaho Child Support Calculator</h1>
   <p class="badge">Updated for Idaho's 2025-ID-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Idaho's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Idaho Child Support Calculator · 2025-ID-v1 guidelines, effective 2025-07-01 · Source: Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120 (Idaho R. Fam. L. P. 120) · usachildsupportcalculator.com/idaho/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -107,6 +110,12 @@
     <p>Official source: <a href="https://isc.idaho.gov/rules-procedure/print/irfl/120" rel="nofollow noopener">Idaho Supreme Court — Idaho Rules of Family Law Procedure, Rule 120</a> (Idaho R. Fam. L. P. 120).</p>
     <p class="deviation-note">This calculator models Idaho's standard Primary Parenting Time (one parent has 25% or less of the overnights, no adjustment) and Shared Physical Custody (both parents have more than 25%, Rule 120(4)(B)'s 1.5x cross-formula) cases. It does not model: Extended Visits (a discretionary further reduction, often 50%, when a 25%-or-less parent has the child for 14+ consecutive days); Split Physical Custody (each parent primary for at least one different child, a separate per-child-multiplier offset calculation, Rule 120(6)); the schedule for 6 or more children (undefined by the guidelines themselves, extrapolated here from the 5-children rates); or discretionary deviations. The $800/month self-support review and $50/child/month minimum are both explicitly described as rebuttable presumptions, not fixed rules.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Idaho's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -194,6 +203,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

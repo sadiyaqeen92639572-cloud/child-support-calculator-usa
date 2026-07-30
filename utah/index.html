@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Utah Child Support Calculator</h1>
   <p class="badge">Updated for Utah's 2023-UT-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Utah's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Utah Child Support Calculator · 2023-UT-v1 guidelines, effective 2023-01-01 · Source: Utah State Legislature — Utah Code Title 81, Chapter 6, Part 3 (Child Support Tables) (Utah Code §§ 81-6-304, 81-6-305) · usachildsupportcalculator.com/utah/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://le.utah.gov/xcode/Title81/Chapter6/81-6-S304.html" rel="nofollow noopener">Utah State Legislature — Utah Code Title 81, Chapter 6, Part 3 (Child Support Tables)</a> (Utah Code §§ 81-6-304, 81-6-305).</p>
     <p class="deviation-note">This calculator models Utah's standard sole-custody calculation (81-6-304/305) only. It does not model joint physical custody (a worksheet using each parent's overnights, Utah Code 81-6-201 et seq.) or split custody. Above $100,000/month combined adjusted gross income, Utah's tables do not extend automatically -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Utah's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

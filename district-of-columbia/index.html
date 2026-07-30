@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>District of Columbia Child Support Calculator</h1>
   <p class="badge">Updated for District of Columbia's 2016-DC-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against District of Columbia's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">District of Columbia Child Support Calculator · 2016-DC-v1 guidelines, effective 2016-01-01 · Source: DC Law Library — D.C. Code §§ 16-916.01, 16-916.01a (D.C. Code §§ 16-916.01, 16-916.01a) · usachildsupportcalculator.com/district-of-columbia/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://code.dccouncil.gov/us/dc/council/code/sections/16-916.01a" rel="nofollow noopener">DC Law Library — D.C. Code §§ 16-916.01, 16-916.01a</a> (D.C. Code §§ 16-916.01, 16-916.01a).</p>
     <p class="deviation-note">Income figures in this calculator are ANNUAL (D.C.'s schedule and worksheet operate in yearly dollars, unlike most states) -- the result is converted to a monthly figure for display. This calculator does not model the separate 'modified self-support reserve' comparison (D.C. Code 16-916.01(g-2), an additional ability-to-pay tier with its own reserve figure and a maximum-ability-to-pay calculation) -- it applies only the standard Self-Support Reserve and presumptive minimum. It also does not model Shared Physical Custody (Worksheet B, when both parents have substantial parenting time) or Split Custody. Above $240,000/year combined adjusted gross income, D.C.'s guideline does not apply presumptively -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against District of Columbia's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

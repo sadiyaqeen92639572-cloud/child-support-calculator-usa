@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>South Carolina Child Support Calculator</h1>
   <p class="badge">Updated for South Carolina's 2024-SC-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against South Carolina's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">South Carolina Child Support Calculator · 2024-SC-v1 guidelines, effective 2024-01-15 · Source: South Carolina Department of Social Services, Child Support Guidelines (DSS Booklet 2819, Nov. 2024) (S.C. Code Ann. § 63-17-470; 27 S.C. Code Regs. 114-4710 to 114-4750) · usachildsupportcalculator.com/south-carolina/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://dss.sc.gov/media/lmdj4cnh/dss-booklet-2819-nov-24.pdf" rel="nofollow noopener">South Carolina Department of Social Services, Child Support Guidelines (DSS Booklet 2819, Nov. 2024)</a> (S.C. Code Ann. § 63-17-470; 27 S.C. Code Regs. 114-4710 to 114-4750).</p>
     <p class="deviation-note">Above $40,000/month combined gross income, South Carolina's schedule has no further value -- courts determine awards on a case-by-case basis rather than an automatic formula. This calculator does not model the 110-128 overnight graduated shared-custody transition or split custody (Worksheet B, two or more children divided between parents).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against South Carolina's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

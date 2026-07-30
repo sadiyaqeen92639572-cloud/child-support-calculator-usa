@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare Child Support Between States 2026 — Side-by-Side Calculator</title>
+<meta name="description" content="Compare estimated child support obligations between two US states side by side, using each state's own official guideline formula.">
+<link rel="canonical" href="https://usachildsupportcalculator.com/compare/">
+<link rel="stylesheet" href="/assets/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I directly compare what I'd pay in two different states?","acceptedAnswer":{"@type":"Answer","text":"Only on common inputs — both parents' income and number of children. Many states also factor in custody overnights, childcare costs, or health insurance premiums; this comparison assumes reasonable defaults (50/50 custody, no add-on costs) for those, which may change the real number. Use each state's full calculator for an accurate figure."}}]}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Compare Child Support Between States</h1>
+  <p class="badge">Side-by-side estimate using each state's own official guideline formula</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This comparison uses only income and number of children as common inputs. Many states also weigh custody overnights, childcare costs, or health insurance premiums — this tool assumes reasonable defaults for those (noted per result) rather than the real specifics of your case. For an accurate number, use that state's own full calculator.
+</div>
+
+<main>
+  <form id="compare-form">
+    <label>State A
+      <select id="stateA"><option value="alabama">Alabama</option><option value="alaska">Alaska</option><option value="arizona">Arizona</option><option value="arkansas">Arkansas</option><option value="california">California</option><option value="colorado">Colorado</option><option value="connecticut">Connecticut</option><option value="delaware">Delaware</option><option value="district-of-columbia">District of Columbia</option><option value="florida">Florida</option><option value="georgia">Georgia</option><option value="hawaii">Hawaii</option><option value="idaho">Idaho</option><option value="illinois">Illinois</option><option value="indiana">Indiana</option><option value="iowa">Iowa</option><option value="kansas">Kansas</option><option value="kentucky">Kentucky</option><option value="louisiana">Louisiana</option><option value="maine">Maine</option><option value="maryland">Maryland</option><option value="massachusetts">Massachusetts</option><option value="michigan">Michigan</option><option value="minnesota">Minnesota</option><option value="mississippi">Mississippi</option><option value="missouri">Missouri</option><option value="montana">Montana</option><option value="nebraska">Nebraska</option><option value="nevada">Nevada</option><option value="new-hampshire">New Hampshire</option><option value="new-jersey">New Jersey</option><option value="new-mexico">New Mexico</option><option value="new-york">New York</option><option value="north-carolina">North Carolina</option><option value="north-dakota">North Dakota</option><option value="ohio">Ohio</option><option value="oklahoma">Oklahoma</option><option value="oregon">Oregon</option><option value="pennsylvania">Pennsylvania</option><option value="rhode-island">Rhode Island</option><option value="south-carolina">South Carolina</option><option value="south-dakota">South Dakota</option><option value="tennessee">Tennessee</option><option value="texas">Texas</option><option value="utah">Utah</option><option value="vermont">Vermont</option><option value="virginia">Virginia</option><option value="washington">Washington</option><option value="west-virginia">West Virginia</option><option value="wisconsin">Wisconsin</option><option value="wyoming">Wyoming</option></select>
+    </label>
+    <label>State B
+      <select id="stateB"><option value="alabama">Alabama</option><option value="alaska">Alaska</option><option value="arizona">Arizona</option><option value="arkansas">Arkansas</option><option value="california">California</option><option value="colorado">Colorado</option><option value="connecticut">Connecticut</option><option value="delaware">Delaware</option><option value="district-of-columbia">District of Columbia</option><option value="florida">Florida</option><option value="georgia">Georgia</option><option value="hawaii">Hawaii</option><option value="idaho">Idaho</option><option value="illinois">Illinois</option><option value="indiana">Indiana</option><option value="iowa">Iowa</option><option value="kansas">Kansas</option><option value="kentucky">Kentucky</option><option value="louisiana">Louisiana</option><option value="maine">Maine</option><option value="maryland">Maryland</option><option value="massachusetts">Massachusetts</option><option value="michigan">Michigan</option><option value="minnesota">Minnesota</option><option value="mississippi">Mississippi</option><option value="missouri">Missouri</option><option value="montana">Montana</option><option value="nebraska">Nebraska</option><option value="nevada">Nevada</option><option value="new-hampshire">New Hampshire</option><option value="new-jersey">New Jersey</option><option value="new-mexico">New Mexico</option><option value="new-york">New York</option><option value="north-carolina">North Carolina</option><option value="north-dakota">North Dakota</option><option value="ohio">Ohio</option><option value="oklahoma">Oklahoma</option><option value="oregon">Oregon</option><option value="pennsylvania">Pennsylvania</option><option value="rhode-island">Rhode Island</option><option value="south-carolina">South Carolina</option><option value="south-dakota">South Dakota</option><option value="tennessee">Tennessee</option><option value="texas">Texas</option><option value="utah">Utah</option><option value="vermont">Vermont</option><option value="virginia">Virginia</option><option value="washington">Washington</option><option value="west-virginia">West Virginia</option><option value="wisconsin">Wisconsin</option><option value="wyoming">Wyoming</option></select>
+    </label>
+    <label>Parent A income ($/month)
+      <input type="number" id="parentAIncome" min="0" step="1" value="4000">
+    </label>
+    <label>Parent B income ($/month)
+      <input type="number" id="parentBIncome" min="0" step="1" value="3000">
+    </label>
+    <label>Number of children
+      <select id="numChildren">
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        <option value="4">4</option><option value="5">5</option>
+      </select>
+    </label>
+    <button type="submit">Compare</button>
+  </form>
+
+  <div id="results-block" class="compare-results" hidden>
+    <div id="result-a"></div>
+    <div id="result-b"></div>
+  </div>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>Can I directly compare what I'd pay in two different states?</summary><p>Only on common inputs — both parents' income and number of children. Many states also factor in custody overnights, childcare costs, or health insurance premiums; this comparison assumes reasonable defaults (50/50 custody, no add-on costs) for those, which may change the real number. Use each state's full calculator for an accurate figure.</p></details>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+<script src="/assets/calc-engine.js"></script>
+<script>
+  let ALL_STATES = null;
+  const rulesCache = {};
+  const scheduleCache = {};
+
+  async function loadStates() {
+    if (!ALL_STATES) {
+      const res = await fetch('/data/states.json');
+      ALL_STATES = await res.json();
+    }
+    return ALL_STATES;
+  }
+  async function loadRules(slug) {
+    if (!rulesCache[slug]) {
+      const res = await fetch('/data/rules/' + slug + '.json');
+      rulesCache[slug] = await res.json();
+    }
+    return rulesCache[slug];
+  }
+  async function loadSchedule(ref) {
+    if (!ref) return null;
+    if (!scheduleCache[ref]) {
+      const res = await fetch('/data/schedules/' + ref);
+      scheduleCache[ref] = await res.json();
+    }
+    return scheduleCache[ref];
+  }
+
+  // Builds the model-specific input shape from the common fields this page
+  // collects (both parents' income, number of children), applying documented
+  // defaults for anything a given state's formula needs beyond that — same
+  // per-model field mapping used by each state's own calculator page.
+  function buildInputs(formulaModel, common) {
+    const assumptions = [];
+    switch (formulaModel) {
+      case 'percentage_of_income':
+        assumptions.push('this state\'s formula uses only the paying parent\'s own income — Parent B\'s income is used here');
+        return { inputs: { obligorNetMonthlyIncome: common.parentBIncome, numChildren: common.numChildren }, assumptions };
+      case 'algebraic_kfactor':
+        assumptions.push('assumes 50/50 custody timeshare');
+        return { inputs: { parentANetIncome: common.parentAIncome, parentBNetIncome: common.parentBIncome, numChildren: common.numChildren, higherEarnerTimesharePct: 0.5 }, assumptions };
+      case 'michigan_formula':
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody)');
+        return { inputs: { parentANetIncome: common.parentAIncome, parentBNetIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182 }, assumptions };
+      case 'ks_age_schedule':
+        assumptions.push('assumes all children are age 12-18 and 50/50 custody');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, children0to5: 0, children6to11: 0, children12to18: common.numChildren, overnightsWithA: 182 }, assumptions };
+      case 'wi_percentage_shared':
+      case 'nv_tiered_percentage':
+      case 'nd_obligor_schedule':
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody)');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182 }, assumptions };
+      default:
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody), $0 childcare cost, $0 health insurance premium');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182, childcareCost: 0, healthInsuranceCost: 0 }, assumptions };
+    }
+  }
+
+  async function computeForState(slug, common) {
+    const allStates = await loadStates();
+    const stateKey = Object.keys(allStates).find(k => allStates[k].slug === slug);
+    const stateEntry = allStates[stateKey];
+    const rules = await loadRules(slug);
+    const scheduleRef = stateEntry.params && stateEntry.params.schedule_table_ref;
+    const schedule = await loadSchedule(scheduleRef);
+    const { inputs, assumptions } = buildInputs(stateEntry.formula_model, common);
+    const result = calculateChildSupport(stateEntry, rules, schedule, inputs);
+    return { stateEntry, result, assumptions };
+  }
+
+  function renderResult(elId, data) {
+    const periodLabel = (data.stateEntry.params && data.stateEntry.params.income_period === 'weekly') ? '/week' : '/month';
+    const payer = data.result.payingParent ? (data.result.payingParent === 'A' ? 'Parent A pays' : 'Parent B pays') : 'Amount';
+    document.getElementById(elId).innerHTML =
+      '<h2>' + data.stateEntry.name + '</h2>' +
+      '<p class="result-amount">' + payer + ': $' + data.result.monthlyAmount.toLocaleString() + periodLabel + '</p>' +
+      '<p class="result-deviation">Assumptions: ' + data.assumptions.join('; ') + '.</p>' +
+      (data.result.capWarning ? '<p class="result-warning">' + data.result.capWarning + '</p>' : '') +
+      '<p class="formula-footnote"><a href="/' + data.stateEntry.slug + '/">Full ' + data.stateEntry.name + ' calculator →</a></p>';
+  }
+
+  document.getElementById('compare-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const common = {
+      parentAIncome: Number(document.getElementById('parentAIncome').value) || 0,
+      parentBIncome: Number(document.getElementById('parentBIncome').value) || 0,
+      numChildren: Number(document.getElementById('numChildren').value) || 1
+    };
+    const slugA = document.getElementById('stateA').value;
+    const slugB = document.getElementById('stateB').value;
+    const [dataA, dataB] = await Promise.all([computeForState(slugA, common), computeForState(slugB, common)]);
+    renderResult('result-a', dataA);
+    renderResult('result-b', dataB);
+    document.getElementById('results-block').hidden = false;
+  });
+</script>
+</body>
+</html>

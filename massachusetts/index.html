@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Massachusetts Child Support Calculator</h1>
   <p class="badge">Updated for Massachusetts's 2025-MA-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Massachusetts's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Massachusetts Child Support Calculator · 2025-MA-v1 guidelines, effective 2025-12-01 · Source: Massachusetts Trial Court — Probate and Family Court, Child Support Guidelines Worksheet (CJD 304) (2025 Massachusetts Child Support Guidelines) · usachildsupportcalculator.com/massachusetts/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -105,6 +108,12 @@
     <p>Official source: <a href="https://www.mass.gov/doc/2025-child-support-guidelines-worksheet-effective-december-1-2025/download" rel="nofollow noopener">Massachusetts Trial Court — Probate and Family Court, Child Support Guidelines Worksheet (CJD 304)</a> (2025 Massachusetts Child Support Guidelines).</p>
     <p class="deviation-note">Massachusetts income figures in this calculator are WEEKLY gross income, treated as 'available income' -- it does not model the guidelines' own adjustments to available income (prior-child support paid, qualified-child deductions for other children in the home, etc.). This calculator applies the standard proportional-share calculation only. It does not model: the Parenting Time proportional adjustment (Guidelines Section II.D and Worksheet Section 6, a cap/comparison mechanism based on the recipient parent's own share of parenting time when it is substantial); the Table C age adjustment for children who are 18 or older; or cases with more than 5 children beyond reusing the 5-children multiplier as a floor. Above $450,000/yr ($8,654/week) combined available income, the guidelines state the result is only a presumptive MINIMUM, not an automatic extension -- courts have discretion to order more.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Massachusetts's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -192,6 +201,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

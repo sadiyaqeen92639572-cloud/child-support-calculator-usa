@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Georgia Child Support Calculator</h1>
   <p class="badge">Updated for Georgia's 2026-GA-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against Georgia's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Georgia Child Support Calculator · 2026-GA-v1 guidelines, effective 2024-07-01 · Source: Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15 (O.C.G.A. § 19-6-15) · usachildsupportcalculator.com/georgia/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://gov.georgia.gov/document/2024-signed-legislation/sb-454/download" rel="nofollow noopener">Georgia General Assembly — SB 454 (2026 session), amending O.C.G.A. § 19-6-15</a> (O.C.G.A. § 19-6-15).</p>
     <p class="deviation-note">Georgia courts can deviate for a low-income adjustment (parents at or below $3,950/month individual adjusted gross income, on a sliding 19-28% of income scale by number of children), high-income cases above the $40,000/month schedule cap, and other statutory deviations under O.C.G.A. § 19-6-15(i).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Georgia's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

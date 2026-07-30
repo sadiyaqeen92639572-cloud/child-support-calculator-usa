@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Montana Child Support Calculator</h1>
   <p class="badge">Updated for Montana's 2026-MT-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Montana's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Montana Child Support Calculator · 2026-MT-v1 guidelines, effective 2026-02-01 · Source: Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62) (Admin. R. Mont. 37.62.101-148) · usachildsupportcalculator.com/montana/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -108,6 +111,12 @@
     <p>Official source: <a href="https://dphhs.mt.gov/assets/cssd/GuidelinesARM.pdf" rel="nofollow noopener">Montana Department of Public Health & Human Services, Child Support Services Division (ARM 37.62)</a> (Admin. R. Mont. 37.62.101-148).</p>
     <p class="deviation-note">This calculator does not model: the graduated minimum-contribution table for parents whose income is at or below the Personal Allowance (ARM 37.62.126(1)(a), an income-ratio bracket lookup); the Long Distance Parenting Adjustment (ARM 37.62.130, reduces SOLA income for 2,000+ miles/year of parenting travel); or the per-child reallocation required when the nonresidential parent has more than 110 days/year with the child (ARM 37.62.134(2)(b)). The SOLA factor for exactly 5 children is not published in the official table (it jumps from 4 to 6 children) -- this calculator uses 0.35, a linear interpolation between the published 4-child (0.31) and 6-child (0.39) factors, not an officially published value.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Montana's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -195,6 +204,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

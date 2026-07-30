@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Minnesota Child Support Calculator</h1>
   <p class="badge">Updated for Minnesota's 2016-MN-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Minnesota's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Minnesota Child Support Calculator · 2016-MN-v1 guidelines, effective 2016-01-01 · Source: Minnesota Statutes, Chapter 518A (Office of the Revisor of Statutes) (Minn. Stat. §§ 518A.35, 518A.36, 518A.42) · usachildsupportcalculator.com/minnesota/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://www.revisor.mn.gov/statutes/cite/518A.35" rel="nofollow noopener">Minnesota Statutes, Chapter 518A (Office of the Revisor of Statutes)</a> (Minn. Stat. §§ 518A.35, 518A.36, 518A.42).</p>
     <p class="deviation-note">Above $20,000/month combined parental income, Minnesota caps the presumptive obligation at the $20,000 schedule figure -- a higher amount requires the factors in Minn. Stat. 518A.43, not an automatic formula. This calculator does not model the medical-support/childcare-support reduction ordering used before basic support is reduced under the Self-Support Reserve, or cases with no parent having custody (Minn. Stat. 518A.35 subd. 1(c)-(d)).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Minnesota's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

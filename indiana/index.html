@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Indiana Child Support Calculator</h1>
   <p class="badge">Updated for Indiana's 2024-IN-v1 guidelines · Last reviewed 2026-07-11</p>
+  <p class="verified-badge">✓ Cross-checked against Indiana's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Indiana Child Support Calculator · 2024-IN-v1 guidelines, effective 2024-01-01 · Source: Indiana Child Support Rules and Guidelines (Indiana Supreme Court) (Ind. Child Support Guideline 3) · usachildsupportcalculator.com/indiana/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://rules.incourts.gov/Content/child-support/default.htm" rel="nofollow noopener">Indiana Child Support Rules and Guidelines (Indiana Supreme Court)</a> (Ind. Child Support Guideline 3).</p>
     <p class="deviation-note">Above $9,200/week combined income, a fixed percentage of the excess is added to the table's top-bracket amount (this calculator applies it automatically). Indiana's Parenting Time Credit Table (starting at 52 overnights/year) is not modeled in this calculator — consult Indiana's official Child Support Calculator for a parenting-time-adjusted figure. This calculator shows the presumptive guideline amount only, not a court order.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Indiana's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

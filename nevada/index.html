@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Nevada Child Support Calculator</h1>
   <p class="badge">Updated for Nevada's 2020-NV-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Nevada's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -49,6 +50,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Nevada Child Support Calculator · 2020-NV-v1 guidelines, effective 2020-02-01 · Source: Nevada Division of Welfare and Supportive Services (Nev. Admin. Code § 425.140) (Nev. Admin. Code §§ 425.140, 425.145, 425.150) · usachildsupportcalculator.com/nevada/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -96,6 +99,12 @@
     <p>Official source: <a href="https://www.law.cornell.edu/regulations/nevada/NAC-425-140" rel="nofollow noopener">Nevada Division of Welfare and Supportive Services (Nev. Admin. Code § 425.140)</a> (Nev. Admin. Code §§ 425.140, 425.145, 425.150).</p>
     <p class="deviation-note">Nevada courts may adjust the base obligation under NAC 425.150 based on discretionary factors (special needs, relative income of both households, time-sharing costs, obligor's ability to pay, etc.) -- there is no mandatory shared-placement formula like some other states. This calculator does not model the low-income schedule (NAC 425.145), which is republished annually by the Administrative Office of the Courts based on federal poverty guidelines and is not part of the codified regulation text itself.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Nevada's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -183,6 +192,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

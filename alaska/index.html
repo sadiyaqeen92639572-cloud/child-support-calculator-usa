@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Alaska Child Support Calculator</h1>
   <p class="badge">Updated for Alaska's 2023-AK-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Alaska's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -43,6 +44,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Alaska Child Support Calculator · 2023-AK-v1 guidelines, effective 2023-10-16 · Source: Alaska Court System — Alaska Civil Rule 90.3 (Alaska Civil Rule 90.3(a)) · usachildsupportcalculator.com/alaska/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -94,6 +97,12 @@
     <p>Official source: <a href="https://courts.alaska.gov/rules/docs/civ90-3.pdf" rel="nofollow noopener">Alaska Court System — Alaska Civil Rule 90.3</a> (Alaska Civil Rule 90.3(a)).</p>
     <p class="deviation-note">This calculator models Alaska Civil Rule 90.3(a), the PRIMARY PHYSICAL CUSTODY calculation only, applied to a single non-custodial parent's already-adjusted net income. It does not model: the Rule 90.3(a)(5) Low-Income Adjustment (parents with total annual income of $30,000 or less may use total income minus $7,500/yr instead of the standard itemized-deduction adjusted income, whichever is lower -- this requires a gross-income-and-deductions breakdown beyond this calculator's single net-income input); the Rule 90.3(a)(3) Extended Visitation Credit (discretionary, up to 75% reduction for periods of 27+ consecutive days); Shared, Divided, or Hybrid Physical Custody (Rule 90.3(b), an entirely different calculation requiring both parents' figures and a 1.5x multiplier); or the grandparent-support provision (Rule 90.3(c)(4)). Courts may also vary the award for good cause under Rule 90.3(c)(1).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Alaska's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/high-income-child-support-calculator/">High Income Child Support Calculator</a> — how this state's income cap works</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -181,6 +190,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

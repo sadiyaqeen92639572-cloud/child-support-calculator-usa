@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Tennessee Child Support Calculator</h1>
   <p class="badge">Updated for Tennessee's 2021-TN-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against Tennessee's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Tennessee Child Support Calculator · 2021-TN-v1 guidelines, effective 2021-10-01 · Source: Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04) (Tenn. Comp. R. & Regs. 1240-02-04) · usachildsupportcalculator.com/tennessee/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://publications.tnsosfiles.com/rules/1240/1240-02/1240-02-04.20211001.pdf" rel="nofollow noopener">Tennessee Department of Human Services, Child Support Guidelines (Tenn. Comp. R. & Regs. 1240-02-04)</a> (Tenn. Comp. R. & Regs. 1240-02-04).</p>
     <p class="deviation-note">Above $28,250/month combined adjusted gross income, Tennessee's own formula applies directly: the $28,250 schedule amount plus a percentage of income above that (6.81%-8.66% by number of children), not judicial discretion. This calculator does not model split parenting (two or more children divided between parents) or extraordinary/other statutory deviations.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Tennessee's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

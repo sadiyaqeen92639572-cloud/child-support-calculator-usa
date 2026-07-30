@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Ohio Child Support Calculator</h1>
   <p class="badge">Updated for Ohio's 2023-OH-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against Ohio's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Ohio Child Support Calculator · 2023-OH-v1 guidelines, effective 2023-06-01 · Source: Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023) (Ohio Rev. Code § 3119.021) · usachildsupportcalculator.com/ohio/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://jfs.ohio.gov" rel="nofollow noopener">Ohio Department of Job and Family Services (JFS 07767, Rev. 6/2023)</a> (Ohio Rev. Code § 3119.021).</p>
     <p class="deviation-note">Above $336,000/year combined gross income, Ohio's schedule has no table value and courts set support case-by-case. Not modeled here: a separate cash medical support order ($388.70/child/year, JFS 07766 Table 3), the 7+ children obligation multiplier table, and the federal/state child care tax credit reductions applied on the worksheet's Line 21 (this calculator adds childcare/health insurance costs prorated by income share without those credit reductions).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Ohio's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/high-income-child-support-calculator/">High Income Child Support Calculator</a> — how this state's income cap works</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

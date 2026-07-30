@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Pennsylvania Child Support Calculator</h1>
   <p class="badge">Updated for Pennsylvania's 2026-PA-v1 guidelines · Last reviewed 2026-07-12</p>
+  <p class="verified-badge">✓ Cross-checked against Pennsylvania's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Pennsylvania Child Support Calculator · 2026-PA-v1 guidelines, effective 2026-01-01 · Source: Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3) (Pa.R.Civ.P. 1910.16-1 through 1910.16-7) · usachildsupportcalculator.com/pennsylvania/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://www.pacodeandbulletin.gov/Display/pacode?file=%2Fsecure%2Fpacode%2Fdata%2F231%2Fchapter1910%2Fs1910.16-3.html" rel="nofollow noopener">Pennsylvania Rules of Civil Procedure (Pa.R.Civ.P. 1910.16-3)</a> (Pa.R.Civ.P. 1910.16-1 through 1910.16-7).</p>
     <p class="deviation-note">Above $30,000/month combined net income, Pennsylvania's schedule has no table value — courts use the high-income formula under Pa.R.Civ.P. 1910.16-3.1 instead. This calculator does not model the shared-custody adjustment (Pa.R.Civ.P. 1910.16-4(c), triggered at 146+ overnights/year for the paying parent) or spousal support/APL interactions.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Pennsylvania's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

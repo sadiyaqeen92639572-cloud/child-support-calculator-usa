@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Kentucky Child Support Calculator</h1>
   <p class="badge">Updated for Kentucky's 2025-KY-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Kentucky's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Kentucky Child Support Calculator · 2025-KY-v1 guidelines, effective 2025-07-01 · Source: Kentucky Revised Statutes § 403.212 (Legislative Research Commission) (KRS 403.212, 403.2122) · usachildsupportcalculator.com/kentucky/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://apps.legislature.ky.gov/law/Statutes/statute.aspx?id=55832" rel="nofollow noopener">Kentucky Revised Statutes § 403.212 (Legislative Research Commission)</a> (KRS 403.212, 403.2122).</p>
     <p class="deviation-note">Above $30,000/month combined adjusted parental gross income, Kentucky courts use judicial discretion (KRS 403.212(7)) rather than an automatic formula. This calculator does not model split custody arrangements (KRS 403.212(8), two separate worksheets offset against each other) or the equal-parenting-time obligor-determination rule (KRS 403.2122(3)(a)(1)(b)).</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Kentucky's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

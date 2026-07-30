@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Nebraska Child Support Calculator</h1>
   <p class="badge">Updated for Nebraska's 2026-NE-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Nebraska's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Nebraska Child Support Calculator · 2026-NE-v1 guidelines, effective 2026-01-01 · Source: Nebraska Judicial Branch — Nebraska Supreme Court Rules, Chapter 4, Article 2 (Child Support Guidelines) (Neb. Ct. R. §§ 4-201 to 4-222) · usachildsupportcalculator.com/nebraska/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://nebraskajudicial.gov/sites/default/files/childsup_table.pdf" rel="nofollow noopener">Nebraska Judicial Branch — Nebraska Supreme Court Rules, Chapter 4, Article 2 (Child Support Guidelines)</a> (Neb. Ct. R. §§ 4-201 to 4-222).</p>
     <p class="deviation-note">This calculator does not model: the discretionary Visitation or Parenting Time Adjustment (§ 4-210 -- up to an 80% reduction during parenting time periods of 28+ days per 90-day period, entirely at the court's discretion, not a fixed formula); Joint Physical Custody (§ 4-212 -- when each parent's parenting time exceeds 142 days/year, a rebuttable presumption requires an entirely different Worksheet 3 calculation); or Split Custody (§ 4-211, a separate Worksheet 2 offset calculation). This calculator models the standard primary-custody case (Worksheet 1) only. Above the $20,000/month combined income shown in Table 1, Nebraska's guidelines do not provide an automatic extension formula -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Nebraska's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

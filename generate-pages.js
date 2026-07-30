@@ -691,6 +691,7 @@ function calculatorScript(state) {
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>`;
 }
 
@@ -736,6 +737,24 @@ function jsonLd(state) {
   return JSON.stringify(graph);
 }
 
+function relatedToolsSection(state, rules) {
+  const links = [];
+  if (rules.custody_adjustment) {
+    links.push('<li><a href="/joint-custody-child-support-calculator/">Joint Custody Child Support Calculator</a> — how shared parenting time changes this calculation</li>');
+  }
+  const p = state.params || {};
+  if (p.net_income_cap_monthly || p.combined_income_cap_monthly || p.income_cap_annual) {
+    links.push('<li><a href="/high-income-child-support-calculator/">High Income Child Support Calculator</a> — how this state\'s income cap works</li>');
+  }
+  links.push('<li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li>');
+  if (!links.length) return '';
+  return `
+  <section>
+    <h2>Related Tools</h2>
+    <ul>${links.join('')}</ul>
+  </section>`;
+}
+
 function renderStatePage(state) {
   assertComplete(state);
   const rules = loadRules(state.slug);
@@ -760,6 +779,7 @@ function renderStatePage(state) {
   <a href="/">← All States</a>
   <h1>${state.name} Child Support Calculator</h1>
   <p class="badge">Updated for ${state.name}'s ${state.guideline_version} guidelines · Last reviewed ${state.last_verified}</p>
+  <p class="verified-badge">✓ Cross-checked against ${state.name}'s official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -776,6 +796,8 @@ function renderStatePage(state) {
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">${state.name} Child Support Calculator · ${state.guideline_version} guidelines, effective ${state.effective_date} · Source: ${state.source.agency_name}${state.source.statute_ref ? ` (${state.source.statute_ref})` : ''} · usachildsupportcalculator.com/${state.slug}/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     ${monetizationSlot('results-sidebar')}
     ${monetizationSlot('results-block')}
   </div>
@@ -809,6 +831,8 @@ function renderStatePage(state) {
     <p class="deviation-note">${rules.deviation_note}</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against ${state.name}'s official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
   </section>
+
+  ${relatedToolsSection(state, rules)}
 </main>
 
 <footer>
@@ -821,10 +845,698 @@ ${calculatorScript(state)}
 </html>`;
 }
 
-function renderChangelogPage() {
+const SATELLITE_CONTENT = {
+  'joint-custody': {
+    intro: 'Joint custody — also called shared physical custody or shared parenting time — changes how child support is calculated in most states. Once the parent with fewer overnights crosses a state-specific threshold (commonly somewhere between 92 and 182 nights a year, depending on the state), most guideline formulas apply a parenting-time credit or switch to a shared-custody worksheet instead of the standard sole-custody calculation.',
+    detail: 'There is no single "joint custody formula" that applies nationwide — each state defines its own overnight threshold and its own adjustment method (a flat percentage credit, a graduated table, or a full alternate worksheet). Rather than guess at a generic number, use your state\'s calculator below: every calculator on this site that has a custody adjustment already asks for annual overnights with each parent and applies that state\'s specific formula automatically — the same mechanism, sourced from the same statute, as our standard state pages.',
+    faqs: [
+      { q: 'What overnight count counts as "joint custody"?', a: 'There is no universal number — states set their own thresholds, and some don\'t use a fixed threshold at all (using a sliding scale instead). Enter your actual annual overnights into your state\'s calculator and it will apply whatever rule that state uses.' },
+      { q: 'Does 50/50 custody mean no child support is owed?', a: 'No. Even at exactly equal overnights, the parent with the higher income (or higher income share) typically still owes some support, because most formulas prorate the total obligation by each parent\'s income share before applying any custody credit.' },
+      { q: 'Which states have the most generous shared-custody credit?', a: 'This varies by state and by income level, not just by which state you\'re in — the fairest way to compare is to run your actual numbers through each state\'s calculator rather than rely on a general ranking.' }
+    ]
+  },
+  'high-income': {
+    intro: 'High-income child support cases don\'t just multiply the standard percentage by a bigger paycheck. Many states cap the income used in the guideline formula at a specific dollar figure — above that cap, courts have discretion to order more based on the child\'s actual proven needs, rather than a mechanical formula continuing upward.',
+    detail: 'The table below lists every state on this site with an explicit, sourced income cap in its guideline formula. States not listed either use a schedule table that extends to a very high top bracket, or a formula (like Wisconsin\'s or Nevada\'s tiered percentage) that has no hard ceiling at all — see that state\'s own page for the exact mechanism, sourced from its statute.',
+    faqs: [
+      { q: 'What happens to income above the cap?', a: 'In capped states, the guideline formula stops increasing once income crosses the cap — courts may still order additional support above the guideline amount, but that requires a judicial finding based on the child\'s needs, not an automatic formula extension.' },
+      { q: 'Is "high income" the same threshold in every state?', a: 'No — the cap (where one exists) is set independently by each state\'s statute or guideline body and is not indexed to a federal standard.' }
+    ]
+  },
+  'military': {
+    intro: 'Calculating child support for an active-duty service member follows the same state guideline formula as any other case — the complication is almost always about what counts as income, not a different formula. Basic Allowance for Housing (BAH) and Basic Allowance for Subsistence (BAS) are non-taxable, but nearly every state guideline treats them as income available for support because they represent real, spendable value even though they aren\'t wages in the traditional sense.',
+    detail: 'To calculate support for a military family, use the same state calculator you\'d use for any case — just include BAH, BAS, and any other regular allowances or special/incentive pay (flight pay, hazardous duty pay, etc.) in the income field alongside base pay, unless you\'ve confirmed with your state\'s own guidance that a specific allowance is excluded. Overseas or duty-station moves can also affect which state\'s guidelines apply — that\'s a jurisdiction question for a military legal assistance office (JAG) or a family law attorney, not something a calculator can resolve.',
+    faqs: [
+      { q: 'Do I include BAH and BAS as income?', a: 'In nearly every state, yes — these allowances are excluded from federal income tax but are still counted as income for child support purposes because they reduce the service member\'s out-of-pocket housing and food costs.' },
+      { q: 'Which state\'s guidelines apply if I\'m stationed elsewhere?', a: 'This is a legal jurisdiction question (often governed by the Servicemembers Civil Relief Act and each state\'s own child support jurisdiction rules), not a calculator question — consult a military legal assistance office (JAG) or a family law attorney before assuming which state\'s formula applies to your case.' }
+    ]
+  }
+};
+
+function renderSatellitePage(key, meta) {
+  const content = SATELLITE_CONTENT[key];
+  const sortedStates = Object.values(states).slice().sort((a, b) => a.name.localeCompare(b.name));
+  const stateLinks = sortedStates.map(s => `<li><a href="/${s.slug}/">${s.name}</a></li>`).join('');
+
+  let extraSection = '';
+  if (key === 'high-income') {
+    const capRows = sortedStates
+      .map(s => {
+        const p = s.params || {};
+        let cap = null;
+        if (p.net_income_cap_monthly) cap = `$${p.net_income_cap_monthly.toLocaleString()}/mo (net income)`;
+        else if (p.combined_income_cap_monthly) cap = `$${p.combined_income_cap_monthly.toLocaleString()}/mo (combined income)`;
+        else if (p.income_cap_annual) cap = `$${p.income_cap_annual.toLocaleString()}/yr (combined income)`;
+        return cap ? `<tr><td><a href="/${s.slug}/">${s.name}</a></td><td>${cap}</td><td>${s.source.statute_ref || ''}</td></tr>` : null;
+      })
+      .filter(Boolean)
+      .join('');
+    extraSection = `
+  <section>
+    <h2>States with an explicit guideline income cap</h2>
+    <table>
+      <tr><th>State</th><th>Cap</th><th>Source</th></tr>
+      ${capRows}
+    </table>
+  </section>`;
+  }
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: content.faqs.map(item => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a }
+        }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+          { '@type': 'ListItem', position: 2, name: meta.title, item: `${DOMAIN}/${meta.slug}/` }
+        ]
+      }
+    ]
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${meta.title} ${YEAR} — Free by-State Guide</title>
+<meta name="description" content="${meta.title}: how ${key.replace(/-/g, ' ')} affects your state's official child support guideline formula, with links to every state's sourced calculator.">
+<link rel="canonical" href="${DOMAIN}/${meta.slug}/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${meta.title}">
+<meta property="og:description" content="How ${key.replace(/-/g, ' ')} affects child support calculations, with links to every state's official-guideline calculator.">
+<meta property="og:url" content="${DOMAIN}/${meta.slug}/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${JSON.stringify(faqJsonLd)}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>${meta.title}</h1>
+  <p class="badge">Guide, not a separate formula — pick your state below for a sourced, state-specific calculation</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. Every calculation on this site uses that state's own published child support guidelines. For your official calculation, consult a family law attorney or your state's child support agency.
+</div>
+
+<main>
+  <section>
+    <h2>${meta.title}: how it works</h2>
+    <p>${content.intro}</p>
+    <p>${content.detail}</p>
+  </section>
+
+  ${extraSection}
+
+  <section>
+    <h2>Choose your state</h2>
+    <ul class="state-link-list">${stateLinks}</ul>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    ${content.faqs.map(item => `<details><summary>${item.q}</summary><p>${item.a}</p></details>`).join('')}
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+</body>
+</html>`;
+}
+
+function renderArrearsPage() {
+  const rates = require('./data/arrears-interest-rates.json');
+  const availableStates = Object.keys(rates)
+    .map(slug => states[Object.keys(states).find(k => states[k].slug === slug)])
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const options = availableStates.map(s => `<option value="${s.slug}">${s.name}</option>`).join('');
+  const stateNotes = availableStates.map(s => {
+    const r = rates[s.slug];
+    return `<div class="arrears-state-note" data-state="${s.slug}" hidden>
+      <p><strong>${s.name}:</strong> ${r.annual_rate_pct}%/year${r.compounds ? ' (compounds — this calculator computes simple interest only, see note below)' : ' simple interest'}.
+      ${r.automatic_accrual ? '' : ' <strong>Not automatic</strong> — a court finding or request is required before interest accrues in this state.'}</p>
+      <p class="deviation-note">${r.notes}</p>
+      <p class="verified-by">Source: <a href="${r.source_url}" rel="nofollow noopener">${r.source_agency}</a> (${r.statute_ref}). Rate last verified ${r.verified_date}.</p>
+    </div>`;
+  }).join('');
+
+  const rowsList = availableStates.map(s => {
+    const r = rates[s.slug];
+    return `<tr><td><a href="/${s.slug}/">${s.name}</a></td><td>${r.annual_rate_pct}%/yr</td><td>${r.automatic_accrual ? 'Automatic' : 'Requires court finding/request'}</td><td>${r.statute_ref}</td></tr>`;
+  }).join('');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Does every state charge interest on unpaid child support?', acceptedAnswer: { '@type': 'Answer', text: 'No. Some states apply interest automatically once a payment is missed; others require the receiving parent or child support agency to specifically request it, and a court to grant it. Check your state\'s row in the table on this page.' } },
+      { '@type': 'Question', name: 'Does interest on child support arrears compound?', acceptedAnswer: { '@type': 'Answer', text: 'It varies by state. A few states compound interest (added to principal periodically, then earning interest itself); this calculator computes simple interest only, so your real balance may be higher in a compounding state.' } }
+    ]
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Child Support Arrears Calculator ${YEAR} — Interest on Unpaid Support</title>
+<meta name="description" content="Estimate interest on unpaid (past-due) child support using your state's official statutory interest rate, sourced and cited per state.">
+<link rel="canonical" href="${DOMAIN}/child-support-arrears-calculator/">
+<link rel="stylesheet" href="/assets/styles.css">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Child Support Arrears Calculator</h1>
+  <p class="badge">Estimate interest on past-due child support using your state's own statutory rate</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. Interest rules on child support arrears vary widely by state, including whether interest is automatic and whether it compounds. Consult your state's child support agency or a family law attorney for your official arrears balance.
+</div>
+
+<main>
+  <form id="arrears-form">
+    <label>State
+      <select id="arrearsState">${options}</select>
+    </label>
+    <label>Unpaid principal amount ($)
+      <input type="number" id="principal" min="0" step="1" value="5000">
+    </label>
+    <label>Days overdue
+      <input type="number" id="daysOverdue" min="0" step="1" value="365">
+    </label>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p class="privacy-note">Simple interest estimate only — see the state note below for compounding and automatic-accrual caveats.</p>
+  </div>
+
+  ${stateNotes}
+
+  <section>
+    <h2>Statutory interest rate by state</h2>
+    <table>
+      <tr><th>State</th><th>Rate</th><th>Accrual</th><th>Statute</th></tr>
+      ${rowsList}
+    </table>
+    <p class="formula-footnote">Only states with a verified, cited primary source are listed. More states will be added as they're researched and verified — see our <a href="/about/">methodology</a>.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>Does every state charge interest on unpaid child support?</summary><p>No. Some states apply interest automatically once a payment is missed; others require the receiving parent or child support agency to specifically request it, and a court to grant it. Check your state's row in the table above.</p></details>
+    <details><summary>Does interest on child support arrears compound?</summary><p>It varies by state. A few states compound interest (added to principal periodically, then earning interest itself); this calculator computes simple interest only, so your real balance may be higher in a compounding state.</p></details>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+<script src="/assets/arrears-engine.js"></script>
+<script>
+  const RATES = ${JSON.stringify(rates)};
+  function showStateNote() {
+    const sel = document.getElementById('arrearsState').value;
+    document.querySelectorAll('.arrears-state-note').forEach(el => { el.hidden = el.dataset.state !== sel; });
+  }
+  document.getElementById('arrearsState').addEventListener('change', showStateNote);
+  document.getElementById('arrears-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showStateNote();
+    const sel = document.getElementById('arrearsState').value;
+    const rate = RATES[sel];
+    const principal = Number(document.getElementById('principal').value) || 0;
+    const days = Number(document.getElementById('daysOverdue').value) || 0;
+    const result = calcArrearsInterest(principal, rate.annual_rate_pct, days);
+    document.getElementById('result-amount').textContent =
+      'Estimated interest: $' + result.interest.toLocaleString() + ' — Total owed: $' + result.total.toLocaleString();
+    document.getElementById('results-block').hidden = false;
+  });
+  showStateNote();
+</script>
+</body>
+</html>`;
+}
+
+function renderModificationPage() {
+  const thresholds = require('./data/modification-thresholds.json');
+  const availableStates = Object.keys(thresholds)
+    .map(slug => states[Object.keys(states).find(k => states[k].slug === slug)])
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const options = availableStates.map(s => `<option value="${s.slug}">${s.name}</option>`).join('');
+
+  const rowsList = availableStates.map(s => {
+    const t = thresholds[s.slug];
+    let ruleText;
+    if (t.threshold_type === 'case_by_case_no_fixed_threshold') {
+      ruleText = 'No fixed statutory percentage — general "substantial change in circumstances" standard';
+    } else {
+      const parts = [];
+      if (t.threshold_pct) parts.push(`${t.threshold_pct}% change`);
+      if (t.threshold_amount_monthly) parts.push(`$${t.threshold_amount_monthly}/mo change`);
+      ruleText = parts.join(' or ');
+      if (t.min_time_since_last_order_years) ruleText += `, ${t.min_time_since_last_order_years}+ yr since last order`;
+    }
+    return `<tr><td><a href="/${s.slug}/">${s.name}</a></td><td>${ruleText}</td><td>${t.statute_ref}</td></tr>`;
+  }).join('');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How much does income need to change to modify child support?', acceptedAnswer: { '@type': 'Answer', text: 'It depends entirely on your state. Many states set a specific percentage (commonly 10-20%) or dollar-amount change as a threshold; others use a general "substantial change in circumstances" standard with no fixed number. See the table on this page for your state\'s rule.' } },
+      { '@type': 'Question', name: 'Where do I get my "new" guideline amount to compare?', acceptedAnswer: { '@type': 'Answer', text: 'Run your current income and custody numbers through your state\'s own child support calculator on this site, then enter that result here alongside your existing order amount.' } }
+    ]
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Child Support Modification Calculator ${YEAR} — Does Your Change Qualify?</title>
+<meta name="description" content="Compare your current child support order to a new guideline amount and check it against your state's statutory modification threshold, sourced and cited per state.">
+<link rel="canonical" href="${DOMAIN}/child-support-modification-calculator/">
+<link rel="stylesheet" href="/assets/styles.css">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Child Support Modification Calculator</h1>
+  <p class="badge">Check whether a change in your numbers meets your state's modification threshold</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. Meeting a state's numeric threshold does not automatically modify your order — you still need to file a motion and, in most states, get a court's approval. Consult your state's child support agency or a family law attorney.
+</div>
+
+<main>
+  <section>
+    <p>First, get your current guideline amount from <a href="/">your state's calculator</a> using today's income and custody numbers. Then compare it to your existing order below.</p>
+  </section>
+
+  <form id="mod-form">
+    <label>State
+      <select id="modState">${options}</select>
+    </label>
+    <label>Current order amount ($/month)
+      <input type="number" id="currentAmount" min="0" step="1" value="1000">
+    </label>
+    <label>New guideline amount, from your state's calculator ($/month)
+      <input type="number" id="newAmount" min="0" step="1" value="1000">
+    </label>
+    <button type="submit">Compare</button>
+  </form>
+
+  <div id="results-block" hidden>
+    <p id="result-amount" class="result-amount"></p>
+    <p id="result-verdict" class="result-warning" hidden></p>
+  </div>
+
+  <section>
+    <h2>Modification threshold by state</h2>
+    <table>
+      <tr><th>State</th><th>Threshold</th><th>Statute</th></tr>
+      ${rowsList}
+    </table>
+    <p class="formula-footnote">Only states with a verified, cited primary source are listed. More states will be added as they're researched and verified — see our <a href="/about/">methodology</a>.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>How much does income need to change to modify child support?</summary><p>It depends entirely on your state. Many states set a specific percentage (commonly 10-20%) or dollar-amount change as a threshold; others use a general "substantial change in circumstances" standard with no fixed number. See the table above for your state's rule.</p></details>
+    <details><summary>Where do I get my "new" guideline amount to compare?</summary><p>Run your current income and custody numbers through your state's own child support calculator on this site, then enter that result here alongside your existing order amount.</p></details>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+<script>
+  const THRESHOLDS = ${JSON.stringify(thresholds)};
+  document.getElementById('mod-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const sel = document.getElementById('modState').value;
+    const t = THRESHOLDS[sel];
+    const current = Number(document.getElementById('currentAmount').value) || 0;
+    const next = Number(document.getElementById('newAmount').value) || 0;
+    const diff = next - current;
+    const pctDiff = current > 0 ? Math.abs(diff) / current * 100 : 0;
+    document.getElementById('result-amount').textContent =
+      'Difference: $' + Math.abs(diff).toLocaleString() + '/mo (' + pctDiff.toFixed(1) + '%), guideline amount is ' + (diff >= 0 ? 'higher' : 'lower') + ' than your current order.';
+    const verdictEl = document.getElementById('result-verdict');
+    if (t.threshold_type === 'case_by_case_no_fixed_threshold') {
+      verdictEl.textContent = 'This state has no fixed numeric threshold — modification depends on a general "substantial change in circumstances" finding by the court.';
+      verdictEl.hidden = false;
+    } else {
+      const meetsPct = !!t.threshold_pct && pctDiff >= t.threshold_pct;
+      const meetsAmount = !!t.threshold_amount_monthly && Math.abs(diff) >= t.threshold_amount_monthly;
+      let meets;
+      if (t.threshold_pct && t.threshold_amount_monthly) {
+        // Both a percentage and a dollar figure are set — how they combine varies by
+        // state (OR, AND, or "whichever is greater/less" sets the effective bar), so
+        // this can't default to a single formula without risking a wrong verdict.
+        const pctDollar = t.threshold_pct / 100 * current;
+        if (t.combine_logic === 'and') meets = meetsPct && meetsAmount;
+        else if (t.combine_logic === 'whichever_less') meets = Math.abs(diff) >= Math.min(pctDollar, t.threshold_amount_monthly);
+        else if (t.combine_logic === 'whichever_greater') meets = Math.abs(diff) >= Math.max(pctDollar, t.threshold_amount_monthly);
+        else meets = meetsPct || meetsAmount;
+      } else {
+        meets = meetsPct || meetsAmount;
+      }
+      verdictEl.textContent = meets
+        ? 'This difference appears to meet your state\\'s numeric modification threshold — this does not by itself modify your order; you still need to file and the court must approve.'
+        : 'This difference does not appear to meet your state\\'s numeric modification threshold, based on the figures you entered.';
+      verdictEl.hidden = false;
+    }
+  });
+</script>
+</body>
+</html>`;
+}
+
+function renderComparePage() {
+  const sortedStates = Object.values(states).slice().sort((a, b) => a.name.localeCompare(b.name));
+  const options = sortedStates.map(s => `<option value="${s.slug}">${s.name}</option>`).join('');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Can I directly compare what I\'d pay in two different states?', acceptedAnswer: { '@type': 'Answer', text: 'Only on common inputs — both parents\' income and number of children. Many states also factor in custody overnights, childcare costs, or health insurance premiums; this comparison assumes reasonable defaults (50/50 custody, no add-on costs) for those, which may change the real number. Use each state\'s full calculator for an accurate figure.' } }
+    ]
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare Child Support Between States ${YEAR} — Side-by-Side Calculator</title>
+<meta name="description" content="Compare estimated child support obligations between two US states side by side, using each state's own official guideline formula.">
+<link rel="canonical" href="${DOMAIN}/compare/">
+<link rel="stylesheet" href="/assets/styles.css">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+</head>
+<body>
+<header>
+  <a href="/">← All States</a>
+  <h1>Compare Child Support Between States</h1>
+  <p class="badge">Side-by-side estimate using each state's own official guideline formula</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not legal advice. This comparison uses only income and number of children as common inputs. Many states also weigh custody overnights, childcare costs, or health insurance premiums — this tool assumes reasonable defaults for those (noted per result) rather than the real specifics of your case. For an accurate number, use that state's own full calculator.
+</div>
+
+<main>
+  <form id="compare-form">
+    <label>State A
+      <select id="stateA">${options}</select>
+    </label>
+    <label>State B
+      <select id="stateB">${options}</select>
+    </label>
+    <label>Parent A income ($/month)
+      <input type="number" id="parentAIncome" min="0" step="1" value="4000">
+    </label>
+    <label>Parent B income ($/month)
+      <input type="number" id="parentBIncome" min="0" step="1" value="3000">
+    </label>
+    <label>Number of children
+      <select id="numChildren">
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        <option value="4">4</option><option value="5">5</option>
+      </select>
+    </label>
+    <button type="submit">Compare</button>
+  </form>
+
+  <div id="results-block" class="compare-results" hidden>
+    <div id="result-a"></div>
+    <div id="result-b"></div>
+  </div>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>Can I directly compare what I'd pay in two different states?</summary><p>Only on common inputs — both parents' income and number of children. Many states also factor in custody overnights, childcare costs, or health insurance premiums; this comparison assumes reasonable defaults (50/50 custody, no add-on costs) for those, which may change the real number. Use each state's full calculator for an accurate figure.</p></details>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+
+<script src="/assets/calc-engine.js"></script>
+<script>
+  let ALL_STATES = null;
+  const rulesCache = {};
+  const scheduleCache = {};
+
+  async function loadStates() {
+    if (!ALL_STATES) {
+      const res = await fetch('/data/states.json');
+      ALL_STATES = await res.json();
+    }
+    return ALL_STATES;
+  }
+  async function loadRules(slug) {
+    if (!rulesCache[slug]) {
+      const res = await fetch('/data/rules/' + slug + '.json');
+      rulesCache[slug] = await res.json();
+    }
+    return rulesCache[slug];
+  }
+  async function loadSchedule(ref) {
+    if (!ref) return null;
+    if (!scheduleCache[ref]) {
+      const res = await fetch('/data/schedules/' + ref);
+      scheduleCache[ref] = await res.json();
+    }
+    return scheduleCache[ref];
+  }
+
+  // Builds the model-specific input shape from the common fields this page
+  // collects (both parents' income, number of children), applying documented
+  // defaults for anything a given state's formula needs beyond that — same
+  // per-model field mapping used by each state's own calculator page.
+  function buildInputs(formulaModel, common) {
+    const assumptions = [];
+    switch (formulaModel) {
+      case 'percentage_of_income':
+        assumptions.push('this state\\'s formula uses only the paying parent\\'s own income — Parent B\\'s income is used here');
+        return { inputs: { obligorNetMonthlyIncome: common.parentBIncome, numChildren: common.numChildren }, assumptions };
+      case 'algebraic_kfactor':
+        assumptions.push('assumes 50/50 custody timeshare');
+        return { inputs: { parentANetIncome: common.parentAIncome, parentBNetIncome: common.parentBIncome, numChildren: common.numChildren, higherEarnerTimesharePct: 0.5 }, assumptions };
+      case 'michigan_formula':
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody)');
+        return { inputs: { parentANetIncome: common.parentAIncome, parentBNetIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182 }, assumptions };
+      case 'ks_age_schedule':
+        assumptions.push('assumes all children are age 12-18 and 50/50 custody');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, children0to5: 0, children6to11: 0, children12to18: common.numChildren, overnightsWithA: 182 }, assumptions };
+      case 'wi_percentage_shared':
+      case 'nv_tiered_percentage':
+      case 'nd_obligor_schedule':
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody)');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182 }, assumptions };
+      default:
+        assumptions.push('assumes 182 overnights/year with Parent A (50/50 custody), $0 childcare cost, $0 health insurance premium');
+        return { inputs: { parentAGrossIncome: common.parentAIncome, parentBGrossIncome: common.parentBIncome, numChildren: common.numChildren, overnightsWithA: 182, childcareCost: 0, healthInsuranceCost: 0 }, assumptions };
+    }
+  }
+
+  async function computeForState(slug, common) {
+    const allStates = await loadStates();
+    const stateKey = Object.keys(allStates).find(k => allStates[k].slug === slug);
+    const stateEntry = allStates[stateKey];
+    const rules = await loadRules(slug);
+    const scheduleRef = stateEntry.params && stateEntry.params.schedule_table_ref;
+    const schedule = await loadSchedule(scheduleRef);
+    const { inputs, assumptions } = buildInputs(stateEntry.formula_model, common);
+    const result = calculateChildSupport(stateEntry, rules, schedule, inputs);
+    return { stateEntry, result, assumptions };
+  }
+
+  function renderResult(elId, data) {
+    const periodLabel = (data.stateEntry.params && data.stateEntry.params.income_period === 'weekly') ? '/week' : '/month';
+    const payer = data.result.payingParent ? (data.result.payingParent === 'A' ? 'Parent A pays' : 'Parent B pays') : 'Amount';
+    document.getElementById(elId).innerHTML =
+      '<h2>' + data.stateEntry.name + '</h2>' +
+      '<p class="result-amount">' + payer + ': $' + data.result.monthlyAmount.toLocaleString() + periodLabel + '</p>' +
+      '<p class="result-deviation">Assumptions: ' + data.assumptions.join('; ') + '.</p>' +
+      (data.result.capWarning ? '<p class="result-warning">' + data.result.capWarning + '</p>' : '') +
+      '<p class="formula-footnote"><a href="/' + data.stateEntry.slug + '/">Full ' + data.stateEntry.name + ' calculator →</a></p>';
+  }
+
+  document.getElementById('compare-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const common = {
+      parentAIncome: Number(document.getElementById('parentAIncome').value) || 0,
+      parentBIncome: Number(document.getElementById('parentBIncome').value) || 0,
+      numChildren: Number(document.getElementById('numChildren').value) || 1
+    };
+    const slugA = document.getElementById('stateA').value;
+    const slugB = document.getElementById('stateB').value;
+    const [dataA, dataB] = await Promise.all([computeForState(slugA, common), computeForState(slugB, common)]);
+    renderResult('result-a', dataA);
+    renderResult('result-b', dataB);
+    document.getElementById('results-block').hidden = false;
+  });
+</script>
+</body>
+</html>`;
+}
+
+function renderGuidePage(guide) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        headline: guide.title,
+        author: GESMINE_ORG,
+        publisher: GESMINE_ORG,
+        description: guide.meta_description
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: guide.faqs.map(item => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a.replace(/<[^>]+>/g, '') }
+        }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Guides', item: `${DOMAIN}/guides/` },
+          { '@type': 'ListItem', position: 3, name: guide.title, item: `${DOMAIN}/guides/${guide.slug}/` }
+        ]
+      }
+    ]
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${guide.title} — USA Child Support Calculator</title>
+<meta name="description" content="${guide.meta_description}">
+<link rel="canonical" href="${DOMAIN}/guides/${guide.slug}/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${guide.title}">
+<meta property="og:description" content="${guide.meta_description}">
+<meta property="og:url" content="${DOMAIN}/guides/${guide.slug}/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+</head>
+<body>
+<header>
+  <a href="/guides/">← All Guides</a>
+  <h1>${guide.title}</h1>
+</header>
+
+<main>
+  <section>
+    <p>${guide.intro}</p>
+  </section>
+
+  ${guide.sections.map(s => `<section><h2>${s.h2}</h2><p>${s.body}</p></section>`).join('')}
+
+  <section>
+    <h2>FAQ</h2>
+    ${guide.faqs.map(item => `<details><summary>${item.q}</summary><p>${item.a}</p></details>`).join('')}
+  </section>
+
+  <section>
+    <h2>Related</h2>
+    <ul>${guide.related.map(r => `<li><a href="${r.href}">${r.label}</a></li>`).join('')}</ul>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+</body>
+</html>`;
+}
+
+function renderGuidesHubPage(guides) {
+  const rows = guides.map(g => `<li><a href="/guides/${g.slug}/">${g.title}</a></li>`).join('');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Child Support Guides — USA Child Support Calculator</title>
+<meta name="description" content="Plain-English guides on how child support works: custody, modification, taxes, enforcement, self-employment income, and more.">
+<link rel="canonical" href="${DOMAIN}/guides/">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<header>
+  <a href="/">← Home</a>
+  <h1>Child Support Guides</h1>
+  <p class="badge">Plain-English explainers, separate from the state-by-state calculators</p>
+</header>
+
+<main>
+  <section>
+    <ul class="state-link-list">${rows}</ul>
+  </section>
+</main>
+
+<footer>
+  <p>USA Child Support Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Child Support Calculator. Estimates only — not legal advice.</p>
+</footer>
+</body>
+</html>`;
+}
+
+function renderChangelogPage(satellites, guides) {
   const rows = Object.values(states)
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(s => `<tr><td><a href="/${s.slug}/">${s.name}</a></td><td>${s.guideline_version}</td><td>${s.effective_date}</td><td>${s.last_verified}</td><td><a href="${s.source.url}" rel="nofollow noopener">${s.source.agency_name}</a></td></tr>`)
+    .join('\n      ');
+
+  const toolRows = [
+    ...Object.entries(satellites).map(([key, meta]) => `<tr><td><a href="/${meta.slug}/">${meta.title}</a></td><td>Satellite tool</td></tr>`),
+    `<tr><td><a href="/child-support-arrears-calculator/">Child Support Arrears Calculator</a></td><td>Tool — 41 states</td></tr>`,
+    `<tr><td><a href="/child-support-modification-calculator/">Child Support Modification Calculator</a></td><td>Tool — 51 states</td></tr>`,
+    `<tr><td><a href="/compare/">Compare States</a></td><td>Tool</td></tr>`
+  ].join('\n      ');
+
+  const guideRows = guides
+    .map(g => `<tr><td><a href="/guides/${g.slug}/">${g.title}</a></td></tr>`)
     .join('\n      ');
 
   return `<!DOCTYPE html>
@@ -852,6 +1564,22 @@ function renderChangelogPage() {
       ${rows}
     </table>
   </section>
+
+  <section>
+    <h2>Tools</h2>
+    <table>
+      <tr><th>Tool</th><th>Coverage</th></tr>
+      ${toolRows}
+    </table>
+  </section>
+
+  <section>
+    <h2>Guides</h2>
+    <table>
+      <tr><th>Guide</th></tr>
+      ${guideRows}
+    </table>
+  </section>
 </main>
 
 <footer>
@@ -870,6 +1598,42 @@ Object.values(states).forEach(state => {
   console.log(`Generated: ${state.slug}/ (${state.formula_model})`);
 });
 
+const satellites = require('./data/satellites.json');
+const guidesForChangelog = require('./data/guides.json');
 fs.mkdirSync(path.join(__dirname, 'changelog'), { recursive: true });
-fs.writeFileSync(path.join(__dirname, 'changelog', 'index.html'), renderChangelogPage(), 'utf8');
+fs.writeFileSync(path.join(__dirname, 'changelog', 'index.html'), renderChangelogPage(satellites, guidesForChangelog), 'utf8');
 console.log('Generated: changelog/');
+
+Object.entries(satellites).forEach(([key, meta]) => {
+  if (!SATELLITE_CONTENT[key]) {
+    throw new Error(`BUILD BLOCKED: data/satellites.json defines "${key}" but no SATELLITE_CONTENT entry exists in generate-pages.js.`);
+  }
+  const html = renderSatellitePage(key, meta);
+  const dir = path.join(__dirname, meta.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
+  console.log(`Generated: ${meta.slug}/ (satellite: ${key})`);
+});
+
+fs.mkdirSync(path.join(__dirname, 'child-support-arrears-calculator'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'child-support-arrears-calculator', 'index.html'), renderArrearsPage(), 'utf8');
+console.log('Generated: child-support-arrears-calculator/');
+
+fs.mkdirSync(path.join(__dirname, 'child-support-modification-calculator'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'child-support-modification-calculator', 'index.html'), renderModificationPage(), 'utf8');
+console.log('Generated: child-support-modification-calculator/');
+
+fs.mkdirSync(path.join(__dirname, 'compare'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'compare', 'index.html'), renderComparePage(), 'utf8');
+console.log('Generated: compare/');
+
+const guides = require('./data/guides.json');
+fs.mkdirSync(path.join(__dirname, 'guides'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'guides', 'index.html'), renderGuidesHubPage(guides), 'utf8');
+console.log('Generated: guides/');
+guides.forEach(guide => {
+  const dir = path.join(__dirname, 'guides', guide.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), renderGuidePage(guide), 'utf8');
+  console.log(`Generated: guides/${guide.slug}/`);
+});

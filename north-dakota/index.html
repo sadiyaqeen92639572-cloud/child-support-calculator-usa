@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>North Dakota Child Support Calculator</h1>
   <p class="badge">Updated for North Dakota's 2023-ND-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against North Dakota's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -49,6 +50,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">North Dakota Child Support Calculator · 2023-ND-v1 guidelines, effective 2023-07-01 · Source: North Dakota Legislative Council — N.D. Admin. Code § 75-02-04.1-10 (N.D. Admin. Code § 75-02-04.1-10) · usachildsupportcalculator.com/north-dakota/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -98,6 +101,12 @@
     <p>Official source: <a href="https://ndlegis.gov/information/acdata/pdf/75-02-04.1.pdf" rel="nofollow noopener">North Dakota Legislative Council — N.D. Admin. Code § 75-02-04.1-10</a> (N.D. Admin. Code § 75-02-04.1-10).</p>
     <p class="deviation-note">North Dakota's guideline amount is based on the OBLIGOR'S OWN monthly net income alone -- the other parent's income is never part of the calculation (this is not an income-shares state). This calculator does not model: Equal Residential Responsibility (NDAC 75-02-04.1-08.2, when both parents have exactly equal time, an entirely different cross-offset calculation); Split Custody (75-02-04.1-03, each parent primary for at least one different child); or the multiple-family adjustment for other children the obligor supports (75-02-04.1-06.1). Above $24,900/month net income, North Dakota's guideline schedule does not provide an automatic extension -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against North Dakota's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -185,6 +194,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

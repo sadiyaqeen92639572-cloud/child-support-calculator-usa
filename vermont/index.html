@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>Vermont Child Support Calculator</h1>
   <p class="badge">Updated for Vermont's 2024-VT-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against Vermont's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">Vermont Child Support Calculator · 2024-VT-v1 guidelines, effective 2024-01-02 · Source: Vermont Office of Child Support (OCS) — 15 V.S.A. §§ 654, 656 (15 V.S.A. §§ 654, 656) · usachildsupportcalculator.com/vermont/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://outside.vermont.gov/dept/DCF/Shared%20Documents/OCS/Calculator/Intact.pdf" rel="nofollow noopener">Vermont Office of Child Support (OCS) — 15 V.S.A. §§ 654, 656</a> (15 V.S.A. §§ 654, 656).</p>
     <p class="deviation-note">Income figures in this calculator are treated as already AFTER-TAX/available monthly income (not gross) -- Vermont's own worksheet converts gross to after-tax income via a separate Tax Conversion Table before this step, which this calculator does not reproduce; enter your already-known after-tax monthly income for the most accurate estimate. This calculator models Sole Custody only. Split Custody (each parent has sole custody of at least one child, an offset between two theoretical worksheets) and Shared Custody (additional adjustments for maintaining two households) use different calculations and are not modeled here. Above $30,024.99/month combined available income, Vermont's table does not extend automatically -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against Vermont's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>

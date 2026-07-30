@@ -18,6 +18,7 @@
   <a href="/">← All States</a>
   <h1>New Mexico Child Support Calculator</h1>
   <p class="badge">Updated for New Mexico's 2024-NM-v1 guidelines · Last reviewed 2026-07-13</p>
+  <p class="verified-badge">✓ Cross-checked against New Mexico's official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
 
 <div class="disclaimer-banner">
@@ -54,6 +55,8 @@
     <p id="result-amount" class="result-amount"></p>
     <p id="result-warning" class="result-warning" hidden></p>
     <p id="result-deviation" class="result-deviation"></p>
+    <p class="print-only-meta">New Mexico Child Support Calculator · 2024-NM-v1 guidelines, effective 2024-01-01 · Source: New Mexico Courts / Human Services Department — NMSA 1978 § 40-4-11.1, 8.50.108 NMAC (NMSA 1978 § 40-4-11.1; 8.50.108 NMAC) · usachildsupportcalculator.com/new-mexico/</p>
+    <button type="button" id="print-btn" class="no-print">Print / Save as PDF</button>
     <div id="mon-results-sidebar" class="mon-slot" hidden></div>
     <div id="mon-results-block" class="mon-slot" hidden></div>
   </div>
@@ -110,6 +113,12 @@
     <p>Official source: <a href="https://nmcourts.gov/wp-content/uploads/sites/21/2024/03/2024NMChildSupportGuidelinesandSchedule.pdf" rel="nofollow noopener">New Mexico Courts / Human Services Department — NMSA 1978 § 40-4-11.1, 8.50.108 NMAC</a> (NMSA 1978 § 40-4-11.1; 8.50.108 NMAC).</p>
     <p class="deviation-note">This calculator models Worksheet A (Basic Visitation -- the paying parent has less than 35% of the year's parenting time) only. It does not model Worksheet B (Shared Responsibility, when each parent has at least 35% of the year), which uses a materially different calculation: each parent retains a share of the basic obligation proportional to their own time with the children, and the amounts are cross-offset rather than simply prorated. Above the schedule's $35,050/month combined income ceiling, New Mexico's guidelines do not provide an automatic extension -- courts determine the amount case-by-case.</p>
     <p class="verified-by">Guideline figures transcribed from the primary source above and cross-checked against New Mexico's official calculator/worksheet for multiple test scenarios — see our <a href="/about/">verification methodology</a>.</p>
+  </section>
+
+  
+  <section>
+    <h2>Related Tools</h2>
+    <ul><li><a href="/military-child-support-calculator/">Military Child Support Calculator</a> — BAH/BAS and other military pay as income</li></ul>
   </section>
 </main>
 
@@ -197,6 +206,7 @@
       e.preventDefault();
       runCalculation();
     });
+    document.getElementById('print-btn').addEventListener('click', function() { window.print(); });
   </script>
 </body>
 </html>
