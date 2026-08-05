@@ -758,18 +758,20 @@ function relatedToolsSection(state, rules) {
 function renderStatePage(state) {
   assertComplete(state);
   const rules = loadRules(state.slug);
+  // DC users commonly search the abbreviation, not the full name — surface it in title/H1
+  const titleName = state.slug === 'district-of-columbia' ? `${state.name} (DC)` : state.name;
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${state.name} Child Support Calculator ${YEAR} — Free Estimate</title>
-<meta name="description" content="Estimate ${state.name} child support using the state's official ${state.formula_model.replace(/_/g, ' ')} guideline formula. Free calculator + full worksheet walkthrough, updated ${state.last_verified}.">
+<title>${titleName} Child Support Calculator ${YEAR} — Free Estimate</title>
+<meta name="description" content="Estimate ${titleName} child support using the state's official ${state.formula_model.replace(/_/g, ' ')} guideline formula. Free calculator + full worksheet walkthrough, updated ${state.last_verified}.">
 <link rel="canonical" href="${DOMAIN}/${state.slug}/">
 <link rel="stylesheet" href="/assets/styles.css">
-<meta property="og:title" content="${state.name} Child Support Calculator">
-<meta property="og:description" content="Free ${state.name} child support estimate based on official state guidelines.">
+<meta property="og:title" content="${titleName} Child Support Calculator">
+<meta property="og:description" content="Free ${titleName} child support estimate based on official state guidelines.">
 <meta property="og:url" content="${DOMAIN}/${state.slug}/">
 <meta property="og:type" content="website">
 <script type="application/ld+json">${jsonLd(state)}</script>
@@ -777,7 +779,7 @@ function renderStatePage(state) {
 <body>
 <header>
   <a href="/">← All States</a>
-  <h1>${state.name} Child Support Calculator</h1>
+  <h1>${titleName} Child Support Calculator</h1>
   <p class="badge">Updated for ${state.name}'s ${state.guideline_version} guidelines · Last reviewed ${state.last_verified}</p>
   <p class="verified-badge">✓ Cross-checked against ${state.name}'s official calculator/worksheet — see our <a href="/about/">verification methodology</a></p>
 </header>
