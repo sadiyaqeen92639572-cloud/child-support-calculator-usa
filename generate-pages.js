@@ -1492,7 +1492,8 @@ function renderGuidePage(guide) {
 }
 
 function renderGuidesHubPage(guides) {
-  const rows = guides.map(g => `<li><a href="/guides/${g.slug}/">${g.title}</a></li>`).join('');
+  const rows = guides.map(g => `<li><a href="/guides/${g.slug}/">${g.title}</a></li>`).join('')
+    + '<li><a href="/guides/child-support-by-state-2026/">Child Support by State 2026: Same Family, $15 to $846/Month (Data Study)</a></li>';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>

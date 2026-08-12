@@ -47,6 +47,9 @@ GUIDES.forEach(g => {
   if (!fs.existsSync(path.join(__dirname, 'guides', g.slug, 'index.html'))) return;
   urls.push({ loc: `${DOMAIN}/guides/${g.slug}/`, lastmod: today, changefreq: 'yearly', priority: '0.6' });
 });
+if (fs.existsSync(path.join(__dirname, 'guides', 'child-support-by-state-2026', 'index.html'))) {
+  urls.push({ loc: `${DOMAIN}/guides/child-support-by-state-2026/`, lastmod: today, changefreq: 'yearly', priority: '0.8' });
+}
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
