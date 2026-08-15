@@ -2778,6 +2778,10 @@
       {
         "q": "Does joint physical custody change Utah child support?",
         "a": "Yes -- when parents share physical custody, Utah uses a different worksheet that factors in each parent's overnights, rather than the standard sole-custody calculation this calculator uses."
+      },
+      {
+        "q": "How much is child support in Utah?",
+        "a": "It depends on both parents' combined income, the number of children, and custody split -- there's no single flat amount. Under the standard formula (Utah Code 81-6-304), the obligation scales with combined gross income; low-income parents (individual income below the 81-6-305 threshold) use a separate Low-Income Table instead. At the very lowest income levels, Utah sets a $30/month floor -- the smallest amount a support order can be, no matter how low income is. Use the calculator above with your actual income figures for an accurate estimate. As of the 2026 guideline update, sourced from Utah Code 81-6-304/305."
       }
     ]
   },
